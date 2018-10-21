@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8;" />
+    <title>
+      David Kurniadi Angdinata
+    </title>
+    <style media="all" type="text/css">
+      body {
+        background: #000000;
+      }
+      a img,
+      a span {
+        top: 0%;
+        left: 0%;
+        right: 0%;
+        bottom: 0%;
+        margin: auto;
+        position: fixed;
+      }
+      a img {
+        width: 10%;
+        z-index: 1;
+        border-color: #000000;
+        border-style: solid;
+        border-radius: 100%;
+        transition: 1s;
+      }
+      a:hover img {
+        width: 20%;
+        transition: 1s;
+      }
+      a span {
+        width: 100%;
+        height: 0%;
+        transition: 5s;
+        border-radius: 100%;
+      }
+      a span.fast {
+        transform: rotate(60deg);
+      }
+      a span.slow {
+        transform: rotate(-60deg);
+      }
+      a:hover span.fast,
+      a:hover span.medium,
+      a:hover span.slow {
+        width: 50%;
+        height: 1%;
+        transition: 2s;
+        animation-name: spin;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+      a:hover span.fast {
+        background: #ff0000;
+        animation-duration: 2s;
+      }
+      a:hover span.medium {
+        background: #00ff00;
+        animation-duration: 4s;
+      }
+      a:hover span.slow {
+        background: #0000ff;
+        animation-duration: 6s;
+      }
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(3600deg);
+        }
+      }
+      a span.a {
+        transform: rotate(-60deg);
+        background: #ff0000;
+        margin-top: 5%;
+        margin-left: 5%;
+      }
+      a span.b {
+        background: #00ff00;
+        margin-left: 10%;
+      }
+      a span.c {
+        transform: rotate(60deg);
+        background: #0000ff;
+        margin-left: 5%;
+        margin-bottom: 5%;
+      }
+      a span.d {
+        transform: rotate(60deg);
+        background: #ffff00;
+        margin-top: 5%;
+        margin-right: 5%;
+      }
+      a span.e {
+        background: #ff00ff;
+        margin-right: 10%;
+      }
+      a span.f {
+        transform: rotate(-60deg);
+        background: #00ffff;
+        margin-right: 5%;
+        margin-bottom: 5%;
+      }
+      a:hover span.a,
+      a:hover span.b,
+      a:hover span.c,
+      a:hover span.d,
+      a:hover span.e,
+      a:hover span.f {
+        width: 20%;
+        height: 10%;
+        transition: 5s;
+        animation-name: spin;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+      a:hover span.a {
+        animation-duration: 2s;
+      }
+      a:hover span.b {
+        animation-duration: 13s;
+      }
+      a:hover span.c {
+        animation-duration: 3s;
+      }
+      a:hover span.d {
+        animation-duration: 11s;
+      }
+      a:hover span.e {
+        animation-duration: 5s;
+      }
+      a:hover span.f {
+        animation-duration: 7s;
+      }
+      span a {
+        color: #00ff00;
+        position: fixed;
+        font-size: 500%;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="http://www.facebook.com/david.angdinata" title="Me">
+      <img src="david.jpg" alt="David Kurniadi Angdinata" title="Me" />
+      <span class="slow">
+      </span>
+      <span class="medium">
+      </span>
+      <span class="fast">
+      </span>
+      <span class="a">
+      </span>
+      <span class="b">
+      </span>
+      <span class="c">
+      </span>
+      <span class="d">
+      </span>
+      <span class="e">
+      </span>
+      <span class="f">
+      </span>
+      <span class="g">
+      </span>
+      <span class="h">
+      </span>
+    </a>
+  </body>
+</html>

@@ -5,169 +5,338 @@
     <title>
       David Kurniadi Angdinata
     </title>
-    <style media="all" type="text/css">
-      body {
-        background: #000000;
-      }
-      a img,
-      a span {
-        top: 0%;
-        left: 0%;
-        right: 0%;
-        bottom: 0%;
-        margin: auto;
-        position: fixed;
-      }
-      a img {
-        width: 10%;
-        z-index: 1;
-        border-color: #000000;
-        border-style: solid;
-        border-radius: 100%;
-        transition: 1s;
-      }
-      a:hover img {
-        width: 20%;
-        transition: 1s;
-      }
-      a span {
-        width: 100%;
-        height: 0%;
-        transition: 5s;
-        border-radius: 100%;
-      }
-      a span.fast {
-        transform: rotate(60deg);
-      }
-      a span.slow {
-        transform: rotate(-60deg);
-      }
-      a:hover span.fast,
-      a:hover span.medium,
-      a:hover span.slow {
-        width: 50%;
-        height: 1%;
-        transition: 2s;
-        animation-name: spin;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-      }
-      a:hover span.fast {
-        background: #ff0000;
-        animation-duration: 2s;
-      }
-      a:hover span.medium {
-        background: #00ff00;
-        animation-duration: 4s;
-      }
-      a:hover span.slow {
-        background: #0000ff;
-        animation-duration: 6s;
-      }
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(3600deg);
-        }
-      }
-      a span.a {
-        transform: rotate(-60deg);
-        background: #ff0000;
-        margin-top: 5%;
-        margin-left: 5%;
-      }
-      a span.b {
-        background: #00ff00;
-        margin-left: 10%;
-      }
-      a span.c {
-        transform: rotate(60deg);
-        background: #0000ff;
-        margin-left: 5%;
-        margin-bottom: 5%;
-      }
-      a span.d {
-        transform: rotate(60deg);
-        background: #ffff00;
-        margin-top: 5%;
-        margin-right: 5%;
-      }
-      a span.e {
-        background: #ff00ff;
-        margin-right: 10%;
-      }
-      a span.f {
-        transform: rotate(-60deg);
-        background: #00ffff;
-        margin-right: 5%;
-        margin-bottom: 5%;
-      }
-      a:hover span.a,
-      a:hover span.b,
-      a:hover span.c,
-      a:hover span.d,
-      a:hover span.e,
-      a:hover span.f {
-        width: 20%;
-        height: 10%;
-        transition: 5s;
-        animation-name: spin;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-      }
-      a:hover span.a {
-        animation-duration: 2s;
-      }
-      a:hover span.b {
-        animation-duration: 13s;
-      }
-      a:hover span.c {
-        animation-duration: 3s;
-      }
-      a:hover span.d {
-        animation-duration: 11s;
-      }
-      a:hover span.e {
-        animation-duration: 5s;
-      }
-      a:hover span.f {
-        animation-duration: 7s;
-      }
-      span a {
-        color: #00ff00;
-        position: fixed;
-        font-size: 500%;
-        text-decoration: none;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="theme.css" />
   </head>
   <body>
-    <a href="http://www.facebook.com/david.angdinata" title="Me">
-      <img src="david.jpg" alt="David Kurniadi Angdinata" title="Me" />
-      <span class="slow">
-      </span>
-      <span class="medium">
-      </span>
-      <span class="fast">
-      </span>
-      <span class="a">
-      </span>
-      <span class="b">
-      </span>
-      <span class="c">
-      </span>
-      <span class="d">
-      </span>
-      <span class="e">
-      </span>
-      <span class="f">
-      </span>
-      <span class="g">
-      </span>
-      <span class="h">
-      </span>
-    </a>
+    <div class="me">
+      <a href="old.html" title="If you came here for this you would be disappointed so please do not stop">
+        <img src="david.jpg" alt="David Kurniadi Angdinata" title="Me" />
+      </a>
+    </div>
+    <div class="terminal">
+      <a href="https://www.haskell.org/" title="Haskell">
+        Haskell>
+      </a>
+      ghci David.hs
+      <br />
+      <a href="https://www.haskell.org/ghc/" title="Haskell">
+        GHCi,
+      </a>
+      version &alefsym;_0:
+      <a href="https://www.haskell.org/ghc/" title="Haskell">
+        http://www.haskell.org/ghc/
+      </a>
+      </a>
+      &nbsp; :? for help
+    </div>
+    <div class="terminal">
+      [1 of 1] Compiling David &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ( David.hs, interpreted )
+      <br />
+      Ok, modules loaded: David.
+      <br />
+      *David> Hello there! I am
+      <a href="http://www.facebook.com/david.angdinata/" title="Me">
+        David Kurniadi Angdinata.
+      </a>
+      <br />
+      *David> I am an
+      <a href="http://www.imperial.ac.uk/study/ug/" title="Undergraduate student">
+        undergraduate student
+      </a>
+      of the
+      <a href="http://www.imperial.ac.uk/computing/" title="Department of Computing">
+        Department of Computing
+      </a>
+      in
+      <a href="http://www.imperial.ac.uk/" title="Imperial College London">
+        Imperial College London.
+      </a>
+      <br />
+      *David> I am currently in my
+      <a href="http://www.imperial.ac.uk/computing/current-students/jmc-info/jmc-third-year-meng/" title="JMC MEng third year">
+        third year of the Master of Engineering programme in Joint Mathematics and Computer Science,
+      </a>
+      specialising in
+      <a href="http://www.imperial.ac.uk/computing/current-students/jmc-info/jmc-degrees/" title="JMC degrees information">
+        Pure Mathematics and Computational Logic.
+      </a>
+      <br />
+      *David> :l Notes.hs
+    </div>
+    <div class="terminal">
+      [1 of 1] Compiling Notes &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ( Notes.hs, interpreted )
+      <br />
+      Ok, modules loaded: Notes.
+      <br />
+      *Notes> These are some typed lecture notes for the modules in the
+      <a href="http://www.imperial.ac.uk/mathematics/" title="Department of Mathematics">
+        Department of Mathematics
+      </a>
+      of which I have attended or will be attending.
+      <br />
+      *Notes> Notes for first year modules are all under construction and will be completed by summer 2019.
+      <ul>
+        <li>
+          M1F Foundations of Analysis (Autumn 2016)
+        </li>
+        <li>
+          M1J1 Applied Methods and Linear Algebra (Spring 2017)
+        </li>
+        <li>
+          M1J2 Algebra and Analysis (Spring 2017)
+        </li>
+        <li>
+          M1M1 Mathematical Methods 1 (Autumn 2016)
+        </li>
+      </ul>
+      *Notes> Notes for second year modules are all under construction and will be completed by summer 2019.
+      <ul>
+        <li>
+          M2AA1 Differential Equations (Spring 2017)
+        </li>
+        <li>
+          M2AA2 Multivariable Calculus (Autumn 2017)
+        </li>
+        <li>
+          M2AA3 Introduction to Numerical Analysis (Spring 2018)
+        </li>
+        <li>
+          M2PM1 Real Analysis (Autumn 2017)
+        </li>
+        <li>
+          M2PM2 Algebra 2 (Autumn 2017)
+        </li>
+        <li>
+          M2PM3 Complex Analysis (Spring 2018)
+        </li>
+        <li>
+          M2PM5 Metric Spaces and Topology (Spring 2017)
+        </li>
+        <li>
+          M2SJ Statistical Methods (Autumn 2017)
+        </li>
+      </ul>
+      *Notes> Notes for third year modules are under construction and will be updated in time.
+      <ul>
+        <li>
+          <a href="https://github.com/Multramate/JMC3/raw/master/M3P8%20Algebra%20III/M3P8.pdf" title="Algebra 3">
+            M3P8 Algebra 3 (Autumn 2018)
+          </a>
+        </li>
+        <li>
+          M3P10 Group Theory (Autumn 2018) -- ETA: Autumn 2018
+        </li>
+        <li>
+          M3P11 Galois Theory (Spring 2019) -- ETA: Spring 2019
+        </li>
+        <li>
+          M3P12 Group Representation Theory (Spring 2019) -- ETA: Spring 2019
+        </li>
+        <li>
+          <a href="https://github.com/Multramate/JMC3/raw/master/M3P14%20Number%20Theory/M3P14.pdf" title="M3P14 Number Theory">
+            M3P14 Number Theory (Autumn 2018)
+          </a>
+        </li>
+        <li>
+          M3P15 Algebraic Number Theory (Spring 2019) -- ETA: Spring 2019
+        </li>
+        <li>
+          M3P17 Algebraic Combinatorics (Autumn 2018) -- ETA: Autumn 2018
+        </li>
+        <li>
+          <a href="https://github.com/Multramate/JMC3/raw/master/M3P20%20Geometry%20I%20Algebraic%20Curves/M3P20.pdf" title="M3P20 Geometry 1: Algebraic Curves">
+            M3P20 Geometry 1: Algebraic Curves (Autumn 2018)
+          </a>
+        </li>
+        <li>
+          M3P21 Geometry 2: Algebraic Topology (Spring 2019) -- ETA: Spring 2019
+        </li>
+        <li>
+          <a href="https://github.com/Multramate/JMC3/raw/master/M3P65%20Mathematical%20Logic/M3P65.pdf" title="M3P65 Mathematical Logic">
+            M3P65 Mathematical Logic (Autumn 2018)
+          </a>
+        </li>
+      </ul>
+      *Notes> Notes for fourth year modules are under construction and will be updated in time.
+      <ul>
+        <li>
+          M4P32 Number Theory: Elliptic Curves (Autumn 2018) -- ETA: Autumn 2018
+        </li>
+        <li>
+          M4P33 Algebraic Geometry (Spring 2019) -- ETA: Spring 2019
+        </li>
+        <li>
+          M4P46 Lie Algebras (Spring 2020) -- ETA: Spring 2020
+        </li>
+        <li>
+          M4P55 Commutative Algebra (Autumn 2018) -- ETA: Autumn 2018
+        </li>
+        <li>
+          M4P58 Modular Forms (Autumn 2019) -- ETA: Autumn 2019
+        </li>
+        <li>
+          M4P61 Infinite Groups (Autumn 2019) -- ETA: Autumn 2019
+        </li>
+        <li>
+          M4P63 Algebra 4 (Spring 2019) -- ETA: Spring 2019
+        </li>
+        <li>
+          M4P72 Modular Representation Theory (Spring 2020) -- ETA: Spring 2020
+        </li>
+      </ul>
+      *Notes> :l Projects.hs
+    </div>
+    <div class="terminal">
+      [1 of 1] Compiling Projects &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ( Projects.hs, interpreted )
+      <br />
+      Ok, modules loaded: Projects.
+      <br />
+      *Projects> I did a research project on
+      <ul>
+        <li>
+          <a href="https://github.com/Multramate/EllipticCurves/raw/master/EllipticCurves.pdf" title="The Arithmetic of Elliptic Curves">
+            the Arithmetic of Elliptic Curves
+          </a>
+        </li>
+      </ul>
+      under the supervision of
+      <a href="https://perswww.kuleuven.be/~u0025871/" title="Dr Johannes Nicaise">
+        Dr Johannes Nicaise
+      </a>
+      as part of the
+      <a href="http://www.imperial.ac.uk/urop/" title="Undergraduate Research Opportunity Programme">
+        Undergraduate Research Opportunity Programme
+      </a>
+      over Summer 2018.
+      <br />
+      *Projects> I also did a group research project on
+      <ul>
+        <li>
+          <a href="https://github.com/Multramate/FanoPlane/raw/master/An%20Introduction%20to%20Finite%20Projective%20Planes.pdf" title="An Introduction to Finite Projective Planes">
+            an Introduction to Finite Projective Planes
+          </a>
+        </li>
+      </ul>
+      under the supervision of
+      <a href="http://wwwf.imperial.ac.uk/~apal4/" title="Dr Ambrus Pál">
+        Dr Ambrus Pál
+      </a>
+      as part of the
+      <a href="https://www.imperial.ac.uk/computing/current-students/courses/M2R/" title="M2R">
+        second year mathematics group project
+      </a>
+      over Summer 2018.
+      <br />
+      *Projects> Unfortunately, all of my projects in the Department of Computing are publicly hidden due to regulations, but can be provided upon request.
+      <ul>
+        <li>
+          Fuzzing server for
+          <a href="https://hypothesis.works/" title="Hypothesis">
+            Hypothesis
+          </a>
+          (Python)
+        </li>
+        <li>
+          Improvements to features of the
+          <a href="https://www.doc.ic.ac.uk/~mjw03/OSLab/pintos.pdf" title="Pintos">
+            Pintos operating system
+          </a>
+          (C)
+        </li>
+        <li>
+          Full
+          <a href="https://teaching.doc.ic.ac.uk/wacc_compiler/" title="WACC">
+            WACC language
+          </a>
+          to Assembly language compiler (Haskell)
+        </li>
+        <li>
+          MIDI file parser and mechanical music player on the
+          <a href="https://www.raspberrypi.org/" title="Raspberry Pi">
+            Raspberry Pi
+          </a>
+          (C)
+        </li>
+        <li>
+          <a href="https://www.imperial.ac.uk/computing/current-students/course-admin/noticeboards/first-year/topics/" title="Computing topics project">
+            Computing topics project
+          </a>
+          on home robotics (HTML / CSS)
+        </li>
+        <li>
+          22
+          <a href="https://www.imperial.ac.uk/computing/current-students/course-admin/noticeboards/first-year/first-labs/" title="First year laboratory">
+            first year weekly laboratory projects
+          </a>
+          (Haskell / Java / Assembly / C)
+        </li>
+      </ul>
+      *Projects> I have also participated in a few hackathons and worked on several small personal projects.
+      <ul>
+        <li>
+          JP Morgan
+          <a href="https://careers.jpmorgan.com/careers/global/en/programs/code-for-good/" title="Code For Good">
+            Code For Good hackathon.
+          </a>
+        </li>
+        <li>
+          Imperial College
+          <a href="https://ichack17.devpost.com/" title="ICHack17">
+            ICHack17 hackathon.
+          </a>
+        </li>
+        <li>
+          180
+          <a href="https://projecteuler.net/" title="Project Euler">
+            Project Euler
+          </a>
+          problems solved over several years.
+        </li>
+        <li>
+          Designed rough website for
+          <a href="http://www.migiglass.com/" title="MiGi Glass">
+            MiGi glass industry
+          </a>
+          over a decade ago.
+        </li>
+      </ul>
+      *Projects> :l Contacts.hs
+    </div>
+    <div class="terminal">
+      [1 of 1] Compiling Contacts &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ( Contacts.hs, interpreted )
+      <br />
+      Ok, modules loaded: Contacts.
+      <br />
+      *Contacts> Send me an email to
+      <a href="mailto:dka316@ic.ac.uk" title="Organisation email">
+        dka316@ic.ac.uk
+      </a>
+      for work-related issues or
+      <a href="mailto:david_gequaxe@yahoo.com" title="Personal email">
+        david_gequaxe@yahoo.com
+      </a>
+      for personal matters.
+      <br />
+      *Contacts> Find some of my projects in my
+      <a href="https://github.com/Multramate/" title="GitHub">
+        GitHub account
+      </a>
+      where my
+      <a href="https://github.com/Multramate/CV/raw/master/CV.pdf" title="CV">
+        Curriculum Vitae
+      </a>
+      can also be found.
+      <br />
+      *Contacts> Connect with me through my
+      <a href="https://www.linkedin.com/in/david-kurniadi-angdinata/" title="LinkedIn">
+        LinkedIn account
+      </a>
+      or chat with me on my
+      <a href="https://www.facebook.com/david.angdinata/" title="LinkedIn">
+        Facebook account.
+      </a>
+      <br />
+      *Contacts> Otherwise, you can communicate with me over in WhatsApp, WeChat, and Messenger.
+    </div>
   </body>
 </html>
