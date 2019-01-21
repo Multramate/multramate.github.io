@@ -58,8 +58,16 @@ body {
   color: #0000ff;
 }
 
-.sub {
-  vertical-align: sub;
+table {
+  width: 100%;
+}
+
+table tr td:first-child {
+  text-align: left;
+}
+
+table tr td:last-child {
+  text-align: right;
 }
 
 li {
