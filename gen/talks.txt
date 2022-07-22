@@ -1,0 +1,99 @@
+    <div class="terminal">
+      *David> print talk >> mapM_ print talks
+      <ul>
+        <li>
+          Here are some presentation slides or typed notes for past mathematical talks.
+          <ul>
+            <li>
+              <a href="ttsabg/main.pdf" title="The Tate-Shafarevich and Brauer groups">
+                The Tate-Shafarevich and Brauer groups
+              </a>
+              <br />
+              Study group on curves over function fields at University College London
+            </li>
+            <li>
+              <a href="ecatmwt/main.pdf" title="Elliptic curves and the Mordell-Weil theorem">
+                Elliptic curves and the Mordell-Weil theorem
+              </a>
+              <br />
+              London Learning Lean at Imperial College London
+            </li>
+            <li>
+              <a href="tesohp/main.pdf" title="The Euler system of Heegner points">
+                The Euler system of Heegner points
+              </a>
+              <br />
+              London Junior Number Theory at King's College London
+            </li>
+            <li>
+              <a href="kwotbc/main.pdf" title="Kolyagin's work on the BSD conjecture">
+                Kolyagin's work on the BSD conjecture
+              </a>
+              <br />
+              Mini project presentation at the London School of Geometry and Number Theory
+            </li>
+            <li>
+              <a href="ecil/main.pdf" title="Elliptic curves in Lean">
+                Elliptic curves in Lean
+              </a>
+              <br />
+              Mathematical Theorem Proving Workshop at Huawei Technologies R&D UK Ltd
+            </li>
+            <li>
+              <a href="icg/main.pdf" title="Ideal class groups">
+                Ideal class groups
+              </a>
+              <br />
+              Short introductory talk at the London School of Geometry and Number Theory
+            </li>
+            <li>
+              <a href="rhfec/main.pdf" title="Rank heuristics for elliptic curves">
+                Rank heuristics for elliptic curves
+              </a>
+              <br />
+              Part III Seminar Series at the University of Cambridge
+            </li>
+            <li>
+              <a href="asfec/main.pdf" title="Arithmetic statistics for elliptic curves">
+                Arithmetic statistics for elliptic curves
+              </a>
+              <br />
+              Masters thesis presentation at Imperial College London
+            </li>
+            <li>
+              <a href="ticgiatsg/main.pdf" title="The ideal class group is a Tate-Shafarevich group">
+                The ideal class group is a Tate-Shafarevich group
+              </a>
+              <br />
+              Presentation at Essen Seminar for Algebraic Geometry and Arithmetic
+            </li>
+            <li>
+              <a href="ceaaul/main.pdf" title="Cryptography engineering at Adjoint UK Ltd">
+                Cryptography engineering at Adjoint UK Ltd
+              </a>
+              <br />
+              Industrial placement presentation at Imperial College London
+            </li>
+            <li>
+              <a href="pbecc/main.pdf" title="Pairing-based elliptic curve cryptography">
+                Pairing-based elliptic curve cryptography
+              </a>
+              <br />
+              Lunch and Learn at Adjoint UK Ltd
+            </li>
+            <li>
+              An unusual cubic representation problem
+              <a href="aucrp/slides/main.pdf" title="An unusual cubic representation problem">
+                slides
+              </a>
+              and
+              <a href="aucrp/notes/main.pdf" title="An unusual cubic representation problem">
+                notes
+              </a>
+              <br />
+              Undergraduate Mathematics Colloquium at Imperial College London
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>

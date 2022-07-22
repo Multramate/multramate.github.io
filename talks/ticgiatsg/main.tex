@@ -1,0 +1,315 @@
+\documentclass{article}
+
+% Packages
+
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[UKenglish]{babel}
+\usepackage{commath}
+\usepackage{enumitem}
+\usepackage{etoolbox}
+\usepackage{fancyhdr}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{tikz-cd}
+\usepackage{csquotes}
+
+% Formatting
+
+\DeclareFontFamily{U}{wncyr}{}
+\DeclareFontShape{U}{wncyr}{m}{n}{<->wncyr10}{}
+\DeclareSymbolFont{cyr}{U}{wncyr}{m}{n}
+\DeclareMathSymbol{\Sha}{\mathord}{cyr}{"58}
+\delimitershortfall5pt
+\newcommand\newoperator[1]{\ifcsdef{#1}{\cslet{#1}{\relax}}{}\csdef{#1}{\operatorname{#1}}}
+\patchcmd{\abstract}{\titlepage}{}{}{}
+\patchcmd{\endabstract}{\endtitlepage}{}{}{}
+
+% Environments
+
+\newtheorem*{theorem}{Theorem}
+
+% Blackboard
+
+\renewcommand{\AA}{\mathbb{A}} % Blackboard A
+\newcommand{\BB}{\mathbb{B}}   % Blackboard B
+\newcommand{\CC}{\mathbb{C}}   % Blackboard C
+\newcommand{\DD}{\mathbb{D}}   % Blackboard D
+\newcommand{\EE}{\mathbb{E}}   % Blackboard E
+\newcommand{\FF}{\mathbb{F}}   % Blackboard F
+\newcommand{\GG}{\mathbb{G}}   % Blackboard G
+\newcommand{\HH}{\mathbb{H}}   % Blackboard H
+\newcommand{\II}{\mathbb{I}}   % Blackboard I
+\newcommand{\JJ}{\mathbb{J}}   % Blackboard J
+\newcommand{\KK}{\mathbb{K}}   % Blackboard K
+\newcommand{\LL}{\mathbb{L}}   % Blackboard L
+\newcommand{\MM}{\mathbb{M}}   % Blackboard M
+\newcommand{\NN}{\mathbb{N}}   % Blackboard N
+\newcommand{\OO}{\mathbb{O}}   % Blackboard O
+\newcommand{\PP}{\mathbb{P}}   % Blackboard P
+\newcommand{\QQ}{\mathbb{Q}}   % Blackboard Q
+\newcommand{\RR}{\mathbb{R}}   % Blackboard R
+\renewcommand{\SS}{\mathbb{S}} % Blackboard S
+\newcommand{\TT}{\mathbb{T}}   % Blackboard T
+\newcommand{\UU}{\mathbb{U}}   % Blackboard U
+\newcommand{\VV}{\mathbb{V}}   % Blackboard V
+\newcommand{\WW}{\mathbb{W}}   % Blackboard W
+\newcommand{\XX}{\mathbb{X}}   % Blackboard X
+\newcommand{\YY}{\mathbb{Y}}   % Blackboard Y
+\newcommand{\ZZ}{\mathbb{Z}}   % Blackboard Z
+
+% Brackets
+
+\renewcommand{\eval}[1]{\left. #1 \right|}          % Evaluation
+\newcommand{\br}{\del}                              % Brackets
+\newcommand{\abr}[1]{\left\langle #1 \right\rangle} % Angle brackets
+\newcommand{\fbr}[1]{\left\lfloor #1 \right\rfloor} % Floor brackets
+\newcommand{\lbr}[1]{\left\lfloor #1 \right\rfloor} % Ceiling brackets
+\newcommand{\st}{\ \middle| \ }                     % Such that
+
+% Calligraphic
+
+\newcommand{\AAA}{\mathcal{A}} % Calligraphic A
+\newcommand{\BBB}{\mathcal{B}} % Calligraphic B
+\newcommand{\CCC}{\mathcal{C}} % Calligraphic C
+\newcommand{\DDD}{\mathcal{D}} % Calligraphic D
+\newcommand{\EEE}{\mathcal{E}} % Calligraphic E
+\newcommand{\FFF}{\mathcal{F}} % Calligraphic F
+\newcommand{\GGG}{\mathcal{G}} % Calligraphic G
+\newcommand{\HHH}{\mathcal{H}} % Calligraphic H
+\newcommand{\III}{\mathcal{I}} % Calligraphic I
+\newcommand{\JJJ}{\mathcal{J}} % Calligraphic J
+\newcommand{\KKK}{\mathcal{K}} % Calligraphic K
+\newcommand{\LLL}{\mathcal{L}} % Calligraphic L
+\newcommand{\MMM}{\mathcal{M}} % Calligraphic M
+\newcommand{\NNN}{\mathcal{N}} % Calligraphic N
+\newcommand{\OOO}{\mathcal{O}} % Calligraphic O
+\newcommand{\PPP}{\mathcal{P}} % Calligraphic P
+\newcommand{\QQQ}{\mathcal{Q}} % Calligraphic Q
+\newcommand{\RRR}{\mathcal{R}} % Calligraphic R
+\newcommand{\SSS}{\mathcal{S}} % Calligraphic S
+\newcommand{\TTT}{\mathcal{T}} % Calligraphic T
+\newcommand{\UUU}{\mathcal{U}} % Calligraphic U
+\newcommand{\VVV}{\mathcal{V}} % Calligraphic V
+\newcommand{\WWW}{\mathcal{W}} % Calligraphic W
+\newcommand{\XXX}{\mathcal{X}} % Calligraphic X
+\newcommand{\YYY}{\mathcal{Y}} % Calligraphic Y
+\newcommand{\ZZZ}{\mathcal{Z}} % Calligraphic Z
+
+% Fraktur
+
+\newcommand{\aaa}{\mathfrak{a}}   % Fraktur a
+\newcommand{\bbb}{\mathfrak{b}}   % Fraktur b
+\newcommand{\ccc}{\mathfrak{c}}   % Fraktur c
+\newcommand{\ddd}{\mathfrak{d}}   % Fraktur d
+\newcommand{\eee}{\mathfrak{e}}   % Fraktur e
+\newcommand{\fff}{\mathfrak{f}}   % Fraktur f
+\renewcommand{\ggg}{\mathfrak{g}} % Fraktur g
+\newcommand{\hhh}{\mathfrak{h}}   % Fraktur h
+\newcommand{\iii}{\mathfrak{i}}   % Fraktur i
+\newcommand{\jjj}{\mathfrak{j}}   % Fraktur j
+\newcommand{\kkk}{\mathfrak{k}}   % Fraktur k
+\renewcommand{\lll}{\mathfrak{l}} % Fraktur l
+\newcommand{\mmm}{\mathfrak{m}}   % Fraktur m
+\newcommand{\nnn}{\mathfrak{n}}   % Fraktur n
+\newcommand{\ooo}{\mathfrak{o}}   % Fraktur o
+\newcommand{\ppp}{\mathfrak{p}}   % Fraktur p
+\newcommand{\qqq}{\mathfrak{q}}   % Fraktur q
+\newcommand{\rrr}{\mathfrak{r}}   % Fraktur r
+\newcommand{\sss}{\mathfrak{s}}   % Fraktur s
+\newcommand{\ttt}{\mathfrak{t}}   % Fraktur t
+\newcommand{\uuu}{\mathfrak{u}}   % Fraktur u
+\newcommand{\vvv}{\mathfrak{v}}   % Fraktur v
+\newcommand{\www}{\mathfrak{w}}   % Fraktur w
+\newcommand{\xxx}{\mathfrak{x}}   % Fraktur x
+\newcommand{\yyy}{\mathfrak{y}}   % Fraktur y
+\newcommand{\zzz}{\mathfrak{z}}   % Fraktur z
+
+% Maps
+
+\newcommand{\function}[5][]{ % Function
+  \ifx &#1&
+    \begin{array}{rcl}
+      #2 & \longrightarrow & #3 \\
+      #4 & \longmapsto     & #5
+    \end{array}
+  \else
+    \begin{array}{ccrcl}
+      #1 & : & #2 & \longrightarrow & #3 \\
+         &   & #4 & \longmapsto     & #5
+    \end{array}
+  \fi
+}
+
+% Number theory
+
+\newoperator{Cl}  % Class group
+\newoperator{id}  % Identity
+\newoperator{im}  % Image
+\newoperator{ker} % Kernel
+
+% Roman
+
+\newcommand{\A}{\mathrm{A}}   % Roman A
+\newcommand{\B}{\mathrm{B}}   % Roman B
+\newcommand{\C}{\mathrm{C}}   % Roman C
+\newcommand{\D}{\mathrm{D}}   % Roman D
+\newcommand{\E}{\mathrm{E}}   % Roman E
+\newcommand{\F}{\mathrm{F}}   % Roman F
+\newcommand{\G}{\mathrm{G}}   % Roman G
+\renewcommand{\H}{\mathrm{H}} % Roman H
+\newcommand{\I}{\mathrm{I}}   % Roman I
+\newcommand{\J}{\mathrm{J}}   % Roman J
+\newcommand{\K}{\mathrm{K}}   % Roman K
+\renewcommand{\L}{\mathrm{L}} % Roman L
+\newcommand{\M}{\mathrm{M}}   % Roman M
+\newcommand{\N}{\mathrm{N}}   % Roman N
+\renewcommand{\O}{\mathrm{O}} % Roman O
+\renewcommand{\P}{\mathrm{P}} % Roman P
+\newcommand{\Q}{\mathrm{Q}}   % Roman Q
+\newcommand{\R}{\mathrm{R}}   % Roman R
+\renewcommand{\S}{\mathrm{S}} % Roman S
+\newcommand{\T}{\mathrm{T}}   % Roman T
+\newcommand{\U}{\mathrm{U}}   % Roman U
+\newcommand{\V}{\mathrm{V}}   % Roman V
+\newcommand{\W}{\mathrm{W}}   % Roman W
+\newcommand{\X}{\mathrm{X}}   % Roman X
+\newcommand{\Y}{\mathrm{Y}}   % Roman Y
+\newcommand{\Z}{\mathrm{Z}}   % Roman Z
+
+\renewcommand{\a}{\mathrm{a}} % Roman a
+\renewcommand{\b}{\mathrm{b}} % Roman b
+\renewcommand{\c}{\mathrm{c}} % Roman c
+\renewcommand{\d}{\mathrm{d}} % Roman d
+\newcommand{\e}{\mathrm{e}}   % Roman e
+\newcommand{\f}{\mathrm{f}}   % Roman f
+\newcommand{\g}{\mathrm{g}}   % Roman g
+\newcommand{\h}{\mathrm{h}}   % Roman h
+\renewcommand{\i}{\mathrm{i}} % Roman i
+\renewcommand{\j}{\mathrm{j}} % Roman j
+\renewcommand{\k}{\mathrm{k}} % Roman k
+\renewcommand{\l}{\mathrm{l}} % Roman l
+\newcommand{\m}{\mathrm{m}}   % Roman m
+\newcommand{\n}{\mathrm{n}}   % Roman n
+\renewcommand{\o}{\mathrm{o}} % Roman o
+\newcommand{\p}{\mathrm{p}}   % Roman p
+\newcommand{\q}{\mathrm{q}}   % Roman q
+\renewcommand{\r}{\mathrm{r}} % Roman r
+\newcommand{\s}{\mathrm{s}}   % Roman s
+\renewcommand{\t}{\mathrm{t}} % Roman t
+\renewcommand{\u}{\mathrm{u}} % Roman u
+\renewcommand{\v}{\mathrm{v}} % Roman v
+\newcommand{\w}{\mathrm{w}}   % Roman w
+\newcommand{\x}{\mathrm{x}}   % Roman x
+\newcommand{\y}{\mathrm{y}}   % Roman y
+\newcommand{\z}{\mathrm{z}}   % Roman z
+
+% Tikz
+
+\tikzset{
+  arrow symbol/.style={"#1" description, allow upside down, auto=false, draw=none, sloped},
+  subset/.style={arrow symbol={\subset}},
+  cong/.style={arrow symbol={\cong}}
+}
+
+% Title
+
+\title{$ \Cl\br{K} \cong \Sha\br{K} $}
+\author{David Kurniadi Angdinata}
+\date{Wednesday, 11th March 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This article gives a short proof of the natural isomorphism between the ideal class group of a number field and a notion of a Tate-Shafarevich group defined from it, primarily adapting the arguments from Sameer Kailasa's 2016 article \emph{on the Tate-Shafarevich group of a number field} while consulting Kevin Buzzard's 2005 article \emph{why is an ideal class group a Tate-Shafarevich group?}.
+\end{abstract}
+
+\vspace{0.5cm}
+
+Let $ K $ be a field of characteristic zero. Denote its non-zero elements by $ K^\times $, its ring of integers by $ \OOO_K $, its unit group by $ \OOO_K^\times $, its algebraic closure by $ \overline{K} $, and its absolute Galois group by $ \GGG_K $. If $ M $ is a Galois module of $ K $, denote its $ n $-th Galois cohomology groups by $ \H^n\br{K, M} $.
+
+If $ K $ is a number field, denote its places by $ \V\br{K} $, its non-archimedean places by $ \V_0\br{K} $, its ideal group by $ \I\br{K} $, its principal ideal group by $ \P\br{K} $, and its ideal class group by $ \Cl\br{K} $. If $ \ppp $ is a place of $ K $, denote its discrete valuation by $ \v_\ppp $, and its completion by $ K_\ppp $.
+
+If $ E $ is an elliptic curve with $ K $-rational points $ E\br{K} $, its Tate-Shafarevich group is defined as
+$$ \Sha\br{E / K} = \ker \br{\H^1\br{K, E\br{\overline{K}}} \to \prod_{\ppp \in \V\br{K}} \H^1\br{K_\ppp, E\br{\overline{K_\ppp}}}}. $$
+In a similar fashion, if $ K $ is a number field, its Tate-Shafarevich group can be defined as
+$$ \Sha\br{K} = \ker \br{\H^1\br{K, \OOO_{\overline{K}}^\times} \to \prod_{\ppp \in \V_0\br{K}} \H^1\br{K_\ppp, \OOO_{\overline{K_\ppp}}^\times}}. $$
+This is a prime example of the folklore heuristic correspondence between rational points of elliptic curves and unit groups of number fields. The following theorem shows its relationship with the ideal class group.
+
+\begin{theorem}
+Let $ K $ be a number field. Then there is a natural isomorphism $ \Cl\br{K} \xrightarrow{\sim} \Sha\br{K} $.
+\end{theorem}
+
+\begin{proof}
+There is a fundamental exact sequence in algebraic number theory given by
+$$ 1 \to \OOO_K^\times \xrightarrow{i} K^\times \xrightarrow{\bullet\OOO_K} \I\br{K} \xrightarrow{q} \Cl\br{K} \to 1. $$
+Extracting a short exact sequence from the first two terms, considering their algebraic closures, and applying the Galois cohomology functor, gives a long exact sequence starting with
+$$
+\begin{tikzcd}[column sep=small, row sep=tiny]
+1 \arrow{r} & \H^0\br{K, \OOO_{\overline{K}}^\times} \arrow{r}{i} \arrow[cong]{d} & \H^0\br{K, \overline{K}^\times} \arrow{r}{\bullet\OOO_{\overline{K}}} \arrow[cong]{d} & \H^0\br{K, \P\br{\overline{K}}} \arrow{r}{\delta} \arrow[cong]{d} & \H^1\br{K, \OOO_{\overline{K}}^\times} \arrow{r} & \H^1\br{K, \overline{K}^\times} \arrow{r} \arrow[cong]{d} & \dots \\
+& \OOO_K^\times & K^\times & \A\br{\overline{K}} & & 1 &
+\end{tikzcd},
+$$
+by Hilbert 90, denoting the Galois-invariant principal fractional ideals in $ \overline{K} $, or \emph{ambiguous ideals}, by $ \A\br{\overline{K}} $. Applying the same argument to $ K_\ppp $ and taking products over all $ \ppp \in \V_0\br{K} $ gives an exact sequence
+$$ 1 \to \prod_{\ppp \in \V_0\br{K}} \OOO_{K_\ppp}^\times \xrightarrow{i} \prod_{\ppp \in \V_0\br{K}} K_\ppp^\times \xrightarrow{\bullet\OOO_{\overline{K}}} \prod_{\ppp \in \V_0\br{K}} \A\br{\overline{K_\ppp}} \xrightarrow{\prod_\ppp \delta_\ppp} \prod_{\ppp \in \V_0\br{K}} \H^1\br{K_\ppp, \OOO_{\overline{K_\ppp}}^\times} \to 1, $$
+where the $ \ppp $-components of the connecting homomomorphisms $ \delta_\ppp $ are surjections sending ambiguous ideals $ x_\ppp\OOO_{\overline{K_\ppp}} \in \A\br{\overline{K_\ppp}} $ to $ 1 $-cocycles, which in turn send automorphisms $ \sigma \in \GGG_K $ to units $ \sigma\br{x_\ppp} / x_\ppp \in \OOO_{\overline{K_\ppp}}^\times $.
+
+\pagebreak
+
+Combining the three exact sequences gives a diagram with exact rows
+$$
+\begin{tikzcd}[column sep=small]
+1 \arrow{r} & \OOO_K^\times \arrow{r}{i} \arrow{d}{\sim} & K^\times \arrow{r}{\bullet\OOO_K} \arrow{d}{\sim} & \I\br{K} \arrow{r}{q} \arrow{d}{\alpha} & \Cl\br{K} \arrow{r} \arrow{d}{\beta} & 1 \\
+1 \arrow{r} & \OOO_K^\times \arrow{r}{i} \arrow[hookrightarrow]{d}{\Delta} & K^\times \arrow{r}{\bullet\OOO_{\overline{K}}} \arrow[hookrightarrow]{d}{\Delta} & \A\br{\overline{K}} \arrow{r}{\delta} \arrow[hookrightarrow]{d}{\Delta_\alpha} & \H^1\br{K, \OOO_{\overline{K}}^\times} \arrow{r} \arrow[hookrightarrow]{d}{\Delta_\beta} & 1 \\
+1 \arrow{r} & \displaystyle\prod_{\ppp \in \V_0\br{K}} \OOO_{K_\ppp}^\times \arrow{r}{i} & \displaystyle\prod_{\ppp \in \V_0\br{K}} K_\ppp^\times \arrow{r}{\bullet\OOO_{\overline{K}}} & \displaystyle\prod_{\ppp \in \V_0\br{K}} \A\br{\overline{K_\ppp}} \arrow{r}{\prod_\ppp \delta_\ppp} & \displaystyle\prod_{\ppp \in \V_0\br{K}} \H^1\br{K_\ppp, \OOO_{\overline{K_\ppp}}^\times} \arrow{r} & 1
+\end{tikzcd}.
+$$
+To make this diagram commute, it is necessary to define the relevant vertical maps.
+\begin{itemize}
+\item The maps $ \sim $ are identity maps, and the maps $ \Delta $ are diagonal embeddings.
+\item The map $ \alpha : \I\br{K} \to \A\br{\overline{K}} $ is an injection sending a fractional ideal $ I \in \I\br{K} $ to the ambiguous ideal above $ I_{\OOO_{\overline{K}}} \in \A\br{\overline{K}} $. This is principal since $ \overline{K} $ contains the Hilbert class field of $ K $, and Galois-invariant since $ I $ and $ \OOO_{\overline{K}} $ are Galois-invariant.
+\item The map $ \beta : \Cl\br{K} \to \H^1\br{K, \OOO_{\overline{K}}^\times} $ is an injection sending an ideal class $ \sbr{I} \in \Cl\br{K} $ to the composition $ \delta\br{\alpha\br{I}} \in \H^1\br{K, \OOO_{\overline{K}}^\times} $, which is independent of the representative fractional ideal $ I \in \I\br{K} $. This by definition gives $ \Sha\br{K} = \ker \Delta_\beta $.
+\end{itemize}
+To prove the isomorphism $ \Cl\br{K} \xrightarrow{\sim} \Sha\br{K} $, it is sufficient to prove $ \im \beta = \ker \Delta_\beta $.
+\begin{itemize}
+\item[$ \subseteq $] Let $ f \in \im \beta $ be a $ 1 $-cocycle. By surjectivity, there is an ideal class $ \sbr{I} \in \Cl\br{K} $ such that $ f = \beta\br{\sbr{I}} $. Now let $ \ppp \in \V_0\br{K} $ be a place. By the Chinese remainder theorem, there is a fractional ideal $ J \in \sbr{I} $ such that $ J + \ppp = \OOO_K $, so $ \v_\ppp\br{J_{\OOO_{\overline{K}}}} = 0 $. By principality, there is an ambiguous ideal $ x_\ppp\OOO_{\overline{K}} \in \A\br{\overline{K}} $ such that $ J_{\OOO_{\overline{K}}} = x_\ppp\OOO_{\overline{K}} $, so $ \v_\ppp\br{x_\ppp\OOO_{\overline{K}}} = 0 $, or $ x_\ppp \in \OOO_{\overline{K_\ppp}}^\times $. Considering $ \Delta_\beta $ over all places $ \ppp \in \V_0\br{K} $,
+\begin{align*}
+\Delta_\beta\br{f}
+& = \Delta_\beta\br{\beta\br{\sbr{I}}}
+= \Delta_\beta\br{\beta\br{\sbr{J}}}
+= \Delta_\beta\br{\delta\br{\alpha\br{J}}}
+= \Delta_\beta\br{\delta\br{J_{\OOO_{\overline{K}}}}} \\
+& = \Delta_\beta\br{\delta\br{x_\ppp\OOO_{\overline{K}}}}
+= \Delta_\beta\br{\sigma \mapsto \sigma\br{x_\ppp} / x_\ppp}
+= 1.
+\end{align*}
+Hence $ f \in \ker \Delta_\beta $.
+\item[$ \supseteq $] Let $ f \in \ker \Delta_\beta $ be a $ 1 $-cocycle. By diagram chasing at $ f $, there is an element $ \br{x_\ppp}_\ppp \in \prod_\ppp K_\ppp^\times $ in the commutative diagram
+$$
+\begin{tikzcd}
+& x\OOO_{\overline{K}} \arrow{r}{\delta} \arrow{d}{\Delta_\alpha} & f \arrow{d}{\Delta_\beta} \\
+\br{x_\ppp}_\ppp \arrow{r}{\bullet \OOO_{\overline{K}}} & \br{x\OOO_{\overline{K_\ppp}}}_\ppp \arrow{r}{\prod_\ppp \delta_\ppp} & 1
+\end{tikzcd},
+$$
+such that $ x_\ppp\OOO_{\overline{K_\ppp}} = x\OOO_{\overline{K_\ppp}} $ for all places $ \ppp \in \V_0\br{K} $, or $ \v_\ppp\br{x_\ppp} = \v_\ppp\br{x} $. By taking limits, it suffices to consider a finite extension $ K \subseteq L $. By the unique factorisation of prime ideals and transitivity of the Galois group $ \GGG_K / \GGG_L $,
+\begin{align*}
+\delta\br{x\OOO_L}
+& = \delta\br{\prod_{\ppp \in \V_0\br{K}} \br{\prod_{\qqq \in \V_0\br{L}, \ \qqq \mid \ppp} \qqq}^{\v_\ppp\br{x}}}
+= \delta\br{\prod_{\ppp \in \V_0\br{K}} \br{\prod_{\qqq \in \V_0\br{L}, \ \qqq \mid \ppp} \qqq}^{\v_\ppp\br{x_\ppp}}} \\
+& = \delta\br{\prod_{\ppp \in \V_0\br{K}} \ppp_{\OOO_L}^{\tfrac{\v_\ppp\br{x_\ppp}}{e_\ppp}}}
+= \delta\br{\alpha\br{\prod_{\ppp \in \V_0\br{K}} \ppp^{\tfrac{\v_\ppp\br{x_\ppp}}{e_\ppp}}}}
+= \beta\br{q\br{\prod_{\ppp \in \V_0\br{K}} \ppp^{\tfrac{\v_\ppp\br{x_\ppp}}{e_\ppp}}}},
+\end{align*}
+where $ e_\ppp $ are the respective local ramification indices of $ K_\ppp \subseteq L_\qqq $. Hence $ f \in \im \beta $.
+\end{itemize}
+Hence $ \im \beta = \ker \Delta_\beta $ and thus $ \Cl\br{K} \cong \Sha\br{K} $.
+\end{proof}
+
+\end{document}

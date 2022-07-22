@@ -1,0 +1,392 @@
+\documentclass[10pt]{beamer}
+
+\setbeamertemplate{footline}[page number]
+
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{transparent}
+
+\DeclareFontFamily{U}{wncyr}{}
+\DeclareFontShape{U}{wncyr}{m}{n}{<->wncyr10}{}
+\DeclareSymbolFont{cyr}{U}{wncyr}{m}{n}
+\DeclareMathSymbol{\Sha}{\mathord}{cyr}{"58}
+
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{theorems}{Theorems}
+
+\begin{document}
+
+\begin{frame}
+
+\begin{center}
+
+{\scriptsize University College London}
+
+\vspace{0.5cm}
+
+{\small Curves over function fields}
+
+\vspace{1cm}
+
+\textbf{\large The Tate-Shafarevich and Brauer groups}
+
+\vspace{1cm}
+
+David Ang
+
+\vspace{0.5cm}
+
+{\footnotesize Tuesday, 05 July 2022}
+
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Overview}
+
+Part I
+\begin{itemize}
+\item The Tate-Shafarevich group of a $ \begin{cases} \text{number field} \\ \text{function field} \end{cases} $
+\item The Artin-Tate conjecture
+\end{itemize}
+
+\vspace{0.5cm}
+
+{\transparent{0.5} Part II
+\begin{itemize}
+\item The Brauer-$ \begin{cases} \text{Grothendieck} \\ \text{Azumaya} \end{cases} $ group of a $ \begin{cases} \text{field} \\ \text{scheme} \end{cases} $
+\item The Brauer-Manin obstruction
+\end{itemize}
+}
+
+\end{frame}
+
+\begin{frame}[t]{The Tate-Shafarevich group of a number field}
+
+Let $ E $ be an elliptic curve over a number field $ K $.
+\only<2->{Let $$ V_K := \{\text{closed points of} \ \mathrm{Spec}(\mathcal{O}_K)\} \cup V_K^\infty. $$}
+
+\only<3->{The \textbf{Tate-Shafarevich group} is $$ \Sha(E / K) := \ker \left(H^1(K, E) \to \prod_{v \in V_K} H^1(K_v, E)\right). $$}
+
+\only<4-6>{Note that there is a bijection $$ H^1(K, E) \xrightarrow{\sim} \mathrm{WC}(E / K), $$ the \textbf{Weil-Ch\^atelet group} of torsors for $ E / K $.}
+\only<5-6>{Thus $ 0 \ne C \in \Sha(E / K) $ is a $ K $-twist of $ E $ that is everywhere locally soluble but globally insoluble.}
+
+\only<6>{
+\begin{example}[Selmer]
+The curve $ 3X^3 + 4Y^3 + 5Z^3 = 0 $ is a $ \mathbb{Q} $-twist of $ E : X^3 + Y^3 + 60Z^3 = 0 $ that is everywhere locally soluble but globally insoluble, so $ \Sha(E / \mathbb{Q}) \ne 0 $.
+\end{example}
+}
+
+\only<7->{
+\begin{conjecture}[Tate-Shafarevich]
+$ \#\Sha(E / K) $ is finite.
+\end{conjecture}
+}
+
+\only<8>{
+\begin{conjecture}[Birch-Swinnerton-Dyer]
+Assuming TS holds, $$ \lim_{s \to 1} \dfrac{L(E / K, s)}{(s - 1)^{\mathrm{rk}(E / K)}} = \dfrac{R \cdot \#\Sha(E / K) \cdot \tau}{\#E(K)_{\mathrm{tors}}^2}. $$
+\end{conjecture}
+}
+
+\end{frame}
+
+\begin{frame}[t]{The Tate-Shafarevich group of a \alert<1>{function field}}
+
+\only<1-4>{Let $ E $ be an elliptic curve over a \alert<1>{function field $ K = \mathbb{F}_q(C) $}.}%
+\only<5->{\alert<5>{Let $ \mathcal{E} \to C $ be an elliptic surface over $ \mathbb{F}_q $ with generic fibre $ E / K $.}}%
+\only<4->{\vspace{0.5cm}}
+\only<1-3>{Let $$ V_K := \{\text{closed points of} \ \only<1>{\mathrm{Spec}(\mathcal{O}_K)} \only<2->{\alert<2>{C}}\} \only<1>{\cup V_K^\infty}. $$ The \textbf{Tate-Shafarevich group} is $$ \Sha(E / K) := \ker \left(H^1(K, E) \to \prod_{v \in V_K} H^1(K_v, E)\right). $$}
+
+\begin{conjecture}[Tate-Shafarevich]
+$ \#\Sha(E / K) $ is finite.
+\end{conjecture}
+
+\only<1-2>{\begin{conjecture}[Birch-Swinnerton-Dyer]}
+\only<3>{\begin{theorem}[KT03]}
+\only<1-3>{Assuming TS\only<3>{\alert<3>{$ [\ell^\infty] $}} holds\only<3>{\alert<3>{ for some $ \ell $}}, $$ \lim_{s \to 1} \dfrac{L(E / K, s)}{(s - 1)^{\mathrm{rk}(E / K)}} = \dfrac{R \cdot \#\Sha(E / K) \cdot \tau}{\#E(K)_{\mathrm{tors}}^2}. $$}
+\only<3>{\end{theorem}}
+\only<1-2>{\end{conjecture}}
+
+\only<4->{
+\begin{theorem}[Tat66]
+TS holds if and only if TS$ [\ell^\infty] $ holds for some $ \ell $.
+\end{theorem}
+}
+
+\only<6->{
+\begin{theorems}
+\setlength{\leftmargini}{0.5in}
+\begin{itemize}
+\item<6->[(Mil68)] TS holds if $ \mathcal{E} $ is constant.
+\item<7->[(Mil70)] TS holds if $ \mathcal{E} $ is rational.
+\item<8->[(ASD73)] TS holds if $ \mathcal{E} $ is K3.
+\end{itemize}
+\end{theorems}
+}
+
+\only<9>{\vspace{0.5cm}
+\begin{theorem}[Ulm12, Proposition 5.3.1]
+$ \mathrm{Br}(\mathcal{E}) \xrightarrow{\sim} \Sha(E / K) $.
+\end{theorem}
+}
+
+\end{frame}
+
+\begin{frame}[t]{The Artin-Tate conjecture}
+
+Let $ \mathcal{E} \to C $ be an elliptic surface over $ \mathbb{F}_q $ with generic fibre $ E / K $.
+\only<2->{Then
+\begin{align*}
+\only<2->{\text{BSD holds for} \ E \qquad
+& \overset{\text{KT03}}{\iff} \qquad \#\Sha(E / K)[\ell^\infty] \ \text{is finite} \ \text{for some} \ \ell \\}
+\only<3->{& \overset{\text{Gro79}}{\iff} \qquad \#\mathrm{Br}(\mathcal{E})[\ell^\infty] \ \text{is finite} \ \text{for some} \ \ell \\}
+\only<4->{& \overset{\text{Mil75}}{\iff} \qquad \text{AT (and T) holds for} \ \mathcal{E}.}
+\end{align*}
+}
+
+\only<5->{
+\begin{conjecture}[Artin-Tate]
+Let $ X $ be a smooth projective geometrically-connected surface over $ \mathbb{F}_q $.
+\only<6->{Then $ \#\mathrm{Br}(X) $ is finite,}
+\only<7->{and if $ \mathrm{NS}(X)_{/ \mathrm{tors}} = \langle D_i \rangle $, then $$ \lim_{s \to 1} \dfrac{P_2(X, q^{-s})}{(1 - q^{1 - s})^{\mathrm{rk}(\mathrm{NS}(X))}} = \dfrac{\#\mathrm{Br}(X) \cdot |\det(\langle D_i, D_j \rangle_{i, j})|}{\#\mathrm{NS}(X)_{\mathrm{tors}}^2 \cdot q^{\chi(X, \mathcal{O}_X) - 1 + \dim(\mathrm{PicVar}(X))}}. $$}
+\end{conjecture}
+}
+
+\only<8>{Note that if $ X \to C $ is flat proper with smooth geometrically-connected generic fibre $ X_K / K $, then $ \#\Sha(\mathrm{Jac}(X_K) / K) \sim \#\mathrm{Br}(X) $ (LLR18).}
+
+\end{frame}
+
+\begin{frame}{Overview}
+
+{\transparent{0.5} Part I
+\begin{itemize}
+\item The Tate-Shafarevich group of a $ \begin{cases} \text{number field} \\ \text{function field} \end{cases} $
+\item The Artin-Tate conjecture
+\end{itemize}
+}
+
+\vspace{0.5cm}
+
+Part II
+\begin{itemize}
+\item The Brauer-$ \begin{cases} \text{Grothendieck} \\ \text{Azumaya} \end{cases} $ group of a $ \begin{cases} \text{field} \\ \text{scheme} \end{cases} $
+\item The Brauer-Manin obstruction
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[t]{The Brauer-Azumaya group of a field}
+
+Let $ K $ be a field. The \textbf{classical Brauer group} of $ K $ is $$ \mathrm{Br}(K) := \{\text{central simple algebras over} \ K\} / \sim. $$
+
+\only<2-8>{A \textbf{central simple algebra} over $ K $ is a finite-dimensional associative $ K $-algebra with centre $ K $ and no non-trivial proper two-sided ideals.}
+
+\only<3-8>{
+\begin{examples}
+\begin{itemize}
+\item<3-8> Algebra of $ n \times n $ matrices $ \mathrm{Mat}_n(K) $ over $ K $.
+\item<4-8> Algebra of $ n \times n $ matrices $ \mathrm{Mat}_n(D) $ over a central division algebra $ D $.
+\item<5-8> Tensor product $ A \otimes_K B $ of two CSAs $ A $ and $ B $.
+\item<6-8> Opposite algebra $ A^{\mathrm{op}} $ of a CSA $ A $.
+\end{itemize}
+\end{examples}
+}
+
+\only<7-8>{Two CSAs $ A $ and $ B $ over $ K $ are \textbf{equivalent} if there are $ n, m \in \mathbb{N} $ such that $ A \otimes_K \mathrm{Mat}_n(K) \cong B \otimes_K \mathrm{Mat}_m(K) $.}
+
+\only<8>{
+\begin{example}
+If $ n, m \in \mathbb{N} $ and $ D $ is a CDA, then $ \mathrm{Mat}_n(D) \sim \mathrm{Mat}_m(D) $.
+\end{example}
+}
+
+\only<9->{
+\begin{examples}
+\begin{itemize}
+\item<9-> $ \mathrm{Br}(\mathbb{F}_q) = 0 $.
+\only<10->{Suffices to prove a CDA $ D $ over $ \mathbb{F}_q $ is $ \mathbb{F}_q $.}
+\only<11->{A finite division algebra $ D $ is a field $ K $.}
+\only<12->{A field $ K $ with centre $ \mathbb{F}_q $ is $ \mathbb{F}_q $.}
+\item<13-> $ \mathrm{Br}(\mathbb{C}) = 0 $.
+\only<14->{Suffices to prove a CDA $ D $ over $ \mathbb{C} $ is $ \mathbb{C} $.}
+\only<15->{If $ x \in D $, then $ \mathbb{C}[x] $ is an integral domain and a finite-dimensional $ \mathbb{C} $-vector space.}
+\only<16->{Thus $ \mathbb{C}[x] $ is a field, but $ \mathbb{C} $ does not have finite extensions.}
+\item<17-> $ \mathrm{Br}(\mathbb{C}(X)) = 0 $ for a curve $ X / \mathbb{C} $.
+\only<18>{This is Tsen's theorem.}
+\end{itemize}
+\end{examples}
+}
+
+\end{frame}
+
+\begin{frame}[t]{The Brauer-Grothendieck group of a field}
+
+Let $ K $ be a field. The \textbf{cohomological Brauer group} of $ K $ is $$ \mathrm{Br}'(K) := H^2(K, \mathbb{G}_{\mathrm{m}}). $$
+
+\only<2->{
+\begin{theorem}[CTS19, Theorem 1.3.5]
+$ \mathrm{Br}(K) \xrightarrow{\sim} \mathrm{Br}'(K) $.
+\end{theorem}
+}
+
+\only<3->{
+\begin{examples}
+\begin{itemize}
+\only<3-6>{\item $ \mathrm{Br}'(\mathbb{R}) = \tfrac{1}{2}\mathbb{Z} / \mathbb{Z} $.}
+\only<4-6>{By cohomology of cyclic groups, $$ \mathrm{Br}'(\mathbb{R}) = H^2(\mathrm{Gal}(\mathbb{C} / \mathbb{R}), \mathbb{C}^\times) \cong \mathbb{R}^\times / \mathrm{Nm}_{\mathbb{C} / \mathbb{R}}(\mathbb{C}^\times) \cong \{\pm\}. $$}
+\only<5-6>{In fact, $ \mathrm{Br}'(\mathbb{R}) = \{\mathbb{R}, \mathbb{H}\} $.}
+\only<6>{\item Local class field theory gives isomorphisms $$ \mathrm{inv}_p : \mathrm{Br}'(\mathbb{Q}_p) \xrightarrow{\sim} \mathbb{Q} / \mathbb{Z}, \qquad \mathrm{inv}_q : \mathrm{Br}'(\mathbb{F}_q((T))) \xrightarrow{\sim} \mathbb{Q} / \mathbb{Z}. $$}
+\only<7->{\item Global class field theory gives short exact sequences $$ 0 = \varinjlim_{L / K} H^1(L / K, C_L) \to \mathrm{Br}'(\mathbb{Q}) \to \bigoplus_{v \in V_{\mathbb{Q}}} \mathrm{Br}'(\mathbb{Q}_v) \xrightarrow{\sum_v \mathrm{inv}_v} \mathbb{Q} / \mathbb{Z} \to 0, $$}
+\only<8>{$$ 0 = H^1(\mathbb{F}_q, \mathrm{Jac}(C_{\overline{\mathbb{F}_q}})) \to \mathrm{Br}'(K) \to \bigoplus_{v \in V_K} \mathrm{Br}'(K_v) \xrightarrow{\sum_v \mathrm{inv}_v} \mathbb{Q} / \mathbb{Z} \to 0, $$ where $ K = \mathbb{F}_q(C) $.}
+\end{itemize}
+\end{examples}
+}
+
+\end{frame}
+
+\begin{frame}[t]{The Brauer-Azumaya group of a scheme}
+
+Let $ X $ be a scheme. The \textbf{Brauer-Azumaya group} of $ X $ is $$ \mathrm{Br}_{\mathrm{Az}}(X) := \{\text{Azumaya algebras on} \ X\} / \sim. $$
+\only<2->{An \textbf{Azumaya algebra $ \mathcal{A} $ on $ X $} is a locally free $ \mathcal{O}_X $-algebra of finite type such that $ \mathcal{A}_x \otimes_{\mathcal{O}_{X, x}} \kappa_x $ is a CSA over $ \kappa_x $ for all closed points $ x \in X $.}
+
+\only<3->{
+\begin{examples}
+\begin{itemize}
+\item<3-> Trivial, tensor product, opposite algebra sheaves of AAs.
+\item<4-> ($ X = \mathrm{Spec}(K) $) For a CSA $ A $ over $ K $, the constant sheaf $ A $.
+\item<5-> ($ X = \mathbb{P}_K^n $) For a CSA $ A $ over $ K $, the sheaf $ A \otimes_K \mathcal{E}nd_K(\bigoplus_{n_i} \mathcal{O}_X(n_i)) $.
+\end{itemize}
+\end{examples}
+}
+
+\only<6->{Two AAs $ \mathcal{A} $ and $ \mathcal{B} $ are \textbf{equivalent} if there are locally free $ \mathcal{O}_X $-modules $ A $ and $ B $ of finite rank such that $ \mathcal{A} \otimes_{\mathcal{O}_X} \mathcal{E}nd_{\mathcal{O}_X}(A) \cong \mathcal{B} \otimes_{\mathcal{O}_X} \mathcal{E}nd_{\mathcal{O}_X}(B) $.}
+
+\only<7->{
+\begin{examples}
+\begin{itemize}
+\item<7-> $ \mathrm{Br}_{\mathrm{Az}}(\mathrm{Spec}(K)) = \mathrm{Br}(K) $.
+\item<8> (Fis17) $ \mathrm{Br}_{\mathrm{Az}}(C) $ for an smooth curve of genus one $ C / K $.
+\end{itemize}
+\end{examples}
+}
+
+\end{frame}
+
+\begin{frame}[t]{The Brauer-Grothendieck group of a scheme}
+
+Let $ X $ be a \only<1-9>{scheme. The \textbf{Brauer-Grothendieck group} of $ X $ is $$ \mathrm{Br}_{\mathrm{Gr}}(X) := H_{\text{\'et}}^2(X, \mathbb{G}_{\mathrm{m}}). $$}%
+\only<10->{\alert<10>{variety over a perfect field $ K $.} There is an exact sequence {\scriptsize
+$$
+\begin{tikzcd}[ampersand replacement=\&, column sep=tiny]
+0 \arrow{r} \& H^1(K, \overline{K}[X]^\times) \arrow{r} \& \mathrm{Pic}(X) \arrow{r} \& \mathrm{Pic}(\overline{X})^{G_K} \arrow{r} \& H^2(K, \overline{K}[X]^\times) \arrow[in=180, out=0, overlay]{dlll} \\
+\& \ker (\mathrm{Br}(X) \to \mathrm{Br}(\overline{X})) \arrow{r} \& H^1(K, \mathrm{Pic}(\overline{X})) \arrow{r} \& \ker (H^3(K, \overline{K}[X]^\times) \arrow{r} \& H_{\text{\'et}}^3(X, \mathbb{G}_{\mathrm{m}}))
+\end{tikzcd}.
+$$
+}}%
+\only<2-6>{Unlike for fields, in general $ \mathrm{Br}_{\mathrm{Az}}(X) \hookrightarrow \mathrm{Br}_{\mathrm{Gr}}(X) $ is not surjective.}
+
+\only<3-6>{\vspace{0.5cm}
+\begin{theorem}[CTS19, Theorem 3.3.2]
+Assume $ X $ is quasi-compact separated with an ample line bundle. Then $$ \mathrm{Br}(X) := \mathrm{Br}_{\mathrm{Az}}(X) \xrightarrow{\sim} \mathrm{Br}_{\mathrm{Gr}}(X)_{\mathrm{tors}}. $$
+\end{theorem}
+}
+
+\only<4-6>{\vspace{-0.5cm}
+\begin{example}
+A quasi-projective scheme over an affine scheme, such as $ E / \mathbb{F}_q(C) $ or $ \mathcal{E} / \mathbb{F}_q $.
+\only<5-6>{If $ X $ is regular integral noetherian, then $ \mathrm{Br}_{\mathrm{Gr}}(X) $ is already torsion.}
+\end{example}
+}
+
+\only<6>{\vspace{0.5cm}
+\begin{theorem}[CTS19, Theorem 3.5.4]
+Assume $ X $ is regular integral over a field $ K $. Then $ \mathrm{Br}(X) \hookrightarrow \mathrm{Br}(K(X)) $.
+\end{theorem}
+}
+
+\only<7-9>{\vspace{-0.5cm} Assume $ X $ is a variety over a perfect field $ K $, and write $ \overline{X} := X \times_K \overline{K} $.}
+
+\only<8-9>{\vspace{0.5cm} The main tool for computation is the Leray spectral sequence $$ E_2^{pq} = H^p(K, H_{\text{\'et}}^q(\overline{X}, \mathbb{G}_{\mathrm{m}})) \implies H_{\text{\'et}}^{p + q}(X, \mathbb{G}_{\mathrm{m}}). $$}
+
+\only<9>{
+\begin{theorem}[CTS19, 4.8]
+The first seven terms form an exact sequence {\scriptsize
+$$
+\begin{tikzcd}[ampersand replacement=\&, column sep=tiny]
+0 \arrow{r} \& H^1(K, \overline{K}[X]^\times) \arrow{r} \& \mathrm{Pic}(X) \arrow{r} \& \mathrm{Pic}(\overline{X})^{G_K} \arrow{r} \& H^2(K, \overline{K}[X]^\times) \arrow[in=180, out=0, overlay]{dlll} \\
+\& \ker (\mathrm{Br}(X) \to \mathrm{Br}(\overline{X})) \arrow{r} \& H^1(K, \mathrm{Pic}(\overline{X})) \arrow{r} \& \ker (H^3(K, \overline{K}[X]^\times) \arrow{r} \& H_{\text{\'et}}^3(X, \mathbb{G}_{\mathrm{m}}))
+\end{tikzcd}.
+$$
+}
+\end{theorem}
+}
+
+\only<11->{
+\begin{examples}
+\begin{itemize}
+\only<11-16>{\item If $ X = \mathbb{A}_K^1 $ or $ X = \mathbb{P}_K^1 $, then $ \mathrm{Br}(X) \cong \mathrm{Br}(K) $.
+\begin{itemize}
+\item<12-16> $ H^2(K, \overline{K}[X]^\times) \cong \mathrm{Br}(K) $ since $ \overline{K}[X]^\times = \overline{K}^\times $.
+\item<13-16> $ \mathrm{Br}(\overline{X}) \hookrightarrow \mathrm{Br}(\overline{K}(X)) = 0 $ by Tsen's theorem.
+\item<14-16> $ \mathrm{Br}(K) \to \mathrm{Br}(X) $ and $ H^3(K, \overline{K}[X]^\times) \to H_{\text{\'et}}^3(X, \mathbb{G}_{\mathrm{m}}) $ are injective since $ X(K) \ne \emptyset $ gives retractions.
+\item<15-16> $ H^1(K, \mathrm{Pic}(\overline{X})) = 0 $ since $ \mathrm{Pic}(\mathbb{A}_{\overline{K}}^1) = 0 $ and $ \deg : \mathrm{Pic}(\mathbb{P}_{\overline{K}}^1) \xrightarrow{\sim} \mathbb{Z} $.
+\end{itemize}
+}
+\only<16>{In fact, $ \mathrm{Br}(\mathbb{A}_K^n) \cong \mathrm{Br}(\mathbb{P}_K^n) \cong \mathrm{Br}(K) $ by induction.}
+\only<17->{\item If $ X = E $ is an elliptic curve, then there is a short exact sequence $$ 0 \to \mathrm{Br}(K) \to \mathrm{Br}(E) \to H^1(K, E) \to 0. $$}
+\only<18->{As before, with $ H^1(K, \mathrm{Pic}(\overline{E})) = H^1(K, \mathrm{Jac}(\overline{E})) = H^1(K, E) $.}
+\only<19->{\item (Tho10) $ \mathrm{Br}(\mathcal{E})[\ell^\infty] $ for an elliptic K3 surface $ \mathcal{E} / \mathbb{F}_q $ given by $ t(t - 1)y^2 = x(x - 1)(x - t) $.}
+\only<20>{Uses the short exact sequence $$ 0 \to \mathrm{NS}(\mathcal{E}) \otimes_{\mathbb{Z}} \mathbb{Z}_\ell \to H_{\text{\'et}}^2(\mathcal{E}, \mathbb{Z}_\ell(1)) \to T_\ell\mathrm{Br}(\mathcal{E}) \to 0, $$ obtained by applying $ \ell $-adic cohomology to the Kummer sequence.}
+\end{itemize}
+\end{examples}
+}
+
+\end{frame}
+
+\begin{frame}[t]{The Brauer-Manin obstruction}
+
+Let $ X $ be a scheme over a global field $ K $.
+\only<2->{A point $ x_v : \mathrm{Spec}(K_v) \to X $ induces a map $ x_v^* : \mathrm{Br}(X) \to \mathrm{Br}(K_v) $.}
+\only<3->{The \textbf{Brauer-Manin pairing} is
+$$
+\begin{array}{rcccl}
+\langle -, - \rangle_{\mathrm{Br}} & : & \mathrm{Br}(X) \times X(\mathbb{A}_K) & \longrightarrow & \mathbb{Q} / \mathbb{Z} \\
+& & (A, (x_v)_v) & \longmapsto & \displaystyle\sum_{v \in V_K} \mathrm{inv}_v(x_v^*(A))
+\end{array}.
+$$
+}%
+\only<4-6>{The \textbf{Brauer-Manin set} for $ A \in \mathrm{Br}(X) $ is $$ X(\mathbb{A}_K)^A := \{(x_v) \in X(\mathbb{A}_K) : \langle A, (x_v)_v \rangle_{\mathrm{Br}} = 0\}. $$}
+\only<5-6>{By global class field theory, $$ \overline{X(K)} \hookrightarrow \bigcap_{A \in \mathrm{Br}(X)} X(\mathbb{A}_K)^A \subseteq X(\mathbb{A}_K). $$}
+\only<6>{If $ X(\mathbb{A}_K)^A \ne \emptyset $ but $ X(\mathbb{A}_K) = \emptyset $, then there is a \textbf{Brauer-Manin obstruction to the Hasse principle} for $ X $ due to $ A \in \mathrm{Br}(X) $.}
+
+\only<7>{
+\begin{theorem}[Wit15]
+Let $ \mathcal{E} $ be an elliptic K3 surface over $ \mathbb{Q} $ given by $$ y^2 = x(x - 3(t - 1)^3(3 + t))(x + 3(t + 1)^3(3 - t)). $$ There is a Brauer-Manin obstruction to the Hasse principle for $ \mathcal{E} $ due to $$ (x + 3(t - 1)^3(3 + t), 6t(t + 1)) + (x - 3(t + 1)^3(3 - t), 6t(t - 1)) \in \mathrm{Br}(\mathcal{E}). $$
+\end{theorem}
+}
+
+\end{frame}
+
+\begin{frame}{References}
+
+\small
+\setlength{\leftmargini}{0.5in}
+\begin{itemize}
+\item[ASD73] Artin, Swinnerton-Dyer (1973) \emph{The Shafarevich-Tate conjecture for pencils of elliptic curves on K3 surfaces}
+\item[CTS19] Colliot-Th\'el\`ene, Skorobogatov (2019) \emph{The Brauer-Grothendieck group}
+\item[Fis17] Fisher (2017) \emph{On some algebras associated to genus one curves}
+\item[KT03] Kato, Trihan (2003) \emph{On the conjectures of Birch and Swinnerton-Dyer in characteristic p}
+\item[LLR18] Liu, Lorenzini, Raynaud (2018) \emph{Corrigendum to N\'eron models, Lie algebras, and reduction of curves of genus one and the Brauer group of a surface}
+\item[Mil68] Milne (1968) \emph{The Tate-\v Safarevi\v c group of a constant abelian variety}
+\item[Mil70] Milne (1970) \emph{The Brauer group of a rational surface}
+\item[Mil75] Milne (1975) \emph{On a conjecture by Artin and Tate}
+\item[Tat66] Tate (1966) \emph{On the conjectures of Birch and Swinnerton-Dyer and a geometric analog}
+\item[Tho10] Thorne (2010) \emph{On the Tate-Shafarevich groups of certain elliptic curves}
+\item[Ulm12] Ulmer (2012) \emph{Curves and Jacobians over function fields}
+\item[Wit15] Wittenberg (2015) \emph{Transcendental Brauer-Manin obstruction on a pencil of elliptic curves}
+\end{itemize}
+
+\end{frame}
+
+\end{document}

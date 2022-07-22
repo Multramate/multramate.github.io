@@ -1,0 +1,5 @@
+<div class="me">
+        <a href="old/" title="Click here for some fun!">
+          <img src="david.jpg" alt="David Kurniadi Angdinata" />
+        </a>
+      </div>

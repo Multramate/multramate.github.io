@@ -1,0 +1,771 @@
+\def\course{The Euler system of Heegner points}
+\def\subtitle{Spring 2022}
+
+\input{header}
+
+\DeclareFontFamily{U}{wncyr}{}
+\DeclareFontShape{U}{wncyr}{m}{n}{<->wncyr10}{}
+\DeclareSymbolFont{cyr}{U}{wncyr}{m}{n}
+\DeclareMathSymbol{\Sha}{\mathord}{cyr}{"58}
+
+\newoperator{Cl}
+\newoperator{coker}
+\newoperator{Frob}
+\newoperator{GL}
+\newoperator{Hom}
+\newoperator{im}
+\newoperator{inf}
+\newoperator{ord}
+\newoperator{res}
+\newoperator{rk}
+\newoperator{Sel}
+\newoperator{tors}
+\newoperator{Tr}
+\newoperator{tra}
+\newoperator{ur}
+
+\addbibresource{bibliography.bib}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Gross and Zagier proved that the derivative of the Hasse-Weil L-function of an elliptic curve over an imaginary quadratic field is non-zero at $ 1 $ precisely when its Heegner point has infinite order, so that the elliptic curve has rank at least one. A few years later, Kolyvagin constructed a family of derived cohomology classes from Heegner points of higher conductors satisfying certain relations, which he terms an \emph{Euler system}, and used these to prove that the elliptic curve has rank exactly one. His methodology involves computing the Selmer group using Galois cohomological techniques, and also gave bounds on the size of the Tate-Shafarevich group. This report outlines his main argument as documented by Gross, and is the final part in a series of three mini projects on the Birch and Swinnerton-Dyer conjecture.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+Let $ E $ be an elliptic curve over $ \QQ $. The modularity theorem parameterises $ E $ with a surjective morphism $ \X_0\br{N} \twoheadrightarrow E $ defined over $ \QQ $, where $ N \in \NN $ is the conductor of $ E $ and $ \X_0\br{N} $ is the modular curve whose non-cuspidal points classify elliptic curves equipped with a cyclic $ N $-isogeny.
+
+Consider an imaginary quadratic field $ F = \QQ\br{\sqrt{-D}} $ satisfying the \textbf{Heegner hypothesis}, namely that all primes dividing $ N $ splits in $ F $ and its ring of integers $ \OOO_F $ has unit group $ \cbr{\pm 1} $. There are infinitely many such imaginary quadratic fields, since this is merely a congruence condition on $ D $. Under this hypothesis, the theory of complex multiplication defines a point in $ \X_0\br{N} $ rational over the Hilbert class field $ F^1 $ of $ F $, which maps to a point $ \hhh^1 \in E\br{F^1} $ under the modular parameterisation. Applying the trace map $ \Tr_1 : E\br{F^1} \to E\br{F} $ to $ \hhh^1 $ yields a \textbf{basic Heegner point} $ \hhh \in E\br{F} $.
+
+\pagebreak
+
+The Gross-Zagier formula \cite{GZ86} establishes a direct relationship between the derivative of the Hasse-Weil $ \L $-function $ \L_{E / F}\br{s} $ of $ E $ over $ F $ evaluated at $ s = 1 $ and the canonical height of $ \hhh $. In particular, $ \L'_{E / F}\br{1} $ is non-zero precisely if $ \hhh $ has infinite order, so that the rank $ \rk E\br{F} $ is at least one. Kolyvagin's seminal paper on Euler systems \cite{Kol90} provides an upper bound to this.
+
+\begin{theorem}
+\label{thm:rankone}
+If $ \hhh \in E\br{F} $ has infinite order, then $ \rk E\br{F} = 1 $.
+\end{theorem}
+
+In fact, the exact statement proven by Kolyvagin included the finiteness of Tate-Shafarevich group $ \Sha\br{F, E} $, with a more precise formulation on its order \cite[Theorem A]{Kol90}. The cohomological techniques he used to bound the order of $ \Sha\br{F, E} $, which was a priori not known to be finite in any generality, became a staple example in the active study of Euler systems even to date \cite{Rub00}. His main argument involves computing the $ \ell $-Selmer group $ \Sel\br{F, E\sbr{\ell}} $, which nests in a short exact sequence of $ \FF_\ell $-vector spaces
+$$ 0 \to E\br{F} / \ell \xrightarrow{\delta} \Sel\br{F, E\sbr{\ell}} \to \Sha\br{F, E}\sbr{\ell} \to 0. $$
+
+\begin{theorem}
+\label{thm:selmercyclic}
+If $ \ell \in \NN $ is an odd prime of good reduction such that $ \G_{\QQ\br{E\sbr{\ell}} / \QQ} \cong \GL_2 \FF_\ell $ and $ \hhh \notin \ell E\br{F} $, then
+$$ \Sel\br{F, E\sbr{\ell}} \cong \FF_\ell \cdot \delta\br{\hhh}. $$
+\end{theorem}
+
+These assumptions on $ \ell $ are mild, in the sense that they apply to almost all primes whenever $ \hhh $ has infinite order \cite[Section 2]{Gro91}. For instance, excluding the thirteen isomorphism classes of elliptic curves with complex multiplication, there are only finitely many primes $ \ell $ whose $ \ell $-adic representation is not surjective, by Serre's theorem on the image of Galois. Under these assumptions, it follows immediately that $ \Sha\br{F, E}\sbr{\ell} = 0 $, while the finiteness of all of $ \Sha\br{F, E} $ is a refinement of these arguments by further techniques to bound the orders of certain ideal class groups, of which will be omitted here.
+
+The following short lemma will be useful to deduce Theorem \ref{thm:rankone} as well as for a later construction.
+
+\begin{lemma}
+\label{lem:trivialtorsion}
+If $ \ell \in \NN $ is a prime such that $ \G_{\QQ\br{E\sbr{\ell}} / \QQ} \cong \GL_2 \FF_\ell $ and $ K $ is a field linearly disjoint over $ \QQ $ to $ \QQ\br{E\sbr{\ell}} $, then $ E\br{K}\sbr{\ell} = 0 $.
+\end{lemma}
+
+\begin{proof}
+Suppose for a contradiction that $ 0 \ne E\br{K}\sbr{\ell} \le E\sbr{\ell} \cong \FF_\ell^2 $, so that either $ E\br{K}\sbr{\ell} \cong \FF_\ell $ or $ E\br{K}\sbr{\ell} = E\sbr{\ell} $. The first case has $ \G_{K\br{E\sbr{\ell}} / K} \cong \G_{\QQ\br{E\sbr{\ell}} / \QQ} $ fixing $ \FF_\ell $, while the second case has $ \QQ\br{E\sbr{\ell}} \subseteq K $ giving $ \QQ\br{E\sbr{\ell}} = \QQ\br{E\sbr{\ell}} \cap K = \QQ $, both of which are contradictions to $ \G_{\QQ\br{E\sbr{\ell}} / \QQ} \cong \GL_2 \FF_\ell $.
+\end{proof}
+
+Theorem \ref{thm:rankone} then follows immediately by counting dimensions.
+
+\begin{proof}[Proof of Theorem \ref{thm:rankone}]
+Choose the prime $ \ell $ such that $ \ell \nmid D $, so that the primes of $ \QQ $ ramified in $ F $ and in $ \QQ\br{E\sbr{\ell}} $ are disjoint by the Heegner hypothesis, and hence are linearly disjoint over $ \QQ $. Lemma \ref{lem:trivialtorsion} then implies that $ E\br{F}\sbr{\ell} = 0 $, so that $ \rk E\br{F} = \dim_{\FF_\ell} \br{E\br{F} / \ell} $ by tensoring over $ \FF_\ell $. This quantity is bounded below by $ 1 $ by the existence of $ \hhh $ and bounded above by $ 1 $ by Theorem \ref{thm:selmercyclic}.
+\end{proof}
+
+The remainder of this report will be a discussion of the proof of Theorem \ref{thm:selmercyclic}, following Weston's account \cite{Wes01}. The following two sections will recall the construction of Selmer groups and Heegner points, defining appropriate generalisations and deriving a few basic properties from Tate duality and complex multiplication respectively. These Heegner points are used to construct a tower of cohomology classes satisfying compatibility relations, making them an Euler system, and an analysis of their local ramification behaviour places them in certain Selmer groups. The final section details a series of computations in Galois cohomology, which ultimately deduces the structure of $ \Sel\br{F, E\sbr{\ell}} $, thus proving Theorem \ref{thm:selmercyclic}.
+
+\begin{notation}
+All the assumptions in this section, particularly $ E $, $ N $, $ D $, and $ \ell $, will prevail throughout the remaining sections. The reader is assumed to be familiar with Silverman's books on elliptic curves \cite{Sil94, Sil09}, so the notation used will be standard according to the textbooks. Any new notation introduced in the following sections will persist through the remainder of the report, unless specified otherwise. For instance, the fraktur versions of a letter denoting a prime will always be used to denote the primes above it.
+\end{notation}
+
+\pagebreak
+
+\section{Selmer groups and Tate duality}
+
+While the classical Selmer group may sometimes be rather difficult to compute directly, it may be nested between two generalised Selmer groups, defined by relaxing or restricting certain local conditions, which are more readily computed with an appropriate choice of local conditions. This section will define these Selmer groups and provide relevant consequences due to class field theory.
+
+\subsection{Generalised Selmer groups}
+
+Recall that the multiplication by $ \ell $ isogeny induces the global Kummer exact sequence
+$$ 0 \to E\br{F} / \ell \xrightarrow{\delta} \H^1\br{F, E\sbr{\ell}} \xrightarrow{\sigma} \H^1\br{F, E}\sbr{\ell} \to 0, $$
+and for each place $ v \in \M_F $, the local Kummer exact sequence
+$$ 0 \to E\br{F_v} / \ell \xrightarrow{\delta_v} \H^1\br{F_v, E\sbr{\ell}} \xrightarrow{\sigma_v} \H^1\br{F_v, E}\sbr{\ell} \to 0. $$
+For almost all places $ v \in \M_F $, there is an alternative description of $ \H^1\br{F_v, E}\sbr{\ell} $ in terms of $ \G_v^{\ur} \coloneqq \G_v / \I_v $.
+
+\begin{lemma}
+\label{lem:singularquotient}
+If $ v \in \M_F^0 $ is a prime of good reduction such that $ v\br{\ell} = 0 $, then
+$$ \H^1\br{F_v, E}\sbr{\ell} = \Hom\br{\I_v, E\sbr{\ell}}^{\G_v^{\ur}}. $$
+\end{lemma}
+
+\begin{proof}
+Since $ \G_v^{\ur} \cong \widehat{\ZZ} $ has cohomological dimension one, the inflation-restriction exact sequence reads
+$$
+\begin{tikzcd}[row sep=tiny]
+0 \arrow{r} & \H^1\br{\G_v^{\ur}, E\sbr{\ell}} \arrow{r}{\inf_{F_v^{\ur} / F_v}} \arrow[cong]{d} & \H^1\br{F_v, E\sbr{\ell}} \arrow{r}{\res_{F_v^{\ur} / F_v}} & \H^1\br{\I_v, E\sbr{\ell}}^{\G_v^{\ur}} \arrow{r}{\tra_{F_v^{\ur} / F_v}} \arrow[cong]{d} & \H^2\br{\G_v^{\ur}, E\sbr{\ell}^{\I_v}} \arrow[cong]{d} \\
+& E\br{F_v} / \ell & & \Hom\br{\I_v, E\sbr{\ell}}^{\G_v^{\ur}} & 0
+\end{tikzcd},
+$$
+by the assumption on $ v $, which identifies the two cokernels.
+\end{proof}
+
+The classical Selmer group $ \Sel\br{F, E\sbr{\ell}} $ arises as the kernel of $ \prod_{v \in \M_F} \br{\cdot}^v $ in the exact diagram
+$$
+\begin{tikzcd}
+0 \arrow{r} & E\br{F} / \ell \arrow{r}{\delta} \arrow{d} & \H^1\br{F, E\sbr{\ell}} \arrow{r}{\sigma} \arrow{d}[swap]{\br{\cdot}_v} \arrow[dashed]{dr}{\br{\cdot}^v} & \H^1\br{F, E}\sbr{\ell} \arrow{r} \arrow{d} & 0 \\
+0 \arrow{r} & E\br{F_v} / \ell \arrow{r}[swap]{\delta_v} & \H^1\br{F_v, E\sbr{\ell}} \arrow{r}[swap]{\sigma_v} & \H^1\br{F_v, E}\sbr{\ell} \arrow{r} & 0
+\end{tikzcd}.
+$$
+Two generalised Selmer groups obtained by relaxing or restricting local conditions is defined as follows.
+
+\begin{definition}
+If $ S \subseteq \M_F $ is a finite set of places, define the \textbf{relaxed Selmer group} by
+$$ \Sel^S\br{F, E\sbr{\ell}} \coloneqq \ker \br{\prod_{v \in \M_F \setminus S} \br{\cdot}^v : \H^1\br{F, E\sbr{\ell}} \to \prod_{v \in \M_F \setminus S} \H^1\br{F_v, E}\sbr{\ell}}, $$
+and define the \textbf{restricted Selmer group} by
+$$ \Sel_S\br{F, E\sbr{\ell}} \coloneqq \ker \br{\prod_{v \in S} \br{\cdot}_v : \Sel^S\br{F, E\sbr{\ell}} \to \prod_{v \in S} \H^1\br{F_v, E\sbr{\ell}}}. $$
+\end{definition}
+
+\begin{notation}
+For ease of notation in the remainder of this section only, since the parameters $ F $, $ E $, and $ \ell $ are fixed, denote $ \Sel \coloneqq \Sel\br{F, E\sbr{\ell}} $, denote $ \Sel^S \coloneqq \Sel^S\br{F, E\sbr{\ell}} $, and denote $ \Sel_S \coloneqq \Sel_S\br{F, E\sbr{\ell}} $.
+\end{notation}
+
+\begin{remark}
+In a more general context of Euler systems \cite[Chapter I]{Rub00}, Rubin defines the notion of a variable \emph{global Selmer structure} compatible with \emph{local Selmer structures} for a $ p $-adic Galois representation over a local field, which are used to define similar Selmer groups that specialise in the case of $ E\sbr{\ell} $ to those defined here. Lemma \ref{lem:singularquotient} is the agreement between the \emph{singular quotients} of local Selmer structures, the \emph{geometric structure} induced by the Kummer sequence and the \emph{unramified structure} induced by inflation-restriction.
+\end{remark}
+
+\pagebreak
+
+In other words, for a finite set of places $ S \subseteq \M_F $, $ \Sel^S $ allows a cohomology class $ c \in \H^1\br{F, E\sbr{\ell}} $ to satisfy $ c^v \ne 0 $ for $ v \in S $, while $ \Sel^S $ requires a cohomology class $ c \in \H^1\br{F, E\sbr{\ell}} $ to further satisfy $ c_v = 0 $ for $ v \in S $. By including a finite set of problematic places as per Lemma \ref{lem:singularquotient}, namely
+$$ S_0 \coloneqq \cbr{v \in \M_F^0 \st E \ \text{has bad reduction at} \ v} \cup \cbr{v \in \M_F^0 \st v\br{\ell} \ne 0} \cup \M_F^\infty, $$
+the relaxed Selmer group may also be given an alternative description in terms of $ \G_S \coloneqq \G_{F_S / F} $, where $ F_S $ denotes the maximal extension of $ F $ unramified outside $ S $.
+
+\begin{lemma}
+\label{lem:relaxedselmer}
+If $ S_0 \subseteq S \subseteq \M_F $ is a finite set of places, then
+$$ \Sel^S = \H^1\br{\G_S, E\sbr{\ell}}. $$
+\end{lemma}
+
+\begin{proof}
+The description in Lemma \ref{lem:singularquotient} identifies the relaxed Selmer group with
+$$ \Sel^S = \ker \br{\H^1\br{F, E\sbr{\ell}} \to \prod_{v \in \M_F \setminus S} \Hom\br{\I_v, E\sbr{\ell}}} = \ker \br{\res : \H^1\br{F, E\sbr{\ell}} \to \H^1\br{F_S, E\sbr{\ell}}}, $$
+since $ \G_{F_S} $ is determined by $ \I_v $ for all $ v \in \M_F \setminus S $, while the inflation-restriction exact sequence reads
+$$ 0 \to \H^1\br{\G_S, E\sbr{\ell}} \xrightarrow{\inf_{F_S / F}} \H^1\br{F, E\sbr{\ell}} \xrightarrow{\res_{F_S / F}} \H^1\br{F_S, E\sbr{\ell}}, $$
+which identifies the two kernels.
+\end{proof}
+
+\subsection{An application of Tate duality}
+
+Now let $ S \subseteq S' \subseteq \M_F $ be finite sets of places. As a consequence of Tate duality, all three kinds of Selmer groups sit in an exact sequence. To establish this, first note that they clearly satisfy the inclusions
+$$ \Sel_{S'} \subseteq \Sel_S \subseteq \Sel \subseteq \Sel^S \subseteq \Sel^{S'}, $$
+with equalities precisely when $ S = S' = \emptyset $, and that there are tautological exact sequences
+\begin{equation}
+\label{eq:1}
+0 \to \Sel^S \to \Sel^{S'} \xrightarrow{\sigma_{S, S'}} \prod_{v \in S' \setminus S} \H^1\br{F_v, E}\sbr{\ell},
+\end{equation}
+and
+\begin{equation}
+\label{eq:2}
+0 \to \Sel_{S'} \to \Sel_S \xrightarrow{\lambda_{S, S'}} \prod_{v \in S' \setminus S} \im \delta_v.
+\end{equation}
+For each place $ v \in \M_F $, local Tate duality says that $ \H^1\br{F_v, E\sbr{\ell}} $ is self-dual, which descends via the local Kummer sequence to a duality between $ \im \delta_v \le \H^1\br{F_v, E\sbr{\ell}} $ and $ \H^1\br{F_v, E\sbr{\ell}} / \im \delta_v \cong \H^1\br{F_v, E}\sbr{\ell} $. Taking the dual of $ \br{\ref{eq:2}} $ gives an exact sequence
+$$ \prod_{v \in S' \setminus S} \H^1\br{F_v, E}\sbr{\ell} \xrightarrow{\lambda_{S, S'}^\vee} \Sel_S^\vee \to \Sel_{S'}^\vee \to 0, $$
+which splices with $ \br{\ref{eq:1}} $ to yield a five-term complex
+\begin{equation}
+\tag{$ \Sel\br{S, S'} $}
+0 \to \Sel^S \to \Sel^{S'} \xrightarrow{\sigma_{S, S'}} \prod_{v \in S' \setminus S} \H^1\br{F_v, E}\sbr{\ell} \xrightarrow{\lambda_{S, S'}^\vee} \Sel_S^\vee \to \Sel_{S'}^\vee \to 0.
+\end{equation}
+This is exact everywhere except possibly at the middle term, whose exactness is supplied by global Tate duality. For simplicity of notation and to compute $ \Sel $, it suffices to show exactness of $ \Sel\br{\emptyset, S} $.
+
+\pagebreak
+
+\begin{proposition}
+\label{prop:tateduality}
+The sequence $ \Sel\br{\emptyset, S} $ is exact.
+\end{proposition}
+
+\begin{proof}
+It suffices to show that $ \Sel\br{S, S'} $ is exact for $ S' \coloneqq S \cup S_0 $, since it furnishes an exact diagram
+$$
+\begin{tikzcd}
+0 \arrow{r} & \Sel^{S'} / \Sel \arrow{r}{\sigma_{\emptyset, S'}} \arrow{d} & \displaystyle\prod_{v \in S'} \H^1\br{F_v, E}\sbr{\ell} \arrow{r}{\lambda_{\emptyset, S'}^\vee} \arrow{d} & \br{\Sel / \Sel_{S'}}^\vee \arrow{r} \arrow{d} & 0 \\
+0 \arrow{r} & \Sel^{S'} / \Sel^S \arrow{r}[swap]{\sigma_{S, S'}} \arrow{d} & \displaystyle\prod_{v \in S' \setminus S} \H^1\br{F_v, E}\sbr{\ell} \arrow{r}[swap]{\lambda_{S, S'}^\vee} \arrow{d} & \br{\Sel_S / \Sel_{S'}}^\vee \arrow{r} \arrow{d} & 0 \\
+& 0 & 0 & 0 &
+\end{tikzcd},
+$$
+and an application of the snake lemma yields a short exact sequence
+$$ 0 \to \Sel^S / \Sel \xrightarrow{\sigma_{\emptyset, S}} \prod_{v \in S' \setminus S} \H^1\br{F_v, E}\sbr{\ell} \xrightarrow{\lambda_{\emptyset, S}^\vee} \br{\Sel / \Sel_S}^\vee \to 0, $$
+which is precisely the content of $ \Sel\br{\emptyset, S} $. Now under the assumption that $ S_0 \subseteq S' $, the middle three terms of the Poitou-Tate exact sequence for $ S' $, by Lemma \ref{lem:relaxedselmer}, are identified with
+$$ \Sel^{S'} \xrightarrow{\tau_{S'}} \prod_{v \in S'} \H^1\br{F_v, E\sbr{\ell}} \xrightarrow{\tau_{S'}^\vee} \Sel^{S'\vee}. $$
+These maps, along with the local Kummer sequence for $ S' \setminus S $ and $ \br{\ref{eq:1}} $ for $ \br{\emptyset, S'} $, furnishes an exact diagram
+$$
+\begin{tikzcd}
+& 0 \arrow{d} & 0 \arrow{d} & 0 \arrow{d} & \\
+& \ker \sigma_{S, S'}^\vee \arrow{d} & \im \tau_{S'} \arrow{d} & \ker \lambda_{S, S'}^\vee \arrow{d} & \\
+0 \arrow{r} & \displaystyle\prod_{v \in S' \setminus S} \im \delta_v \oplus \displaystyle\prod_{v \in S} \H^1\br{F_v, E\sbr{\ell}} \arrow{r}{\iota} \arrow{d}{\sigma_{S, S'}^\vee} & \displaystyle\prod_{v \in S'} \H^1\br{F_v, E\sbr{\ell}} \arrow{r} \arrow{d}{\tau_{S'}^\vee} & \displaystyle\prod_{v \in S' \setminus S} \H^1\br{F_v, E}\sbr{\ell} \arrow{r} \arrow{d}{\lambda_{S, S'}^\vee} & 0 \\
+0 \arrow{r} & \im \sigma_{S, S'}^\vee \oplus \displaystyle\prod_{v \in S} \H^1\br{F_v, E\sbr{\ell}} \arrow{r}[swap]{\sigma_{\emptyset, S'}^\vee} \arrow{d} & \Sel^{S'\vee} \arrow{r} & \Sel_S^\vee \arrow{r} & 0 \\
+& 0 & & &
+\end{tikzcd},
+$$
+so another application of the snake lemma links the top row in a short exact sequence
+$$ 0 \to \ker \sigma_{S, S'}^\vee \xrightarrow{\iota} \im \tau_{S'} \to \ker \lambda_{S, S'}^\vee \to 0. $$
+Thus $ \ker \lambda_{S, S'}^\vee $ is precisely the image of $ \Sel^{S'} $ in $ \prod_{v \in S' \setminus S} \H^1\br{F_v, E}\sbr{\ell} $, which is precisely $ \im \sigma_{S, S'} $.
+\end{proof}
+
+\begin{remark}
+Gross's proof only uses local Tate duality, instead appealing to an exact sequence in global class field theory in a later step \cite[Proposition 8.2]{Gro91}, which is subsumed under the Poitou-Tate exact sequence.
+\end{remark}
+
+Note that the exact sequence respects the action of complex conjugation $ \ccc \in \G_{F / \QQ} $, so this entire argument works under a fixed eigenspace. Now the right half of $ \Sel\br{\emptyset, S} $ induces a short exact sequence
+$$ 0 \to \coker \sigma_{\emptyset, S} \xrightarrow{\lambda_{S, S'}^\vee} \Sel^\vee \to \Sel_S^\vee \to 0. $$
+Since these are all finite-dimensional $ \FF_\ell $-vector spaces, their duals have the same dimensions, so $ \Sel $ is determined completely by $ \coker \sigma_{\emptyset, S} $ and $ \Sel_S $ for an appropriate choice of $ S \subseteq \M_F $.
+
+\pagebreak
+
+\subsection{An application of Chebotarev density}
+
+Computing these generalised Selmer groups is only realistic with an appropriate set of primes $ S $ that satisfy congruence conditions, which are in turn guaranteed by Chebotarev density. For the remainder of the report, denote the eigenspaces of the action of complex conjugation $ \ccc \in \G_{F / \QQ} $ by superscript signs. For instance, write $ \G_{K' / K} = \G_{K' / K}^+ \oplus \G_{K' / K}^- $ and $ E\sbr{\ell} = E\sbr{\ell}^+ \oplus E\sbr{\ell}^- $, noting that both eigenspaces of the latter are one-dimensional $ \FF_\ell $-vector spaces by virtue of the Galois equivariance of the Weil pairing $ E\sbr{\ell} \times E\sbr{\ell} \to \mu_\ell $.
+
+\begin{lemma}
+\label{lem:chebotarevdensity}
+Let $ L $ be a finite extension of $ F\br{E\sbr{\ell}} $ such that
+$$ \Sel\br{F, E\sbr{\ell}} \subseteq \inf_{L / F} \H^1\br{L / F, E\sbr{\ell}}. $$
+Let $ F\br{E\sbr{\ell}} \subseteq K \subseteq K' \subseteq L $ be intermediate extensions, and let $ \sigma \in \G_{K' / K}^- $ be a non-trivial automorphism. Then there is a finite set of primes $ S \subseteq \M_F $ such that
+$$ \br{\dfrac{\eval{\ppp}_{\QQ}}{K' / \QQ}} = \ccc\sigma, \qquad \ppp \in S, $$
+and
+$$ \Sel_S\br{F, E\sbr{\ell}} \subseteq \inf_{K' / F} \H^1\br{K' / F, E\sbr{\ell}}. $$
+\end{lemma}
+
+\begin{proof}
+Let $ n = \sbr{L : K'} $, and let $ \G_{L / K'} = \cbr{\sigma_1, \dots, \sigma_n} $. Chebotarev density ensures the existence of infinitely many finite sets of primes $ S' \coloneqq \cbr{\ppp_1, \dots, \ppp_n} \subseteq \M_L $ such that
+$$ \br{\dfrac{\ppp_i}{L / \QQ}} = \ccc\sigma\sigma_i, \qquad i \in \cbr{1, \dots, n}, $$
+so that any prime $ \ppp \in S \coloneqq \cbr{\eval{\ppp_1}_F, \dots, \eval{\ppp_n}_F} \subseteq \M_F $ satisfies
+$$ \br{\dfrac{\eval{\ppp}_\QQ}{K' / \QQ}} = \eval{\br{\dfrac{\eval{\ppp}_\QQ}{L / \QQ}}}_{K'} = \ccc\sigma, $$
+by construction. It remains to show, under the inflation-restriction exact sequence
+$$ 0 \to \H^1\br{K' / F, E\sbr{\ell}} \xrightarrow{\inf} \H^1\br{L / F, E\sbr{\ell}} \xrightarrow{\res} \H^1\br{L / K', E\sbr{\ell}}^{\G_{K' / F}}, $$
+that $ \res \Sel_S\br{F, E\sbr{\ell}} = 0 $, in other words that $ \br{\res c}\br{\sigma_i} = 0 $ for any $ c \in \Sel_S\br{F, E\sbr{\ell}} $ and any $ i \in \cbr{1, \dots, n} $. Note that $ \ppp_i $ remains inert in $ F / \QQ $ and splits completely in $ K / F $, since
+$$ \br{\dfrac{\eval{\ppp_i}_F}{F / \QQ}} = \eval{\br{\dfrac{\ppp_i}{L / \QQ}}}_F = \ccc, \qquad \br{\dfrac{\eval{\ppp_i}_K}{K / F}} = \eval{\br{\dfrac{\ppp_i}{L / \QQ}}}_K^2 = \ccc^2 = 1, $$
+so its inertia degree in $ K / \QQ $ is exactly two. Now the restricted condition on $ S $ implies that $ \br{\res c}\br{\tfrac{\ppp_i}{L / K'}} = 0 $, and hence $ \br{\res c}\br{\tfrac{\ppp_i}{L / K}} = 0 $ since $ \res c $ extends to a homomorphism $ \G_{L / K} \to E\sbr{\ell} $. Since
+$$ \br{\dfrac{\ppp_i}{L / K}} = \br{\dfrac{\ppp_i}{L / \QQ}}^2 = \br{\ccc\sigma\sigma_i}^2 = \sigma^{-1}\br{\ccc\sigma_i\ccc}\sigma\sigma_i, $$
+this is equivalent to
+$$ -\br{\res c}\br{\sigma_i} = \br{\res c}\br{\ccc\sigma_i\ccc} = \ccc\br{\res c}\br{\sigma_i}, $$
+so $ c \in \Sel_S\br{F, E\sbr{\ell}} $ and $ \br{\res c}\br{\sigma_i} \in E\sbr{\ell} $, and hence all of $ \br{\res c}\br{\G_{L / K}} $, live in opposite eigenspaces under complex conjugation. The Galois invariance of $ \res c \in \H^1\br{L / K, E\sbr{\ell}} $ translates to Galois equivariance as a homomorphism $ \res c : \G_{L / K} \to E\sbr{\ell} $, so $ \br{\res c}\br{\G_{L / K}} $ is a $ \G_{K / F} $-module. Since $ E\sbr{\ell} \cong \FF_\ell^2 $ is irreducible as a $ \G_{F\br{E\sbr{\ell}} / F} \cong \GL_2 \FF_\ell $-module, and hence as a $ \G_{K / F} $-module, this is only possible if $ \br{\res c}\br{\G_{L / K}} = 0 $.
+\end{proof}
+
+Again, this entire argument works under a fixed eigenspace. The ambient field $ L $ here is only necessary for the proof, and not for the purposes of application, since such a field always exists.
+
+\pagebreak
+
+\section{The Euler system of Heegner points}
+
+The basic Heegner point lies in the bottom of a tower of generalised Heegner points, which are used to derive a family of cohomology classes satisfying certain relations that make them an Euler system. This section will outline the construction of Heegner points of higher conductors, explicitly define the aforementioned Euler system, and prove local ramification behaviour of the derived classes. In an attempt to deviate from the general literature, many of the proofs in this section will be omitted for a reference or given as sketches, while the statements will be illustrated with a detailed example.
+
+\begin{example}
+The example in consideration in this section will be the elliptic curve over $ \QQ $ of conductor $ N = 101 $ with Cremona label 101a1, given by the minimal Weierstrass equation
+$$ E : y^2 + y = x^3 + x^2 - x - 1, $$
+which is a model of the modular curve $ \X_0\br{101} $ modulo its Fricke involution $ \w_{101} $. Its Mordell-Weil group is $ \ZZ \cdot \br{1, 0} $, it has a prime $ 101 $ of non-split multiplicative reduction, and its $ \ell $-adic representations have maximal images for all primes $ \ell \in \NN $, so $ \ell = 3 $ is chosen arbitrarily, and its associated eigenform is
+$$ f_E\br{q} = q - 2q^3 - 2q^4 - q^5 - 2q^7 + q^9 - 2q^{11} + 4q^{12} + q^{13} + 2q^{15} + 4q^{16} + 3q^{17} - 5q^{19} + \dots, $$
+so the modular parameterisation sends $ \tau \in \X_0\br{101}\br{\CC} $ to
+$$ q - \dfrac{2}{3}q^3 - \dfrac{1}{2}q^4 - \dfrac{1}{5}q^5 - \dfrac{2}{7}q^7 + \dfrac{1}{9}q^9 - \dfrac{2}{11}q^{11} + \dfrac{1}{3}q^{12} + \dfrac{1}{13}q^{13} + \dfrac{2}{15}q^{15} + \dfrac{1}{4}q^{16} + \dfrac{3}{17}q^{17} - \dfrac{5}{19}q^{19} + \dots \in \CC, $$
+where $ q \coloneqq e^{2\pi i\tau} $. The imaginary quadratic field chosen is $ F = F^1 = \QQ\br{\sqrt{-43}} $, which has trivial ideal class group and has unit group $ \cbr{\pm 1} $, and satisfies the Heegner hypothesis since $ -43 \equiv 19^2 \mod 101 $.
+\end{example}
+
+\begin{remark}
+These choices were made as part of a brute-force search in SageMath and LMFDB, under the standard hypotheses, as well as assumptions for computational simplicity, namely a trivial class group for $ F $, a Kolyvagin conductor of $ p = 2 $, and a maximal Galois image for $ \ell = 3 $. Out of the few remaining options, it seems that this is the only one with a rational $ y $-coordinate of its Heegner point.
+\end{remark}
+
+\subsection{Heegner points of higher conductors}
+
+Recall that under the Heegner hypothesis, the theory of complex multiplication for $ \OOO_F $ defines the basic Heegner point $ \hhh \in E\br{F} $. This construction can be generalised to define Heegner points for non-maximal orders of $ F $. For proofs of the assertions in this section, refer to Cox's book \cite{Cox89}.
+
+Let $ \OOO_{F, n} \coloneqq \ZZ + n\OOO_F $ be the order of $ F $ of conductor $ n \in \NN $. The generalised ideal class group of $ \OOO_{F, n} $ is $ \Cl \OOO_{F, n} \coloneqq \I_{F, n} / \P_{F, n} $, where $ \I_{F, n} $ is the group of fractional ideals coprime to $ n\OOO_F $ and $ \P_{F, n} $ is its subgroup generated by principal fractional ideals congruent to some integer modulo $ n\OOO_F $. By the existence theorem of class field theory, there is a unique abelian extension $ F^n $ of $ F $, called the \textbf{ring class field of $ F $ of conductor $ n $}, whose Galois group $ \G_{F^n / F} $ over $ F $ is isomorphic to $ \Cl \OOO_{F, n} $ via the Artin map, and whose Galois group $ \G_{F^n / \QQ} $ over $ \QQ $ is isomorphic to $ \G_{F^n / F} \rtimes \G_{F / \QQ} $ via $ \ccc\sigma\ccc = \sigma^{-1} $. A prime ramified in $ F^n / F $ necessarily divides $ n\OOO_F $, while a prime inert in $ F / \QQ $ lies in $ \P_{F, n} $ and hence splits completely in $ F^n / F $. Since $ \OOO_F^\times = \cbr{\pm 1} $, there is an isomorphism $ \G^n \coloneqq \G_{F^n / F^1} \cong \br{\OOO_F / n}^\times / \br{\ZZ / n}^\times $ induced by the short exact sequence
+$$ 1 \to \br{\ZZ / n}^\times \to \br{\OOO_F / n\OOO_F}^\times \to \br{\I_{F, n} \cap \P_F} / \P_{F, n} \to 1, $$
+so that by the Chinese remainder theorem, $ \G^n \cong \prod_{p \mid n} \G^p $ whenever $ n $ is square-free. If $ p $ remains inert in $ F / \QQ $, then clearly $ \G^p \cong \FF_{p^2}^\times / \FF_p^\times \cong \ZZ / \br{p + 1} $, and denote its generator by $ \sigma_p \in \G^p $.
+
+Now let $ n \in \NN $ be coprime to $ ND $, and let $ \NNN_F \trianglelefteq \OOO_F $ be an ideal of norm $ N $, which exists by the Heegner hypothesis, so that the ideal $ \NNN_{F, n} = \NNN_F \cap \OOO_{F, n} \le \OOO_{F, n} $ satisfies $ \OOO_{F, n} / \NNN_{F, n} \cong \ZZ / N $. Since the fractional ideals $ \OOO_F $ and $ \NNN_F^{-1} $ are lattices in $ \CC $, they define complex elliptic curves $ \CC / \OOO_{F, n} $ and $ \CC / \NNN_{F, n}^{-1} $ related by a cyclic $ N $-isogeny, and hence a point in $ \X_0\br{N}\br{\CC} $ under its moduli interpretation. By construction, both $ \CC / \OOO_{F, n} $ and $ \CC / \NNN_{F, n}^{-1} $ have complex multiplication by $ \OOO_F $, so the first main theorem of complex multiplication applies to give $ \j\br{\CC / \OOO_{F, n}}, \j\br{\CC / \NNN_{F, n}^{-1}} \in F^n $, where $ \j $ is the $ \j $-invariant function, but these are exactly the coordinates of the point in $ \X_0\br{N}\br{\CC} $. Applying the modular parameterisation $ \X_0\br{N} \twoheadrightarrow E $ yields the \textbf{Heegner point $ \hhh_n \in E\br{F^n} $ of conductor $ n $}. The basic Heegner point is then simply $ \hhh \coloneqq \Tr_1 \hhh_1 $.
+
+\pagebreak
+
+\begin{example}
+Let $ \delta \coloneqq \tfrac{1 + \sqrt{-43}}{2} $, and consider the ideal
+$$ \NNN_F \coloneqq \abr{101, \delta - 10} \trianglelefteq \OOO_F, $$
+so that $ \OOO_F / \NNN_F \cong \ZZ / 101 $. Then $ \NNN_F $ corresponds to the point $ \tau \coloneqq \tfrac{\delta - 10}{202} \in \X_0\br{N}\br{\CC} $, which maps under the modular parameterisation to the basic Heegner point
+$$ \hhh \coloneqq \br{1, 0} \in E\br{F}, $$
+which happens to be twice the generator $ -\br{0, 1} \in E\br{\QQ} $. Now let $ n = 2 $, and consider the ideal
+$$ \NNN_{F, 2} \coloneqq \abr{101, 2\delta - 20} \trianglelefteq \OOO_{F, 2}, $$
+so that $ \OOO_{F, 2} / \NNN_{F, 2} \cong \ZZ / 101 $ as well. Similarly, $ \NNN_{F, 2} $ corresponds to the point $ \tfrac{\delta - 10}{101} \in \X_0\br{N}\br{\CC} $, which maps under the modular parameterisation to the Heegner point of conductor two
+$$ \hhh_2 \coloneqq \br{\alpha, 1} \in E\br{F^2}, $$
+where $ \alpha $ is a generator over $ F $ of the ring class field $ F^2 \coloneqq F\sbr{X} / \abr{X^3 + X^2 - X - 3} $ of conductor two.
+\end{example}
+
+While a lot more can be said about Heegner points of any conductor, for the purposes of this report it suffices to consider \textbf{Kolyvagin conductors}, namely the square-free $ n \in \NN $ coprime to $ ND\ell $ such that
+$$ p \mid n \ \text{prime} \qquad \implies \qquad \br{\dfrac{p}{F\br{E\sbr{\ell}} / \QQ}} \sim \ccc. $$
+For the remainder of this report, let $ n = pq $ be a Kolyvagin conductor for some prime $ p \in \NN $ and some $ q \in \NN $. The assumption of $ n $ being a Kolyvagin conductor has several immediate consequences. In terms of ramification behaviour, $ p $ remains inert in $ F / \QQ $ since $ \br{\tfrac{p}{F / \QQ}} = \ccc $, so that the corresponding prime $ \ppp \coloneqq p\OOO_F $ of $ \M_F $ splits completely in $ F^q / F $ and totally ramifies in $ F^p / F $. Additionally, since
+$$ \br{\dfrac{\ppp}{F\br{E\sbr{\ell}} / F}} = \br{\dfrac{p}{F\br{E\sbr{\ell}} / \QQ}}^2 = \ccc^2 = 1, $$
+the prime $ \ppp $ also splits completely in $ F\br{E\sbr{\ell}} / F $. All this is summarised in the diagram
+$$
+\begin{tikzcd}
+& F^n & & F\br{E\sbr{\ell}} \\
+F^p \arrow[dash]{ur}{\text{split}} & & F^q \arrow[dash]{ul}[swap]{\text{ramified}} & \\
+& F \arrow[dash]{ul}{\text{ramified}} \arrow[dash]{ur}[swap]{\text{split}} \arrow[bend right=45, dash]{uurr}[swap]{\text{splits}} & & \\
+& \QQ \arrow[dash]{u}{\text{inert}} & &
+\end{tikzcd}.
+$$
+Now since $ \ell $ is odd and $ \br{\tfrac{p}{F / \QQ}} = \ccc $, their characteristic polynomials $ X^2 - \a_pX + p = 0 $ and $ X^2 - 1 = 0 $ acting on $ E\sbr{\ell} \cong \FF_\ell^2 $ are congruent modulo $ \ell $, so there are congruences
+$$ \a_p \equiv 0 \mod \ell, \qquad p + 1 \equiv 0 \mod \ell. $$
+The action of $ \ccc $ also decomposes $ \widetilde{E}\br{\FF_\ppp} = \widetilde{E}\br{\FF_{p^2}} $ into eigenspaces $ \widetilde{E}\br{\FF_\ppp}^+ \oplus \widetilde{E}\br{\FF_\ppp}^- $, with
+$$ \#\widetilde{E}\br{\FF_\ppp}^+ = \#\widetilde{E}\br{\FF_p} = p + 1 - \a_p, \qquad \#\widetilde{E}\br{\FF_\ppp}^- = \deg \br{\Frob_p + \sbr{1}} = \det \Frob_p + 1 + \Tr \Frob_p = p + 1 + \a_p, $$
+which are both divisible by $ \ell $, so that $ \dim_{\FF_\ell} \widetilde{E}\br{\FF_\ppp}\sbr{\ell}^\pm = 1 $.
+
+\pagebreak
+
+\begin{example}
+The prime $ p = 2 $ is a Kolyvagin conductor. For instance, if $ \tfrac{a + b\sqrt{-43}}{2} \in \OOO_F $ for some $ a, b \in \ZZ $ of the same parity, then $ 1 \equiv \sqrt{-43} \mod 2 $ implies that $ \br{\tfrac{a + b\sqrt{-43}}{2}}^2 \equiv \tfrac{a - b\sqrt{-43}}{2} = \ccc\br{\tfrac{a + b\sqrt{-43}}{2}} \mod 2 $. Since $ -43 \equiv 5 \mod 8 $, $ 2 $ remains inert in $ F $, and totally ramifies in $ F^2 $ as $ 2 = \br{\alpha + 1}^3 $. Furthermore,
+$$ \widetilde{E}\br{\FF_4}^+ = \cbr{0, \br{1, 0}, \br{1, 1}}, \qquad \widetilde{E}\br{\FF_4}^- = \cbr{0, \br{0, X}, \br{0, X + 1}}, $$
+where $ X $ is the generator of $ \FF_4 $ over $ \FF_2 $, which agrees with $ \#\widetilde{E}\br{\FF_4}^+ = \#\widetilde{E}\br{\FF_4}^- = 3 $ since $ \a_2 = 0 $.
+\end{example}
+
+Most importantly, the Heegner points of Kolyvagin conductors satisfy the following compatibility relations that Kolyvagin terms the axioms of an \textbf{AX3 Euler system}.
+
+\begin{proposition}
+\label{prop:eulersystem}
+\hfill
+\begin{itemize}
+\item $ \Tr_p \hhh_n = \sbr{\a_p} \hhh_q $ in $ E\br{F^q} $, where $ \Tr_p = \sum_{i = 0}^p \sigma_p^i $.
+\item $ \widetilde{\hhh_n} = \br{\tfrac{\ppp_q}{F^q / F}} \widetilde{\hhh_q} $ in $ \widetilde{E}\br{\FF_{\ppp_q}} $, where $ \ppp_q \in \M_{F^q} $ is a prime above $ \ppp $.
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+This is a consequence of Eichler-Shimura theory \cite[Proposition 3.7]{Gro91}.
+\end{proof}
+
+\begin{example}
+Let $ n = p = 2 $. In $ E\br{F^2} $,
+$$ \Tr_2 \hhh_2 = \hhh_2 + \sigma_2 \hhh_2 + \sigma_2^2 \hhh_2 = -\sigma_2^2 \hhh_2 + \sigma_2^2 \hhh_2 = 0 = \sbr{0} \hhh. $$
+In $ \widetilde{E}\br{\FF_4} $, the Frobenius is simply multiplication by $ \sbr{2} $, so
+$$ \hhh_2 \equiv \br{-1, 1} \equiv \br{13, -49} = \sbr{2} \hhh \mod \alpha + 1. $$
+\end{example}
+
+Finally, let $ \epsilon $ be the eigenvalue of the Fricke involution $ \w_N $ on the eigenform $ f_E $, which is also the negative of the sign in the functional equation satisfied by the completed Hasse-Weil $ \L $-function $ \Lambda_{E / \QQ}\br{s} $. The following characterises the action of complex conjugation on Heegner points in terms of $ \epsilon $.
+
+\begin{lemma}
+\label{lem:conjugationeigenspace}
+$ \ccc \hhh_n = \epsilon\sigma \hhh_n $ in $ E\br{F^n} / E\br{F^n}_{\tors} $ for some $ \sigma \in \G^n $.
+\end{lemma}
+
+\begin{proof}
+This is an analysis of the action of $ \w_N $ on $ \X_0\br{N} $ \cite[Proposition 5.3]{Gro91}.
+\end{proof}
+
+\begin{example}
+Let $ n = 2 $. Note that $ -\epsilon $ can also be computed as the product of all local root numbers, which consists of $ 1 $ for the prime $ 101 $ of non-split multiplicative reduction and $ -1 $ for the unique archimedean place, so that $ \epsilon = 1 $. Then $ \hhh_2 $ involves a choice between three generators of $ F^2 $ over $ F $, so complex conjugation acts as the identity or sends one choice to another, but $ \G^2 $ acts transitively on these choices.
+\end{example}
+
+For the remaining sections, denote $ \epsilon_n \coloneqq \br{-1}^k\epsilon $, where $ k $ is the number of prime factors of $ n $.
+
+\subsection{Kolyvagin derivatives and Kolyvagin classes}
+
+With a tower of Heegner points $ \hhh_n \in E\br{F^n} $ at hand, one may obtain cohomology classes in $ \H^1\br{F, E\sbr{\ell}} $ by simply taking the trace map $ \Tr_n : E\br{F^n} \to E\br{F} $ then applying the Kummer map $ \delta^n : E\br{F^n} \to \H^1\br{F, E\sbr{n}} $, yet this brutal approach does not yield interesting cohomology classes. Instead, Kolyvagin first defines an operator on $ E\br{F^n} $ to construct $ \G^n $-invariant elements, before applying a trace map.
+
+\begin{definition}
+If $ n \in \NN $, define the \textbf{Kolyvagin derivative} by
+$$ \D_n \coloneqq \prod_{p \mid n} \sum_{i = 1}^p i\sigma_p^i \in \ZZ\sbr{\G^n}, $$
+and define the \textbf{derived Heegner point} by $ \HHH_n \coloneqq \Tr_n\D_n \hhh_n \in E\br{F^n} $, where
+$$ \Tr_n \coloneqq \sum_{\sigma \in S_n} \sigma \in \ZZ\sbr{\G_{F^n / F}}, $$
+and $ S_n $ is any set of coset representatives of $ \G^n \le \G_{F^n / F} $.
+\end{definition}
+
+\pagebreak
+
+Note that $ \HHH_1 = \hhh $. By construction, the Kolyvagin derivative and the trace map satisfy formal identities in $ \ZZ\sbr{\G^n} $, which translates to crucial properties for the derived Heegner point as a class in $ E\br{F^n} / \ell $.
+
+\begin{lemma}
+\label{lem:kolyvaginderivative}
+The operators $ \D_n $ and $ \Tr_n $ satisfy the telescoping identities
+$$ \br{\sigma_p - 1}\D_p = p + 1 - \Tr_p, \qquad \ccc\D_p = p\Tr_p - \sigma_p\D_p\ccc, $$
+so that
+$$ \sbr{\HHH_n} \in \br{E\br{F^n} / \ell}^{\G_{F^n / F}, \epsilon_n}. $$
+\end{lemma}
+
+\begin{proof}
+The identities are completely explicit computations, while the latter statement follows from another computation using Proposition \ref{prop:eulersystem} and Lemma \ref{lem:conjugationeigenspace} \cite[Proposition 3.6 and Proposition 5.4]{Gro91}
+\end{proof}
+
+\begin{example}
+For simplicity, let $ n = p = 2 $, so that $ \epsilon_2 = -1 $, although the general case when $ n > p $ is not significantly more complicated. Then
+$$ \br{\sigma_2 - 1}\D_2 = \br{\sigma_2 - 1}\br{\sigma_2 + 2\sigma_2^2} = \sigma_2^2 + 2 - \sigma_2 - 2\sigma_2^2 = 3 - \br{1 + \sigma_2 + \sigma_2^2} = 3 - \Tr_2, $$
+and since $ \ccc\br{1 + \sigma_2 + \sigma_2^2} = 1 + \sigma_2 + \sigma_2^2 $,
+$$ \ccc\D_2 = \ccc\br{\sigma_2 + 2\sigma_2^2} = 2\ccc\br{1 + \sigma_2 + \sigma_2^2} - \sigma_2^2\ccc - 2\ccc = 2\br{1 + \sigma_2 + \sigma_2^2} - \sigma_2\br{\sigma_2 + 2\sigma_2^2}\ccc = 2\Tr_2 - \sigma_2\D_2\ccc. $$
+By Proposition \ref{prop:eulersystem},
+$$ \br{\sigma_2 - \sbr{1}}\D_2 \hhh_2 = \sbr{3} \hhh_2 - \Tr_2 \hhh_2 = \sbr{3} \hhh_2 \equiv 0 \mod 3E\br{F^2}, $$
+so $ \G^2 $ fixes $ \D_2 \hhh_2 $, and hence $ \G_{F^2 / F} $ fixes $ \HHH_2 $. By Lemma \ref{lem:conjugationeigenspace}, there is some $ \sigma \in \G^2 $ such that
+$$ \ccc \HHH_2 = \Tr_2^{-1}\ccc\D_2 \hhh_2 = \Tr_2^{-1}\sbr{2}\Tr_2 \hhh_2 - \Tr_2^{-1}\sigma_2\D_2\ccc \hhh_2 = -\sigma\sigma_2\Tr_2^{-1}\D_2 \hhh_2 \mod 3E\br{F^2}. $$
+Since $ \D_2 \hhh_2 $ is $ \G^2 $-invariant, $ \Tr_2^{-1}\D_2 \hhh_2 = \HHH_2 $ is $ \G_{F^2 / F} $-invariant, so $ \sigma $ and $ \sigma_2 $ act trivially. Thus $ \ccc \HHH_2 \equiv -\HHH_2 \mod 3E\br{F^2} $, and so $ \HHH_2 $ lies in the negative eigenspace of $ \ccc $.
+\end{example}
+
+Since $ E\br{F^n}\sbr{\ell} = 0 $ by Lemma \ref{lem:trivialtorsion}, the global Kummer sequences for $ F $ and $ F^n $ and the inflation-restriction exact sequence fit in an exact diagram
+$$
+\begin{tikzcd}
+& & \H^1\br{\G_{F^n / F}, E\br{F^n}\sbr{\ell}} = 0 \arrow{d}{\inf_{F^n / F}} & & \\
+0 \arrow{r} & E\br{F} / \ell \arrow{r}{\delta} \arrow{d} & \H^1\br{F, E\sbr{\ell}} \arrow{r} \arrow{d}{\res_{F^n / F}} & \H^1\br{F, E}\sbr{\ell} \arrow{r} \arrow{d} & 0 \\
+0 \arrow{r} & \br{E\br{F^n} / \ell}^{\G_{F^n / F}} \arrow{r}[swap]{\delta^n} & \H^1\br{F^n, E\sbr{\ell}}^{\G_{F^n / F}} \arrow{r} \arrow{d}{\tra_{F^n / F}} & \H^1\br{F^n, E}\sbr{\ell}^{\G_{F^n / F}} & \\
+& & \H^2\br{\G_{F^n / F}, E\br{F^n}\sbr{\ell}} = 0 & &
+\end{tikzcd},
+$$
+so $ \res_{F^n / F} $ is an isomorphism.
+
+\begin{definition}
+The \textbf{Kolyvagin class} $ \c\br{n} \in \H^1\br{F, E\sbr{\ell}} $ is the unique class such that
+$$ \res_{F^n / F} \c\br{n} = \delta^n\br{\sbr{\HHH_n}}. $$
+\end{definition}
+
+Since $ \delta^n $ and $ \res_{F^n / F} $ respect the action of complex conjugation, Kolyvagin classes belongs to the $ \epsilon_n $-eigenspace of $ \ccc $ by Lemma \ref{lem:kolyvaginderivative}. It is easy to see that it can be explicitly described by the cocycle
+$$ \function[\c\br{n}]{\G_F}{E\sbr{\ell}}{\sigma}{\sigma\sbr{\dfrac{1}{\ell}} \HHH_n - \sbr{\dfrac{1}{\ell}} \HHH_n - \sbr{\dfrac{1}{\ell}}\br{\sigma - \sbr{1}} \HHH_n}, $$
+which is well-defined again by Lemma \ref{lem:kolyvaginderivative}. Unfortunately, cohomology classes are rather cumbersome to illustrate with an example, so the assertions in the remaining sections will be given proofs.
+
+\pagebreak
+
+\subsection{Local triviality of Kolyvagin classes}
+
+It remains to study the local ramification behaviour of Kolyvagin classes $ \c\br{n} \in \H^1\br{F, E\sbr{\ell}} $ under the maps $ \br{\cdot}_v : \H^1\br{F, E\sbr{\ell}} \to \H^1\br{F_v, E\sbr{\ell}} $ and $ \br{\cdot}^v : \H^1\br{F, E\sbr{\ell}} \to \H^1\br{F_v, E}\sbr{\ell} $ to place them in appropriate Selmer groups, starting by proving that they vanish locally at the places away from $ n $.
+
+\begin{lemma}
+\label{lem:localzero}
+If $ v \in \M_F $ and $ v \nmid n $, then $ \c\br{n}^v = 0 $.
+\end{lemma}
+
+\begin{proof}
+Assume that $ v $ is a prime of good reduction such that $ v\br{\ell} = 0 $. Under this assumption, Lemma \ref{lem:singularquotient} identifies $ \c\br{n}^v $ with a homomorphism $ \I_v \to E\sbr{\ell} $. Since $ F_{v_n}^n $ is unramified over $ F_v $, $ \br{\res_{F^n / F} \c\br{n}}^{v_n} $ is exactly the same homomorphism, but this is zero by exactness in the definition of $ \c\br{n} $. On the other hand, the archimedean case is trivial, while the remaining finitely many cases involve a careful analysis of a N\'eron model of $ E $, which is too far afield and will be omitted for a reference \cite[Proposition 6.2]{Gro91}.
+\end{proof}
+
+In terms of Selmer groups, this says that $ \c\br{n} \in \Sel^S\br{F, E\sbr{\ell}}^{\epsilon_n} $ for the finite set of primes $ S = \cbr{p\OOO_F \in \M_F \st p \mid n} $. The Kolyvagin classes for the primes dividing $ n $ do not necessarily vanish locally, but the following key computation encodes a crucial relationship between local triviality and local $ \ell $-divisibility.
+
+\begin{lemma}
+\label{lem:localiff}
+If $ p \mid n $ and $ n = pq $, then $ \c\br{n}^\ppp = 0 $ if and only if $ \HHH_q \in \ell E\br{F_\ppp} $.
+\end{lemma}
+
+\begin{proof}
+Similarly to Lemma \ref{lem:localzero}, Lemma \ref{lem:singularquotient} identifies $ \br{\res_{F^n / F} \c\br{n}}^{\ppp_n} $ with a homomorphism $ \I_{\ppp_n} \to E\sbr{\ell} $ that is zero by exactness, so it identifies $ \c\br{n}^\ppp $ with a homomorphism $ \I_\ppp / \I_{\ppp_n} \to E\sbr{\ell} $. Since $ p $ splits completely in $ F^q / F $ and totally ramifies in $ F^n / F^q $, there are canonical isomorphisms
+$$ \I_\ppp / \I_{\ppp_n} \cong \G_{F_{\ppp_n}^{n, \ur} / F_\ppp^{\ur}} \cong \G_{F_{\ppp_n}^n / F_\ppp} = \G_{F_{\ppp_n}^n / F_{\ppp_q}^q} \cong \G_{F^n / F^q} \cong \G^p, $$
+so that $ \c\br{n}^\ppp = 0 $ precisely if $ \c\br{n}\br{\sigma_p} = 0 $. Since the reduction map $ \widetilde{\cdot} : E\sbr{\ell} \to \widetilde{E}\br{\overline{\FF_\ppp}} $ is injective, this is precisely if $ \widetilde{\c\br{n}\br{\sigma_p}} = 0 $ in $ \widetilde{E}\br{\overline{\FF_\ppp}} $, which reduces under the explicit description of $ \c\br{n} $ to $ \sbr{\tfrac{1}{\ell}}\br{\sigma_p - \sbr{1}} \widetilde{\HHH_n} = 0 $, since $ \sigma_p \in \I_F $ acts trivially on $ \widetilde{E}\br{\overline{\FF_\ppp}} $. Now note by Proposition \ref{prop:eulersystem} that there is an identity
+$$ \sigma \widetilde{\hhh_n} = \sigma\br{\dfrac{\sigma^{-1}\ppp_q}{F^q / F}} \widetilde{\hhh_q} = \br{\dfrac{\ppp_q}{F^q / F}}\sigma \widetilde{\hhh_q}, \qquad \sigma \in \G_{F^q / F}, $$
+so that $ \Tr_n\D_q \widetilde{\hhh_n} = \sbr{p + 1}\br{\tfrac{\ppp_q}{F^q / F}} \widetilde{\HHH_q} $ as well. By this identity along with Proposition \ref{prop:eulersystem} again,
+$$ \br{\sigma_p - \sbr{1}} \widetilde{\HHH_n} = \Tr_n\D_q\br{\sigma_p - \sbr{1}}\D_p \widetilde{\hhh_n} = \sbr{p + 1}\Tr_n\D_q \widetilde{\hhh_n} - \Tr_p \widetilde{\HHH_q} = \br{\sbr{p + 1}\br{\dfrac{\ppp_q}{F^q / F}} - \sbr{\a_p}} \widetilde{\HHH_q}, $$
+so that $ \sbr{\tfrac{1}{\ell}}\br{\sigma_p - \sbr{1}} \widetilde{\HHH_n} \in \widetilde{E}\br{\FF_{\ppp_q}} = \widetilde{E}\br{\FF_\ppp} $ since $ \a_p \equiv p + 1 \equiv 0 \mod \ell $. Furthermore, the Frobenius of $ \ppp_q $ is conjugate to $ \ccc $, so it acts on $ \widetilde{\HHH_q} $ as $ \sbr{\epsilon_q} $ by Lemma \ref{lem:conjugationeigenspace}. On the other hand, $ \widetilde{\HHH_q} $ generates the cyclic group $ \widetilde{E}\br{\FF_\ppp}^{\epsilon_q} / \ell \cong \widetilde{E}\br{\FF_\ppp}\sbr{\ell}^{\epsilon_q} \cong \FF_\ell $ by Lemma \ref{lem:kolyvaginderivative}. Since $ \#\widetilde{E}\br{\FF_\ppp}^{\epsilon_q} = \abs{\br{p + 1}\epsilon_q - \a_p} $, it follows immediately that $ \sbr{\tfrac{1}{\ell}}\br{\sigma_p - 1} \widetilde{\HHH_n} = 0 $ precisely if $ \widetilde{\HHH_q} = 0 $ in $ \widetilde{E}\br{\FF_\ppp} / \ell $. Now since $ p \ne \ell $, there is an exact sequence
+$$
+\begin{tikzcd}[row sep=tiny]
+0 \arrow{r} & E_1\br{F_\ppp} / \ell \arrow{r} \arrow[cong]{d} & E\br{F_\ppp} \arrow{r} & \widetilde{E}\br{\FF_\ppp}\sbr{\ell} \arrow{r} & 0, \\
+& E_1\br{F_\ppp}\sbr{\ell} & & &
+\end{tikzcd},
+$$
+whose first term vanishes by Lemma \ref{lem:trivialtorsion}, so $ \widetilde{\HHH_q} = 0 $ in $ \widetilde{E}\br{\FF_\ppp} / \ell $ precisely if $ \HHH_q = 0 $ in $ E\br{F_\ppp} / \ell $, or equivalently $ \HHH_q \in \ell E\br{F_\ppp} $. Thus the lemma follows, through the equivalences
+\begin{align*}
+\c\br{n}^\ppp = 0
+& \qquad \iff \qquad \c\br{n}\br{\sigma_p} = 0
+\qquad \iff \qquad \widetilde{\c\br{n}\br{\sigma_p}} = 0 \\
+& \qquad \iff \qquad \sbr{\dfrac{1}{\ell}}\br{\sigma_p - \sbr{1}} \widetilde{\HHH_n} = 0
+\qquad \iff \qquad \widetilde{\HHH_q} \in \ell\widetilde{E}\br{\FF_\ppp}
+\qquad \iff \qquad \HHH_q \in \ell E\br{F_\ppp}.
+\end{align*}
+\end{proof}
+
+This gives an equivalent condition for $ \c\br{n}^\ppp = 0 $ in terms of the local $ \ell $-divisibility of $ \HHH_q $, which is reminiscent of the global $ \ell $-divisibility assumption $ \hhh \notin \ell E\br{F} $ that will be exploited in the following section.
+
+\pagebreak
+
+\section{Computing the Selmer group}
+
+With an Euler system of Heegner points lying in certain generalised Selmer groups, the classical Selmer group $ \Sel\br{F, E\sbr{\ell}} $ may then be computed using purely Galois cohomology, using the assumption $ \hhh \notin \ell E\br{F} $ for the first time. This section will introduce preliminary results and proceed to compute the $ \pm\epsilon $ eigenspaces of the Selmer group to finally complete the proof of Theorem \ref{thm:selmercyclic}. Throughout, there will be a tower of fields $ F \subseteq K^1 \subseteq K^2 \subseteq K^3 $, where $ K^1 \coloneqq F\br{E\sbr{\ell}} $, $ K^2 \coloneqq K^1\br{\sbr{\tfrac{1}{\ell}}\hhh} $, and $ K^3 $ will be defined later. For these three fields, denote a choice of a prime in $ K^i $ above a prime $ \ppp \in \M_F $ by $ \ppp_{K^i} \in \M_{K^i} $.
+
+\subsection{Preliminary results}
+
+The following are three general lemmas, the first of which is a consequence of the Weil pairing.
+
+\begin{lemma}
+\label{lem:cohomologydimension}
+If $ p $ is a Kolyvagin conductor, then $ \dim_{\FF_\ell} \H^1\br{F_\ppp, E}\sbr{\ell}^\pm = 1 $.
+\end{lemma}
+
+\begin{proof}
+By Galois equivariance of the Weil pairing, it suffices to show that $ \H^1\br{F_\ppp, E}\sbr{\ell}^\pm \cong E\sbr{\ell}^\mp $. The assumption of $ p $ being a Kolyvagin conductor implies that $ K^1 / F $ has trivial inertia at $ \ppp $, so $ E\sbr{\ell} \subseteq E\br{F_\ppp} $, and hence $ \mu_\ell \subseteq F_\ppp $ by the Weil pairing. Lemma \ref{lem:singularquotient} then identifies
+$$ \H^1\br{F_\ppp, E}\sbr{\ell} = \Hom\br{\I_\ppp, E\sbr{\ell}}^{\G_\ppp^{\ur}} = \Hom\br{\I_\ppp / \ell, E\sbr{\ell}}^{\G_\ppp^{\ur}} \cong \Hom\br{\mu_\ell, E\sbr{\ell}}^{\G_\ppp^{\ur}} = \Hom\br{\mu_\ell, E\sbr{\ell}}, $$
+as $ \FF_\ell $-vector spaces, which respects the action of $ \ccc $, except that it acts on $ \mu_\ell $ by inversion.
+\end{proof}
+
+The second lemma rephrases the vanishing of a Hochschild-Lyndon-Serre spectral sequence.
+
+\begin{lemma}
+\label{lem:vanishingcohomology}
+$ \H^1\br{K^1 / F, E\sbr{\ell}} = \H^2\br{K^1 / F, E\sbr{\ell}} = 0 $.
+\end{lemma}
+
+\begin{proof}
+Since $ \G_{K^1 / F} \cong \GL_2 \FF_\ell $, its centre $ Z \coloneqq \Z\br{\G_{K^1 / F}} \cong \FF_\ell^\times $ has order $ \ell - 1 $ coprime to the order $ \ell^2 $ of $ E\sbr{\ell} \cong \FF_\ell^2 $ since $ \ell > 2 $, so $ \H^i\br{Z, E\sbr{\ell}} = 0 $ for all $ i \in \NN $. In particular, $ E\sbr{\ell}^Z = 0 $, so $ \H^i\br{I, E\sbr{\ell}} = 0 $ for all $ i \in \NN $ as well, where $ I \coloneqq \G_{K^1 / F} / Z $. The inflation-restriction exact sequence then reads
+$$
+\begin{tikzcd}[row sep=tiny]
+\H^1\br{I, E\sbr{\ell}^Z} \arrow{r}{\inf} \arrow[cong]{d} & \H^1\br{K^1 / F, E\sbr{\ell}} \arrow{r}{\res} & \H^1\br{Z, E\sbr{\ell}}^I \arrow[cong]{d} \\
+0 & & 0
+\end{tikzcd},
+$$
+so that $ \H^1\br{K^1 / F, E\sbr{\ell}} = 0 $, and the vanishing of $ \H^1\br{Z, E\sbr{\ell}} $ yields another application
+$$
+\begin{tikzcd}[row sep=tiny]
+\H^2\br{I, E\sbr{\ell}^Z} \arrow{r}{\inf} \arrow[cong]{d} & \H^2\br{K^1 / F, E\sbr{\ell}} \arrow{r}{\res} & \H^2\br{Z, E\sbr{\ell}}^I \arrow[cong]{d} \\
+0 & & 0
+\end{tikzcd},
+$$
+so that $ \H^2\br{K^1 / F, E\sbr{\ell}} = 0 $ as well.
+\end{proof}
+
+It is clear by induction that $ \H^i\br{K^1 / F, E\sbr{\ell}} = 0 $ for all $ i \in \NN $, but only the first two dimensions will be necessary. The third lemma computes the Galois invariant endomorphisms of $ E\sbr{\ell} $.
+
+\begin{lemma}
+\label{lem:invariantendomorphisms}
+Under the standard $ \G_{K^1 / F} $-action, $ \dim_{\FF_\ell} \Hom\br{E\sbr{\ell}, E\sbr{\ell}}^{\G_{K^1 / F}} = 1 $.
+\end{lemma}
+
+\begin{proof}
+Since $ \G_{K^1 / F} \cong \GL_2 \FF_\ell $, this is just $ \Hom\br{\FF_\ell^2, \FF_\ell^2}^{\GL_2 \FF_\ell} $, so the Galois invariance of $ \Hom\br{E\sbr{\ell}, E\sbr{\ell}} $ translates to the equivariant homomorphisms, which clearly includes the one-dimensional subspace of scalar maps. It is easy to see that these are all the homomorphisms, by considering the matrices
+$$ \twobytwo{1}{1}{0}{1}, \twobytwo{0}{1}{1}{0} \in \GL_2 \FF_\ell, $$
+so that the dimension is exactly one.
+\end{proof}
+
+The following two sections will proceed very similarly via invoking Lemma \ref{lem:chebotarevdensity} to obtain certain Kolyvagin classes. By first showing that the Galois group structure of a field extension is isomorphic to $ E\sbr{\ell} $, the dimension of its cohomology group over $ F $, and hence of the restricted Selmer group, can be determined. The relaxed Selmer group is bounded by the local triviality of these Kolyvagin classes under the assumption $ \hhh \notin \ell E\br{F} $, and these compute the classical Selmer group by the exact sequence in Proposition \ref{prop:tateduality}.
+
+\pagebreak
+
+\subsection{The zero eigenspace}
+
+Apply Lemma \ref{lem:chebotarevdensity} to the fields $ K' = K^2 $ and $ K = K^1 $ to obtain a finite set of primes $ S \subseteq \M_F $ such that
+$$ \br{\dfrac{p}{K^2 / \QQ}} = \ccc\sigma, \qquad \ppp \in S, $$
+and
+$$ \Sel_S\br{F, E\sbr{\ell}}^{-\epsilon} \subseteq \inf_{K^2 / F}\br{\H^1\br{K^2 / F, E\sbr{\ell}}}^{-\epsilon}. $$
+This requires a choice of a non-trivial $ \sigma \in \G_{K^2 / K^1}^- $, which is guaranteed by the following.
+
+\begin{lemma}
+\label{lem:galoisdimension1}
+There is an isomorphism of $ \G_{K^1 / F} $-modules $ \G_{K^2 / K^1} \xrightarrow{\sim} E\sbr{\ell} $ induced by $ \delta\br{\hhh} $.
+\end{lemma}
+
+\begin{proof}
+By Lemma \ref{lem:vanishingcohomology}, the inflation-restriction exact sequence reads
+$$
+\begin{tikzcd}[row sep=tiny]
+\H^1\br{K^1 / F, E\sbr{\ell}} \arrow{r}{\inf_{K^1 / F}} \arrow[cong]{d} & \H^1\br{F, E\sbr{\ell}} \arrow{r}{\res_{K^1 / F}} & \H^1\br{K^1, E\sbr{\ell}}^{\G_{K^1 / F}} \arrow{r}{\tra_{K^1 / F}} \arrow[cong]{d} & \H^2\br{K^1 / F, E\sbr{\ell}} \arrow[cong]{d} \\
+0 & & \Hom\br{\G_{K^1}, E\sbr{\ell}}^{\G_{K^1 / F}} & 0
+\end{tikzcd}.
+$$
+The cocycle $ \delta\br{\hhh} \in \H^1\br{F, E\sbr{\ell}} $ restricts to a homomorphism $ \res_{K^1 / F} \delta\br{\hhh} \in \Hom\br{\G_{K^1}, E\sbr{\ell}}^{\G_{K^1 / F}} $, whose kernel is exactly $ \G_{K^2} $ by definition, inducing an injection $ \rho : \G_{K^2 / K^1} \hookrightarrow E\sbr{\ell} $. Let $ \sigma \in \G_{K^1 / F} $ be such that $ \rho\br{\sigma} \ne 0 $, which is possible since $ \hhh \notin \ell E\br{F} $. For any $ P \in E\sbr{\ell} $, there is some $ \sigma' \in \G_{K^1 / F} $ such that $ P = \sigma'\br{\rho\br{\sigma}} $, since $ \G_{K^1 / F} \cong \GL_2 \FF_\ell $ acts transitively on $ E\sbr{\ell} \setminus \cbr{0} \cong \FF_\ell^2 \setminus \cbr{\br{0, 0}} $. The Galois invariance of $ \res_{K^1 / F} \delta\br{\hhh} $ translates to the Galois equivariance of $ \rho $, so $ P = \rho\br{\sigma'^{-1}\sigma\sigma'} $. Thus $ \rho $ is surjective.
+\end{proof}
+
+With such a choice, all primes $ \ppp \in S $ are Kolyvagin conductors since
+$$ \br{\dfrac{p}{K^1 / \QQ}} = \eval{\br{\dfrac{p}{K^2 / \QQ}}}_{K^1} = \eval{\ccc\sigma}_{K^1} = \ccc. $$
+As an almost immediate consequence, the cohomology group over $ F $ is generated by $ \delta\br{\hhh} $.
+
+\begin{lemma}
+\label{lem:cohomologygenerator1}
+$ \H^1\br{K^2 / F, E\sbr{\ell}} \cong \FF_\ell \cdot \delta\br{\hhh} $.
+\end{lemma}
+
+\begin{proof}
+By Lemma \ref{lem:vanishingcohomology}, Lemma \ref{lem:invariantendomorphisms}, and Lemma \ref{lem:galoisdimension1}, the inflation-restriction exact sequence reads
+$$
+\begin{tikzcd}[row sep=tiny]
+\H^1\br{K^1 / F, E\sbr{\ell}} \arrow{r}{\inf_{K^1 / F}} \arrow[cong]{d} & \H^1\br{K^2 / F, E\sbr{\ell}} \arrow{r}{\res_{K^1 / F}} & \H^1\br{K^2 / K^1, E\sbr{\ell}}^{\G_{K^1 / F}} \arrow{r}{\tra_{K^1 / F}} \arrow[cong]{d} & \H^2\br{K^1 / F, E\sbr{\ell}} \arrow[cong]{d} \\
+0 & & \FF_\ell & 0
+\end{tikzcd},
+$$
+but $ \H^1\br{K^2 / F, E\sbr{\ell}} $ already contains $ \delta\br{\hhh} $.
+\end{proof}
+
+This bounds the restricted part, while the relaxed part is constrained via local ramification behaviour.
+
+\begin{lemma}
+\label{lem:localtriviality1}
+If $ \ppp \in S $, then
+\begin{enumerate}
+\item $ \c\br{p}^v = 0 $ for all $ v \notin S $, and
+\item $ \c\br{p}^\ppp \ne 0 $.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\hfill
+\begin{enumerate}
+\item This follows immediately from Lemma \ref{lem:localzero}.
+\item Since $ \sigma \ne \ccc $ by choice, $ \ppp $ splits completely in $ K^2 / F $ by the computation
+$$ \br{\dfrac{\ppp}{K^2 / F}} = \br{\dfrac{p}{K^2 / \QQ}} = \ccc\sigma, $$
+so $ \f\br{K_{\ppp_{K^2}}^2 / F_\ppp} > 1 $, and hence $ \hhh \notin \ell E\br{F_\ppp} $. Thus $ \c\br{p}^\ppp \ne 0 $ by Lemma \ref{lem:localiff}.
+\end{enumerate}
+\end{proof}
+
+\pagebreak
+
+In particular, $ \c\br{p} \in \Sel^{\cbr{\ppp}}\br{F, E\sbr{\ell}}^{-\epsilon} $ by Lemma \ref{lem:kolyvaginderivative}. The $ -\epsilon $ eigenspace is now easy to compute.
+
+\begin{proposition}
+\label{prop:negativeeigenspace}
+$ \Sel\br{F, E\sbr{\ell}}^{-\epsilon} = 0 $.
+\end{proposition}
+
+\begin{proof}
+By Lemma \ref{lem:kolyvaginderivative}, $ \delta\br{\hhh} \in \H^1\br{K^2 / F, E\sbr{\ell}}^\epsilon $, so $ \Sel_S\br{F, E\sbr{\ell}}^{-\epsilon} \subseteq \H^1\br{K^2 / F, E\sbr{\ell}}^{-\epsilon} = 0 $ by Lemma \ref{lem:cohomologygenerator1}. By Lemma \ref{lem:localtriviality1}, $ \c\br{p}^\ppp $ are the only non-zero elements generating the one-dimensional $ \FF_\ell $-vector spaces $ \H^1\br{F_\ppp, E}\sbr{\ell}^{-\epsilon} $ by Lemma \ref{lem:cohomologydimension}, so $ \coker \sigma_{\emptyset, S} = 0 $. Thus Proposition \ref{prop:tateduality} yields
+$$
+\begin{tikzcd}[row sep=tiny]
+\coker \sigma_{\emptyset, S} \arrow{r} \arrow[cong]{d} & \Sel\br{F, E\sbr{\ell}}^{-\epsilon\vee} \arrow{r} & \Sel_S\br{F, E\sbr{\ell}}^{-\epsilon\vee} \arrow[cong]{d} \\
+0 & & 0
+\end{tikzcd}.
+$$
+\end{proof}
+
+\subsection{The non-zero eigenspace}
+
+Now let $ \ppp \in S $ be an arbitrary choice of a prime, and let $ K^3 $ be the fixed field of $ \ker \br{\res_{K^2} \c\br{p} : \G_{K^2} \to E\sbr{\ell}} $. Apply Lemma \ref{lem:chebotarevdensity} to the fields $ K' = K^3 $ and $ K = K^2 $ to obtain a finite set of primes $ S' \subseteq \M_F $ such that
+$$ \br{\dfrac{q}{K^3 / \QQ}} = \ccc\sigma, \qquad \qqq \in S', $$
+and
+$$ \Sel_{S'}\br{F, E\sbr{\ell}}^\epsilon \subseteq \inf_{K^3 / F}\br{\H^1\br{K^3 / F, E\sbr{\ell}}}^\epsilon. $$
+This requires a choice of a non-trivial $ \sigma \in \G_{K^3 / K^2}^- $, which is guaranteed by the following.
+
+\begin{lemma}
+\label{lem:galoisdimension2}
+There is an isomorphism of $ \G_{K^2 / F} $-modules $ \G_{K^3 / K^2} \xrightarrow{\sim} E\sbr{\ell} $ induced by $ \c\br{p} $.
+\end{lemma}
+
+\begin{proof}
+By Lemma \ref{lem:cohomologygenerator1}, the inflation-restriction exact sequence reads
+$$
+\begin{tikzcd}[row sep=tiny]
+0 \arrow{r} & \H^1\br{K^2 / F, E\sbr{\ell}} \arrow{r}{\inf_{K^2 / F}} \arrow[cong]{d} & \H^1\br{F, E\sbr{\ell}} \arrow{r}{\res_{K^2 / F}} & \H^1\br{K^2, E\sbr{\ell}} \\
+& \FF_\ell \cdot \delta\br{\hhh} & &
+\end{tikzcd}.
+$$
+Then $ \res_{K^2 / F} \c\br{p} \ne 0 $, otherwise $ \c\br{p} $ lies in the linear span of $ \inf_{K^2 / F} \delta\br{\hhh} $, which lie in different eigenspaces by Lemma \ref{lem:kolyvaginderivative}. The proof then proceeds identically to Lemma \ref{lem:galoisdimension1}, replacing $ K^2 / K^1 $ with $ K^3 / K^2 $ and $ \delta\br{\hhh} $ with $ \c\br{p} $, and working under the assumption $ \hhh \notin \ell E\br{F} $.
+\end{proof}
+
+With such a choice, all primes $ \qqq \in S' $ are Kolyvagin conductors since
+$$ \br{\dfrac{q}{K^2 / \QQ}} = \eval{\br{\dfrac{q}{K^3 / \QQ}}}_{K^2} = \eval{\ccc\sigma}_{K^2} = \ccc. $$
+As an almost immediate consequence, the cohomology group over $ F $ is generated by $ \delta\br{\hhh} $ and $ \c\br{p} $.
+
+\begin{lemma}
+\label{lem:cohomologygenerator2}
+$ \H^1\br{K^3 / F, E\sbr{\ell}} \cong \FF_\ell \cdot \delta\br{\hhh} \oplus \FF_\ell \cdot \c\br{p} $.
+\end{lemma}
+
+\begin{proof}
+By Lemma \ref{lem:cohomologygenerator1} and Lemma \ref{lem:galoisdimension2}, the inflation-restriction exact sequence reads
+$$
+\begin{tikzcd}[row sep=tiny]
+0 \arrow{r} & \H^1\br{K^2 / F, E\sbr{\ell}} \arrow{r}{\inf} \arrow[cong]{d} & \H^1\br{K^3 / F, E\sbr{\ell}} \arrow{r}{\res} & \H^1\br{K^3 / K^2, E\sbr{\ell}}^{\G_{K^2 / F}} \arrow[cong]{d} \\
+& \FF_\ell \cdot \delta\br{\hhh} & & \Hom\br{E\sbr{\ell}, E\sbr{\ell}}^{\G_{K^2 / F}}
+\end{tikzcd}.
+$$
+Since $ \G_{K^1 / F} \cong \GL_2 \FF_\ell $ is a quotient of $ \G_{K^2 / F} $, $ \Hom\br{E\sbr{\ell}, E\sbr{\ell}}^{\G_{K^2 / F}} $ is at most one-dimensional, by Lemma \ref{lem:invariantendomorphisms}, but $ \H^1\br{K^3 / F, E\sbr{\ell}} $ already contains $ \inf_{K^2 / F} \delta\br{\hhh} $ and $ \c\br{p} $, linearly independent by Lemma \ref{lem:kolyvaginderivative}.
+\end{proof}
+
+\pagebreak
+
+This bounds the restricted part, while the relaxed part is constrained via local ramification behaviour.
+
+\begin{lemma}
+\label{lem:localtriviality2}
+If $ \qqq \in S' $, then
+\begin{enumerate}
+\item $ \c\br{pq}^v = 0 $ for all $ v \notin S' $, and
+\item $ \c\br{pq}^\qqq \ne 0 $.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\hfill
+\begin{enumerate}
+\item Lemma \ref{lem:localzero} reduces this to showing that $ \c\br{pq}^\ppp = 0 $ for all $ \ppp \in S $, and Lemma \ref{lem:localiff} reduces this to showing that $ \HHH_q \in \ell E\br{F_\ppp} $. Now $ \qqq $ splits completely in $ K^2 / F $ by the computation
+$$ \br{\dfrac{\qqq}{K^2 / F}} = \br{\dfrac{q}{K^2 / \QQ}}^2 = \ccc^2 = 1, $$
+so $ \f\br{K_{\qqq_{K^2}}^2 / F_\ppp} = 1 $, and hence $ \hhh \in \ell E\br{F_\qqq} $. By Lemma \ref{lem:kolyvaginderivative}, Lemma \ref{lem:localzero}, and Lemma \ref{lem:localiff}, $ \c\br{q} \in \Sel\br{F, E\sbr{\ell}}^{-\epsilon} $, which is zero by Proposition \ref{prop:negativeeigenspace}, so $ 0 = \res_{F^q / F} \c\br{q} = \delta^q\br{\sbr{\HHH_q}} $. Thus $ \HHH_q \in \ell E\br{F^q} \subseteq \ell E\br{F_\ppp^q} = \ell E\br{F_\ppp} $, as required.
+\item Since $ \sigma \ne \ccc $ by choice, $ \qqq_{K^2} $ splits completely in $ K^3 / K^2 $ by the computation
+$$ \br{\dfrac{\qqq_{K^2}}{K^3 / K^2}} = \br{\dfrac{q}{K^3 / \QQ}} = \ccc\sigma \ne 1, $$
+so the localisation $ \c\br{p}_\qqq : \G_{K_{\qqq_{K^3}}^3 / K_{\qqq_{K^2}}^2} \xrightarrow{\sim} E\sbr{\ell} $ of the isomorphism in Lemma \ref{lem:galoisdimension2} is not trivial. On the other hand, $ \qqq $ splits completely in $ F^p / F $, so the restriction $ \G_F \to \G_{F_\qqq} $ factors in a diagram
+$$
+\begin{tikzcd}
+E\br{F} / \ell \arrow{r} \arrow[hookrightarrow]{d}{\delta} & E\br{F^p} / \ell \arrow{r} \arrow[hookrightarrow]{d}{\delta^p} & E\br{F_\qqq} / \ell \arrow[hookrightarrow]{d}{\delta_\qqq} & \\
+\H^1\br{F, E\sbr{\ell}} \arrow{r} & \H^1\br{F^p, E\sbr{\ell}} \arrow{r} & \H^1\br{F_\qqq, E\sbr{\ell}}
+\end{tikzcd}
+$$
+Commutativity says $ \delta_\qqq\br{\sbr{\HHH_p}} = \c\br{p}_\qqq \ne 0 $, so $ \HHH_p \notin \ell E\br{F_\qqq} $, and hence $ \c\br{pq}^\qqq \ne 0 $ by Lemma \ref{lem:localiff}.
+\end{enumerate}
+\end{proof}
+
+In particular, $ \c\br{pq} \in \Sel^{\cbr{\qqq}}\br{F, E\sbr{\ell}}^\epsilon $ by Lemma \ref{lem:kolyvaginderivative}. The $ \epsilon $ eigenspace is now easy to compute.
+
+\begin{proposition}
+\label{prop:positiveeigenspace}
+$ \Sel\br{F, E\sbr{\ell}}^\epsilon \cong \FF_\ell \cdot \delta\br{\hhh} $.
+\end{proposition}
+
+\begin{proof}
+By Lemma \ref{lem:kolyvaginderivative}, $ \delta\br{\hhh} \in \H^1\br{K^3 / F, E\sbr{\ell}}^\epsilon $, so $ \Sel_{S'}\br{K, E\sbr{\ell}}^\epsilon \subseteq \H^1\br{K^3 / F, E\sbr{\ell}}^\epsilon \cong \FF_\ell \cdot \delta\br{\hhh} $ by Lemma \ref{lem:cohomologygenerator2}. By Lemma \ref{lem:localtriviality2}, $ \c\br{pq}^\qqq $ are the only non-zero elements generating the one-dimensional $ \FF_\ell $-vector spaces $ \H^1\br{F_\qqq, E}\sbr{\ell}^\epsilon $ by Lemma \ref{lem:cohomologydimension}, so $ \coker \sigma_{\emptyset, S'} = 0 $. Thus Proposition \ref{prop:tateduality} yields
+$$
+\begin{tikzcd}[row sep=tiny]
+\coker \sigma_{\emptyset, S'} \arrow{r} \arrow[cong]{d} & \Sel\br{F, E\sbr{\ell}}^{\epsilon\vee} \arrow{r} & \Sel_{S'}\br{F, E\sbr{\ell}}^{\epsilon\vee} \arrow{r} & 0 \\
+0 & & &
+\end{tikzcd},
+$$
+which is an isomorphism since $ \Sel\br{F, E\sbr{\ell}}^\epsilon $ already contains $ \delta\br{\hhh} $ by exactness.
+\end{proof}
+
+The proof of Theorem \ref{thm:selmercyclic} is now complete.
+
+\begin{proof}[Proof of Theorem \ref{thm:selmercyclic}]
+This follows immediately from Proposition \ref{prop:negativeeigenspace} and Proposition \ref{prop:positiveeigenspace}.
+\end{proof}
+
+\pagebreak
+
+\section{The Birch and Swinnerton-Dyer conjecture}
+
+The works of Gross-Zagier and Kolyvagin have huge implications on the Birch and Swinnerton-Dyer conjecture \cite[Theorem 3.22]{Dar04}. Recall that $ \epsilon $ is the negative of the sign in the functional equation satisfied by the completed Hasse-Weil $ \L $-function $ \Lambda_{E / F}\br{s} $. Depending on $ \epsilon $, an imaginary quadratic field $ F = \QQ\br{\sqrt{-D}} $ satisfying the Heegner hypothesis may be constructed while simultaneously satisfying a non-zero condition on the Hasse-Weil $ \L $-function $ \L_{E_D / \QQ}\br{s} $ for the quadratic twist $ E_D $ of $ E $ over $ \QQ $.
+
+\begin{lemma}
+\label{lem:heegnerdiscriminant}
+\hfill
+\begin{itemize}
+\item If $ \epsilon = + $, there is an imaginary quadratic field $ F = \QQ\br{\sqrt{-D}} $ satisfying the Heegner hypothesis such that $ \L_{E_D / \QQ}\br{1} \ne 0 $.
+\item If $ \epsilon = - $, there is an imaginary quadratic field $ F = \QQ\br{\sqrt{-D}} $ satisfying the Heegner hypothesis such that $ \L'_{E_D / \QQ}\br{1} \ne 0 $.
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+These are delicate analytic arguments on $ \L $-functions \cite{Wal85, BFH90, MM91}.
+\end{proof}
+
+With this lemma, the weak Birch and Swinnerton-Dyer conjecture holds for analytic rank at most one.
+
+\begin{theorem}
+If $ \ord_{s = 1} \L_{E / \QQ}\br{s} \le 1 $, then
+$$ \ord_{s = 1} \L_{E / \QQ}\br{s} = \rk E\br{\QQ}. $$
+\end{theorem}
+
+\begin{proof}
+Applying higher derivatives at $ s = 1 $ in the functional equation $ \Lambda_{E / \QQ}\br{s} = -\epsilon\Lambda_{E / \QQ}\br{2 - s} $ yields
+$$ \L_{E / \QQ}^{\br{k}}\br{1} = -\br{-1}^k\epsilon\L_{E / \QQ}^{\br{k}}\br{1}, $$
+and similarly for any quadratic twist of $ E $ over $ \QQ $. It necessitates to consider the cases $ \epsilon = \pm $ separately.
+\begin{itemize}
+\item Let $ \epsilon = + $. Then $ \L_{E / \QQ}\br{1} = 0 $ for parity reasons, so $ \ord_{s = 1} \L_{E / \QQ}\br{s} = 1 $ by assumption. By Lemma \ref{lem:heegnerdiscriminant}, $ \L_{E_D / \QQ}\br{1} \ne 0 $ for some $ F = \QQ\br{\sqrt{-D}} $, so $ \ord_{s = 1} \L_{E_D / \QQ}\br{s} = 0 $, and hence $ \ord_{s = 1} \L_{E / F}\br{s} = 1 $. The Gross-Zagier formula implies that $ \hhh \in E\br{F} $ has infinite order, so Theorem \ref{thm:rankone} implies that $ \rk E\br{F} = 1 $. By Lemma \ref{lem:conjugationeigenspace}, $ \ccc \hhh = \hhh $ in $ E\br{F} / E\br{F}_{\tors} $, so $ \hhh \in E\br{\QQ} $, and thus $ \rk E\br{\QQ} = 1 $.
+\item Let $ \epsilon = - $. Then $ \L'_{E / \QQ}\br{1} = 0 $ for parity reasons, so $ \ord_{s = 1} \L_{E / \QQ}\br{s} = 0 $ by assumption. By Lemma \ref{lem:heegnerdiscriminant}, $ \L'_{E_D / \QQ}\br{1} \ne 0 $ for some $ F = \QQ\br{\sqrt{-D}} $, and $ \L_{E_D / \QQ}\br{1} = 0 $ for parity reasons, so $ \ord_{s = 1} \L_{E_D / \QQ}\br{s} = 1 $, and hence $ \ord_{s = 1} \L_{E / F}\br{s} = 1 $. The Gross-Zagier formula implies that $ \hhh \in E\br{F} $ has infinite order, so Theorem \ref{thm:rankone} implies that $ \rk E\br{F} = 1 $. By Lemma \ref{lem:conjugationeigenspace}, $ \ccc \hhh = -\hhh $ in $ E\br{F} / E\br{F}_{\tors} $, so $ \hhh \in E\br{F} \setminus E\br{\QQ} $, and thus $ \rk E\br{\QQ} = 0 $.
+\end{itemize}
+\end{proof}
+
+It is conjectural that almost all rational elliptic curves have rank at most one, and there are recent advancements to show that this holds for a positive proportion of all rational elliptic curves when ordered by a naive height, and hence validates the weak conjecture due to Gross-Zagier and Kolyvagin. The precise bounds on the order of the Tate-Shafarevich group proven by Kolyvagin also provided some validation for the strong conjecture, although the full statement for rank at most one has yet to be proven to date.
+
+\pagebreak
+
+\printbibliography
+
+\end{document}

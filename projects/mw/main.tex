@@ -1,0 +1,944 @@
+\def\course{The Mordell-Weil theorem in Lean}
+\def\subtitle{Spring 2022}
+
+\input{header}
+
+\newcommand{\Ab}{\textbf{Ab}}
+\newcommand{\Alg}{\textbf{Alg}}
+\newcommand{\Sch}{\textbf{Sch}}
+\newcommand{\Set}{\textbf{Set}}
+
+\newoperator{Aut}
+\newoperator{ch}
+\newoperator{Cl}
+\newoperator{Gal}
+\newoperator{im}
+\newoperator{inf}
+\newoperator{ord}
+\newoperator{Pic}
+\newoperator{res}
+\newoperator{Spec}
+\newoperator{Sel}
+
+\definecolor{keywordcolor}{rgb}{0.7, 0.1, 0.1}
+\definecolor{tacticcolor}{rgb}{0.0, 0.1, 0.6}
+\definecolor{commentcolor}{rgb}{0.4, 0.4, 0.4}
+\definecolor{symbolcolor}{rgb}{0.0, 0.1, 0.6}
+\definecolor{sortcolor}{rgb}{0.1, 0.5, 0.1}
+\definecolor{attributecolor}{rgb}{0.7, 0.1, 0.1}
+\def\lstlanguagefiles{lstlean.tex}
+\lstset{language=lean}
+
+\addbibresource{bibliography.bib}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+In 1922, Louis Mordell proved that the group of rational points of an elliptic curve is finitely generated. Subsequently, in 1928, Andr\'e Weil generalised this for abelian varieties over number fields, and their collective result has since been known as the Mordell-Weil theorem. This report documents an ongoing attempt to formalise relevant definitions and a proof of the Mordell-Weil theorem for an elliptic curve over a number field in the Lean theorem prover, along with any design decisions made in the process.
+\end{abstract}
+
+\tableofcontents
+
+\pagebreak
+
+\section{Background}
+
+This section provides the relevant definitions in the arithmetic of elliptic curves, outlines a proof of the Mordell-Weil theorem for an elliptic curve over a number field, and briefly introduces the Lean theorem prover and its mathematical library. For more details on the constructions, consult Silverman's book \emph{The Arithmetic of Elliptic Curves} \cite{Sil09} and Katz-Mazur's book \emph{Arithmetic Moduli of Elliptic Curves} \cite{KM85}.
+
+\subsection{Elliptic curves}
+
+Depending on the ambient category the reader wishes to consider, there are many seemingly different definitions of an elliptic curve with varying degrees of abstraction, which are non-trivially equivalent in many cases. For the sake of a short exposition, this will begin at the generality of schemes.
+
+An \textbf{elliptic curve} over a scheme $ S $ is an $ S $-scheme $ E $, equipped with a \textbf{zero section} $ S \to E $ of the natural morphism $ f : E \to S $, such that $ f $ is smooth, proper, and all its geometric fibres are integral curves of genus one. For an $ S $-scheme $ T $, the \textbf{set of $ T $-points} $ E\br{T} $ of $ E $ is the set of $ S $-scheme morphisms $ T \to E $, which furnishes a contravariant functor $ \Sch_S \to \Set $ given by $ T \mapsto E\br{T} $. On the other hand, $ E $ represents the relative Picard functor $ \Sch_S \to \Ab $ given by $ T \mapsto \Pic_{E / S}^0\br{T} $, and there is a natural identification $ E\br{T} \xrightarrow{\sim} \Pic_{E / S}^0\br{T} $, giving $ E $ the structure of an abelian scheme. In some sense this is a global definition, great for the purposes of proving general results in algebraic geometry, but for the purposes of the Mordell-Weil theorem it suffices to consider the local definition over a field.
+
+When $ S = \Spec F $ for a field $ F $, the above definition translates to a single smooth, proper, geometrically integral curve of genus one $ E $, equipped with a choice of a point $ \OOO \in E $ given by the zero section that will play the role of an identity element later. For the $ S $-scheme $ T = \Spec K $ given by a field extension $ K $ of $ F $, the set of $ T $-points, now denoted by the \textbf{set of $ K $-points} $ E\br{K} $, can be naturally identified with the relative Picard group, now just the usual \textbf{Picard group} $ \Pic_{E / F}^0\br{K} $ of degree zero divisors modulo principal divisors. More concretely, this identification sends a $ K $-point $ P \in E\br{K} $ to the class of the degree zero divisor $ \sbr{P} - \sbr{\OOO} $, which can be shown to be bijective due to the Riemann-Roch theorem. Considering only the field extensions of $ F $ then furnishes a covariant functor from category of fields containing $ F $ to $ \Ab $ given by $ K \mapsto E\br{K} $, which can be enriched to a functor $ \Alg_F \to \Ab $ with a bit of work.
+
+As a further consequence of the Riemann-Roch theorem, elliptic curves over a field $ F $ can also be given a \textbf{Weierstrass model}, namely the projective plane curve given by the equation
+$$ Y^2Z + a_1XYZ + a_3YZ^2 = X^3 + a_2X^2Z + a_4XZ^2 + a_6Z^3, \qquad a_i \in F. $$
+The distinguished point $ \OOO $ is often chosen to be the unique point at infinity $ \sbr{X : Y : Z} = \sbr{0 : 1 : 0} $, and the remaining technical conditions are reduced to the non-vanishing of a quantity called the \textbf{discriminant}
+\begin{align*}
+\Delta \coloneqq & -\br{a_1^2 + 4a_2}^2\br{a_1^2a_6 + 4a_2a_6 - a_1a_3a_4 + a_2a_3^2 - a_4^2} - 8\br{2a_4 + a_1a_3}^3 \\
+& - 27\br{a_3^2 + 4a_6}^2 + 9\br{a_1^2 + 4a_2}\br{2a_4 + a_1a_3}\br{a_3^2 + 4a_6}.
+\end{align*}
+Under the identification $ E\br{K} \xrightarrow{\sim} \Pic_{E / F}^0\br{K} $, the \textbf{group law} is simply a chord-and-tangent process on the $ K $-points of $ E $, governed by the property that three $ K $-points sum to zero precisely if they are collinear, as illustrated below. This is well-defined, as a projective line necessarily intersect $ E $ at exactly three $ K $-points, counted with multiplicity and possibly at $ \OOO $, by B\'ezout's theorem. In particular, the group law can be given by completely explicit equations, albeit having to consider several cases at all times.
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{grouplaw.png}
+\end{center}
+
+\pagebreak
+
+Morphisms of elliptic curves over a fixed base scheme is complicated to define, but given the Weierstrass model over a field, isomorphisms preserving $ \OOO $ can be given explicitly by a linear change of variables
+$$ \sbr{X : Y : Z} \mapsto \sbr{u^2X + rZ : u^3Y + u^2sX + tZ : Z}, \qquad u \in F^\times, \qquad r, s, t \in F, $$
+which extend to an isomorphism of their corresponding group of $ K $-points by functoriality. For instance, completing the square and completing the cube are both admissible changes of variables provided $ \ch F \ne 2, 3 $, so that the Weierstrass model can be reduced to a \textbf{short Weierstrass model}
+$$ Y^2Z = X^3 + AXZ^3 + BZ^3, \qquad A, B \in F, $$
+with the same unique point at infinity, and whose affine $ K $-points are symmetric about the $ x \coloneqq X / Z $-axis. Furthermore, any such change of variables preserves a quantity called the \textbf{$ \j $-invariant}
+$$ \j \coloneqq \dfrac{\br{-48a_4 - 24a_1a_3 + 16a_2^2 + 8a_1^2a_2 + a_1^4}^3}{\Delta}, $$
+which also classifies elliptic curves up to isomorphism over all finite extensions of $ F $ simultaneously.
+
+More general morphisms preserving $ \OOO $ are called \textbf{isogenies}, with a crucial example being the multiplication by $ n \in \NN $ map $ \sbr{n} : E \to E $, whose kernel is the \textbf{$ n $-torsion subgroup} scheme $ E\sbr{n} $. The $ x $-coordinates of the $ K $-points in $ E\br{K}\sbr{n} $ can then be given by the $ K $-roots of a certain \textbf{$ n $-division polynomial} $ \psi_n\br{x} \in F\sbr{X} $, which are defined inductively. For instance, under the symmetric short Weierstrass model, an affine $ K $-point $ \br{x, y} \in E\br{K} $ lies in $ E\br{K}\sbr{2} $ precisely if $ y = 0 $, by definition of the group law, so that the affine $ K $-points in $ E\br{K}\sbr{2} $ are exactly the $ K $-roots of $ \psi_2\br{x} \coloneqq x^3 + Ax + B $. In particular, $ E\br{K}\sbr{2} $ has at most four $ K $-points including $ \OOO $, and has exactly four $ K $-points when $ \psi_2\br{x} $ splits in $ K $.
+
+Finally, given extensions $ L / K / F $, the group of $ F $-automorphisms $ \Aut\br{L / K} $ acts on the $ E\br{L} $ and $ E\br{L}\sbr{n} $ naturally, which, when they are Galois, have invariants $ E\br{K} $ and $ E\br{K}\sbr{n} $ respectively. This will be crucial in the explicit Galois cohomology of elliptic curves to be seen later.
+
+\subsection{The Mordell-Weil theorem}
+
+The following is perhaps the most fundamental result in the arithmetic of elliptic curves.
+
+\begin{theorem}[Mordell-Weil]
+\label{thm:mordellweil}
+Let $ F $ be a number field. Then $ E\br{F} $ is finitely generated.
+\end{theorem}
+
+In particular, the structure theorem for finitely generated abelian groups says that $ E\br{F} $ is isomorphic to the direct product of a finite group $ T $ and a finite number $ r \in \NN $ of copies of $ \ZZ $. Here, $ T $ is the \textbf{torsion subgroup} of $ E $, which for $ F = \QQ $ has been completely classified by Mazur, with substantial partial results for other number fields. On the other hand, the \textbf{rank} $ r \in \NN $ of $ E $ is subtly more mysterious, lending itself to a multitude of important problems in number theory, most notably the Birch and Swinnerton-Dyer conjecture that equates it with the order of vanishing of the Hasse-Weil $ \L $-function of $ E $.
+
+Weil's original proof of Theorem \ref{thm:mordellweil}, as well as its subsequent interpretations, can generally be divided into two large chunks, the first of which is often referred to as the \textbf{weak Mordell-Weil theorem}, which involves proving that $ E\br{F} / 2E\br{F} $ is finite. With modern technical advances, this is done by implicitly embedding $ E\br{F} / 2E\br{F} $ in a computably finite group $ \Sel\br{F, E\sbr{n}} $ obtained via the machinery of Galois cohomology. This embedding can be given by an explicit \textbf{complete $ 2 $-descent} homomorphism
+$$ \delta : E\br{F} \to F^\times / \br{F^\times}^2 \times F^\times / \br{F^\times}^2, $$
+whose kernel is exactly $ 2E\br{F} $ and whose image is contained in two copies of a certain provably finite subgroup $ F\br{S, 2} $ called a \textbf{Selmer group}. It is worth noting that there are other descent methods, such as by a cyclic $ 2 $-isogeny, and that there are other less direct paths to the same conclusion, such as via reducing the problem to the finiteness of a certain composite extension analogous to Kummer theory, but complete $ 2 $-descent remains to be the fastest and least technical proof of the weak Mordell-Weil theorem.
+
+\pagebreak
+
+The weak Mordell-Weil theorem is certainly necessary for the full Mordell-Weil theorem, and its sufficiency is a consequence of the existence of an explicit \textbf{naive height} on $ E\br{F} $ measuring the complexity of $ F $-points on $ E\br{F} $. In particular, it is a function $ \h : E\br{F} \to \RR_{\ge 0} $ satisfying the following three properties.
+\begin{itemize}
+\item For all $ Q \in E\br{F} $, there exists $ C_1 \in \RR $ such that for all $ P \in E\br{F} $, we have $ \h\br{P + Q} \le 2\h\br{P} + C_1 $.
+\item There exists $ C_2 \in \RR $ such that for all $ P \in E\br{F} $, we have $ 4\h\br{P} \le \h\br{2P} + C_2 $.
+\item For all $ C_3 \in \RR $, we have $ \cbr{P \in E\br{F} \mid \h\br{P} \le C_3} $ is finite.
+\end{itemize}
+This forms the latter half of the proof, and completes the proof of Theorem \ref{thm:mordellweil} by the \textbf{descent theorem}, which says that any abelian group $ A $ endowed with a height function $ A \to \RR_{\ge 0} $ such that $ A / 2A $ is finite is necessarily finitely generated. It is also worth noting that there is a more canonical height function studied by N\'eron and Tate that happens to be a quadratic form, which can also be used to deduce the same result, but for the purposes of the Mordell-Weil theorem it suffices to consider the aforementioned naive height.
+
+Detailed steps of both halves, especially the definition of the complete $ 2 $-descent homomorphism and the naive height function, will be elucidated during a discussion of their implementation in the following section.
+
+\subsection{The Lean theorem prover}
+
+The formalisation of the Mordell-Weil theorem will be done in the \textbf{Lean theorem prover} \cite{Lean}, a functional programming language and an interactive theorem prover based on the calculus of constructions with inductive types, developed principally by Leonardo de Moura at Microsoft Research in 2013. Essentially, dependent type theory in Lean plays the role of set theory in mathematics via a version of the Curry-Howard correspondence, where the statement of a theorem is formalised as a type in Lean, and a proof of said theorem, if it exists, will be the unique term of that type. This interpretation may present unexpected challenges to a working mathematician, such as the subtle notion of equality in Lean between two sets that are obviously equal in conventional mathematics, but are far from being the same type in Lean.
+
+While a proof of a theorem in Lean is merely a term, clever monadic metaprogramming has enabled the feature known as \textbf{tactics}, programmes that act on a proof state rather than specifying the exact term necessary to inhabit a type. By hiding the various bookkeeping complications, such as the composition of many terms within a single proof, specifying tactics to fill a proof in tactic mode allows the working mathematician to focus on the proof argument more naturally than in the usual term mode. For instance, the type \texttt{p} $ \to $ \texttt{p}, inhabited by the term $ \lambda $ \texttt{p, p} in term mode, is more naturally expressed in tactic mode as \texttt{begin intro p, exact p end}, via the aptly-named tactics \texttt{intro} and \texttt{exact} and delimited by the keywords \texttt{begin} and \texttt{end}. There is a long list of other more sophisticated tactics available in the community website, such as \texttt{simp}, which simplifies the proof state with existing lemmas, and \texttt{ring}, which normalises expressions in commutative ring theory. Finally, note that the keyword \texttt{sorry} inhabits all types, and acts as a placeholder in both term and tactic modes to the proof of a theorem whenever deemed necessary.
+
+The formal statement and eventual proof of the Mordell-Weil theorem is only made remotely possible by the existing Lean mathematical library \textbf{mathlib} \cite{mathlib}, a community-driven effort to build a unified library of formalised mathematics, including large chunks of undergraduate-level algebra, analysis, topology, geometry, and other areas. In particular, the ongoing proof of the Mordell-Weil theorem crucially uses many basic results from the \texttt{group\_theory}, \texttt{ring\_theory}, \texttt{field\_theory}, and \texttt{number\_theory} libraries, while awaiting basic results of local fields and Galois cohomology to be formalised in the near future. The current definition of elliptic curves is located in the \texttt{algebraic\_geometry} library despite not using anything in the library itself, but should eventually use the newly-developed Proj construction of schemes.
+
+For the remainder of the report, code snippets of theorem statements will be presented whenever informative, but are often pseudocode to simplify cumbersome notation or highlight certain parts, while encouraging the reader to explore the actual repository. Most of the code is found in the \texttt{mordell\_weil} branch of mathlib under the \texttt{algebraic\_geometry/EllipticCurve} directory, but specific files will be listed in each section.
+
+As a final remark, it is worth noting that the Weierstrass model of an elliptic curve over a field $ F $ with $ \ch F \ne 2, 3 $ has been formalised in other theorem provers, namely in CoCoA \cite{Fri98} and in Coq \cite{TH07} \cite{BS14}, but all of them have stopped at the proof of the group law. The weak Birch and Swinnerton-Dyer conjecture has also been stated in Lean \cite{Bel21}, leaving a \texttt{sorry} for the proof of the Mordell-Weil theorem.
+
+\pagebreak
+
+\section{Implementation}
+
+This section describes the ongoing formalisation of the Mordell-Weil theorem mostly in the \texttt{mordell\_weil} branch of mathlib, along with any difficulties encountered and design decisions made in the process.
+
+\subsection{Weierstrass equations}
+
+The code in this section can be found in \texttt{algebraic\_geometry/EllipticCurve.lean}.
+
+\subsubsection{The \texttt{EllipticCurve} structure}
+
+The first order was to select an appropriate mathematically-accurate definition of elliptic curves that is sufficiently general and suitable for computational purposes, yet sufficiently realistic under the current state of mathlib. While schemes do exist in mathlib, only affine schemes, and very recently projective schemes, have been properly constructed as examples. There are few isolated definitions and results on schemes, insufficient to define the genus of a curve or prove the Riemann-Roch theorem, which excludes the possibility of defining elliptic curves over a scheme while still allowing for locally-defined Weierstrass models. The choice was eventually made by Kevin Buzzard to define elliptic curves directly by the coefficients of a Weierstrass model over a commutative ring, along with important quantities such as the discriminant and the $ \j $-invariant.
+
+\begin{lstlisting}[frame=single]
+def disc_aux {R : Type} [comm_ring R] (a₁ a₂ a₃ a₄ a₆ : R) : R :=
+-(a₁^2 + 4*a₂)^2*(a₁^2*a₆ + 4*a₂*a₆ - a₁*a₃*a₄ + a₂*a₃^2 - a₄^2)
+  - 8*(2*a₄ + a₁*a₃)^3 - 27*(a₃^2 + 4*a₆)^2 + 9*(a₁^2 + 4*a₂)*(2*a₄ + a₁*a₃)*(a₃^2 + 4*a₆)
+
+structure EllipticCurve (R : Type) [comm_ring R] :=
+(a₁ a₂ a₃ a₄ a₆ : R) (disc_unit : units R) (disc_unit_eq : disc_unit.val = disc_aux a₁ a₂ a₃ a₄ a₆)
+
+variables {R : Type} [comm_ring R] (E : EllipticCurve R)
+
+def disc : R := disc_aux E.a₁ E.a₂ E.a₃ E.a₄ E.a₆
+
+def j : R := E.disc_unit.inv*(-48*E.a₄ - 24*E.a₁*E.a₃ + 16*E.a₂^2 + 8*E.a₁^2*E.a₂ + E.a₁^4)^3
+\end{lstlisting}
+
+Note that while this is the current mathlib definition, it is only mathematically-accurate for commutative rings whose class group has trivial $ 12 $-torsion, which includes fields and principal ideal domains.
+
+\subsubsection{Changes of variables}
+
+Under the Weierstrass model, isomorphisms are then given as simple linear changes of variables, with completing the square \texttt{cov2} and completing the cube \texttt{cov3} as special cases. The fact that the $ \j $-invariant is invariant under these changes of variables is a simple application of \texttt{ring1}.
+
+\begin{lstlisting}[frame=single]
+def cov (u : units R) (r s t : R) : EllipticCurve R :=
+{ a₁           := u.inv*(E.a₁ + 2*s),
+  a₂           := u.inv^2*(E.a₂ - s*E.a₁ + 3*r - s^2),
+  a₃           := u.inv^3*(E.a₃ + r*E.a₁ + 2*t),
+  a₄           := u.inv^4*(E.a₄ - s*E.a₃ + 2*r*E.a₂ - (t + r*s)*E.a₁ + 3*r^2 - 2*s*t),
+  a₆           := u.inv^6*(E.a₆ + r*E.a₄ + r^2*E.a₂ + r^3 - t*E.a₃ - t^2 - r*t*E.a₁),
+  disc_unit    := ⟨u.inv^12*E.disc_unit.val, u.val^12*E.disc_unit.inv, by ..., by ...⟩, -- ring1
+  disc_unit_eq := by { simp only [disc_unit_eq, disc_aux], ring1 } }
+
+lemma cov.j_eq (u : units R) (r s t : R) : (E.cov u r s t).j = E.j := by ... -- ring1
+
+def cov2 : EllipticCurve R := E.cov 1 0 (-E.a₁/2) (-E.a₃/2)
+
+def cov3 : EllipticCurve R := E.cov 1 (-(a₁^2 + 4*a₂)/12) 0 0
+\end{lstlisting}
+
+Again, this is only mathematically-accurate for rings whose class group has trivial $ 12 $-torsion. Throughout, whenever a proof is not informative or does not fit in a line, it will be shortened to \texttt{by ...} for brevity.
+
+\pagebreak
+
+\subsection{Group law}
+
+The code in this section can be found in \texttt{algebraic\_geometry/EllipticCurve/point.lean}.
+
+\subsubsection{The \texttt{point} inductive}
+
+Due to the choice of defining elliptic curves by coefficients of the Weierstrass equation, the group structure on $ E\br{K} $ does not come for free via the identification with $ \Pic_{E / F}^0\br{K} $, and the type of $ K $-points has to be defined manually as projective coordinates satisfying the Weierstrass equation in $ \PP^2 $. However, using projective coordinates is clearly an overkill, as the point at infinity is unique, so instead the $ K $-points are defined as an \texttt{inductive} between $ \OOO $ and the remaining affine $ K $-points satisfying a Weierstrass equation.
+
+\begin{lstlisting}[frame=single]
+variables {F : Type} [field F] (E : EllipticCurve F) (K : Type) [field K] [algebra F K]
+
+local notation F↑K := algebra_map F K
+
+inductive point
+| zero
+| some (x y : K) (w : y^2 + (F↑K)E.a₁*x*y + (F↑K)E.a₃*y
+                    = x^3 + (F↑K)E.a₂*x^2 + (F↑K)E.a₄*x + (F↑K)E.a₆)
+
+notation E(K) := point E K
+\end{lstlisting}
+
+Here, a clean notation is introduced for $ E\br{K} $. Note that the coefficients of the Weierstrass equation lie in the base field $ F $, and has to be coerced via \texttt{algebra\_map} to the coordinate field $ K $ to be type-correct.
+
+\subsubsection{Group operations}
+
+The group operation on $ E\br{K} $ is then defined via the aforementioned chord-and-tangent process, with $ \OOO $ acting as the identity, which is achieved by writing down an instance of the typeclass \texttt{has\_zero}.
+
+\begin{lstlisting}[frame=single]
+instance : has_zero E(K) := ⟨zero⟩
+\end{lstlisting}
+
+Recall that negation of a $ K $-point is a reflection $ \br{x, y} \mapsto \br{x, -y} $ about the $ x $-axis in the short Weierstrass model, but in general there are additional contributions from $ a_1 $ and $ a_3 $. It is then necessary, by definition of the \texttt{inductive}, to supply a proof that the negated $ K $-point still lies on $ E $, given a proof that the original $ K $-point lies on $ E $. This is a simple matter of rewriting the unaltered right hand side of the Weierstrass equation \texttt{w} with the left hand side via \texttt{rw}, then running the fast commutative ring theory normaliser \texttt{ring1}.
+
+\begin{lstlisting}[frame=single]
+def neg : E(K) → E(K)
+| zero         := zero
+| (some x y w) := some x (-y - (F↑K)E.a₁*x - (F↑K)E.a₃)
+begin
+  rw [← w],
+  ring1
+end
+
+instance : has_neg E(K) := ⟨neg⟩
+\end{lstlisting}
+
+Addition, however, is quite a bit more involved. After splitting the trivial cases involving $ \OOO $, the primary computation is that of the line \texttt{L} joining two affine $ K $-points, which further splits into cases depending on whether they are distinct or symmetric about the $ x $-axis. The third intersection is obtained by inspecting the coefficients of a cubic equation and then negated, which is essentially the same code in both cases.
+
+On the other hand, the proof that the resulting $ K $-point still lies on $ E $ is a matter of checking the equality of two huge rational functions, which in theory is doable by the field theory simplifier \texttt{field\_simp}. Yet, the tactic seems to be relatively primitive, in the sense that it cannot simplify increasing denominator exponents, resulting in expressions that are far too large to work with, and causing frustrating deterministic timeouts. Instead, the final decision was to manually break the expressions down into several sub-expressions, automating steps with the fast \texttt{ring1} whenever division is avoidable, resulting in about 200 lines of hideous polynomial equalities but guaranteeing that the definitions will compile within reasonable time.
+
+\pagebreak
+
+\begin{lstlisting}[frame=single]
+def add : E(K) → E(K) → E(K)
+| zero            P               := P
+| P               zero            := P
+| (some x₁ y₁ w₁) (some x₂ y₂ w₂) :=
+
+-- add distinct points
+if x_ne : x₁ ≠ x₂ then
+  let L  := (y₁ - y₂)/(x₁ - x₂),
+      x₃ := L^2 + (F↑K)E.a₁*L - (F↑K)E.a₂ - x₁ - x₂,
+      y₃ := -L*x₃ - (F↑K)E.a₁*x₃ - y₁ + L*x₁ - (F↑K)E.a₃
+  in some x₃ y₃ $ by ... -- field_simp but explicit
+
+-- double a point
+else if y_ne : y₁ + y₂ + (F↑K)E.a₁*x₂ + (F↑K)E.a₃ ≠ 0 then
+  let L  := (3*x₁^2 + 2*(F↑K)E.a₂*x₁ + (F↑K)E.a₄ - (F↑K)E.a₁*y₁)/(2*y₁ + (F↑K)E.a₁*x₁ + (F↑K)E.a₃),
+      x₃ := L^2 + (F↑K)E.a₁*L - (F↑K)E.a₂ - 2*x₁,
+      y₃ := -L*x₃ - (F↑K)E.a₁*x₃ - y₁ + L*x₁ - (F↑K)E.a₃
+  in some x₃ y₃ $ by ... -- field_simp but explicit
+
+-- draw vertical line
+else
+  zero
+
+instance : has_add E(K) := ⟨add⟩
+\end{lstlisting}
+
+Note that the actual code extracts the case of point doubling into a separate function, and separates the actual definitions from the proofs that the resulting $ K $-point lies in $ E $.
+
+\subsubsection{Group axioms}
+
+Most of the five remaining axioms of an \texttt{add\_comm\_group} are relatively easy to prove, with commutativity being split into six cases that are relatively straightforward to check just by unfolding definitions.
+
+\begin{lstlisting}[frame=single]
+lemma zero_add (P : E(K)) : 0 + P = P := by cases P; refl
+
+lemma add_zero (P : E(K)) : P + 0 = P := by cases P; refl
+
+lemma add_left_neg (P : E(K)) : -P + P = 0 :=
+begin
+  cases P,
+  { refl },
+  { ... } -- ring1
+end
+
+lemma add_comm (P Q : E(K)) : P + Q = Q + P :=
+begin
+  rcases ⟨P, Q⟩ with ⟨_ | _, _ | _⟩,
+  ... -- six cases
+end
+\end{lstlisting}
+
+On the other hand, associativity seems to be an entirely different beast.
+
+\begin{lstlisting}[frame=single]
+lemma add_assoc (P Q R : E(K)) : (P + Q) + R = P + (Q + R) :=
+begin
+  rcases ⟨P, Q, R⟩ with ⟨_ | _, _ | _, _ | _⟩,
+  ... -- ??? cases
+end
+\end{lstlisting}
+
+\pagebreak
+
+Preliminary attempts to replicate the methods for checking commutativity have proved to be futile due to the sheer number of cases to consider, and some estimates put the number of coefficients of the relevant polynomial identities to be checked to be well over a hundred thousand. This is a problem known to be difficult even in conventional mathematics, with several indirect proofs to avoid bashing out the algebra.
+\begin{itemize}
+\item One could use the Cayley-Bacharach theorem in classical incidence geometry \cite[Lemma 7.1]{Cas91} to directly equate two affine $ K $-points \texttt{(P + Q) + R} and \texttt{P + (Q + R)} defined differently by the chord-and-tangent process. This requires B\'ezout's theorem, which in turn requires the notion of intersection multiplicities, which need significant work to define given the current state of mathlib.
+\item One could also turn to the theory of elliptic functions in complex analysis, and prove a version of the uniformisation theorem \cite[Corollary VI.5.1.1]{Sil09}, giving a lattice $ \Lambda \subset \CC $ and an explicit isomorphism of groups $ \CC / \Lambda \xrightarrow{\sim} E\br{\CC} $. This is again far from being formalised in mathlib, and only works well when $ \ch F = 0 $ by the Lefschetz principle, yet delving into $ \ch F \ne 0 $ will be inevitable.
+\item The proper way to obtain the group structure in $ E\br{K} $ is via the identification with $ \Pic_{E / F}^0\br{K} $ \cite[Proposition III.3.4]{Sil09}, which boils down to divisors, differentials, and the Riemann-Roch theorem. This was achieved in Coq albeit only for the short Weierstrass model, and is likely the way forward.
+\end{itemize}
+Despite the tedium, there is currently an ongoing attempt to bash out the algebra in the \texttt{ell\_add\_assoc} branch, but the ultimate decision was to leave associativity as a \texttt{sorry} and move on, as all the methods listed here will lead the project too far afield from the original aim of proving the Mordell-Weil theorem.
+
+In retrospect, the primary benefit of using affine coordinates is the uniqueness of each affine $ K $-point $ \br{x, y} $ given coordinates \texttt{x} and \texttt{y} and a proof \texttt{w} that $ \br{x, y} \in E\br{K} $, whereas using projective coordinates will introduce an additional layer of quotients and a third variable that is often redundant. However, using affine coordinates also introduces an additional layer of cases to check at every stage and having to resort to the awkward \texttt{field\_simp}, whereas no division is necessary in projective coordinates, allowing \texttt{ring} to be used a lot more generously. Given that projectivisation is only recently developed in mathlib, it is perhaps worth venturing into projective coordinates eventually to automate the computations with \texttt{ring}.
+
+\subsubsection{Functoriality and Galois actions}
+
+Now the functoriality of $ K \mapsto E\br{K} $ has to be proven manually, but this is a simple matter of unfolding the definitions and pushing an $ F $-algebra homomorphism $ \phi : K \to L $ of fields through several cases.
+
+\begin{lstlisting}[frame=single]
+variables {L M : Type} [field L] [field M] [algebra F L] [algebra F M] [algebra K L] [algebra K M]
+          [algebra L M] [is_scalar_tower F K L] [is_scalar_tower F K M] [is_scalar_tower F L M]
+
+def point_hom.to_fun (φ : K →ₐ[F] L) : E(K) → E(L)
+| zero         := zero
+| (some x y w) := some (φ x) (φ y) $ by ... -- push it inwards
+
+def point_hom (φ : K →ₐ[F] L) : E(K) →+ E(L) :=
+{ to_fun    := point_hom.to_fun φ,
+  map_zero' := rfl,
+  map_add'  := by ... } -- push it inwards
+
+local notation K→[F]L := (algebra.of_id K L).restrict_scalars F
+
+lemma point_hom.id (P : E(K)) : point_hom (K→[F]K) P = P := by cases P; refl
+
+lemma point_hom.comp (P : E(K)) :
+  point_hom (L→[F]M) (point_hom (K→[F]L) P) = point_hom ((L→[F]M).comp (K→[F]L)) P :=
+by cases P; refl
+\end{lstlisting}
+
+While the category of fields extending a base field $ F $ does not exist in mathlib, \texttt{point\_hom.id} and \texttt{point\_hom.comp} are precisely the axioms for a covariant functor from this category to $ \Ab $. More work needs to be done to turn this into a functor $ \Alg_F \to \Ab $, since this requires defining the group law over an arbitrary $ F $-algebra, but just having these lemmas suffices for most purposes.
+
+\pagebreak
+
+Similarly, defining the distributive multiplicative action $ \Aut\br{L / K} \curvearrowright E\br{L} $ is again a matter of unfolding the definitions and pushing a $ K $-automorphism $ \sigma \in \Aut\br{L / K} $ through several cases.
+
+\begin{lstlisting}[frame=single]
+def point_gal (σ : L ≃ₐ[K] L) : E(L) → E(L)
+| zero         := zero
+| (some x y w) := some (σ • x) (σ • y) $ by ... -- push it inwards
+
+instance : distrib_mul_action (L ≃ₐ[K] L) E(L) :=
+{ smul      := point_gal,
+  one_smul  := λ P, by cases P; refl,
+  mul_smul  := λ _ _ P, by cases P; refl,
+  smul_add  := by ..., -- push it inwards
+  smul_zero := λ _, rfl }
+\end{lstlisting}
+
+When $ L / K $ is Galois, Galois theory shows that the invariant subgroup of $ \Gal\br{L / K} \curvearrowright E\br{L} $ is precisely $ E\br{K} $, but this is only proven for finite $ L / K $ as only finite Galois theory exists in mathlib. It is worth noting that, to ensure type-correctness for the subgroups of $ E\br{L} $, this invariant subgroup is really the injective image of $ E\br{K} $ in $ E\br{L} $, which requires a separate proof that \texttt{point\_hom} is injective.
+
+\begin{lstlisting}[frame=single]
+lemma point_hom.injective (φ : K →ₐ[F] L) : function.injective $ point_hom φ := by ...
+
+def point_gal.fixed : add_subgroup E(L) :=
+{ carrier   := mul_action.fixed_points (L ≃ₐ[K] L) E(L),
+  zero_mem' := λ _, rfl,
+  add_mem'  := λ _ _ hP hQ _, by rw [smul_add, hP, hQ],
+  neg_mem'  := λ _ hP σ, by simpa only [smul_neg, neg_inj] using hP σ }
+
+lemma point_gal.fixed.eq [finite_dimensional K L] [is_galois K L] :
+  point_gal.fixed E K L = (point_hom $ K→[F]L).range :=
+by ... -- finite Galois theory
+\end{lstlisting}
+
+\subsubsection{Changes of variables}
+
+Finally, recall that an admissible change of variables $ E \xrightarrow{\sim} E' $ extends to a group isomorphism $ E\br{K} \xrightarrow{\sim} E\br{K'} $, the proof of which is a simple manipulation of coefficients with \texttt{ring1}.
+
+\begin{lstlisting}[frame=single]
+variables (u : units F) (r s t : F)
+
+def cov.to_fun : (E.cov u r s t)(K) → E(K)
+| zero         := zero
+| (some x y w) := some (u.val^2*x + r) (u.val^3*y + u.val^2*s*x + t) $ by ... -- ring1
+
+def cov.inv_fun : E(K) → (E.cov u r s t)(K)
+| zero         := zero
+| (some x y w) := some (u.inv^2*(x - r)) (u.inv^3*(y - s*x + r*s - t)) $ by ... -- ring1
+
+def cov.equiv_add : (E.cov u r s t)(K) ≃+ E(K) :=
+{ to_fun    := cov.to_fun u r s t,
+  inv_fun   := cov.inv_fun u r s t,
+  left_inv  := by ..., -- ring1
+  right_inv := by ..., -- ring1
+  map_add'  := by ... } -- ring1
+
+def cov2.equiv_add : E.cov2(K) ≃+ E(K) := cov.equiv_add 1 0 (-E.a₁/2) (-E.a₃/2)
+
+def cov3.equiv_add : E.cov3(K) ≃+ E(K) := cov.equiv_add 1 (-(a₁^2 + 4*a₂)/12) 0 0
+\end{lstlisting}
+
+\pagebreak
+
+\subsection{Torsion points}
+
+The code in this section can be found in \texttt{algebraic\_geometry/EllipticCurve/torsion.lean}.
+
+\subsubsection{Multiplication by \texorpdfstring{$ n $}{n} maps}
+
+With the more restricted definition of an elliptic curve, defining general morphisms or isogenies $ E \to E' $, even when $ E = E' $, would be rather tricky. Fortunately, the maps $ \sbr{n} : E \to E $ are often the whole story at least in the case $ \ch F = 0 $, and they are trivial to define on $ E\br{L} $ via existing \texttt{has\_scalar} instances on abelian groups, taking into account the equivariant action $ \Aut\br{L / K} \curvearrowright E\br{L}\sbr{n} $ that will be needed later.
+
+\begin{lstlisting}[frame=single]
+variables (n : ℕ) (σ : L ≃ₐ[K] L) (P : E(L))
+
+def mul_by' : E(L) →+[L ≃ₐ[K] L] E(L) :=
+{ to_fun    := (•) n,
+  map_smul' := by ..., -- simp
+  map_zero' := smul_zero n,
+  map_add'  := smul_add n }
+
+lemma mul_by.map_smul : n • σ • P = σ • n • P := (mul_by' n).map_smul' σ P
+
+def mul_by : E(K) →+ E(K) := mul_by' n
+
+notation E(K)[n] := (mul_by n : E(K) →+ E(K)).ker
+notation E(K)⬝n := (mul_by n : E(K) →+ E(K)).range
+notation E(K)/n := E(K) / E(K)⬝n
+\end{lstlisting}
+
+Here, three suggestive notations are introduced for ease of reading the remainder of this report, but they are likely to be removed in the actual code given an ongoing discussion on notation for pointwise operations.
+
+\subsubsection{Functoriality and Galois actions}
+
+While functoriality and properties of the Galois action are just as easily proven for the image $ nE\br{K} $ and the cokernel $ E\br{K} / n $, for the purposes of complete $ 2 $-descent it suffices to prove them for the kernel $ E\br{K}\sbr{n} $, all of which follow almost immediately from their respective statements for $ E\br{K} $.
+
+\begin{lstlisting}[frame=single]
+def ker_hom (φ : K →ₐ[F] L) : E(K)[n] →+ E(L)[n] :=
+⟨λ ⟨P, hP⟩, ⟨point_hom φ P, by ...⟩, rfl, by ...⟩
+
+lemma ker_hom.id (P : E(K)[n]) : ker_hom n (K→[F]K) P = P := by rcases P with _ | _; refl
+
+lemma ker_hom.comp (P : E(K)[n]) :
+  ker_hom n (L→[F]M) (ker_hom n (K→[F]L) P) = ker_hom n ((L→[F]M).comp (K→[F]L)) P :=
+by rcases P with _ | _; refl
+
+lemma ker_hom.injective (φ : K →ₐ[F] L) : function.injective $ ker_hom n φ := by ...
+
+def ker_gal (σ : L ≃ₐ[K] L) : E(L)[n] → E(L)[n] := λ ⟨P, hP⟩, ⟨σ • P, by ...⟩
+
+instance : has_scalar (L ≃ₐ[K] L) E(L)[n] := ⟨ker_gal n⟩
+
+instance : mul_action (L ≃ₐ[K] L) E(L)[n] := ⟨ker_gal n, by ..., by ...⟩
+
+def ker_gal.fixed : add_subgroup E(L)[n] :=
+⟨mul_action.fixed_points (L ≃ₐ[K] L) E(L)[n], λ _, rfl, by ..., by ...⟩
+
+lemma ker_gal.fixed.eq [finite_dimensional K L] [is_galois K L] :
+  ker_gal.fixed n E K L = (ker_hom n $ K→[F]L).range :=
+by ...
+\end{lstlisting}
+
+\pagebreak
+
+\subsubsection{Cubic discriminants}
+
+In fact, for the purposes of complete $ 2 $-descent it suffices to analyse $ E\sbr{2} $, whose affine $ K $-points have $ x $-coordinates that are exactly the $ K $-roots of the cubic polynomial $ \psi_2\br{x} $. The discriminant of $ \psi_2\br{x} $ happens to be a non-zero multiple of the discriminant $ \Delta $ of $ E $, so its roots are distinct in a splitting field precisely because $ \Delta \ne 0 $. Unfortunately, there was no API to work with discriminants of cubic polynomials, particularly to extract the distinct roots from a cubic polynomial with non-vanishing discriminant, so this was developed independently and is now available in mathlib at \texttt{algebra/cubic\_discriminant.lean}.
+
+\begin{lstlisting}[frame=single]
+structure cubic (R : Type) := (a b c d : R)
+
+variables {R S : Type} [comm_ring R] [is_domain R] [semiring S] (φ : R →+* S) (P : cubic R)
+
+def to_poly : R[X] := C P.a*X^3 + C P.b*X^2 + C P.c*X + C P.d
+
+def equiv : cubic R ≃ {p : R[X] // p.degree ≤ 3} := by ... -- to_poly
+
+def map : cubic S := ⟨φ P.a, φ P.b, φ P.c, φ P.d⟩
+
+def roots : multiset R := P.to_poly.roots
+
+def disc : R := P.b^2*P.c^2 - 4*P.a*P.c^3 - 4*P.b^3*P.d - 27*P.a^2*P.d^2 + 18*P.a*P.b*P.c*P.d
+\end{lstlisting}
+
+The actual file itself contains many trivial lemmas about coefficients and degrees, primarily to incorporate some potentially useful API for degenerate cubic polynomials whose leading coefficients may be zero, so to prove results about a non-degenerate cubic polynomial requires a proof that its leading coefficient is non-zero. For instance, fixing a ring homomorphism to a ring $ S $ where a cubic polynomial \texttt{P} has three roots \texttt{x}, \texttt{y}, and \texttt{z}, a relevant result is that its discriminant is non-zero precisely if these roots are distinct, in which case \texttt{P} can be written as a product of factors corresponding to these roots when viewed as a polynomial over $ S $.
+
+\begin{lstlisting}[frame=single]
+theorem eq_prod_three_roots (ha : P.a ≠ 0) (h3 : (map φ P).roots = {x, y, z}) :
+  (map φ P).to_poly = C (φ P.a) * (X - C x) * (X - C y) * (X - C z) :=
+by ... -- ring1
+
+theorem disc_ne_zero_iff_roots_ne (ha : P.a ≠ 0) (h3 : (map φ P).roots = {x, y, z}) :
+  P.disc ≠ 0 ↔ x ≠ y ∧ x ≠ z ∧ y ≠ z :=
+by ... -- eq_prod_three_roots
+\end{lstlisting}
+
+\subsubsection{\texorpdfstring{$ 2 $}{2}-division polynomials}
+
+Under this API, the fact that the discriminant of $ \psi_2\br{x} $ is $ 16\Delta $ is then an application of \texttt{ring1} and unfolding the definitions, which in the relevant case of $ \ch F \ne 2 $ implies that the roots of $ \psi_2\br{x} $ are distinct.
+
+\begin{lstlisting}[frame=single]
+def ψ₂_x : cubic K :=
+⟨4, (F↑K)E.a₁^2 + 4*(F↑K)E.a₂, 4*(F↑K)E.a₄ + 2*(F↑K)E.a₁*(F↑K)E.a₃, (F↑K)E.a₃^2 + 4*(F↑K)E.a₆⟩
+
+lemma ψ₂_x.disc_eq_disc : (ψ₂_x E K).disc = 16*E.disc := by ... -- ring1
+
+variables [invertible (2 : F)]
+
+lemma ψ₂_x.roots_ne {a b c : K} (h3 : (ψ₂_x E K).roots = {a, b, c}) : a ≠ b ∧ a ≠ c ∧ b ≠ c :=
+by ... -- disc_ne_zero_iff_roots_ne
+\end{lstlisting}
+
+It is perhaps worth noting that the condition \texttt{invertible 2} is imposed on $ F $ rather than $ K $, since the former implies the latter, but due to the instance resolution system it is not possible to automatically derive an instance of \texttt{invertible 2} on $ K $ without running into cycles. Several instances had to be rewritten manually as definitions, and the entire problem took quite a while to be satisfactorily resolved.
+
+General $ n $-division polynomials can probably be defined pretty easily by induction, but generalisations of the above results will require a good API for discriminants of general polynomials, which has yet to exist.
+
+\pagebreak
+
+\subsubsection{\texorpdfstring{$ 2 $}{2}-torsion subgroups}
+
+An important ingredient for the weak Mordell-Weil theorem will be the finiteness of $ E\br{K}\sbr{n} $, which for complete $ 2 $-descent translates to the finiteness of $ E\br{K}\sbr{2} $. Since the affine $ K $-points in $ E\br{K}\sbr{2} $ can now be characterised by polynomial identities on their coordinates, finiteness is achieved by projecting an affine $ K $-point to the $ x $-coordinate, then utilising the existing \texttt{fintype} instance on roots of polynomials.
+
+\begin{lstlisting}[frame=single]
+lemma E₂_y {x y w} : some x y w ∈ E(K)[2] ↔ y = -((F↑K)E.a₁*x + (F↑K)E.a₃)/2 := by ... -- ring1
+
+lemma E₂_x {x y w} : some x y w ∈ E(K)[2] ↔ x ∈ (ψ₂_x E K).roots := by ... -- ring1
+
+def E₂_to_ψ₂ : E(K)[2] → option {x // x ∈ (ψ₂_x E K).roots}
+| ⟨zero      , _⟩ := none
+| ⟨some x y w, h⟩ := some ⟨x, E₂_x.mp h⟩
+
+lemma E₂_to_ψ₂.injective : function.injective E₂_to_ψ₂ := by ... -- injection from definition
+
+instance : fintype E(K)[2] := fintype.of_injective E₂_to_ψ₂ E₂_to_ψ₂.injective
+\end{lstlisting}
+
+While an injection suffices for the finiteness of $ E\br{K}\sbr{2} $, it is easy to prove an upper bound on its cardinality and that the projection map is in fact a surjection, and hence an equivalence.
+
+\begin{lstlisting}[frame=single]
+theorem E₂.card_le_four : fintype.card E(K)[2] ≤ 4 := by ... -- properties of cubics
+
+lemma E₂_to_ψ₂.surjective : function.surjective E₂_to_ψ₂ := by ... -- construct explicit lift
+
+def E₂_to_ψ₂.equiv : E(K)[2] ≃ option {x // x ∈ (ψ₂_x E K).roots} :=
+equiv.of_bijective E₂_to_ψ₂ ⟨E₂_to_ψ₂.injective, E₂_to_ψ₂.surjective⟩
+\end{lstlisting}
+
+Now the finiteness of $ E\br{K}\sbr{2} $ will suffice for the first reduction lemma in complete $ 2 $-descent \cite[Lemma VIII.1.2]{Sil09}, but a preliminary attempt to reproduce the proof of the second reduction step in the literature \cite[Proposition VIII.1.2]{Sil09} did not lead very far. This involved reducing the finiteness of $ E\br{F} / 2E\br{F} $ to the finiteness of the splitting field of $ \psi_2\br{x} $ over $ F $ via a Galois cohomological Kummer pairing, yet working with finiteness of degrees of extensions was far too infuriating, and the idea was ultimately scrapped in favour of explicitly writing down the complete $ 2 $-descent homomorphism. In retrospect, it is perhaps worth returning to this more conceptual proof in the future, especially once Galois cohomology and the notion of ramification are defined in mathlib. Nevertheless, some basic lemmas proven in said attempt may prove to be useful, such as the exact cardinality of $ E\br{K}\sbr{2} $ and the trivial Galois action over the splitting field.
+
+\begin{lstlisting}[frame=single]
+variables [algebra (ψ₂_x E F).splitting_field K] [algebra (ψ₂_x E F).splitting_field L]
+
+theorem E₂.card_eq_four : fintype.card E(K)[2] = 4 := by ... -- properties of cubics
+
+lemma E₂.hom.bijective : function.bijective $ ker_hom 2 $ K→[F]L := by ... -- ker_hom.injective
+
+def E₂.hom.equiv : E(K)[2] ≃ E(L)[2] := equiv.of_bijective (ker_hom 2 $ K→[F]L) E₂.hom.bijective
+
+lemma E₂.gal.fixed (σ : L ≃ₐ[K] L) (P : E(L)[2]) : σ • P = P := by ... -- ker_gal.fixed.eq
+\end{lstlisting}
+
+Given the above results, it is probably not too difficult to construct an injective group homomorphism $ E\br{K}\sbr{2} \hookrightarrow \br{\ZZ / 2\ZZ}^2 $ that is surjective over the splitting field. Again, with a good definition of $ n $-division polynomials, it should not be too difficult to define $ E\br{K}\sbr{n} \hookrightarrow \br{\ZZ / n\ZZ}^2 $ as well.
+
+\pagebreak
+
+\subsection{Weak Mordell-Weil theorem}
+
+The code in this section can be found in \texttt{algebraic\_geometry/EllipticCurve/mordell\_weil.lean} and in \texttt{algebraic\_geometry/EllipticCurve/selmer.lean}, the latter of which is likely to be moved in the future.
+
+\subsubsection{Reduction lemma}
+
+With a working explicit definition of $ E\br{K}\sbr{n} $, much of the weak Mordell-Weil theorem can be proven via complete $ 2 $-descent, but to define the homomorphism itself requires an assumption that $ K $ contains the splitting field of $ \psi_2\br{x} $ over $ F $, so that $ E\br{K}\sbr{2} $ has exactly three distinct roots. The first reduction step would be to prove that this assumption is mild, in the sense that the finiteness of $ E\br{K} / 2E\br{K} $ is sufficient for the finiteness of $ E\br{F} / 2E\br{F} $. This holds for an arbitrary finite Galois extension $ L / K $, with no difficulty introduced by replacing $ 2 $ with a general $ n \in \NN $, and is proven by considering the exact diagram
+$$
+\begin{tikzcd}
+0 \arrow{r} & \Phi \arrow{r} \arrow[hookrightarrow]{d}{\kappa} & E\br{K} / nE\br{K} \arrow{r}{\iota} \arrow[hookrightarrow]{d}{\kappa_K} & E\br{L} / nE\br{L} \arrow[hookrightarrow]{d}{\kappa_L} \\
+0 \arrow{r} & \H^1\br{\Gal\br{L / K}, E\br{L}\sbr{n}} \arrow{r}[swap]{\inf} & \H^1\br{K, E\sbr{n}} \arrow{r}[swap]{\res} & \H^1\br{L, E\sbr{n}}
+\end{tikzcd},
+$$
+where the bottom row is the inflation-restriction exact sequence, and the vertical injections are truncated connecting homomorphisms of the long exact sequence in Galois cohomology. The required result translates to the finiteness of the kernel $ \Phi $, which follows, via the injection $ \kappa $, from the finiteness of $ L / K $ by assumption and of $ E\br{L}\sbr{n} $ by the previous section. Now $ \Phi $ is easy to define, knowing that $ nE\br{K} \le nE\br{L} $.
+
+\begin{lstlisting}[frame=single]
+variables [finite_dimensional K L] [is_galois K L] (n : ℕ)
+
+lemma range_le_comap_range : E(K)⬝n ≤ add_subgroup.comap (point_hom $ K→[F]L) E(L)⬝n := by ...
+
+def ι : E(K)/n →+ E(L)/n := quotient_add_group.map _ _ _ $ range_le_comap_range n
+
+def Φ : add_subgroup E(K)/n := (ι n).ker
+\end{lstlisting}
+
+As Galois cohomology has yet to exist in mathlib, $ \kappa $ has to be defined explicitly by tracing the definition of the connecting homomorphisms. It turns out that $ \kappa\br{\sbr{P}} = \br{\sigma \mapsto \sigma \cdot Q - Q} $, where $ Q \in E\br{L}\sbr{n} $ is a choice of a lift such that $ nQ = P $ obtained by \texttt{classical.some}, but making it type-correct and proving injectivity turned out to be slightly tricky due to layers of subtypes, quotients, and existentials.
+
+\begin{lstlisting}[frame=single]
+lemma Φ_mem_range (P : Φ n) : point_hom (K→[F]L) P.val.out' ∈ E(L)⬝n := by ...
+
+def κ : Φ n → L ≃ₐ[K] L → E(L)[n] :=
+λ P σ, ⟨σ • (Φ_mem_range n P).some - (Φ_mem_range n P).some, by ...⟩
+
+lemma κ.injective : function.injective $ κ n := by ...
+\end{lstlisting}
+
+Note that this merely provides an injection from $ \Phi $ into the finite set of functions $ \Gal\br{L / K} \to E\br{L}\sbr{n} $, which is sufficient, rather than into the actual cohomology group $ \H^1\br{\Gal\br{L / K}, E\br{L}\sbr{n}} $.
+
+The reduction lemma is then immediate by the newly-written \texttt{fintype\_of\_ker\_of\_codom} that expresses finiteness over left exact sequences. This does assume that $ \ch F \ne 2 $ to detect the \texttt{fintype} instance of $ E\br{L}\sbr{2} $ automatically, and is written as a definition rather than an instance to avoid cycles.
+
+\begin{lstlisting}[frame=single]
+variables [invertible (2 : F)]
+
+instance : fintype (Φ 2 E K) := fintype.of_injective (κ 2) $ κ.injective 2
+
+def coker_2_of_fg_extension.fintype [fintype E(L)/2] : fintype E(K)/2 :=
+add_group.fintype_of_ker_of_codom $ ι 2
+\end{lstlisting}
+
+\pagebreak
+
+\subsubsection{Complete \texorpdfstring{$ 2 $}{2}-descent}
+
+Now let $ F $ be a number field. Assuming $ E\sbr{2} \subseteq E\br{K} $, it follows immediately by \texttt{disc\_ne\_zero\_iff\_roots\_ne} that $ \psi_2\br{x} $ has exactly three distinct $ K $-roots $ e_1, e_2, e_3 \in K $. Since $ \ch F \ne 2, 3 $, a change of variables reduces $ E $ to a short Weierstrass equation, which by \texttt{eq\_prod\_three\_roots} can be written as
+$$ y^2 = \br{x - e_1}\br{x - e_2}\br{x - e_3}. $$
+The complete $ 2 $-descent homomorphism $ \delta $ is then defined by generically sending
+$$ \function{E\br{K}}{K^\times / \br{K^\times}^2 \times K^\times / \br{K^\times}^2}{\br{x, y}}{\br{\sbr{x - e_1}, \sbr{x - e_2}}}, $$
+which is well-defined on affine $ K $-points except when $ x = e_1 $ or $ x = e_2 $, in which case the undefined component is modified slightly. Note that while the short Weierstrass equation hypotheses are unused in the definition of $ \delta $, they are crucial in proving that it respects addition and in computing the kernel later.
+
+\begin{lstlisting}[frame=single]
+variables (ha₁ : E.a₁ = 0) (ha₃ : E.a₃ = 0) (h3 : (ψ₂_x E K).roots = {e₁, e₂, e₃})
+
+def δ.to_fun : E(K) → (units K) / (units K)^2 × (units K) / (units K)^2
+| zero         := 1
+| (some x y w) :=
+if he₁ : x = e₁ then
+  (units.mk0 ((e₁ - e₃)*(e₁ - e₂)) $ mul_ne_zero (sub_ne_zero.mpr (ψ₂_x.roots_ne h3).2.1)
+                                                 (sub_ne_zero.mpr (ψ₂_x.roots_ne h3).1),
+  units.mk0 (e₁ - e₂) $ sub_ne_zero.mpr (ψ₂_x.roots_ne h3).1)
+else if he₂ : x = e₂ then
+  (units.mk0 (e₂ - e₁) $ sub_ne_zero.mpr (ψ₂_x.roots_ne h3).1.symm,
+  units.mk0 ((e₂ - e₃)*(e₂ - e₁)) $ mul_ne_zero (sub_ne_zero.mpr (ψ₂_x.roots_ne h3).2.2)
+                                                (sub_ne_zero.mpr (ψ₂_x.roots_ne h3).1.symm))
+else
+  (units.mk0 (x - e₁) $ sub_ne_zero.mpr he₁, units.mk0 (x - e₂) $ by sub_ne_zero.mpr he₂)
+
+def δ : E(K) →+ additive ((units K) / (units K)^2 × (units K) / (units K)^2) :=
+{ to_fun    := δ.to_fun ha₁ ha₃ h3,
+  map_zero' := rfl,
+  map_add'  := by ... }
+\end{lstlisting}
+
+An important remark here is the distinction between the additive group $ E\br{K} $ and the multiplicative group $ K^\times $, so for a homomorphism between them to be constructed, one of $ E\br{K} $ or $ K^\times $ has to be tagged as the other type. This is a known design issue in mathlib that surfaces often, say in valuation theory and in Kummer theory, with one solution being an overhaul of \texttt{monoid\_hom} structures to include a binary operation.
+
+With this definition of $ \delta $, proving that its kernel is $ 2E\br{K} $ is completely constructive, with one inclusion being obvious by \texttt{map\_nsmul}. The other inclusion follows from the fact that if $ P = \br{x, y} \in E\br{K} $ is such that $ x - e_i = t_i^2 $ and $ y = t_1t_2t_3 $ for some $ t_i \in K^\times $, then by unfolding point doubling,
+$$ 2 \cdot \br{x + t_1t_2 + t_1t_3 + t_2t_3, \br{t_1 + t_2}\br{t_1 + t_3}\br{t_2 + t_3}} = P. $$
+
+\begin{lstlisting}[frame=single]
+lemma δ.ker : (δ ha₁ ha₃ h3).ker = E(K)⬝2 := by ...
+\end{lstlisting}
+
+On the other hand, proving that its image is finite seems to be a lot more work. This image lies in two copies of $ K\br{B, 2} $, which is defined in the next section and depends on a finite set of bad primes
+$$ B = \cbr{\ppp \in \M_K^0 \st E \ \text{has bad reduction at} \ \ppp} \cup \cbr{\ppp \in \M_K^0 \st \ppp \ \text{divides} \ 2}. $$
+Now the notion of having bad reduction requires defining minimal Weierstrass models, but $ B $ can simply be enlarged to contain slightly more primes dividing $ \Delta $ for a non-minimal Weierstrass model, so the finiteness of $ B $ is doable. However, to show that the image of $ \delta $ lies in this group, the standard conceptual argument in the literature \cite[Proposition X.1.1]{Sil09} seemingly boils this down to the fact that the splitting field of $ \psi_2\br{x} $ is unramified over $ F $ outside $ B $, then applying Kummer theory. This would entail formalising many definitions and basic results of local fields and the action of inertia, which are far from being settled in mathlib, and likely needing a few more facts about elliptic curves over local fields.
+
+\pagebreak
+
+However, an argument by Cassels over $ \QQ $ \cite[Theorem 15.1]{Cas91} leads to the following generalisation over number fields that circumvents the local theory entirely. By a change of variables, assume without loss of generality that $ A, B \in \OOO_K $, so that $ e_i \in \OOO_K $. Taking valuations over the short Weierstrass equation yields
+$$ \ord_\ppp \br{x - e_1} + \ord_\ppp \br{x - e_2} + \ord_\ppp \br{x - e_3} \equiv 0 \mod 2, \qquad \ppp \in \M_K^0, $$
+so there are either zero or two of $ \cbr{e_1, e_2, e_3} $ such that $ \ord_\ppp \br{x - e_i} \equiv 1 \mod 2 $ by parity. An easy valuation argument shows that $ \ord_\ppp \br{x - e_i} \ge 0 $, and in the latter case of two roots that $ \ord_\ppp \br{e_i - e_j} > 0 $, or in other words that $ \ppp \in B $, which turns out to be the precise condition for $ \im \delta \subseteq K\br{B, 2}^2 $ as seen in the next section. Due to time constraints however, this was left as a \texttt{sorry}, but this will be the next step to complete.
+
+\begin{lstlisting}[frame=single]
+lemma bad_primes : finset $ height_one_spectrum $ O K :=
+@set.to_finset _
+  {p : height_one_spectrum $ O K | p.valuation (F↑K)E.disc_unit ≠ 1 ∨ p.valuation (ℤ↑K)n < 1}
+  sorry
+
+lemma δ.range_le : (δ ha₁ ha₃ h3).range ≤ K(bad_primes E 2, 2) × K(bad_primes E 2, 2) := sorry
+\end{lstlisting}
+
+Note again that valuations of \texttt{height\_one\_spectrum} are multiplicative, so that \texttt{p.valuation x < 1} means $ \abs{x}_\ppp < 1 $ or $ \ord_\ppp x > 0 $. In any case, combining the reduction lemma and the injection induced by the complete $ 2 $-descent homomorphism, assuming that $ K\br{B, 2} $ is finite, proves the weak Mordell-Weil theorem.
+
+\begin{lstlisting}[frame=single]
+def δ.lift : E(K)/2 →+ K(bad_primes E 2, 2) × K(bad_primes E 2, 2) :=
+(add_subgroup.inclusion $ δ.range_le ha₁ ha₃ h3).comp $
+  (quotient_add_group.range_ker_lift $ δ ha₁ ha₃ h3).comp $
+  (quotient_add_group.equiv_quotient_of_eq $ δ.ker ha₁ ha₃ h3).symm.to_add_monoid_hom
+
+lemma δ.lift.injective : function.injective $ δ.lift ha₁ ha₃ h3 := by ...
+
+instance : fintype E(F)/2 := by ...
+\end{lstlisting}
+
+\subsubsection{The Selmer group}
+
+It remains to define $ K\br{B, 2} $ and prove that it is finite, which holds true for an arbitrary finite set of primes $ S \subseteq \M_K^0 $, again with no difficulty introduced by replacing $ 2 $ with a general $ n \in \NN $. This is the Selmer group
+$$ K\br{S, n} \coloneqq \cbr{\sbr{b} \in K^\times / \br{K^\times}^n \st \forall \ppp \in S, \ \ord_\ppp b \equiv 0 \mod n}, $$
+which is a well-defined closed condition on $ K^\times / \br{K^\times}^n $. However, precisely formalising the condition turned out to be quite tricky due to layers of the \texttt{multiplicative} tag, quotients, and units, which further required an equivalence between a group $ G $ and $ \br{G \cup \cbr{0}}^\times $ that is part of an equivalence of categories.
+
+\begin{lstlisting}[frame=single]
+def group.with_zero_units {G : Type} [group G] : units (with_zero G) ≃* G :=
+{ to_fun    := λ x, (with_zero.ne_zero_iff_exists.mp x.ne_zero).some,
+  inv_fun   := λ x, ⟨x, x⁻¹, by ..., by ...⟩,
+  left_inv  := by ...,
+  right_inv := by ...,
+  map_mul'  := by ... }
+
+variables (p : height_one_spectrum $ O K)
+
+def val_of_ne_zero : units K →* multiplicative ℤ :=
+group.with_zero_units.to_monoid_hom.comp $ units.map p.valuation
+
+def val_of_ne_zero_mod : (units K) / (units K)^n →* multiplicative (zmod n) :=
+(int.quotient_zmultiples_nat_equiv_zmod n).to_multiplicative.to_monoid_hom.comp $
+  quotient_group.map (units K)^n (add_subgroup.zmultiples n).to_subgroup (val_of_ne_zero p) $ by ...
+\end{lstlisting}
+
+\pagebreak
+
+The Selmer group can then be defined using the homomorphism \texttt{val\_of\_ne\_zero\_mod}, with a suggestive notation, and proving that it is a subgroup follows immediately from properties of kernels of homomorphisms.
+
+\begin{lstlisting}[frame=single]
+variables (S : finset $ height_one_spectrum $ O K) (n : ℕ)
+
+def selmer : subgroup $ (units K) / (units K)^n :=
+{ carrier  := {b | ∀ p ∉ S, val_of_ne_zero_mod p b = 1},
+  one_mem' := λ _ _, by rw [map_one],
+  mul_mem' := λ _ _ hx hy p hp, by rw [map_mul, hx p hp, hy p hp, one_mul],
+  inv_mem' := λ _ hx p hp, by rw [map_inv, hx p hp, inv_one] }
+
+notation K(S, n) := selmer K S n
+\end{lstlisting}
+
+Now to prove that the Selmer group is finite, it suffices to prove that $ K\br{\emptyset, n} $ is finite, as it is by definition the kernel of the natural homomorphism, denoted by \texttt{selmer.val} in code, given by
+$$ \function[f]{K\br{S, n}}{\br{\ZZ / n\ZZ}^{\#S}}{\sbr{b}}{\br{\ord_\ppp b}_{\ppp \in S}}. $$
+
+\begin{lstlisting}[frame=single]
+def selmer.val : K(S, n) →* S → multiplicative (zmod n) :=
+{ to_fun   := λ b p, val_of_ne_zero_mod p b,
+  map_one' := funext $ λ p, map_one $ val_of_ne_zero_mod p,
+  map_mul' := λ x y, funext $ λ p, map_mul (val_of_ne_zero_mod p) x y }
+
+lemma selmer.val_ker : selmer.val.ker = K(∅, n).subgroup_of K(S, n) := by ...
+\end{lstlisting}
+
+The finiteness of $ K\br{\emptyset, n} $ in turn relies on two fundamental theorems in algebraic number theory, namely the finiteness of the class group $ \Cl_K $ and the finite generation of the unit group $ \OOO_K^\times $. The former was formalised in mathlib only rather recently \cite{BDNN21}, while the latter is part of Dirichlet's unit theorem, which has yet to be formalised but should be doable with the currently available machinery. Assuming this \texttt{sorry}, a trivial consequence of the structure theorem for finitely generated abelian groups, which was merged into mathlib literally a few days ago, yields the finiteness of $ \OOO_K^\times / \br{\OOO_K^\times}^n $ for $ n > 0 $.
+
+\begin{lstlisting}[frame=single]
+instance : group.fg (units $ O K) := sorry
+
+instance [fact $ 0 < n] : fintype $ (units $ O K) / (units $ O K)^n := by ...
+\end{lstlisting}
+
+Along with $ \Cl_K $, they nest $ K\br{\emptyset, n} $ in a left exact sequence
+$$ 0 \to \OOO_K^\times / \br{\OOO_K^\times}^n \xrightarrow{g} K\br{\emptyset, n} \xrightarrow{h} \Cl_K. $$
+Now $ g $ is simply the quotient map of the canonical inclusion $ \OOO_K^\times \hookrightarrow K^\times $, but to map into the subtype $ K\br{\emptyset, n} $ rather than all of $ K^\times / \br{K^\times}^n $, this was broken into a \texttt{selmer.from\_unit} map $ \OOO_K^\times \hookrightarrow K\br{\emptyset, n} $ and a kernel computation. The latter is merely a double-sided inclusion, one being trivial and the other required the assumption $ n > 0 $ to prove that $ x^n \in \OOO_K $ implies that $ x \in \OOO_K $ via standard facts on integral closure.
+
+\begin{lstlisting}[frame=single]
+def ne_zero_of_unit : units (O K) →* units K :=
+{ to_fun   := λ ⟨⟨v, _⟩, ⟨i, _⟩, vi, iv⟩, ⟨v, i, by injection vi, by injection iv⟩,
+  map_one' := rfl,
+  map_mul' := λ ⟨⟨_, _⟩, ⟨_, _⟩, _, _⟩ ⟨⟨_, _⟩, ⟨_, _⟩, _, _⟩, rfl }
+
+def selmer.from_unit : units (O K) →* K(∅, n) :=
+{ to_fun   := λ x, ⟨quotient_group.mk $ ne_zero_of_unit x, by ...⟩,
+  map_one' := rfl,
+  map_mul' := λ ⟨⟨_, _⟩, ⟨_, _⟩, _, _⟩ ⟨⟨_, _⟩, ⟨_, _⟩, _, _⟩, rfl }
+
+lemma selmer.from_unit_ker [fact $ 0 < n] : selmer.from_unit.ker = (units (O K))^n := by ...
+\end{lstlisting}
+
+\pagebreak
+
+On the other hand, $ h $, or rather \texttt{selmer.to\_class} in code, is slightly more complicated to define even mathematically. Given a representative $ x $ of a class in $ K\br{\emptyset, n} $, its principal fractional ideal $ \abr{x} $ necessarily factorises into the $ n $-th power of a fractional ideal $ \xxx $ by unique factorisation into prime ideals, whose class lands in $ \Cl_K $. Then $ h $ is defined to map the class $ \sbr{x} \in K\br{\emptyset, n} $ to the class $ \sbr{\xxx} \in \Cl_K $. The two layers of quotients coupled with a currently weak API for unique factorisation in Dedekind domains made $ h $ quite tedious to formalise, let alone exactness at $ K\br{\emptyset, n} $. For instance, a preliminary attempt on a direct proof that $ \abr{x} $ is an $ n $-th power resulted in a mathematically-accurate set-theoretic function $ h $, but proving that it is a homomorphism was incredibly tricky due to having different lifts for $ \sbr{x} $.
+
+\begin{lstlisting}[frame=single]
+def fractional_ideal.units_of_factorization (f : height_one_spectrum (O K) → ℤ) :
+  (units $ fractional_ideal (non_zero_divisors $ O K) K) :=
+units.mk0 (finprod (λ p : height_one_spectrum $ O K, p.as_ideal ^ f p)) $ by ...
+
+lemma selmer.val_exists (x : K(∅, n)) : ∃ z : ℤ, z * n = -(val_of_ne_zero p x.val.out').to_add :=
+by ...
+
+def selmer.to_class.to_fun (x : K(∅, n)) : class_group (O K) K :=
+quotient_group.mk' (to_principal_ideal (O K) K).range $
+  fractional_ideal.units_of_factorization $ λ p, (selmer.val_exists p x).some
+\end{lstlisting}
+
+A more elegant solution was to slightly modularise the definition of $ h $, by first proving a similar lemma \texttt{selmer.val\_exists\_of\_mk} for an element $ x \in K^\times $, then the lemma \texttt{selmer.to\_class\_of\_mk} that it is well-defined, in the sense that taking its class and choosing a different lift computes the same expected output, which made the actual code somewhat longer but more comprehensible.
+
+\begin{lstlisting}[frame=single]
+lemma selmer.val_exists_of_mk {x : units K} (hx : quotient_group.mk x ∈ K(∅, n)) :
+  ∃ z : ℤ, z * n = -(val_of_ne_zero p x).to_add :=
+by ...
+
+lemma selmer.to_class_of_mk [fact $ 0 < n] {x : units K} (hx : quotient_group.mk x ∈ K(∅, n)) :
+  selmer.to_class.to_fun ⟨quotient_group.mk x, hx⟩
+    = quotient_group.mk' (to_principal_ideal (O K) K).range
+      (fractional_ideal.units_of_factorization $ λ p, (selmer.val_exists_of_mk p hx).some) :=
+by ...
+
+def selmer.to_class [fact $ 0 < n] : K(∅, n) →* class_group (O K) K :=
+{ to_fun   := selmer.to_class.to_fun,
+  map_one' := by ...,
+  map_mul' := by ... }
+
+lemma selmer.to_class_ker [fact $ 0 < n] : selmer.to_class.ker = selmer.from_unit.range := by ...
+\end{lstlisting}
+
+It is worth noting that the proofs of \texttt{selmer.to\_class\_of\_mk} and \texttt{selmer.to\_class\_of\_ker} crucially use the \texttt{fractional\_ideal.lean} file in Maria In\'es de Frutos-Fernandez's formalisation of ad\`eles and id\`eles of global fields \cite{Fru22}, primarily the \texttt{fractional\_ideal.factorization\_principal} lemma that expresses a principal ideal as a \texttt{finprod} over all primes, which is in the process of being incorporated into mathlib.
+
+Once $ g $ and $ h $ are defined and the relevant sequence is shown to be left exact, finiteness of $ K\br{\emptyset, n} $, and hence of all Selmer groups, is a matter of applying \texttt{fintype\_of\_ker\_of\_codom} to $ f $ and $ h $.
+
+\begin{lstlisting}[frame=single]
+def selmer.fintype [fact $ 0 < n] : fintype K(∅, n) :=
+group.fintype_of_ker_of_codom $ selmer.to_class n
+
+instance [fact $ 0 < n] : fintype K(S, n) := group.fintype_of_ker_of_codom $ selmer.val S n
+\end{lstlisting}
+
+Note that the actual code supplies the \texttt{fintype} proofs in hidden arguments that cannot be inferred. It is worth emphasising that the finiteness of Selmer groups is a result in pure algebraic number theory, and can be incorporated into mathlib a lot sooner than the arithmetic of elliptic curves once Dirichlet's unit theorem is formalised. Defining Selmer groups independently also has the added benefit of reusability, even if complete $ 2 $-descent were to be scrapped in the future for a more conceptual Galois cohomological proof.
+
+\pagebreak
+
+\subsection{Height functions}
+
+The code in this section can be found in \texttt{algebraic\_geometry/EllipticCurve/heights.lean} in the main branch, and in \texttt{algebraic\_geometry/height\_function.lean} in the \texttt{descent\_theorem} branch.
+
+\subsubsection{Naive heights}
+
+The remaining ingredient to the Mordell-Weil theorem is a coherent definition of heights on elliptic curves. The standard theory in the literature \cite[Section VIII.6]{Sil09} involves first defining a relative height function on $ \PP_K^1 $ that restricts to $ E $ via a surjective morphism $ f : E \to \PP_K^1 $, then considering its absolute version on $ \PP_{\overline{\QQ}}^1 $ and taking logarithms. By choosing $ f = x $, this results in a function defined on affine $ K $-points by
+$$ \function[h]{E\br{K} \setminus \cbr{\OOO}}{\RR_{> 0}}{\br{x, y}}{\dfrac{1}{\sbr{K : \QQ}}\sum_{v \in \M_K} \sbr{K_v : \QQ_v} \log \max\br{\abs{x}_v, \abs{1}_v}}, $$
+requiring that the places $ v \in \M_K $ have normalised absolute values, and setting $ h\br{\OOO} \coloneqq 0 $. Notice that $ h $ is normalised with local and global degrees to satisfy a certain extension formula, which requires a robust theory of local field extensions to prove, but the three properties of heights remain true without these scaling factors for any particular $ K $, so they can be safely omitted. In contrast, to show that $ h $ is well-defined irrespective of homogeneous coordinates requires the product formula, which should be relatively doable. Due to time constraints however, only the special case of $ K = \QQ $ is formalised, since the three properties can be proven with explicit inequalities that are not too cumbersome, and $ h $ becomes the naive height
+$$ \function[\h]{E\br{\QQ} \setminus \cbr{\OOO}}{\RR_{> 0}}{\br{x, y}}{\log \max\br{\abs{p}_\infty, \abs{q}_\infty}}, $$
+where $ x = p / q $ is written in lowest terms. Note that this possible since $ \ZZ $ is a GCD domain, while an arbitrary ring of integers $ \OOO_K $ may not be, which justifies the complication in the definition of $ h $.
+
+\begin{lstlisting}[frame=single]
+def height : E(ℚ) → ℝ
+| zero         := 0
+| (some x _ _) := (max (|x.num|) (|x.denom|) : ℝ).log
+\end{lstlisting}
+
+\subsubsection{Properties of heights}
+
+In what follows, as done previously, assume a short Weierstrass model with $ A, B \in \ZZ $.
+
+The finiteness of $ \cbr{P \in E\br{\QQ} \st \h\br{P} \le C} $, sometimes called the Northcott property, is proven by observing that there are finitely many choices for the numerator and the denominator of the $ x $-coordinate of a $ \QQ $-point, which boils down to a very explicit embedding into a product of types known to be finite.
+
+\begin{lstlisting}[frame=single]
+def height_le_constant.fun {C : ℝ} :
+  {P : E(ℚ) // height P ≤ C} → option (fin (2*C.exp.floor + 1) × fin (C.exp.floor + 1) × fin 2)
+| ⟨zero      , _⟩ := none
+| ⟨some x y w, h⟩ := some ⟨(x.num + C.exp.floor).to_nat, x.denom, if y ≤ 0 then 0 else 1⟩
+
+variables (ha₁ : E.a₁ = 0) (ha₃ : E.a₃ = 0)
+
+lemma height_le_constant.injective {C : ℝ} :
+  function.injective $ @height_le_constant.function E C :=
+by ...
+
+def height_le_constant.fintype (C : ℝ) : fintype {P : E(ℚ) // height P ≤ C} :=
+fintype.of_injective height_le_constant.fun $ height_le_constant.injective ha₁ ha₃
+\end{lstlisting}
+
+Here, the embedding maps the numerator into integers between $ -\fbr{e^C} $ and $ \fbr{e^C} $, and as such has be translated into non-negative integers to reuse the \texttt{fintype} instance of the \texttt{fin} type. Note that its definition does not require the short Weierstrass equation hypotheses, but proving injectivity for the $ y $-coordinate does.
+
+\pagebreak
+
+The remaining two properties are essentially consequences of a certain parallelogram law on the canonical height, expressing $ \h\br{P + Q} $ in terms of $ \h\br{P} $ up to some controllable constant. Their proofs are essentially huge case bashes, each specifying the constant explicitly and involves lengthy manipulations of inequalities, which ended up being about 600 lines in total, so they shall not be described in detail here.
+
+The only worthwhile remark is in the proof of the first property $ \h\br{P + Q} \le 2\h\br{P} + C_1 $, which crucially uses properties of \texttt{padic\_val\_rat} to express an affine $ \QQ $-point $ \br{x, y} $ as $ \br{a / d^2, b / d^3} $ for some $ a, b, d \in \ZZ $ such that $ \br{a, d} = \br{b, d} = 1 $. This turned out to be quite tedious, as the API for \texttt{padic\_val\_rat} was missing a lot of boilerplate, but more annoyingly because its definition requires the rational number in question to be non-zero for it to be mathematically-accurate, so cases had to be opened at every step, in stark contrast to \texttt{height\_one\_spectrum.valuation} with codomain \texttt{with\_zero (multiplicative Z)} to avoid the extra layer of cases. Perhaps the current disconnect between the older \texttt{padics} library and the newly-developed \texttt{adic\_valuation} library should be resolved by redefining the former as a special case of the latter.
+
+\begin{lstlisting}[frame=single]
+lemma padic_val_point.denom {A B : ℤ} {x y : ℚ} (w : y ^ 2 = x ^ 3 + A * x + B) :
+  ∃ n : ℕ, x.denom = n ^ 2 ∧ y.denom = n ^ 3 :=
+by ...
+\end{lstlisting}
+
+Assuming this, the constant for an affine $ \QQ $-point $ Q = \br{a / d^2, b / d^3} $ can then be given explicitly by
+\begin{align*}
+C_1 \coloneqq \max \{ & 2\h\br{Q}, \log \br{d^4 + 2\abs{a}d^2 + a^2}, \\
+& \log \br{\abs{a}d^2 + \abs{a^2 + Ad^4} + \abs{Aad^2 + 2Bd^4} + 2\abs{bd}\sqrt{1 + \abs{A} + \abs{B}}} \}.
+\end{align*}
+
+\begin{lstlisting}[frame=single]
+lemma exists_constant_height_add_le (Q : E(ℚ)) :
+  ∃ C : ℝ, ∀ P : E(ℚ), height (P + Q) ≤ 2 * height P + C :=
+by ...
+\end{lstlisting}
+
+The second property $ 4\h\br{P} \le \h\br{2P} + C_2 $ does not require $ p $-adic analysis, but requires bounding the cancellation between the numerator and the denominator of the $ x $-coordinate of an affine $ K $-point, which boils down to checking a few polynomial identities. The constant can then be given explicitly by
+\begin{align*}
+C_2 \coloneqq \max \{ & 4\max \cbr{\h\br{Q} \st Q \in E\br{\QQ}\sbr{2}}, \log 2\br{12 + 16\abs{A}}, \log 2\br{3 + 5\abs{A} + 27\abs{B}}, \\
+& \log 8\br{\abs{4A^3 + 27B^2} + A^2\abs{B} + \abs{A}\abs{3A^3 + 22B^2} + 3\abs{B}\abs{A^3 + 8B^2}}, \\
+& \log 2\br{A^2\abs{B} + \abs{A}\abs{5A^3 + 32B^2} + 2\abs{B}\abs{13A^3 + 96B^2} + 3A^2\abs{A^3 + 8B^2}} \}.
+\end{align*}
+
+\begin{lstlisting}[frame=single]
+lemma exists_constant_le_height_dbl : ∃ C : ℝ, ∀ P : E(ℚ), 4 * height P ≤ height (2 ⬝ P) + C :=
+by ...
+\end{lstlisting}
+
+\subsubsection{Descent theorem}
+
+The final ingredient to the Mordell-Weil theorem is the descent theorem \cite[Theorem VIII.3.1]{Sil09}, which was formalised entirely by Jujian Zhang, independently and prior to this project, in the \texttt{descent\_theorem} branch of mathlib. Zhang assumes the existence of a structure \texttt{height\_function} whose fields are precisely the three properties of heights, and subsequently derives the proof of the theorem \texttt{descent}.
+
+\begin{lstlisting}[frame=single]
+variables (A : Type) [add_comm_group A]
+
+structure height_function :=
+(to_fun : A → ℝ) (nonneg : ∀ P : A, 0 ≤ to_fun P) (C₁ : A → ℝ) (C₁_pos: ∀ a : A, 0 < C₁ a)
+(height_add_le : ∀ P Q : A, to_fun (P + Q) ≤ 2 * to_fun P + C₁ Q) (m : ℕ) (hm : 2 ≤ m)
+(C₂ : ℝ) (C₂_pos : 0 < C₂) (height_nsmul_ge : ∀ P : A, m^2 * to_fun P ≤ to_fun (m • P) + C₂)
+(finite : ∀ C₃ : ℝ, {P : A | to_fun P < C₃}.finite)
+
+theorem descent : A.fg := by ...
+\end{lstlisting}
+
+Zhang's actual definition of \texttt{height\_function} has a few other differences from the naive height function defined in the previous section, but they are all minor and are essentially equivalent.
+
+\pagebreak
+
+\section{Future}
+
+This section concludes the report with a summary on the progress so far, a list of suggestions for future potential projects related to elliptic curves and the Mordell-Weil theorem, and a final personal remark.
+
+\subsection{Current progress}
+
+The overall strategy of the proof of the Mordell-Weil theorem is mostly settled, but there is currently a disconnect between the three parts that were mostly written independently of each other. Bridging these gaps should not be too difficult, but the current repository also contains a few \texttt{sorry} lemmas.
+\begin{itemize}
+\item In \texttt{point.lean}, the only block is a proof of the associativity of the group law. This will likely either be a brute-force approach given enough time, or an identification with $ \Pic_{E / F}^0\br{K} $, probably under a restricted definition that works only for Weierstrass models of elliptic curves.
+\item In \texttt{mordell\_weil.lean}, the proof that $ \im \delta \subseteq K\br{B, 2}^2 $ and the accompanying definition of bad primes are currently being worked on. The other missing component is the bridge between weak and full Mordell-Weil via heights, which will require a well-developed theory over $ K $ rather than just over $ \QQ $.
+\item In \texttt{selmer.lean}, the only missing result is the finite generation part of Dirichlet unit's theorem, which can be delegated as its own project. Over time, there may be algebraic lemmas with a temporary \texttt{sorry} sprinkled throughout the file as a result of actively merging other parts of the file into mathlib.
+\end{itemize}
+All other relevant files, including \texttt{heights.lean} for naive heights over $ \QQ $, are \texttt{sorry}-free.
+
+\subsection{Potential projects}
+
+Formalising the basics of elliptic curves and a primitive proof of the Mordell-Weil theorem opens up several other potential formalisation work. The following are some ideas in roughly increasing accessibility.
+\begin{itemize}
+\item Generalise the definition of $ \psi_2\br{x} $ to $ \psi_n\br{x} $ by induction, construct an injective group homomorphism $ E\br{K}\sbr{n} \hookrightarrow \br{\ZZ / n\ZZ}^2 $ surjective over the splitting field, and define the Tate module.
+\item Explore the theory over finite fields, such as proving the Hasse-Weil bound, defining the Hasse-Weil zeta-function, and perhaps verifying the Weil conjectures for elliptic curves.
+\item Verify the correctness of algorithms, such as Schoof or Lenstra, and of some cryptographic protocols.
+\item Explore the theory over local fields, such as developing formal groups abstractly, defining reduction types, proving that $ E\br{K}\sbr{n} \hookrightarrow \widetilde{E}_\ppp\br{\kappa_\ppp} $ for good primes $ \ppp \in \M_K^0 $, and perhaps proving the N\'eron-Ogg-Shafarevich criterion. This will require the ramification theory of local fields.
+\item Define $ \Sel\br{K, E\sbr{n}} $ and the Tate-Shafarevich group, and reprove the weak Mordell-Weil theorem more conceptually by embedding $ E\br{K} / 2E\br{K} \hookrightarrow \Sel\br{K, E\sbr{n}} $. This will require Galois cohomology.
+\item Redefine elliptic curves using the Proj construction, and reprove all results using this definition. This will require much algebraic geometry, particularly the Riemann-Roch theorem.
+\item Explore the theory over global function fields, such as reproving the Mordell-Weil theorem, defining elliptic surfaces and the N\'eron-Severi group, and perhaps stating the Birch and Swinnerton-Dyer conjecture over function fields. This will again require much algebraic geometry.
+\item Explore the complex theory, such as defining elliptic functions and integrals, proving the uniformisation theorem, defining modular curves, and perhaps stating some version of the modularity theorem and some form of modular parameterisation. This will require a very robust theory of modular forms.
+\end{itemize}
+
+\subsection{Concluding retrospect}
+
+On hindsight, given the severe lack of algebraic geometry in mathlib and the timeline for the project, one cannot say that elliptic curves have been truly formalised, but trying to prove the Mordell-Weil theorem remains a good stress test for the usability and compatibility of various mathlib libraries.
+
+\pagebreak
+
+\printbibliography
+
+\end{document}
