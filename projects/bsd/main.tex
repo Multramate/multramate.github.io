@@ -76,7 +76,7 @@ Suppose for a contradiction that $ 0 \ne E\br{K}\sbr{\ell} \le E\sbr{\ell} \cong
 Theorem \ref{thm:rankone} then follows immediately by counting dimensions.
 
 \begin{proof}[Proof of Theorem \ref{thm:rankone}]
-Choose the prime $ \ell $ such that $ \ell \nmid D $, so that the primes of $ \QQ $ ramified in $ F $ and in $ \QQ\br{E\sbr{\ell}} $ are disjoint by the Heegner hypothesis, and hence are linearly disjoint over $ \QQ $. Lemma \ref{lem:trivialtorsion} then implies that $ E\br{F}\sbr{\ell} = 0 $, so that $ \rk E\br{F} = \dim_{\FF_\ell} \br{E\br{F} / \ell} $ by tensoring over $ \FF_\ell $. This quantity is bounded below by $ 1 $ by the existence of $ \hhh $ and bounded above by $ 1 $ by Theorem \ref{thm:selmercyclic}.
+Choose the odd prime $ \ell $ such that $ \ell \nmid D $, so that the primes of $ \QQ $ ramified in $ F $ and in $ \QQ\br{E\sbr{\ell}} $ are disjoint by the Heegner hypothesis, and hence are linearly disjoint over $ \QQ $. Lemma \ref{lem:trivialtorsion} then implies that $ E\br{F}\sbr{\ell} = 0 $, so that $ \rk E\br{F} = \dim_{\FF_\ell} \br{E\br{F} / \ell} $ by tensoring over $ \FF_\ell $. This quantity is bounded below by $ 1 $ by the existence of $ \hhh $ and bounded above by $ 1 $ by Theorem \ref{thm:selmercyclic}.
 \end{proof}
 
 The remainder of this report will be a discussion of the proof of Theorem \ref{thm:selmercyclic}, following Weston's account \cite{Wes01}. The following two sections will recall the construction of Selmer groups and Heegner points, defining appropriate generalisations and deriving a few basic properties from Tate duality and complex multiplication respectively. These Heegner points are used to construct a tower of cohomology classes satisfying compatibility relations, making them an Euler system, and an analysis of their local ramification behaviour places them in certain Selmer groups. The final section details a series of computations in Galois cohomology, which ultimately deduces the structure of $ \Sel\br{F, E\sbr{\ell}} $, thus proving Theorem \ref{thm:selmercyclic}.
@@ -137,7 +137,7 @@ For ease of notation in the remainder of this section only, since the parameters
 \end{notation}
 
 \begin{remark}
-In a more general context of Euler systems \cite[Chapter I]{Rub00}, Rubin defines the notion of a variable \emph{global Selmer structure} compatible with \emph{local Selmer structures} for a $ p $-adic Galois representation over a local field, which are used to define similar Selmer groups that specialise in the case of $ E\sbr{\ell} $ to those defined here. Lemma \ref{lem:singularquotient} is the agreement between the \emph{singular quotients} of local Selmer structures, the \emph{geometric structure} induced by the Kummer sequence and the \emph{unramified structure} induced by inflation-restriction.
+In a more general context of Euler systems \cite[Chapter I]{Rub00}, Rubin defines the notion of a variable \emph{global Selmer structure} compatible with \emph{local Selmer structures} for a $ p $-adic Galois representation over a local field, which are used to define Selmer groups that specialise in the case of $ E\sbr{\ell} $ to those defined here. Lemma \ref{lem:singularquotient} is the agreement between the \emph{singular quotients} of local Selmer structures, the \emph{geometric structure} induced by the Kummer sequence and the \emph{unramified structure} induced by inflation-restriction.
 \end{remark}
 
 \pagebreak
@@ -164,7 +164,7 @@ which identifies the two kernels.
 
 Now let $ S \subseteq S' \subseteq \M_F $ be finite sets of places. As a consequence of Tate duality, all three kinds of Selmer groups sit in an exact sequence. To establish this, first note that they clearly satisfy the inclusions
 $$ \Sel_{S'} \subseteq \Sel_S \subseteq \Sel \subseteq \Sel^S \subseteq \Sel^{S'}, $$
-with equalities precisely when $ S = S' = \emptyset $, and that there are tautological exact sequences
+with equalities when $ S = S' = \emptyset $, and that there are tautological exact sequences
 \begin{equation}
 \label{eq:1}
 0 \to \Sel^S \to \Sel^{S'} \xrightarrow{\sigma_{S, S'}} \prod_{v \in S' \setminus S} \H^1\br{F_v, E}\sbr{\ell},
