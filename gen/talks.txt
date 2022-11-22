@@ -5,6 +5,34 @@
           Here are some presentation slides or typed notes for past mathematical talks.
           <ul>
             <li>
+              <a href="ttaef/main.pdf" title="Tate's thesis and epsilon factors">
+                Tate's thesis and epsilon factors
+              </a>
+              <br />
+              Study group on Galois representations and root numbers at University College London
+            </li>
+            <li>
+              <a href="ecamt/main.pdf" title="Elliptic curves and Mordell's theorem">
+                Elliptic curves and Mordell's theorem
+              </a>
+              <br />
+              2022 Xena Project Undergraduate Workshop at Imperial College London
+            </li>
+            <li>
+              <a href="foecil/main.pdf" title="Formalisation of elliptic curves in Lean">
+                Formalisation of elliptic curves in Lean
+              </a>
+              <br />
+              Young Researchers in Algebraic Number Theory at the University of Glasgow
+            </li>
+            <li>
+              <a href="ec/main.pdf" title="Étale cohomology">
+                Étale cohomology
+              </a>
+              <br />
+              Study group on étale cohomology at the London School of Geometry and Number Theory
+            </li>
+            <li>
               <a href="ttsabg/main.pdf" title="The Tate-Shafarevich and Brauer groups">
                 The Tate-Shafarevich and Brauer groups
               </a>
