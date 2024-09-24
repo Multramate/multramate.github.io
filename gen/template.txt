@@ -9,38 +9,16 @@
   </head>
   <body>
     <div class="terminal">
-      data
-      <a href="{back}" title="Index">
-        David
-      </a>
-      =
-      <a href="{back}notes/" title="Notes">
-        Notes
-      </a>
-      |
-      <a href="{back}projects/" title="Projects">
-        Projects
-      </a>
-      |
-      <a href="{back}talks/" title="Talks">
-        Talks
-      </a>
+      data <a href="{back}"> David </a>
+      | <a href="{back}projects/"> Projects </a>
+      | <a href="{back}talks/"> Talks </a>
+      | <a href="{back}notes/"> Notes </a>
     </div>
     <div class="header">
       {head}
     </div>
     <div class="terminal">
-      <a href="https://www.haskell.org/ghc/" title="Glasgow Haskell Compiler">
-        GHCi,
-      </a>
-      {version}:
-      <a href="https://www.haskell.org/" title="Haskell">
-        https://www.haskell.org/
-      </a>
-      &nbsp; :? for
-      <a href="https://www.haskell.org/documentation/" title="Haskell documentation">
-        help
-      </a>
+      <a href="https://www.haskell.org/ghc/"> GHCi, </a> {version}: <a href="https://www.haskell.org/"> https://www.haskell.org/ </a> &nbsp; :? for <a href="https://www.haskell.org/documentation/"> help </a>
     </div>
 {body}
   </body>

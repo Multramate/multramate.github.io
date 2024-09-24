@@ -1,105 +1,28 @@
     <div class="terminal">
+      *David> print research >> mapM_ print (filter ((==) "research" . fst) projects)
+      <ul>
+        <li>
+          Here are my recent research projects and some of their final papers.
+          <ul>
+            <li> Twisted L-values of elliptic curves over global function fields </li>
+            <li> Formalising division polynomials, elliptic divisibility sequences, the torsion subgroup, and the Tate module of Weierstrass elliptic curves (joint with Peiran Wu and Junyan Xu) </li>
+            <li> Algebraicity of Artin–Hasse–Weil L-series over global function fields <br /> Preprint in preparation </li>
+            <li> <a href="loectbcc/main.pdf"> L-values of elliptic curves twisted by cubic characters </a> <br /> Preprint submitted to the <a href="https://www.lms.ac.uk/publications/jlms"> Journal of the London Mathematical Society </a> </li>
+            <li> <a href="aefpotgloweciac/main.pdf"> An elementary formal proof of the group law on Weierstrass elliptic curves in any characteristic </a> (joint with Junyan Xu) <br /> Published in the <a href="https://mizar.uwb.edu.pl/ITP2023/"> Fourteenth International Conference on Interactive Theorem Proving </a> </li>
+          </ul>
+        </li>
+      </ul>
       *David> print math >> mapM_ print (filter ((==) "math" . fst) projects)
       <ul>
         <li>
           Here are the final reports of some of my past mathematics projects.
           <ul>
-            <li>
-              <a href="mw/main.pdf" title="The Mordell-Weil theorem in Lean">
-                The Mordell-Weil theorem in Lean
-              </a>
-              with code in
-              <a href="https://github.com/leanprover-community/mathlib/tree/mordell_weil" title="The mordell_weil branch of mathlib">
-                mathlib
-              </a>
-              <br />
-              <a href="https://www.lsgnt-cdt.ac.uk/" title="London School of Geometry and Number Theory">
-                LSGNT
-              </a>
-              mini project supervised by
-              <a href="https://www.ma.imperial.ac.uk/~buzzard/" title="Prof Kevin Buzzard">
-                Prof Kevin Buzzard
-              </a>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <a href="bsd/main.pdf" title="The Birch and Swinnerton-Dyer conjecture">
-                The Birch and Swinnerton-Dyer conjecture
-              </a>
-              <br />
-              <a href="https://www.lsgnt-cdt.ac.uk/" title="London School of Geometry and Number Theory">
-                LSGNT
-              </a>
-              group mini project supervised by
-              <a href="http://www.homepages.ucl.ac.uk/~ucahvdo/webpage.html" title="Prof Vladimir Dokchitser">
-                Prof Vladimir Dokchitser
-              </a>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <a href="as/main.pdf" title="Arithmetic statistics for elliptic curves">
-                Arithmetic statistics for elliptic curves
-              </a>
-              <br />
-              <a href="http://www.imperial.ac.uk/computing/current-students/courses/MATH97071/" title="Advanced Research Project in Mathematics">
-                M4R
-              </a>
-              masters thesis supervised by
-              <a href="https://wwwf.imperial.ac.uk/~tsg/" title="Prof Toby Gee">
-                Prof Toby Gee
-              </a>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <a href="cft/main.pdf" title="Class field theory and applications">
-                Class field theory and applications
-              </a>
-              <br />
-              <a href="http://www.imperial.ac.uk/urop/" title="Undergraduate Research Opportunity Programme">
-                UROP
-              </a>
-              project supervised by
-              <a href="http://wwwf.imperial.ac.uk/~dhelm/" title="Dr David Helm">
-                Dr David Helm
-              </a>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <a href="aec/main.pdf" title="The arithmetic of elliptic curves">
-                The arithmetic of elliptic curves
-              </a>
-              and the
-              <a href="aec/group.pdf" title="Group law">
-                group law
-              </a>
-              <br />
-              <a href="http://www.imperial.ac.uk/urop/" title="Undergraduate Research Opportunity Programme">
-                UROP
-              </a>
-              project supervised by
-              <a href="https://perswww.kuleuven.be/~u0025871/" title="Prof Johannes Nicaise">
-                Prof Johannes Nicaise
-              </a>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <a href="fpp/main.pdf" title="An introduction to finite projective planes">
-                An introduction to finite projective planes
-              </a>
-              <br />
-              <a href="https://www.imperial.ac.uk/computing/current-students/courses/MATH95010/" title="Year Two Mathematics Group Project">
-                M2R
-              </a>
-              group project supervised by
-              <a href="http://wwwf.imperial.ac.uk/~apal4/" title="Dr Ambrus Pál">
-                Dr Ambrus Pál
-              </a>
-            </li>
+            <li> <a href="mw/main.pdf"> The Mordell-Weil theorem in Lean </a> with code in <a href="https://github.com/leanprover-community/mathlib/tree/mordell_weil"> mathlib </a> <br /> London School of Geometry and Number Theory mini project supervised by <a href="https://www.ma.imperial.ac.uk/~buzzard/"> Prof Kevin Buzzard </a> </li>
+            <li> <a href="bsd/main.pdf"> The Birch and Swinnerton-Dyer conjecture </a> <br /> London School of Geometry and Number Theory group mini project supervised by <a href="http://www.homepages.ucl.ac.uk/~ucahvdo/webpage.html"> Prof Vladimir Dokchitser </a> </li>
+            <li> <a href="as/main.pdf"> Arithmetic statistics for elliptic curves </a> <br /> Advanced Research Project in Mathematics supervised by <a href="https://wwwf.imperial.ac.uk/~tsg/"> Prof Toby Gee </a> </li>
+            <li> <a href="cft/main.pdf"> Class field theory and applications </a> <br /> Undergraduate Research Opportunity Programme supervised by <a href="http://wwwf.imperial.ac.uk/~dhelm/"> Prof David Helm </a> </li>
+            <li> <a href="aec/main.pdf"> The arithmetic of elliptic curves </a> and the <a href="aec/group.pdf"> group law </a> <br /> Undergraduate Research Opportunity Programme supervised by <a href="https://perswww.kuleuven.be/~u0025871/"> Prof Johannes Nicaise </a> </li>
+            <li> <a href="fpp/main.pdf"> An introduction to finite projective planes </a> <br /> Year Two Mathematics Group Project supervised by <a href="http://wwwf.imperial.ac.uk/~apal4/"> Dr Ambrus Pál </a> </li>
           </ul>
         </li>
       </ul>
@@ -108,76 +31,14 @@
         <li>
           Here are some of my past computing projects, whose repositories are publicly hidden due to internal regulations, but can be provided upon request.
           <ul>
-            <li>
-              <a href="ip/main.pdf" title="Industrial placement report">
-                Cryptography engineering industrial placement
-              </a>
-              at
-              <a href="https://github.com/adjoint-io/" title="Adjoint UK Ltd">
-                Adjoint UK Ltd
-              </a>
-              (Haskell)
-              <br />
-              Libraries for
-              <a href="http://hackage.haskell.org/package/galois-field" title="Galois fields">
-                Galois fields,
-              </a>
-              <a href="http://hackage.haskell.org/package/elliptic-curve" title="Elliptic curves">
-                elliptic curves,
-              </a>
-              and
-              <a href="http://hackage.haskell.org/package/pairing" title="Bilinear pairings">
-                bilinear pairings
-              </a>
-            </li>
-            <li>
-              Fuzzing server and user interface for
-              <a href="https://hypothesis.works/" title="Hypothesis">
-                Hypothesis
-              </a>
-              (Python)
-            </li>
-            <li>
-              Improvements to features of the
-              <a href="https://www.doc.ic.ac.uk/~mjw03/OSLab/pintos.pdf" title="Pintos">
-                Pintos operating system
-              </a>
-              (C)
-            </li>
-            <li>
-              Full
-              <a href="https://teaching.doc.ic.ac.uk/wacc_compiler/" title="WACC">
-                WACC language
-              </a>
-              to Assembly language compiler (Haskell)
-            </li>
-            <li>
-              Basic
-              <a href="https://github.com/Multramate/equations">
-                equations
-              </a>
-              parser and simplifier (Haskell)
-            </li>
-            <li>
-              MIDI file parser and mechanical glockenspiel player on the
-              <a href="https://www.raspberrypi.org/" title="Raspberry Pi">
-                Raspberry Pi
-              </a>
-              (C)
-            </li>
-            <li>
-              <a href="https://www.imperial.ac.uk/computing/current-students/course-admin/noticeboards/first-year/topics/" title="Computing topics project">
-                Computing topics project
-              </a>
-              on home robotics (HTML / CSS)
-            </li>
-            <li>
-              Website design for
-              <a href="http://www.migiglass.com/" title="MiGi Glass">
-                MiGi Glass
-              </a>
-              (HTML / CSS)
-            </li>
+            <li> <a href="ip/main.pdf"> Cryptography engineering industrial placement </a> at <a href="https://github.com/adjoint-io/"> Adjoint UK Ltd </a> (Haskell) <br /> Libraries for <a href="http://hackage.haskell.org/package/galois-field"> Galois fields, </a> <a href="http://hackage.haskell.org/package/elliptic-curve"> elliptic curves, </a> and <a href="http://hackage.haskell.org/package/pairing"> bilinear pairings </a> </li>
+            <li> Fuzzing server and user interface for <a href="https://hypothesis.works/"> Hypothesis </a> (Python) </li>
+            <li> Improvements to features of the <a href="https://www.doc.ic.ac.uk/~mjw03/OSLab/pintos.pdf"> Pintos operating system </a> (C) </li>
+            <li> Full <a href="https://teaching.doc.ic.ac.uk/wacc_compiler/"> WACC language </a> to Assembly language compiler (Haskell) </li>
+            <li> Basic <a href="https://github.com/Multramate/equations"> equations </a> parser and simplifier (Haskell) </li>
+            <li> MIDI file parser and mechanical glockenspiel player on the <a href="https://www.raspberrypi.org/"> Raspberry Pi </a> (C) </li>
+            <li> <a href="https://www.imperial.ac.uk/computing/current-students/course-admin/noticeboards/first-year/topics/"> Computing topics project </a> on home robotics (HTML / CSS) </li>
+            <li> Website design for <a href="http://www.migiglass.com/"> MiGi Glass </a> (HTML / CSS) </li>
           </ul>
         </li>
       </ul>

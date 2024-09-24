@@ -1,0 +1,494 @@
+\documentclass[10pt]{beamer}
+
+\setbeamertemplate{footline}[page number]
+
+\newtheorem{conjecture}{Conjecture}
+
+\DeclareFontFamily{U}{wncyr}{}
+\DeclareFontShape{U}{wncyr}{m}{n}{<->wncyr10}{}
+\DeclareSymbolFont{cyr}{U}{wncyr}{m}{n}
+\DeclareMathSymbol{\Sha}{\mathord}{cyr}{"58}
+
+\title{Congruences of twisted L-values}
+
+\author{David Ang}
+
+\institute{University College London}
+
+\date{Thursday, 19 October 2023}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Overview}
+
+Notation:
+\begin{itemize}
+\item $ N $ is an integer
+\item $ p $ and $ q $ are odd primes such that $ p \nmid N $ (and $ p \equiv 1 \mod q $)
+\item $ E $ is an elliptic curve over $ \mathbb{Q} $ of conductor $ N $ (with analytic rank zero)
+\item $ \chi $ is a Dirichlet character of conductor $ p $ and order $ q $
+\end{itemize}
+
+\pause
+
+\vspace{0.5cm} Outline:
+\begin{itemize}
+\item Twisted L-values
+\item Modular symbols
+\item Arithmetic consequences
+\item Asymptotic distribution
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[t]{The L-function of $ E $}
+
+Recall that the \textbf{L-function of $ E $} is given by
+$$ L(E, s) := \prod_p \dfrac{1}{\det(1 - p^{-s} \cdot \phi_p \ | \ \rho_{E, \ell}^{I_p})}, $$
+where $ \phi_p \in G_\mathbb{Q} $ is an arithmetic Frobenius and $ \rho_{E, \ell} : G_\mathbb{Q} \to \mathrm{Aut}(T_\ell(E)) $ is the representation of the $ \ell $-adic Tate module $ T_\ell(E) $ for some $ \ell \ne p $.
+
+\pause
+
+\begin{conjecture}[Birch--Swinnerton-Dyer]
+The order of vanishing of $ L(E, s) $ at $ s = 1 $ is $ \mathrm{rk}(E) $, and
+$$ \lim_{s \to 1} \dfrac{L(E, s)}{(s - 1)^{\mathrm{rk}(E)}} \cdot \dfrac{1}{\Omega(E)} = \dfrac{\mathrm{Reg}(E) \cdot \mathrm{Tam}(E) \cdot \#\Sha(E)}{\#\mathrm{tor}(E)^2}. $$
+\end{conjecture}
+
+\pause
+
+When $ \mathrm{rk}(E) = 0 $, the LHS is the \textbf{algebraic L-value of $ E $}, given by
+$$ \mathcal{L}(E) := L(E, 1) \cdot \dfrac{1}{\Omega(E)}. $$
+
+\end{frame}
+
+\begin{frame}[t]{The L-function of $ E / K $}
+
+Let $ K / \mathbb{Q} $ be finite Galois. The \textbf{L-function of $ E / K $} is given by
+$$ L(E / K, s) := \prod_\mathfrak{p} \dfrac{1}{\det(1 - \mathrm{Nm}(\mathfrak{p})^{-s} \cdot \phi_\mathfrak{p} \ | \ \rho_{E / K, \mathfrak{l}}^{I_\mathfrak{p}})}. $$
+
+\pause
+
+\begin{conjecture}[Birch--Swinnerton-Dyer]
+The order of vanishing of $ L(E / K, s) $ at $ s = 1 $ is $ \mathrm{rk}(E / K) $, and
+$$ \lim_{s \to 1} \dfrac{L(E / K, s)}{(s - 1)^{\mathrm{rk}(E / K)}} \cdot \dfrac{\sqrt{\Delta(K)}}{\Omega(E / K)} = \dfrac{\mathrm{Reg}(E / K) \cdot \mathrm{Tam}(E / K) \cdot \#\Sha(E / K)}{\#\mathrm{tor}(E / K)^2}. $$
+\end{conjecture}
+
+\pause
+
+On the other hand, Artin formalism gives a factorisation
+$$ L(E / K, s) = \prod_{\rho : \mathrm{Gal}(K / \mathbb{Q}) \to \mathbb{C}^\times} L(E, \rho, s)^{\dim(\rho)}. $$
+
+\end{frame}
+
+\begin{frame}[t]{Twisted L-functions of $ E $}
+
+Let $ K = \mathbb{Q}(\zeta_p) $. Then
+$$ \left\{\begin{array}{c} \text{Artin representations} \\ \mathrm{Gal}(K / \mathbb{Q}) \to \mathbb{C}^\times \end{array}\right\} \quad \leftrightsquigarrow \quad \left\{\begin{array}{c} \text{Dirichlet characters} \\ (\mathbb{Z} / p\mathbb{Z})^\times \to \mathbb{C}^\times \end{array}\right\}. $$
+
+\pause
+
+The \textbf{L-function of $ E $ twisted by $ \chi $} is given by
+$$ L(E, \chi, s) := \prod_p \dfrac{1}{\det(1 - p^{-s} \cdot \phi_p \ | \ (\rho_{E, \ell} \otimes \rho_\chi)^{I_p})}. $$
+
+\pause
+
+More concretely,
+$$ L(E, s) = \sum_{n \in \mathbb{N}} \dfrac{a_n}{n^s} \quad \overset{\chi}{\rightsquigarrow} \quad L(E, \chi, s) = \sum_{n \in \mathbb{N}} \dfrac{a_n\chi(n)}{n^s}. $$
+
+\pause
+
+\begin{conjecture}[Deligne--Gross]
+The order of vanishing of $ L(E, \chi, s) $ at $ s = 1 $ is $ \langle\chi, E(K)_\mathbb{C}\rangle $.
+\end{conjecture}
+
+\end{frame}
+
+\begin{frame}[t]{A twisted BSD-type formula}
+
+Is there a conjectural leading term?
+
+\pause
+
+\vspace{0.5cm} When $ \mathrm{rk}(E) = 0 $, the \textbf{algebraic L-value of $ E $ twisted by $ \chi $} is given by
+$$ \mathcal{L}(E, \chi) := L(E, \chi, 1) \cdot \dfrac{p}{\tau(\chi) \cdot \Omega(E)}, $$
+where $ \tau(\chi) $ is the Gauss sum of $ \chi $.
+
+\pause
+
+\begin{example}[Dokchitser--Evans--Wiersema]
+Let $ E_1 $ and $ E_2 $ be given by 307a1 and 307c1, and let $ \chi $ be the quintic character of conductor $ 11 $ given by $ \chi(2) = \zeta_5 $. \pause Then $ \Delta(E_i) = -307 $, and
+$$ \mathrm{Reg}(E_i / K) = \mathrm{Tam}(E_i / K) = \Sha(E_i / K) = \mathrm{tor}(E_i / K) = 1, $$
+for all $ K \subseteq \mathbb{Q}(\zeta_{11})^+ $. \pause However
+$$ \mathcal{L}(E_1, \chi) = 1, \qquad \mathcal{L}(E_2, \chi) = \zeta_5(\zeta_5 + \zeta_5^2 + \zeta_5^3)^2. $$
+\end{example}
+
+\end{frame}
+
+\begin{frame}[t]{Varying the character}
+
+Fix $ E $ and $ q $. As $ p $ varies, how does $ \mathcal{L}(E, \chi) $ vary?
+
+\pause
+
+\begin{example}
+Let $ E $ be given by 67a1, and let $ q = 3 $.
+
+\pause
+
+\vspace{0.5cm}
+
+\begin{tabular}{c|ccccccccc}
+$ p $ & 7 & 13 & 19 & 31 & 37 & 43 & 61 & 73 & 79 \\
+\hline
+$ \mathcal{L}(E, \chi) $ & 2$\zeta_3$ & 3$\zeta_3$ & -$\zeta_3$ & -27$\zeta_3$ & 3$\zeta_3$ & -4$\zeta_3$ & -$\zeta_3$ & -3$\zeta_3$ & 8 \\
+\visible<4-6>{$ \zeta_3 \mapsto 1 $ & 2 & 3 & -1 & -27 & 3 & -4 & -1 & -3 & 8} \\
+\visible<5-6>{$ \#E(\mathbb{F}_p) $ & 10 & 12 & 13 & 42 & 39 & 46 & 64 & 81 & 88} \\
+\visible<6>{sum & 12 & 15 & 12 & 15 & 42 & 42 & 63 & 78 & 96} \\
+\end{tabular}
+
+\vspace{0.5cm}
+
+\begin{tabular}{c|ccccccccc}
+$ p $ & 97 & 103 & 109 & 127 & 139 & 151 & 157 & 163 \\
+\hline
+$ \mathcal{L}(E, \chi) $ & -17 & 3$\zeta_3$ & -90$\zeta_3$ & 74$\zeta_3$ & 23$\zeta_3$ & -2 & 16 & -43$\zeta_3$ \\
+\visible<4-6>{$ \zeta_3 \mapsto 1 $ & -17 & 3 & -90 & 74 & 23 & -2 & 16 & -43} \\
+\visible<5-6>{$ \#E(\mathbb{F}_p) $ & 98 & 120 & 108 & 121 & 118 & 149 & 149 & 145} \\
+\visible<6>{sum & 81 & 123 & 18 & 195 & 141 & 147 & 165 & 102}
+\end{tabular}
+\end{example}
+
+\end{frame}
+
+\begin{frame}[t]{The modularity theorem}
+
+Write L-values of $ E $ as L-values of modular forms.
+
+\pause
+
+\vspace{0.5cm} Recall that the \textbf{Hecke L-function} of a cusp form $ f \in S_k(\Gamma) $ is given by
+$$ L(f, s) := -\dfrac{(-z)^{s - 1}}{\Gamma(s)}\int_0^\infty (2\pi i)^sf(z)\mathrm{d}z. $$
+
+\pause
+
+\begin{theorem}[Carayol, Eichler, Shimura, BCDT, Edixhoven]
+There is a finite surjective morphism $ \phi_E : X_0(N) \to E $ defined over $ \mathbb{Q} $, and a cuspidal eigenform $ f_E \in S_2(\Gamma_0(N)) $, such that
+\begin{itemize}
+\item the Hecke operator $ T_p $ has eigenvalue $ a_p(E) $,
+\item the Hecke L-function of $ f_E $ is $ L(E, s) $, and
+\item the pullback of $ \omega_E $ under $ \phi_E $ is a positive multiple of $ 2\pi if_E(z)\mathrm{d}z $.
+\end{itemize}
+\end{theorem}
+
+\pause
+
+This positive multiple is called the \textbf{Manin constant} $ c_0(E) $ of $ E $.
+
+\end{frame}
+
+\begin{frame}[t]{Classical modular symbols}
+
+A \textbf{modular symbol} is a path $ \{x, y\} \in \mathcal{H} / \Gamma $, whose \textbf{period} is
+$$ \mu_f(x, y) := \int_x^y 2\pi if(z)\mathrm{d}z, $$
+so that $ \mu_f(0, \infty) = -L(f, 1) $. \pause For any $ x \in \mathbb{Q} $,
+$$ \mu_f(0, x + \mathbb{Z}) = \mu_f(0, x), \qquad \mu_f(0, -x) = \overline{\mu_f(0, x)}. $$
+
+\pause
+
+In particular, for any $ x \in \mathbb{Q} $,
+$$ \mu_f(0, x) + \mu_f(0, 1 - x) = 2\Re(\mu_f(0, x)). $$
+
+\pause
+
+\begin{lemma}[Manin]
+$$ \dfrac{2\Re(\mu_{f_E}(0, x))}{\Omega(E)} \in \dfrac{1}{c_0(E)}\mathbb{Z}. $$
+\end{lemma}
+
+\end{frame}
+
+\begin{frame}[t]{L-values as periods}
+
+The Hecke operator $ T_p $ acts on the space of modular symbols such that
+$$ -L(E, 1) \cdot \#E(\mathbb{F}_p) = \sum_{n = 1}^{p - 1} \mu_{f_E}(0, \tfrac{n}{p}). $$
+
+\pause
+
+Dividing by $ \Omega(E) $ gives
+$$ -\mathcal{L}(E) \cdot \#E(\mathbb{F}_p) = \sum_{n = 1}^{p - 1} \dfrac{\mu_{f_E}(0, \tfrac{n}{p})}{\Omega(E)}. $$
+
+\pause
+
+Combining the $ n $-th and ($ p - n $)-th terms gives
+$$ -\mathcal{L}(E) \cdot \#E(\mathbb{F}_p) = \sum_{n = 1}^{\tfrac{p - 1}{2}} \dfrac{2\Re(\mu_{f_E}(0, \tfrac{n}{p}))}{\Omega(E)}. $$
+
+\pause
+
+Multiplying by $ c_0(E) $ gives an equality in $ \mathbb{Z} $.
+
+\end{frame}
+
+\begin{frame}[t]{Twisted L-values as periods}
+
+Applying the Mellin transform to the Dirichlet series of $ f_E \otimes \chi $ yields
+$$ L(E, \chi, 1) \cdot \dfrac{p}{\tau(\chi)} = \sum_{n = 1}^{p - 1} \overline{\chi}(n)\mu_{f_E}(0, \tfrac{n}{p}). $$
+
+\pause
+
+A similar rearrangement gives
+$$ \mathcal{L}(E, \chi) = \sum_{n = 1}^{\tfrac{p - 1}{2}} \overline{\chi}(n)\dfrac{2\Re(\mu_{f_E}(0, \tfrac{n}{p}))}{\Omega(E)}. $$
+
+\pause
+
+Multiplying by $ c_0(E) $ gives an equality in $ \mathbb{Z}[\zeta_q] $.
+
+\pause
+
+\vspace{0.5cm}
+
+\begin{theorem}[Manin]
+$$ -c_0(E) \cdot \mathcal{L}(E) \cdot \#E(\mathbb{F}_p) \equiv c_0(E) \cdot \mathcal{L}(E, \chi) \mod (1 - \zeta_q). $$
+\end{theorem}
+
+\end{frame}
+
+\begin{frame}[t]{Revisiting the example}
+
+\begin{example}[Dokchitser--Evans--Wiersema]
+Let $ E_1 $ and $ E_2 $ be given by 307a1 and 307c1, and let $ \chi $ be the quintic character of conductor $ 11 $ given by $ \chi(2) = \zeta_5 $. Then $ \Delta(E_i) = -307 $, and
+$$ \mathrm{Reg}(E_i / K) = \mathrm{Tam}(E_i / K) = \Sha(E_i / K) = \mathrm{tor}(E_i / K) = 1, $$
+for all $ K \subseteq \mathbb{Q}(\zeta_{11})^+ $. However
+$$ \mathcal{L}(E_1, \chi) = 1, \qquad \mathcal{L}(E_2, \chi) = \zeta_5(\zeta_5 + \zeta_5^2 + \zeta_5^3)^2. $$
+
+\pause
+
+Now $ c_0(E_i) = \mathcal{L}(E_i) = 1 $, but
+$$ \#E_1(\mathbb{F}_{11}) = 9, \qquad \#E_2(\mathbb{F}_{11}) = 16, $$
+so the congruence says $ \mathcal{L}(E_1, \chi) \not\equiv \mathcal{L}(E_2, \chi) \mod (1 - \zeta_5) $.
+\end{example}
+
+\pause
+
+\vspace{0.5cm} In fact, the congruence clarifies all 30 pairs of examples in the paper.
+
+\end{frame}
+
+\begin{frame}[t]{Insufficiency of congruence}
+
+In general, the congruence only serves as a sanity check for the L-value.
+
+\pause
+
+\begin{example}
+Let $ E_1 $ and $ E_2 $ be given by 182d1 and 460a1, and let $ \chi $ be the quintic character of conductor $ 11 $ given by $ \chi(2) = \zeta_5 $. \pause Then $ \Delta(E_i) < 0 $, and
+$$ \mathrm{Reg}(E_i / K) = \mathrm{Tam}(E_i / K) = \Sha(E_i / K) = \mathrm{tor}(E_i / K) = 1, $$
+for all $ K \subseteq \mathbb{Q}(\zeta_{11})^+ $. \pause Furthermore $ c_0(E_i) = \mathcal{L}(E_i) = 1 $, and
+$$ \#E_1(\mathbb{F}_{11}) = 11, \qquad \#E_2(\mathbb{F}_{11}) = 6, $$
+so the congruence says $ \mathcal{L}(E_1, \chi) \equiv \mathcal{L}(E_2, \chi) \mod (1 - \zeta_5) $. \pause However
+$$ \mathcal{L}(E_1, \chi) = -\zeta_5^2, \qquad \mathcal{L}(E_2, \chi) = -\zeta_5^3. $$
+\end{example}
+
+\pause
+
+In certain cases, the congruence can be interpreted as an equality.
+
+\end{frame}
+
+\begin{frame}[t]{Congruence for units}
+
+Let $ K \subseteq \mathbb{Q}(\zeta_p) $ be the subfield of degree $ q $ where $ \chi $ factors through $ K / \mathbb{Q} $. \pause Assume further that the Birch--Swinnerton-Dyer conjecture holds for $ E $ over $ \mathbb{Q} $ and over $ K $, and that $ c_0(E) = 1 $ and $ \mathcal{L}(E) \cdot \#E(\mathbb{F}_p) \not\equiv 0 \mod q $.
+
+\pause
+
+\begin{theorem}[Dokchitser--Evans--Wiersema]
+$ \mathcal{L}(E, \chi) = \overline{\chi}(N) \cdot \ell $ for some $ \ell \in \mathbb{Z}[\zeta_q + \overline{\zeta_q}] $, \pause has norm $ \pm\mathcal{B}(E, \chi) $, where
+$$ \mathcal{B}(E, \chi) := \dfrac{\mathrm{Tam}(E / K) \cdot \#\Sha(E / K) \cdot \#\mathrm{tor}(E / K)^{-2}}{\mathrm{Tam}(E / \mathbb{Q}) \cdot \#\Sha(E / \mathbb{Q}) \cdot \#\mathrm{tor}(E / \mathbb{Q})^{-2}} \in \mathbb{Z}, $$
+\pause and generates an ideal of $ \mathbb{Z}[\zeta_q] $ invariant under complex conjugation.
+\end{theorem}
+
+\pause
+
+\begin{corollary}
+If $ \mathcal{B}(E, \chi) = 1 $, then $ \ell \in \mathbb{Z}[\zeta_q + \overline{\zeta_q}]^\times $, and
+$$ \ell \equiv -\mathcal{L}(E) \cdot \#E(\mathbb{F}_p) \mod (2 - (\zeta_q + \overline{\zeta_q})). $$
+\end{corollary}
+
+\pause If $ q = 3 $, the congruence determines $ \ell $ exactly.
+
+\end{frame}
+
+\begin{frame}[t]{Congruence for non-units}
+
+In general, the ideal generated by $ \mathcal{L}(E, \chi) $ has finitely many possibilities.
+
+\pause
+
+\begin{example}[Dokchitser--Evans--Wiersema]
+Let $ E_1 $ and $ E_2 $ be given by 291d1 and 139a1, and let $ \chi $ be the quintic character of conductor $ 31 $ given by $ \chi(3) = \zeta_5^3 $. \pause Then $ \mathcal{B}(E_i, \chi) = 11^2 $, so $ \mathcal{L}(E_i, \chi) $ generate ideals of norm $ 11^2 $ that are invariant under complex conjugation. \pause There are only two such ideals, generated by
+$$ \ell_1 := 3\zeta_5^3 + \zeta_5^2 + 3\zeta_5, \qquad \ell_2 := \zeta_5^3 + 3\zeta_5 + 3. $$
+
+\pause
+
+In fact, $ (\mathcal{L}(E_i, \chi)) = (\ell_i) $ by Burns--Castillo. \pause Furthermore $ \mathcal{L}(E_i) = 1 $, $ \#E_1(\mathbb{F}_{31}) = 33 $, and $ \#E_2(\mathbb{F}_{31}) = 23 $, so the congruence says
+$$ \mathcal{L}(E_1, \chi) = u_1 \cdot \ell_1, \qquad u_1 \cdot (3 + 1 + 3) \equiv -33 \mod (1 - \zeta_5), $$
+$$ \mathcal{L}(E_2, \chi) = u_2 \cdot \ell_2, \qquad u_2 \cdot (1 + 3 + 3) \equiv -23 \mod (1 - \zeta_5). $$
+
+\pause
+
+In fact, $ u_1 = \zeta_5^4 $ and $ u_2 = \zeta_5^2 - \zeta_5 + 1 $.
+\end{example}
+
+\end{frame}
+
+\begin{frame}[t]{Asymptotic distribution}
+
+Fix $ E $ and $ q $. As $ p $ varies, how does $ \mathcal{L}(E, \chi) $ modulo $ (1 - \zeta_q) $ vary?
+
+\pause
+
+\vspace{0.5cm} The congruence says $ \mathcal{L}(E, \chi) $ varies according to $ \#E(\mathbb{F}_p) $ modulo $ q $.
+
+\pause
+
+\vspace{0.5cm} On the other hand, by considering $ \rho_{E, q}(\phi_p) \in \mathrm{GL}_2(\mathbb{Z}_q) $,
+$$ \#E(\mathbb{F}_p) = 1 + \det(\rho_{E, q}(\phi_p)) - \mathrm{tr}(\rho_{E, q}(\phi_p)). $$
+
+\pause
+
+As $ p \equiv 1 \mod q $ varies, $ \rho_{E, q}(\phi_p) $ varies over the group
+$$ G_{E, q^\infty} := \{M \in \mathrm{im}(\rho_{E, q}) \ | \ \det(M) \equiv 1 \mod q\}. $$
+
+\pause
+
+By Chebotarev, $ \rho_{E, q}(\phi_p) $ is asymptotically distributed uniformly in $ G_{E, q^\infty} $.
+
+\pause
+
+\vspace{0.5cm} Thus the asymptotic density of $ \#E(\mathbb{F}_p) \equiv \ell \mod q $ is the asymptotic density of matrices $ M \in G_{E, q^\infty} $ with $ 1 + \det(M) - \mathrm{tr}(M) \equiv \ell \mod q $.
+
+\end{frame}
+
+\begin{frame}[t]{Maximal Galois image}
+
+For most $ E $, suffices to consider $ \overline{\rho_{E, q}} : G_\mathbb{Q} \to \mathrm{Aut}(E[q]) $ and
+$$ G_{E, q} := \{M \in \mathrm{im}(\overline{\rho_{E, q}}) \ | \ \det(M) = 1\}. $$
+
+\pause
+
+\begin{example}
+Let $ E $ be given by 11a1. Then $ c_0(E) = 1 $ and $ \mathcal{L}(E) = \tfrac{1}{5} \equiv -1 \mod 3 $, so
+$$ \mathcal{L}(E, \chi) \equiv \#E(\mathbb{F}_p) \equiv 2 - \mathrm{tr}(\overline{\rho_{E, 3}}(\phi_p)) \mod (1 - \zeta_3). $$
+
+\pause
+
+Now $ \overline{\rho_{E, 3}} $ is surjective, so $ G_{E, 3} = \mathrm{SL}_2(\mathbb{F}_3) $. \pause This consists of:
+
+\vspace{-0.4cm} {\scriptsize
+$$
+\begin{array}{c}
+\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \ \begin{pmatrix} 0 & 2 \\ 1 & 2 \end{pmatrix} \ \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix} \ \begin{pmatrix} 2 & 2 \\ 1 & 0 \end{pmatrix} \ \begin{pmatrix} 0 & 1 \\ 2 & 2 \end{pmatrix} \ \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix} \ \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} \ \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix} \ \begin{pmatrix} 2 & 1 \\ 2 & 0 \end{pmatrix} \\ \\
+\begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} \ \begin{pmatrix} 0 & 2 \\ 1 & 1 \end{pmatrix} \ \begin{pmatrix} 2 & 0 \\ 2 & 2 \end{pmatrix} \ \begin{pmatrix} 0 & 1 \\ 2 & 1 \end{pmatrix} \ \begin{pmatrix} 2 & 0 \\ 1 & 2 \end{pmatrix} \ \begin{pmatrix} 2 & 1 \\ 0 & 2 \end{pmatrix} \ \begin{pmatrix} 1 & 1 \\ 2 & 0 \end{pmatrix} \ \begin{pmatrix} 1 & 2 \\ 1 & 0 \end{pmatrix} \ \begin{pmatrix} 2 & 2 \\ 0 & 2 \end{pmatrix} \\ \\
+\begin{pmatrix} 0 & 2 \\ 1 & 0 \end{pmatrix} \ \begin{pmatrix} 0 & 1 \\ 2 & 0 \end{pmatrix} \ \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix} \ \begin{pmatrix} 1 & 1 \\ 1 & 2 \end{pmatrix} \ \begin{pmatrix} 1 & 2 \\ 2 & 2 \end{pmatrix} \ \begin{pmatrix} 2 & 2 \\ 2 & 1 \end{pmatrix}
+\end{array}
+$$
+} \vspace{-0.2cm}
+
+\pause
+
+Thus $ \mathcal{L}(E, \chi) \equiv 0, 1, 2 \mod (1 - \zeta_3) $ with densities $ \tfrac{9}{24} $, $ \tfrac{9}{24} $, $ \tfrac{6}{24} $.
+\end{example}
+
+\end{frame}
+
+\begin{frame}[t]{Small Galois image}
+
+For other $ E $, need to consider $ \overline{\rho_{E, q^n}} : G_\mathbb{Q} \to \mathrm{Aut}(E[q^n]) $ and
+$$ G_{E, q^n} := \{M \in \mathrm{im}(\overline{\rho_{E, q^n}}) \ | \ \det(M) \equiv 1 \mod q\}. $$
+
+\pause
+
+\begin{example}
+Let $ E $ be given by 14a1. Then $ c_0(E) = 1 $ and $ \mathcal{L}(E) = \tfrac{1}{6} $, so
+$$ \mathcal{L}(E, \chi) \equiv -\tfrac{1}{6} \cdot \#E(\mathbb{F}_p) \mod (1 - \zeta_3). $$
+
+\pause
+
+In other words, $ \mathcal{L}(E, \chi) \equiv \ell \mod (1 - \zeta_3) $ precisely if
+$$ 1 + \det(\overline{\rho_{E, 9}}(\phi_p)) - \mathrm{tr}(\overline{\rho_{E, 9}}(\phi_p)) \equiv -6\ell \mod 9. $$
+
+\pause
+
+However, $ 1 + \det(M) - \mathrm{tr}(M) \equiv 0 \mod 9 $ for all matrices $ M $ in
+$$ G_{E, 9} = \{M \in \mathrm{GL}_2(\mathbb{Z} / 9\mathbb{Z}) \ | \ M \equiv 1 \mod 3\}. $$
+
+\pause
+
+Thus $ \mathcal{L}(E, \chi) \equiv 0, 1, 2 \mod (1 - \zeta_3) $ with densities $ 1 $, $ 0 $, $ 0 $.
+\end{example}
+
+\end{frame}
+
+\begin{frame}[t]{Large Galois image}
+
+For some $ E $, the density of $ \#E(\mathbb{F}_p) $ might be visible in $ G_{E, q^n} $.
+
+\pause
+
+\begin{example}
+Let $ E $ be given by 20a1. Then $ c_0(E) = 1 $ and $ \mathcal{L}(E) = \tfrac{1}{6} $, so similarly
+$$ 1 + \det(\overline{\rho_{E, 9}}(\phi_p)) - \mathrm{tr}(\overline{\rho_{E, 9}}(\phi_p)) \equiv -6\ell \mod 9 $$
+precisely if $ \mathcal{L}(E, \chi) \equiv \ell \mod (1 - \zeta_3) $. \pause Now
+$$ G_{E, 9} = \left\{M \in \mathrm{GL}_2(\mathbb{Z} / 9\mathbb{Z}) \ \middle| \ M \equiv \begin{pmatrix} 1 & * \\ 0 & 1 \end{pmatrix} \mod 3\right\}. $$
+
+\pause
+
+There are $ 135 $, $ 54 $, $ 54 $ matrices $ M \in G_{E, 9} $ such that
+$$ 1 + \det(M) - \mathrm{tr}(M) \equiv -6(0), -6(1), -6(2) \mod 9. $$
+
+\pause
+
+Thus $ \mathcal{L}(E, \chi) \equiv 0, 1, 2 \mod (1 - \zeta_3) $ with densities $ \tfrac{135}{243} $, $ \tfrac{54}{243} $, $ \tfrac{54}{243} $.
+\end{example}
+
+\end{frame}
+
+\begin{frame}[t]{The density theorem}
+
+Define the \textbf{natural density}
+$$ \delta_{E, q}(\ell) := \lim_{n \to \infty} \dfrac{\#\{p \in P_n \ | \ c_0(E) \cdot \mathcal{L}(E, \chi) \equiv \ell \mod (1 - \zeta_q)\}}{\#P_n}, $$
+where $ P_n $ is the set of primes $ p \equiv 1 \mod q $ less than $ n $.
+
+\pause
+
+\begin{theorem}[A.]
+Let $ c := (c_0(E) \cdot \mathcal{L}(E))^{-1} $, and let $ n := \nu_q(c) + 1 $. \pause If $ n \le 0 $, then $ \delta_{E, q}(0) = 1 $. \pause Otherwise, $ c $ is well-defined and non-zero modulo $ q^n $, and
+$$ \delta_{E, q}(\ell) = \dfrac{\#\{M \in G_{E, q^n} \ | \ 1 + \det(M) - \mathrm{tr}(M) \equiv -c\ell \mod q^n\}}{\#G_{E, q^n}}. $$
+
+\pause
+
+In particular, if $ \overline{\rho_{E, q}} $ is surjective, then $ n = 1 $, and
+$$ \delta_{E, q}(\ell) =
+\left\{\begin{array}{lcr}
+\tfrac{1}{q - 1} & & 1 \\
+\tfrac{q}{q^2 - 1} & \qquad \text{if} \qquad & 0 \\
+\tfrac{1}{q + 1} & & -1
+\end{array}\right\}
+= \left(\dfrac{c\ell}{q}\right)\left(\dfrac{c\ell + 4}{q}\right). $$
+\end{theorem}
+
+\end{frame}
+
+\begin{frame}{Current status}
+
+Paper is in preparation.
+\begin{itemize}
+\item Stated congruence for non-trivial even Dirichlet characters of arbitrary conductor and order, but with an error term of periods.
+\item Classified natural densities for cubic characters, thanks to classification of $ 3 $-adic images by Rouse--Sutherland--Zureick-Brown.
+\item Explained some distributions for cubic characters in Kisilevsky--Nam, where the normalisation of $ \mathcal{L}(E, \chi) $ depends crucially on $ \chi(N) $.
+\end{itemize}
+Thank you!
+
+\end{frame}
+
+\end{document}

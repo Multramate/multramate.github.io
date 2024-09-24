@@ -4,43 +4,12 @@
         <li>
           Here are some lecture notes for Part III modules in the University of Cambridge.
           <ul>
-            <li>
-              <a href="
-              https://github.com/Multramate/Cam-GANT/raw/master/Local%20Fields/LF.pdf" title="Local Fields">
-                Local Fields (Michaelmas 2020)
-              </a>
-              by Dr Rong Zhou
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/Cam-GANT/raw/master/Algebraic%20Geometry/AG.pdf" title="Algebraic Geometry">
-                Algebraic Geometry (Michaelmas 2020)
-              </a>
-              by Prof Mark Gross
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/Cam-GANT/raw/master/Algebraic%20Topology/AT.pdf" title="Algebraic Topology">
-                Algebraic Topology (Michaelmas 2020)
-              </a>
-              by Prof Ivan Smith
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/Cam-GANT/raw/master/Elliptic%20Curves/EC.pdf" title="Elliptic Curves">
-                Elliptic Curves (Michaelmas 2020)
-              </a>
-              by Prof Tom Fisher
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/Cam-GANT/raw/master/Profinite%20Groups%20and%20Group%20Cohomology/PGGC.pdf" title="Profinite Groups and Group Cohomology">
-                Profinite Groups and Group Cohomology (Lent 2021)
-              </a>
-              by Dr Gareth Wilkes
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/Cam-GANT/raw/master/Algebraic%20Number%20Theory/ANT.pdf" title="Algebraic Number Theory">
-                Algebraic Number Theory (Lent 2021)
-              </a>
-              by Prof Tony Scholl
-            </li>
+            <li> <a href="https://github.com/Multramate/Cam-GANT/raw/master/Local%20Fields/LF.pdf"> Local Fields (Michaelmas 2020) </a> by Dr Rong Zhou </li>
+            <li> <a href="https://github.com/Multramate/Cam-GANT/raw/master/Algebraic%20Geometry/AG.pdf"> Algebraic Geometry (Michaelmas 2020) </a> by Prof Mark Gross </li>
+            <li> <a href="https://github.com/Multramate/Cam-GANT/raw/master/Algebraic%20Topology/AT.pdf"> Algebraic Topology (Michaelmas 2020) </a> by Prof Ivan Smith </li>
+            <li> <a href="https://github.com/Multramate/Cam-GANT/raw/master/Elliptic%20Curves/EC.pdf"> Elliptic Curves (Michaelmas 2020) </a> by Prof Tom Fisher </li>
+            <li> <a href="https://github.com/Multramate/Cam-GANT/raw/master/Profinite%20Groups%20and%20Group%20Cohomology/PGGC.pdf"> Profinite Groups and Group Cohomology (Lent 2021) </a> by Dr Gareth Wilkes </li>
+            <li> <a href="https://github.com/Multramate/Cam-GANT/raw/master/Algebraic%20Number%20Theory/ANT.pdf"> Algebraic Number Theory (Lent 2021) </a> by Prof Tony Scholl </li>
           </ul>
         </li>
       </ul>
@@ -49,54 +18,14 @@
         <li>
           Here are some lecture notes for fourth year modules in Imperial College London.
           <ul>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P32%20Number%20Theory%20Elliptic%20Curves/M4P32.pdf" title="Number Theory: Elliptic Curves">
-                Number Theory: Elliptic Curves (Autumn 2019)
-              </a>
-              by Prof Toby Gee
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P33%20Algebraic%20Geometry/M4P33.pdf" title="Algebraic Geometry">
-                Algebraic Geometry (Spring 2020)
-              </a>
-              by Prof Kevin Buzzard
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P54%20Differential%20Topology/M4P54.pdf" title="Differential Topology">
-                Differential Topology (Spring 2020)
-              </a>
-              by Prof Paolo Cascini
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P55%20Commutative%20Algebra/M4P55.pdf" title="Commutative Algebra">
-                Commutative Algebra (Autumn 2019)
-              </a>
-              by Prof Alexei Skorobogatov
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P57%20Complex%20Manifolds/M4P57.pdf" title="Complex Manifolds">
-                Complex Manifolds (Spring 2020)
-              </a>
-              by Prof Paolo Cascini
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P58%20Modular%20Forms/M4P58.pdf" title="Modular Forms">
-                Modular Forms (Autumn 2019)
-              </a>
-              by Dr David Helm
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P61%20Infinite%20Groups/M4P61.pdf" title="Infinite Groups">
-                Infinite Groups (Autumn 2019)
-              </a>
-              by Dr Isabel Müller
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P63%20Algebra%20IV/M4P63.pdf" title="Algebra IV">
-                Algebra IV (Spring 2020)
-              </a>
-              by Dr John Britnell
-            </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P32%20Number%20Theory%20Elliptic%20Curves/M4P32.pdf"> Number Theory: Elliptic Curves (Autumn 2019) </a> by Prof Toby Gee </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P33%20Algebraic%20Geometry/M4P33.pdf"> Algebraic Geometry (Spring 2020) </a> by Prof Kevin Buzzard </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P54%20Differential%20Topology/M4P54.pdf"> Differential Topology (Spring 2020) </a> by Prof Paolo Cascini </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P55%20Commutative%20Algebra/M4P55.pdf"> Commutative Algebra (Autumn 2019) </a> by Prof Alexei Skorobogatov </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P57%20Complex%20Manifolds/M4P57.pdf"> Complex Manifolds (Spring 2020) </a> by Prof Paolo Cascini </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P58%20Modular%20Forms/M4P58.pdf"> Modular Forms (Autumn 2019) </a> by Dr David Helm </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P61%20Infinite%20Groups/M4P61.pdf"> Infinite Groups (Autumn 2019) </a> by Dr Isabel Müller </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M4P63%20Algebra%20IV/M4P63.pdf"> Algebra IV (Spring 2020) </a> by Dr John Britnell </li>
           </ul>
         </li>
       </ul>
@@ -105,71 +34,20 @@
         <li>
           Here are some lecture notes for third year modules in Imperial College London.
           <ul>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P5%20Geometry%20of%20Curves%20and%20Surfaces/M3P5.pdf" title="Geometry of Curves and Surfaces">
-                Geometry of Curves and Surfaces (Autumn 2018)
-              </a>
-              by Prof Tom Coates
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P8%20Algebra%20III/M3P8.pdf" title="Algebra III">
-                Algebra III (Autumn 2018)
-              </a>
-              by Dr David Helm
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P11%20Galois%20Theory/M3P11.pdf" title="Galois Theory">
-                Galois Theory (Spring 2019)
-              </a>
-              by Prof Alessio Corti
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P14%20Number%20Theory/M3P14.pdf" title="Number Theory">
-                Number Theory (Autumn 2018)
-              </a>
-              by Prof Toby Gee
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P15%20Algebraic%20Number%20Theory/M3P15.pdf" title="Algebraic Number Theory">
-                Algebraic Number Theory (Spring 2019)
-              </a>
-              by Dr Ana Caraiani
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P17%20Algebraic%20Combinatorics/M3P17.pdf" title="Algebraic Combinatorics">
-                Algebraic Combinatorics (Autumn 2018)
-              </a>
-              by Dr Joanna Fawcett
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P20%20Geometry%20I%20Algebraic%20Curves/M3P20.pdf" title="Geometry I: Algebraic Curves">
-                Geometry I: Algebraic Curves (Autumn 2018)
-              </a>
-              by Dr Mattia Talpo
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P21%20Geometry%20II%20Algebraic%20Topology/M3P21.pdf" title="Geometry II: Algebraic Topology">
-                Geometry II: Algebraic Topology (Spring 2019)
-              </a>
-              by Dr Christian Urech
-            </li>
-            <li>
-              <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P65%20Mathematical%20Logic/M3P65.pdf" title="Mathematical Logic">
-                Mathematical Logic (Autumn 2018)
-              </a>
-              by Prof David Evans
-            </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P5%20Geometry%20of%20Curves%20and%20Surfaces/M3P5.pdf"> Geometry of Curves and Surfaces (Autumn 2018) </a> by Prof Tom Coates </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P8%20Algebra%20III/M3P8.pdf"> Algebra III (Autumn 2018) </a> by Dr David Helm </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P11%20Galois%20Theory/M3P11.pdf"> Galois Theory (Spring 2019) </a> by Prof Alessio Corti </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P14%20Number%20Theory/M3P14.pdf"> Number Theory (Autumn 2018) </a> by Prof Toby Gee </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P15%20Algebraic%20Number%20Theory/M3P15.pdf"> Algebraic Number Theory (Spring 2019) </a> by Dr Ana Caraiani </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P17%20Algebraic%20Combinatorics/M3P17.pdf"> Algebraic Combinatorics (Autumn 2018) </a> by Dr Joanna Fawcett </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P20%20Geometry%20I%20Algebraic%20Curves/M3P20.pdf"> Geometry I: Algebraic Curves (Autumn 2018) </a> by Dr Mattia Talpo </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P21%20Geometry%20II%20Algebraic%20Topology/M3P21.pdf"> Geometry II: Algebraic Topology (Spring 2019) </a> by Dr Christian Urech </li>
+            <li> <a href="https://github.com/Multramate/IC-GANT/raw/master/M3P65%20Mathematical%20Logic/M3P65.pdf"> Mathematical Logic (Autumn 2018) </a> by Prof David Evans </li>
           </ul>
         </li>
       </ul>
       *David> print disclaimer
       <ul>
-        <li>
-          If you discover any errors or typos, please do not hesitate to contact me via email at
-          <a href="mailto:dka31@cantab.ac.uk" title="Personal email">
-            dka31@cantab.ac.uk,
-          </a>
-          and I will surely fix them within a day.
-        </li>
+        <li> If you discover any errors or typos, please do not hesitate to contact me via email at <a href="mailto:dka31@cantab.ac.uk"> dka31@cantab.ac.uk, </a> and I will surely fix them within a day. </li>
       </ul>
     </div>

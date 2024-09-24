@@ -1,0 +1,313 @@
+\documentclass[10pt]{beamer}
+
+\setbeamertemplate{footline}[page number]
+
+\DeclareFontFamily{U}{wncyr}{}
+\DeclareFontShape{U}{wncyr}{m}{n}{<->wncyr10}{}
+\DeclareSymbolFont{cyr}{U}{wncyr}{m}{n}
+\DeclareMathSymbol{\Sha}{\mathord}{cyr}{"58}
+
+\usepackage{tikz-cd}
+
+\begin{document}
+
+\begin{frame}
+
+\begin{center}
+
+{\scriptsize University College London}
+
+\vspace{0.5cm}
+
+{\small Study group on the conjecture of Birch and Swinnerton-Dyer}
+
+\vspace{1cm}
+
+\textbf{\large Kolyvagin's theorem}
+
+\vspace{1cm}
+
+David Ang
+
+\vspace{0.5cm}
+
+{\footnotesize Wednesday, 13 March 2024}
+
+\end{center}
+
+\end{frame}
+
+\begin{frame}[t]{Some recapitulation}
+
+Let $ E $ be a rational elliptic curve of conductor $ N $, and let $ K = \mathbb{Q}(\sqrt{-D}) $ be an imaginary quadratic field satisfying the \textbf{Heegner hypothesis}
+$$ \ell \mid N \qquad \implies \qquad \ell \ \text{is split in} \ K. $$
+For any $ n $ coprime to $ N $, define a \textbf{Heegner point of conductor $ n $}
+$$ P_n := \Phi_N(\mathbb{C} / \mathcal{O}_n, \mathbb{C} / \mathcal{N}_n) \in E(H_n). $$
+For any $ \ell $ coprime to $ nN $ that is inert in $ K $, there are norm compatibilities
+$$ \mathrm{Tr}_{H_n}^{H_{n\ell}} P_{n\ell} = a_\ell P_n. $$
+These form a \textbf{Heegner system for $ (E, K) $}.
+
+\vspace{0.5cm} Furthermore, define the \textbf{basic Heegner point}
+$$ P_K := \mathrm{Tr}_K^{H_1}(P_1) \in E(K). $$
+
+\end{frame}
+
+\begin{frame}[t]{Application to BSD}
+
+We will do the following next week:
+
+\begin{theorem}[Gross--Zagier '86]
+There is an explicit constant $ \alpha \ne 0 $ such that $ L'(E / K, 1) = \alpha \cdot \widehat{h}(P_K) $.
+\end{theorem}
+
+\vspace{0.5cm} We will do the following this week:
+
+\begin{theorem}[Kolyvagin '90]
+If $ \widehat{h}(P_K) \ne 0 $, then $ \mathrm{rk}_\mathbb{Z} E(K) = 1 $ and $ \#\Sha(E / K) < \infty $.
+\end{theorem}
+
+In particular, $ E(K)_{/ \mathrm{tors}} = \mathbb{Z} \cdot \tfrac{1}{n}P_K $.
+
+\vspace{0.5cm} This almost proves the following:
+
+\begin{corollary}[of Gross--Zagier '86, Kolyvagin '90, etc]
+If $ \mathrm{ord}_{s = 1} L(E, s) \le 1 $, then $ \mathrm{rk}_\mathbb{Z} E(\mathbb{Q}) = \mathrm{ord}_{s = 1} L(E, s) $ and $ \#\Sha(E) < \infty $.
+\end{corollary}
+
+The missing ingredient is the existence of $ K $.
+
+\end{frame}
+
+\begin{frame}[t]{Existence of Heegner fields}
+
+Let $ -\epsilon $ be the sign in the functional equation
+$$ \Lambda(E, s) = -\epsilon \cdot \Lambda(E, 2 - s). $$
+
+\begin{theorem}[Waldspurger '85, Murty--Murty '97]
+If $ \epsilon = + $, there are many imaginary quadratic fields $ K = \mathbb{Q}(\sqrt{-D}) $ satisfying the Heegner hypothesis such that $ \mathrm{ord}_{s = 1} L(E_D, s) = 0 $.
+\end{theorem}
+
+In particular,
+$$ \mathrm{ord}_{s = 1} L(E, s) = \mathrm{ord}_{s = 1} L(E / K, s). $$
+
+\begin{theorem}[Bump--Friedberg--Hoffstein '90, Murty--Murty '91]
+If $ \epsilon = - $, there are many imaginary quadratic fields $ K = \mathbb{Q}(\sqrt{-D}) $ satisfying the Heegner hypothesis such that $ \mathrm{ord}_{s = 1} L(E_D, s) = 1 $.
+\end{theorem}
+
+In particular,
+$$ \mathrm{ord}_{s = 1} L(E, s) = \mathrm{ord}_{s = 1} L(E / K, s) - 1. $$
+
+\end{frame}
+
+\begin{frame}[t]{Complex conjugation on Heegner points}
+
+\begin{lemma}[$ \tau $]
+Complex conjugation $ \tau $ maps $ P_n \in E(H_n)_{/ \mathrm{tors}} $ to
+$$ \tau(P_n) = \epsilon \cdot \sigma(P_n), $$
+for some $ \sigma \in \mathrm{Gal}(H_n / K) $.
+\end{lemma}
+
+\begin{proof}
+Note that $ \epsilon $ is precisely the eigenvalue of the Fricke involution $ w_N $ on the eigenform $ f_E $ associated to $ E $. On the other hand,
+$$ w_N(\mathbb{C} / \mathcal{O}_n, \mathbb{C} / \mathcal{N}_n) = (\mathbb{C} / \mathcal{N}_n^{-1}, \mathbb{C} / \overline{\mathcal{N}_n}), $$
+which differs from $ \tau(\mathbb{C} / \mathcal{O}_n, \mathbb{C} / \mathcal{N}_n) $ by some $ \sigma \in \mathrm{Gal}(H_n / K) \cong \mathrm{Cl}(\mathcal{O}_n) $. Now apply $ \Phi_N $ and the Manin--Drinfeld theorem.
+\end{proof}
+
+\vspace{0.5cm} In particular, $ P_K \in E(\mathbb{Q})_{/ \mathrm{tors}} $ precisely if $ \epsilon = + $.
+
+\end{frame}
+
+\begin{frame}[t]{Proof of Gross--Zagier--Kolyvagin}
+
+\begin{proof}[Proof of BSD for $ \mathrm{ord}_{s = 1} L(E, s) \le 1 $]
+The functional equation says that $ L(E, 1) = -\epsilon \cdot L(E, 1) $ and $ L'(E, 1) = \epsilon \cdot L'(E, 1) $. Since $ \mathrm{ord}_{s = 1} L(E, s) \le 1 $,
+$$ \mathrm{ord}_{s = 1} L(E, s) = \begin{cases} 1 & \epsilon = + \\ 0 & \epsilon = - \end{cases}. $$
+Choose any imaginary quadratic field $ K $ satisfying the Heegner hypothesis such that $ \mathrm{ord}_{s = 1} L(E / K, s) = 1 $, which exists by W/MM and BFH/MM. By Gross--Zagier and Kolyvagin, $ E(K)_{/ \mathrm{tors}} = \mathbb{Z} \cdot \tfrac{1}{n}P_K $. By Lemma $ (\tau) $,
+$$ \mathrm{rk}_\mathbb{Z} E(\mathbb{Q}) = \begin{cases} 1 & \epsilon = + \\ 0 & \epsilon = - \end{cases}. $$
+Finally, $ \#\Sha(E) < \infty $ follows from $ \#\Sha(E / K) < \infty $ by Kolyvagin.
+\end{proof}
+
+\end{frame}
+
+\begin{frame}[t]{A weaker version of Kolyvagin}
+
+\begin{theorem}[Kolyvagin '90]
+If $ \widehat{h}(P_K) \ne 0 $, then $ \mathrm{rk}_\mathbb{Z} E(K) = 1 $ and $ \#\Sha(E / K) < \infty $.
+\end{theorem}
+
+For any prime $ \ell $,
+$$ 0 \to E(K) / \ell E(K) \xrightarrow{\delta} \mathrm{Sel}_\ell(E / K) \to \Sha(E / K)[\ell] \to 0. $$
+Choose any prime $ \ell \nmid 6ND $ such that $ \overline{\rho_{E, \ell}} $ is surjective and $ P_K \notin \ell E(K) $. Then $ E(K)[\ell] = 0 $, so $ \mathrm{rk}_{\mathbb{Z}} E(K) = \dim_{\mathbb{F}_\ell} E(K) / \ell E(K) $.
+
+\begin{theorem}[weak Kolyvagin '90]
+$ \mathrm{Sel}_\ell(E / K) = \mathbb{F}_\ell \cdot \delta(P_K) $, so $ \mathrm{rk}_\mathbb{Z} E(K) \le 1 $ and $ \#\Sha(E / K)[\ell] < \infty $.
+\end{theorem}
+
+\vspace{0.5cm} When $ E $ has no complex multiplication, this excludes finitely many primes by Serre's theorem, so this proves that $ \widehat{h}(P_K) \ne 0 $ implies $ \mathrm{rk}_\mathbb{Z} E(K) = 1 $. Kolyvagin proves $ \#\Sha(E / K) < \infty $ by refining the argument for these primes and bounding the $ \ell $-primary components using Iwasawa theory.
+
+\end{frame}
+
+\begin{frame}[t]{Selmer structures}
+
+Let $ M $ be a discrete finite irreducible self-dual $ \mathbb{F}_\ell[G_K] $-module.
+
+\vspace{0.5cm} The inflation-restriction exact sequence says
+$$ 0 \to H^1(G_p^{\mathrm{ur}}, M^{I_p}) \to H^1(K_p, M) \to H^1(I_p, M)^{G_p^{\mathrm{ur}}} \to 0. $$
+For $ M = E[\ell] $ and good $ p \nmid \ell $, this can be identified with
+$$ 0 \to E(K_p) / \ell E(K_p) \to H^1(K_p, E[\ell]) \to H^1(K_p, E)[\ell] \to 0. $$
+More generally, a \textbf{Selmer structure} for $ (K, M) $ is an assignment
+$$ p \longmapsto H_f^1(K_p, M) \subseteq H^1(K_p, M), $$
+such that $ H_f^1(K_p, M) = H^1(G_p^{\mathrm{ur}}, M^{I_p}) $ for all but finitely many places $ p $ of $ K $. Its associated \textbf{singular quotient} $ H_s^1(K_p, M) $ sits in
+$$ 0 \to H_f^1(K_p, M) \to H^1(K_p, M) \xrightarrow{(\cdot)^s} H_s^1(K_p, M) \to 0. $$
+
+\end{frame}
+
+\begin{frame}[t]{Selmer groups}
+
+The \textbf{Selmer group} $ \mathrm{Sel} := \mathrm{Sel}(K, M) $ sits in
+$$ 0 \to \mathrm{Sel}(K, M) \to H^1(K, M) \xrightarrow{\prod_p (\cdot)_p^s} \prod_p H_s^1(K_p, M). $$
+For $ M = E[\ell] $ and $ H_f^1(K_p, M) = E(K_p) / \ell E(K_p) $, this is just $ \mathrm{Sel}_\ell(E / K) $.
+
+\vspace{0.5cm} Let $ S $ be a finite set of places of $ K $.
+\begin{itemize}
+\item The \textbf{relaxed Selmer group} $ \mathrm{Sel}^S := \mathrm{Sel}^S(K, M) $ sits in
+$$ 0 \to \mathrm{Sel}(K, M) \to \mathrm{Sel}^S(K, M) \xrightarrow{\bigoplus_{p \in S} (\cdot)_p^s} \bigoplus_{p \in S} H_s^1(K_p, M). $$
+\item The \textbf{restricted Selmer group} $ \mathrm{Sel}_S := \mathrm{Sel}_S(K, M) $ sits in
+$$ 0 \to \mathrm{Sel}_S(K, M) \to \mathrm{Sel}(K, M) \xrightarrow{\bigoplus_{p \in S} (\cdot)_p} \bigoplus_{p \in S} H_f^1(K_p, M). $$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[t]{Duality of Selmer groups}
+
+\begin{corollary}[of Tate duality]
+\vspace{-0.5cm}
+$$
+\begin{tikzcd}[ampersand replacement=\&, column sep=small, row sep=0.1in]
+0 \arrow{r} \& \mathrm{Sel} \arrow{r} \& \mathrm{Sel}^S \arrow{r} \& \displaystyle\bigoplus_{p \in S} H_s^1(K_p, M) \arrow[dash]{d}{\mid} \& \& \& \\
+\& \& \& \displaystyle\bigoplus_{p \in S} H_f^1(K_p, M)^\vee \arrow{r} \& \mathrm{Sel}^\vee \arrow{r} \& \mathrm{Sel}_S^\vee \arrow{r} \& 0.
+\end{tikzcd}
+$$
+\vspace{-0.5cm}
+\end{corollary}
+
+\begin{proof}
+Local Tate duality gives a perfect pairing $ H_s^1(K_p, M) \times H_f^1(K_p, M) \to \mathbb{F}_\ell $. The Poitou-Tate exact sequence gives exactness at
+$$ \mathrm{Sel}^S \to \bigoplus_{p \in S} H^1(K_p, M) \to \mathrm{Sel}^{S\vee}. $$
+Now apply the snake lemma and diagram chase.
+\end{proof}
+
+\end{frame}
+
+\begin{frame}[t]{Complex conjugation on Selmer groups}
+
+To compute $ \mathrm{Sel} $, it suffices to consider the last three terms
+$$ 0 \to \mathrm{coker}\left(\mathrm{Sel}^S \to \displaystyle\bigoplus_{p \in S} H_s^1(K_p, M)\right) \to \mathrm{Sel}^\vee \to \mathrm{Sel}_S^\vee \to 0, $$
+for some appropriate finite set of places $ S $ of $ K $.
+
+\vspace{0.5cm} If $ \tau \in G_\mathbb{Q} $ is an involution with non-zero eigenspaces $ M^+ $ and $ M^- $, then
+$$ 0 \to \mathrm{coker}\left(\mathrm{Sel}^{S_1+} \to \displaystyle\bigoplus_{p \in S_1} H_s^1(K_p, M)^+\right) \to \mathrm{Sel}^{+\vee} \to \mathrm{Sel}_{S_1}^{+\vee} \to 0, $$
+$$ 0 \to \mathrm{coker}\left(\mathrm{Sel}^{S_2-} \to \displaystyle\bigoplus_{p \in S_2} H_s^1(K_p, M)^-\right) \to \mathrm{Sel}^{-\vee} \to \mathrm{Sel}_{S_2}^{-\vee} \to 0, $$
+for some appropriate finite sets of places $ S_1 $ and $ S_2 $ of $ K $.
+
+\end{frame}
+
+\begin{frame}[t]{Computing Selmer groups}
+
+Now consider $ M = E[\ell] $.
+
+\begin{corollary}[of Chebotarev density]
+There is a finite set $ S $ of primes of $ \mathbb{Q} $ inert in $ K $ such that
+$$ \mathrm{coker}\Biggl(\underbrace{\mathrm{Sel}^{S-\epsilon}}_{\bigoplus_{p \in S} \mathbb{F}_\ell \cdot c(p)_p^s} \to \bigoplus_{p \in S} \underbrace{H^1(K_p, E)[\ell]^{-\epsilon}}_{\mathbb{F}_\ell \cdot c(p)_p^s}\Biggr) \to \mathrm{Sel}^{-\epsilon\vee} \to \underbrace{\mathrm{Sel}_S^{-\epsilon\vee}}_0. $$
+For any $ p \in S $, there is a finite set $ S_p $ of primes of $ \mathbb{Q} $ inert in $ K $ such that
+$$ \mathrm{coker}\Biggl(\underbrace{\mathrm{Sel}^{S_p\epsilon}}_{\bigoplus_{q \in S_p} \mathbb{F}_\ell \cdot c(pq)_q^s} \to \bigoplus_{q \in S_p} \underbrace{H^1(K_p, E)[\ell]^\epsilon}_{\mathbb{F}_\ell \cdot c(pq)_q^s}\Biggr) \to \mathrm{Sel}^{\epsilon\vee} \to \underbrace{\mathrm{Sel}_{S_p}^{\epsilon\vee}}_{\mathbb{F}_\ell \cdot \delta(P_K)} \to 0. $$
+\vspace{-0.5cm}
+\end{corollary}
+
+\begin{proof}
+Chebotarev density and a lot of Galois cohomology.
+\end{proof}
+
+\end{frame}
+
+\begin{frame}[t]{Derivative operators}
+
+The classes $ c(n) \in H^1(K, E[\ell]) $ are derived from $ P_n \in E(H_n) $.
+
+\vspace{0.5cm} It suffices to let $ n $ be a product of primes $ p \nmid ND\ell $ inert in $ K $, so
+$$ \mathrm{Gal}(H_n / H_1) \cong \prod_{p \mid n} \mathrm{Gal}(H_p / H_1) \cong \prod_{p \mid n} \mathbb{Z} / (p + 1)\mathbb{Z} \cdot \sigma_p. $$
+Define the \textbf{derivative operator} $ D_n \in \mathbb{Z}[\mathrm{Gal}(H_n / H_1)] $ by
+$$ D_n := \prod_{p \mid n} D_p, $$
+where $ D_p $ is any solution to $ (\sigma_p - 1)D_p = p + 1 - \mathrm{Tr}_{H_1}^{H_p} $, and define
+$$ \mathcal{P}_n := \sum_{\tau \in T_n} \tau(D_nP_n), $$
+where $ T_n $ is a set of coset representatives for $ \mathrm{Gal}(H_n / H_1) $ in $ \mathrm{Gal}(H_n / K) $.
+
+\end{frame}
+
+\begin{frame}[t]{Derived classes}
+
+\begin{lemma}
+The class of $ \mathcal{P}_n $ in $ E(H_n) / \ell E(H_n) $ is invariant under the action of $ G_n := \mathrm{Gal}(H_n / K) $ and lies in the $ \epsilon_n := \epsilon \cdot (-1)^{\sigma_0(n)} $ eigenspace.
+\end{lemma}
+
+\begin{proof}
+Norm compatibilities and Lemma $ (\tau) $.
+\end{proof}
+
+\vspace{0.5cm} Define the \textbf{derived class} $ c(n) \in H^1(K, E[\ell])^{\epsilon_n} $ by $ \mathrm{res}_n(c(n)) = \delta_n(\mathcal{P}_n) $ in
+$$
+\begin{tikzcd}[ampersand replacement=\&, column sep=small, row sep=small]
+\& H^1(G_n, E(H_n)[\ell])^{\epsilon_n} = 0 \arrow{d}{\mathrm{inf}_n} \& \\
+H_f^1(K, E[\ell])^{\epsilon_n} \arrow{r}{\delta} \arrow{d} \& H^1(K, E[\ell])^{\epsilon_n} \arrow{r} \arrow{d}{\mathrm{res}_n} \& H_s^1(K, E[\ell])^{\epsilon_n} \arrow{d} \\
+H_f^1(H_n, E[\ell])^{G_n\epsilon_n} \arrow{r}[swap]{\delta_n} \& H^1(H_n, E[\ell])^{G_n\epsilon_n} \arrow{r} \arrow{d}{\mathrm{tra}_n} \& H_s^1(H_n, E[\ell])^{G_n\epsilon_n} \\
+\& H^2(G_n, E(H_n)[\ell])^{\epsilon_n} = 0 \&
+\end{tikzcd}.
+$$
+
+\end{frame}
+
+\begin{frame}[t]{Ramification of derived classes}
+
+\begin{lemma}
+\begin{enumerate}
+\item If $ p \nmid n $, then $ c(n)_p^s = 0 $, so $ c(n) \in \mathrm{Sel}^{\{p \mid n\}\epsilon_n} $.
+\item If $ p \mid n $, then $ c(n)_p^s = 0 $ if and only if $ \mathcal{P}_{n / p} \in \ell E(K_p) $.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[Proof of 1 for good $ p \nmid \ell $]
+Note that $ H_s^1(I_p, E[\ell]) = \mathrm{Hom}(I_p, E[\ell])^{G_p^{\mathrm{ur}}} $. Since $ (H_n)_p / K $ is unramified at $ p $, the inertia subgroups of $ K_p $ and $ (H_n)_p $ are both $ I_p $, so
+$$
+\begin{tikzcd}[ampersand replacement=\&, row sep=0.1in]
+H_f^1(K_p, E[\ell]) \arrow{r} \arrow{d} \& H^1(K_p, E[\ell]) \arrow{r}{(\cdot)^s} \arrow{d}{\mathrm{res}_n} \& \mathrm{Hom}(I_p, E[\ell]) \arrow[dash]{d}{\mid} \\
+H_f^1((H_n)_p, E[\ell]) \arrow{r}[swap]{\delta_n} \& H^1((H_n)_p, E[\ell]) \arrow{r}[swap]{(\cdot)^s} \& \mathrm{Hom}(I_p, E[\ell])
+\end{tikzcd}.
+$$
+Thus $ c(n)_p^s = (\mathrm{res}_n(c(n)_p))^s = 0 $ by exactness.
+\end{proof}
+
+\vspace{0.5cm} Note that 2 is precisely the reason for the assumption $ P_K \notin \ell E(K) $.
+
+\end{frame}
+
+\begin{frame}[t]{References}
+
+Different accounts of Kolyvagin's paper on Euler systems:
+\begin{itemize}
+\item K Rubin (1989) The work of Kolyvagin on the arithmetic of elliptic curves
+\item B Gross (1991) Kolyvagin's work on modular elliptic curves
+\item T Weston (2001) The Euler system of Heegner points
+\item H Darmon (2004) Rational points on modular elliptic curves
+\end{itemize}
+Relevant papers on non-vanishing of L-functions:
+\begin{itemize}
+\item J-L Waldspurger (1985) Sur les valeurs de certaines fonctions L automorphes en leur centre de symetrie
+\item D Bump, S Friedberg, and J Hoffstein (1990) Nonvanishing theorems for L-functions of modular forms
+and their derivatives
+\item M R Murty and V K Murty (1991) Mean values of derivatives of modular L-series
+\item M R Murty and V K Murty (1997) Non-vanishing of L-functions and applications
+\end{itemize}
+
+\end{frame}
+
+\end{document}

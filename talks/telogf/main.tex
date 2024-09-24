@@ -1,0 +1,341 @@
+\documentclass[10pt]{beamer}
+
+\setbeamertemplate{footline}[page number]
+
+\usetheme{Frankfurt}
+
+\usepackage{bbm}
+
+\newtheorem{conjecture}{Conjecture}
+
+\DeclareFontFamily{U}{wncyr}{}
+\DeclareFontShape{U}{wncyr}{m}{n}{<->wncyr10}{}
+\DeclareSymbolFont{cyr}{U}{wncyr}{m}{n}
+\DeclareMathSymbol{\Sha}{\mathord}{cyr}{"58}
+
+\title{Twisted elliptic L-values over global fields}
+
+\author[David Ang]{David Ang}
+
+\institute[LSGNT]{London School of Geometry and Number Theory}
+
+\date{\small Algebraic Number Theory \\ \vspace{0.5cm} \footnotesize Thursday, 5 September 2024}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{The BSD formula}
+
+\begin{frame}[t]{Twisted L-series}
+
+Let $ A $ be an abelian variety over a global field $ K $, and let $ \chi $ be a character of a finite group $ G $. \pause The \textbf{Artin--Hasse--Weil L-series} of $ (A, \chi) $ is
+$$ L(A, \chi, s) := \prod_\mathfrak{p} \dfrac{1}{L_\mathfrak{p}(\rho_{A, \ell}^\vee \otimes \chi, q_\mathfrak{p}^{-s})}, $$
+where $ L_\mathfrak{p}(\rho, T) := \det(1 - T \cdot \phi_\mathfrak{p} \mid \rho^{I_\mathfrak{p}}) $.
+
+\pause
+
+\vspace{0.5cm} If $ \chi = \mathbbm{1} $, then $ L(A, \chi, s) = L(A, s) $ is the \textbf{Hasse--Weil L-series} of $ A $.
+
+\pause
+
+\vspace{0.5cm} If $ L $ is a finite Galois extension of $ K $ with Galois group $ G $, then
+$$ L(A / L, s) = L(A, \mathrm{Ind}_{\{1\}}^G \mathbbm{1}, s) = \prod_\chi L(A, \chi, s), $$
+where $ \chi $ runs over all the irreducible characters $ \mathrm{Irr}(G) $ of $ G $.
+
+\end{frame}
+
+\begin{frame}[t]{The Birch--Swinnerton-Dyer conjecture}
+
+\begin{conjecture}[Birch--Swinnerton-Dyer]
+The order of vanishing of $ L(A, s) $ at $ s = 1 $ is equal to $ \mathrm{rk}(A) $. Furthermore, the leading term of $ L(A, s) $ at $ s = 1 $ is equal to
+$$ L^*(A, 1) = \dfrac{\Omega(A) \cdot \mathrm{Reg}(A) \cdot \mathrm{Tam}(A) \cdot \#\Sha(A)}{\sqrt{|\Delta_K|} \cdot \#\mathrm{tor}(A) \cdot \#\mathrm{tor}(\widehat{A})}. $$
+\end{conjecture}
+
+\pause
+
+This is known in some cases when $ A $ is an elliptic curve.
+
+\begin{itemize}
+\item If $ K = \mathbb{Q} $ and the order of vanishing is at most $ 1 $, then the rank conjecture is proven by Gross--Zagier 1986 and Kolyvagin 1988, and much of the $ \ell $-part of the leading term conjecture is proven by Keller--Yin 2024 and Burungale--Castella--Skinner 2024.
+\item If $ K = \mathbb{F}_p(C) $, then Kato--Trihan 2003 proved that the rank conjecture is equivalent to the finiteness of $ \Sha(A)[\ell^\infty] $ for some prime $ \ell \ne p $ and implies the leading term conjecture.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[t]{The Deligne--Gross conjecture}
+
+\begin{conjecture}[Deligne--Gross]
+The order of vanishing of $ L(A, \chi, s) $ at $ s = 1 $ is equal to $ \langle\chi, A(L)_\mathbb{C}\rangle $.
+\end{conjecture}
+
+\pause
+
+This is known in some cases when $ A $ is an elliptic curve over $ \mathbb{Q} $.
+
+\begin{itemize}
+\item If $ A $ has no potential complex multiplication, then Kato 2004 proved this for one-dimensional Artin representations.
+\item If the order of vanishing is $ 0 $, then Bertolini--Darmon--Rotger 2015 proved this for odd irreducible two-dimensional Artin representations.
+\item If the order of vanishing is $ 0 $, then Darmon--Rotger 2017 proved this for certain self-dual Artin representations of dimension at most $ 4 $.
+\end{itemize}
+
+\pause
+
+\begin{theorem}[Bisatt--Dokchitser 2018]
+Assume the Deligne--Gross conjecture. If $ \chi \in \mathrm{Irr}(C_q \rtimes C_{p^n}) $ with $ q \not\equiv 1 \mod p^n $, then $ p $ divides the order of vanishing of $ L(A, \chi, s) $ at $ s = 1 $.
+\end{theorem}
+
+\end{frame}
+
+\begin{frame}[t]{A twisted leading term conjecture}
+
+There seems to be a barrier to a leading term conjecture for $ L(A, \chi, s) $.
+
+\pause
+
+\begin{example}
+Let $ A_1 $ and $ A_2 $ be elliptic curves over $ \mathbb{Q} $ given by Cremona labels 1356d1 and 1356f1, and let $ \chi $ be the primitive Dirichlet character of conductor $ 7 $ and order $ 3 $ given by $ \chi(3) = \zeta_3^2 $. \pause Then
+$$ \mathrm{Reg}(A_i / K) = \mathrm{Tam}(A_i / K) = \Sha(A_i / K) = \mathrm{tor}(A_i / K) = 1, $$
+for $ K = \mathbb{Q} $ and $ K = \mathbb{Q}(\zeta_7)^+ $, but $ \mathcal{L}(A_1, \chi) = \zeta_3^2 $ and $ \mathcal{L}(A_2, \chi) = -\zeta_3^2 $.
+\end{example}
+
+\pause
+
+\begin{theorem}[Dokchitser--Evans--Wiersema 2021]
+Assume there is a conjecture $ \mathcal{L}(A, \chi) = \mathrm{BSD}(A, \chi) $ for a semistable elliptic curve $ A $ over $ \mathbb{Q} $. If $ \chi \in \mathrm{Irr}(D_{pq}) $ with $ p \equiv q \equiv 3 \mod 4 $, then $ \langle\chi, A(L)_\mathbb{C}\rangle > 0 $ if the order of vanishing of $ L(A, \chi, s) $ at $ s = 1 $ is odd.
+\end{theorem}
+
+\end{frame}
+
+\section{Algebraic L-values}
+
+\begin{frame}[t]{Algebraic L-values}
+
+Define the \textbf{algebraic L-value} of $ A $ by
+$$ \mathcal{L}(A) := \dfrac{L^*(A, 1)}{\Omega(A) \cdot \mathrm{Reg}(A)}. $$
+
+\pause
+
+If $ L(A, 1) \ne 0 $, then
+$$ \mathcal{L}(A) = \dfrac{L(A, 1)}{\Omega(A)}. $$
+
+\pause
+
+If $ A $ is an elliptic curve over $ \mathbb{Q} $, then modularity gives
+$$ -(1 + p - a_p(A)) \cdot L(f_A, 1) = \sum_{n = 1}^{p - 1} \int_0^{\tfrac{n}{p}} f_A(q)\mathrm{d}q, $$
+which is a rational multiple of $ \Omega(A) $.
+
+\pause
+
+\vspace{0.5cm} In general, the algebraicity of $ \mathcal{L}(A) $ is Deligne's period conjecture.
+
+\end{frame}
+
+\begin{frame}[t]{Deligne's period conjecture}
+
+A motive $ M $ over a global field $ K $ is a collection of $ K $-vector space realisations $ H_B(M) $, $ H_{dR}(M) $, $ H_\lambda(M) $, and $ H_p(M) $, equipped with comparison isomorphisms between their complexifications.
+
+\pause
+
+\begin{conjecture}[Deligne]
+Let $ M $ be a critical motive over a number field $ K $ such that $ L(M, 0) \ne 0 $. Then there is some $ x \in K^\times $ such that
+$$ L(M, 0) = x^\sigma \cdot c^+(M), \qquad \sigma \in \mathrm{Gal}(K / \mathbb{Q}). $$
+\end{conjecture}
+
+Here, $ c^+(M) $ is the determinant of the period map
+$$ H_B(M)^+ \otimes \mathbb{C} \hookrightarrow H_B(M) \otimes \mathbb{C} \xrightarrow{\sim} H_{dR}(M) \otimes \mathbb{C} \twoheadrightarrow H_{dR}(M)^+ \otimes \mathbb{C}. $$
+
+\pause
+
+If $ M = h^1(A)(1) $, then this says that there is some $ x \in \mathbb{Q}^\times $ such that
+$$ L(A, 1) = x \cdot \Omega(A). $$
+
+\end{frame}
+
+\begin{frame}[t]{Algebraic twisted L-values}
+
+Define the \textbf{algebraic twisted L-value} of $ (A, \chi) $ by
+$$ \mathcal{L}(A, \chi) := \dfrac{L^*(A, \chi, 1)}{\Omega(A, \chi) \cdot \mathrm{Reg}(A, \chi)}. $$
+
+\pause
+
+Define the twisted period of $ (A, \chi) $ by
+$$ \Omega(A, \chi) := \dfrac{\Omega_+(A)^{\dim^+(\chi)} \cdot \Omega_-(A)^{\dim^-(\chi)} \cdot w_\chi^{\dim(A)}}{\sqrt{N_\chi}^{\dim(A)}}. $$
+
+\pause
+
+Define the twisted regulator of $ (A, \chi) $ by
+$$ \mathrm{Reg}(A, \chi) := \det(\langle e_i(\chi), e_j(\widehat{\chi}) \rangle)_{i, j}, $$
+where $ \{e_i(\chi)\}_i $ is a basis of
+$$ A(L)[\chi] := \mathrm{Hom}_{\mathbb{Z}[\chi]}(\rho_\chi, A(L) \otimes_\mathbb{Z} \mathbb{Z}[\chi])^{\mathrm{Gal}(L / K)}. $$
+
+\end{frame}
+
+\begin{frame}[t]{Algebraicity of twisted L-values}
+
+If $ L(A, \chi, 1) \ne 0 $, then $ \mathrm{Reg}(A, \chi) = 1 $. Then Deligne's period conjecture for $ M = h^1(A)(1) \otimes \chi $ says that there is some $ x \in \mathbb{Q}(\chi)^\times $ such that
+$$ L(A, \chi^\sigma, 1) = x^\sigma \cdot \Omega(A, \chi^\sigma), \qquad \sigma \in \mathrm{Gal}(\mathbb{Q}(\chi) / \mathbb{Q}). $$
+
+\pause
+
+Thus $ \mathcal{L}(A, \chi^\sigma) = \mathcal{L}(A, \chi)^\sigma $ for all $ \sigma \in \mathrm{Gal}(\mathbb{Q}(\chi) / \mathbb{Q}) $.
+
+\pause
+
+\begin{theorem}[Bouganis--Dokchitser 2007, Wiersema--Wuthrich 2021]
+Let $ L $ be a finite abelian extension of $ \mathbb{Q} $ with Galois group $ G $, and let $ A $ be an elliptic curve over $ \mathbb{Q} $ such that $ L(A, \chi, 1) \ne 0 $. Then for any non-trivial $ \chi \in \mathrm{Irr}(G) $ such that $ (N_\chi, N_A) = 1 $,
+$$ \mathcal{L}(A, \chi^\sigma) = \mathcal{L}(A, \chi)^\sigma, \qquad \sigma \in \mathrm{Gal}(\mathbb{Q}(\chi) / \mathbb{Q}). $$
+Furthermore, $ \mathcal{L}(A, \chi) \in \mathbb{Z}[\chi] $ assuming that $ c_1(A) = 1 $.
+\end{theorem}
+
+\pause
+
+Castillo--Evans--Wiersema 2023 gave numerical evidence for $ A = \mathrm{Jac}(C) $.
+
+\end{frame}
+
+\section{A twisted BSD formula}
+
+\begin{frame}[t]{Ideals of twisted L-values}
+
+The ideal generated by $ \mathcal{L}(A, \chi) $ has a conjectural twisted BSD formula.
+
+\pause
+
+\begin{theorem}[Burns--Castillo 2019]
+Let $ L $ be a finite Galois extension of $ \mathbb{Q} $ with Galois group $ G $, and let $ A $ be an abelian variety over $ \mathbb{Q} $ such that $ (\Delta_L, N_A) = 1 $. Assume that the refined Birch--Swinnerton-Dyer conjecture holds for $ (A, L, \mathbb{Q}) $. Let $ \chi \in \mathrm{Irr}(G) $, and let $ \lambda $ be a prime of $ \mathbb{Q}(\chi) $ not dividing
+$$ 2, \quad |G|, \quad \Delta_L, \quad N_A, \quad \mathrm{Tam}(A), \quad \#\mathrm{tor}(A / L), \quad \#\mathrm{tor}(\widehat{A} / L). $$
+
+\pause
+
+Then there is an equality of fractional $ \mathbb{Z}[\chi]_\lambda $-ideals
+$$ \mathcal{L}(A, \chi) \cdot \mathbb{Z}[\chi]_\lambda = \dfrac{\mathrm{char}_\lambda(\Sha(A / L, \chi))}{\prod_{v \mid \Delta_L} L_v(A, \chi, 1)}. $$
+\end{theorem}
+
+Here, $ \Sha(A / L, \chi) := \mathrm{Hom}_{\mathbb{Z}[\chi]}(\rho_\chi, \Sha(A / L) \otimes_\mathbb{Z} \mathbb{Z}[\chi])^{\mathrm{Gal}(L / K)} $.
+
+\end{frame}
+
+\begin{frame}[t]{Norms of twisted L-values}
+
+The norm of $ \mathcal{L}(A, \chi) $ has a conjectural expression when $ L(A, \chi, 1) \ne 0 $.
+
+\pause
+
+\begin{theorem}[Dokchitser--Evans--Wiersema 2021]
+Let $ L $ be a finite abelian extension of $ \mathbb{Q} $ with Galois group $ G $, and let $ A $ be an elliptic curve over $ \mathbb{Q} $ such that $ c_1(A) = 1 $. Assume that the Birch--Swinnerton-Dyer conjecture holds for $ (A, L) $ and $ (A, \mathbb{Q}) $. Let $ \chi \in \mathrm{Irr}(G) $ have odd prime conductor $ p \nmid N_A $ and odd prime order $ q \nmid \#A(\mathbb{F}_p) \cdot \mathcal{L}(A) $ such that $ L(A, \chi, 1) \ne 0 $. \pause Then
+$$ \mathrm{Nm}_\mathbb{Q}^{\mathbb{Q}(\zeta_q)^+}(\mathcal{L}(A, \chi) \cdot \zeta) = B(K), $$
+where $ \zeta := \chi(N_A)^{(q - 1) / 2} $ and $ K $ is the subfield of $ \mathbb{Q}(\zeta_p) $ cut out by $ \chi $.
+\end{theorem}
+
+Here,
+$$ B(K) := \dfrac{\#\mathrm{tor}(A)}{\#\mathrm{tor}(A / K)}\sqrt{\dfrac{\mathrm{Tam}(A / K) \cdot \#\Sha(A / K)}{\mathrm{Tam}(A) \cdot \#\Sha(A)}}. $$
+
+\end{frame}
+
+\begin{frame}[t]{Values of twisted L-values}
+
+The value of $ \mathcal{L}(A, \chi) $ can be predicted precisely when $ \chi $ is cubic.
+
+\pause
+
+\begin{theorem}[A. 2023]
+Let $ L $ be a finite abelian extension of $ \mathbb{Q} $ with Galois group $ G $, and let $ A $ be an elliptic curve over $ \mathbb{Q} $ such that $ c_1(A) = 1 $. Assume that the Birch--Swinnerton-Dyer conjecture holds for $ (A, L) $ and $ (A, \mathbb{Q}) $. Let $ \chi \in \mathrm{Irr}(G) $ have odd prime conductor $ p \nmid N_A $ and order $ 3 \nmid \#A(\mathbb{F}_p) \cdot \mathcal{L}(A) $ such that $ L(A, \chi, 1) \ne 0 $. \pause Then
+$$ \mathcal{L}(A, \chi) \cdot \zeta = \begin{cases} B(K) & \text{if} \ \#A(\mathbb{F}_p) \cdot \mathcal{L}(A) \cdot B(K)^{-1} \equiv 2 \mod 3 \\ -B(K) & \text{if} \ \#A(\mathbb{F}_p) \cdot \mathcal{L}(A) \cdot B(K)^{-1} \equiv 1 \mod 3 \end{cases}, $$
+where $ \zeta := \chi(N_A)^{(q - 1) / 2} $.
+\end{theorem}
+
+\pause
+
+This follows from $ -\#A(\mathbb{F}_p) \cdot \mathcal{L}(A) \equiv \mathcal{L}(A, \chi) \mod (1 - \zeta_q) $, which arises from a congruence in Manin's formalism for classical modular symbols.
+
+\end{frame}
+
+\begin{frame}[t]{Example of twisted L-values}
+
+This explains a barrier to a leading term conjecture for $ L(A, \chi, s) $.
+
+\pause
+
+\begin{example}
+Let $ A_1 $ and $ A_2 $ be elliptic curves over $ \mathbb{Q} $ given by Cremona labels 1356d1 and 1356f1, and let $ \chi $ be the primitive Dirichlet character of conductor $ 7 $ and order $ 3 $ given by $ \chi(3) = \zeta_3^2 $. Then
+$$ \mathcal{L}(A_1, \chi) = \zeta_3^2, \qquad \mathcal{L}(A_2, \chi) = -\zeta_3^2. $$
+
+\pause
+
+Now Dokchitser--Evans--Wiersema 2021 says that
+$$ \mathcal{L}(A_i, \chi) = \pm\chi(1356)^2 = \pm\zeta_3^2. $$
+
+\pause
+
+On the other hand $ \#A_1(\mathbb{F}_7) = 11 $ and $ \#A_2(\mathbb{F}_7) = 7 $, so A. 2023 says that
+$$ \mathcal{L}(A_1, \chi) \equiv -\#A_1(\mathbb{F}_7) \equiv 1 \equiv \zeta_3^2 \mod (1 - \zeta_3), $$
+$$ \mathcal{L}(A_2, \chi) \equiv -\#A_2(\mathbb{F}_7) \equiv -1 \equiv -\zeta_3^2 \mod (1 - \zeta_3). $$
+\end{example}
+
+\end{frame}
+
+\section{Global function fields}
+
+\begin{frame}[t]{Algebraic twisted L-values}
+
+Now let $ A $ be an abelian variety over a global function field $ K = \mathbb{F}_p(C) $. \pause By the Grothendieck--Lefschetz trace formula,
+$$ L(A, \chi, s) = \prod_{i = 0}^2 \det(1 - p^{-s} \cdot \phi_p \mid H_{\text{\'et}, c}^i(\overline{C}, \mathcal{F}))^{(-1)^{i + 1}}, $$
+where $ \mathcal{F} $ is the constructible sheaf on $ C $ given by the pushforward of the lisse sheaf $ V_\ell(A) \otimes \rho_\chi $ defined over any unramified open subset of $ C $.
+
+\pause
+
+\vspace{0.5cm} Since $ L(A, \chi, s) $ is already algebraic, define $ \mathcal{L}(A, \chi) := L^*(A, \chi, 1) $.
+
+\pause
+
+\begin{theorem}[A. 2024]
+Let $ L $ be a finite Galois extension of $ K = \mathbb{F}_p(C) $ with Galois group $ G $, and let $ A $ be an abelian variety over $ K $. Then for any $ \chi \in \mathrm{Irr}(G) $,
+$$ \mathcal{L}(A, \chi^\sigma) = \mathcal{L}(A, \chi)^\sigma, \qquad \sigma \in \mathrm{Gal}(\mathbb{Q}(\chi) / \mathbb{Q}). $$
+\end{theorem}
+
+\end{frame}
+
+\begin{frame}[t]{Ideals of twisted L-values}
+
+The ideal generated by $ \mathcal{L}(A, \chi) $ has a conjectural twisted BSD formula.
+
+\pause
+
+\begin{theorem}[Kim--Tan--Trihan--Tsoi 2024]
+Let $ L $ be a finite Galois extension of $ K = \mathbb{F}_p(C) $ with Galois group $ G $, and let $ A $ be an abelian variety over $ K $. Assume that $ \Sha(A / L) $ is finite. Let $ \chi \in \mathrm{Irr}(G) $, and let $ \lambda $ be a prime of $ \mathbb{Q}(\chi) $ not dividing
+$$ p, \qquad |G|, \qquad \mathrm{Tam}(A), \qquad \#\mathrm{tor}(A / L), \qquad \#\mathrm{tor}(\widehat{A} / L). $$
+
+\pause
+
+Then there is an equality of fractional $ \mathbb{Z}[\chi]_\lambda $-ideals
+$$ \mathcal{L}(A, \chi) \cdot \mathbb{Z}[\chi]_\lambda = \dfrac{\mathrm{Reg}_\lambda(A, \chi) \cdot \mathrm{char}_\lambda(\Sha_\lambda(A / L, \chi))}{\prod_{v \mid \Delta_L} L_v(A, \chi, 1)}. $$
+\end{theorem}
+
+This involves the $ \mathbb{Z}[\chi]_\lambda $-modules $ \mathrm{Reg}_\lambda(A, \chi) $ and $ \Sha_\lambda(A / L, \chi) $, which are necessary to generalise the statement to primes $ \lambda $ of $ \mathbb{Q}(\chi) $ dividing $ p $.
+
+\end{frame}
+
+\begin{frame}[t]{Values of twisted L-values}
+
+Can we predict the value of $ \mathcal{L}(A, \chi) $ analogous to A. 2023?
+
+\pause
+
+\vspace{0.5cm} I am currently working on this.
+
+\pause
+
+\vspace{0.5cm} If $ A $ is an elliptic curve over $ \mathbb{Q} $, then modularity gives a congruence of classical modular symbols, which proves A. 2023. \pause In contrast, there are modularity results for abelian varieties over $ K = \mathbb{F}_p(C) $, due to the global Langlands conjectures proven by Drinfeld 1989 and Lafforgue 1998.
+
+\pause
+
+\vspace{0.5cm} On the other hand, $ L(A, \chi, s) $ is already a rational function in $ p^{-s} $ with coefficients in $ \mathbb{Q}(\chi) $, which can be determined by investigating the action of $ \phi_p $ on $ H_{\text{\'et}, c}^i(\overline{C}, \mathcal{F}) $. \pause In fact, $ L(A, \chi, s) $ is a polynomial in $ p^{-s} $ with coefficients in $ \mathbb{Z}[\chi] $ under certain conditions on $ (A, \chi) $.
+
+\pause
+
+\vspace{0.5cm} Can we understand the action of $ \phi_p $ from the geometry of $ (A, \chi) $?
+
+\end{frame}
+
+\end{document}

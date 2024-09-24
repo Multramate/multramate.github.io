@@ -1,0 +1,261 @@
+\documentclass[10pt]{beamer}
+
+\setbeamertemplate{footline}[page number]
+
+\usetheme{berkeley}
+
+\usepackage{multirow}
+
+\title{Elliptic curves in mathlib}
+
+\author{David Ang}
+
+\institute{London School of Geometry and Number Theory}
+
+\date{Wednesday, 26 June 2024}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Overview}
+
+\begin{frame}[t]{Overview: definitions}
+
+Elliptic curves in \texttt{Mathlib/AlgebraicGeometry/EllipticCurve} are defined in terms of Weierstrass curves over a commutative ring $ R $.
+
+\begin{definition}[\texttt{WeierstrassCurve} in \texttt{Weierstrass.lean}]
+A \textbf{Weierstrass curve} $ W_R $ is a tuple $ (a_1, a_2, a_3, a_4, a_6) \in R^5 $.
+
+An \textbf{elliptic curve} $ E_R $ is a Weierstrass curve such that $ \Delta(a_i) \in R^\times $.
+\end{definition}
+
+\pause
+
+Their points are defined via the affine model.
+
+\begin{definition}[\texttt{WeierstrassCurve.Affine.Point} in \texttt{Affine.lean}]
+An \textbf{affine point} of $ W_R $ is a pair $ (x, y) \in R^2 $ such that $ W(x, y) = 0 $ and either $ W_X(x, y) \ne 0 $ or $ W_Y(x, y) \ne 0 $, where
+$$ W := Y^2 + a_1XY + a_3Y - (X^3 + a_2X^2 + a_4X^3 + a_6). $$
+
+The \textbf{points} $ W_R(R) $ are the affine points of $ W_R $ and a point at infinity.
+\end{definition}
+
+\end{frame}
+
+\begin{frame}[t]{Overview: files}
+
+Current:
+\begin{itemize}
+\item \texttt{Weierstrass.lean}
+\item \texttt{Affine.lean}
+\item \texttt{Projective.lean}
+\item \texttt{Jacobian.lean}
+\item \texttt{Group.lean}
+\item \texttt{DivisionPolynomial/Basic.lean}
+\item \texttt{DivisionPolynomial/Degree.lean}
+\end{itemize}
+
+Future:
+\begin{itemize}
+\item \texttt{Universal.lean}
+\item \texttt{DivisionPolynomial/Group.lean}
+\item \texttt{Torsion.lean}
+\item \texttt{Scheme.lean} (NEW!)
+\end{itemize}
+
+\end{frame}
+
+\section{Group law}
+
+\begin{frame}[t]{Group law: theorem}
+
+\begin{theorem}[in \texttt{Group.lean}]
+If $ F $ is a field, then $ W_F(F) $ is an abelian group under an addition law.
+\end{theorem}
+
+\pause
+
+\vspace{0.5cm}
+
+Elementary proofs of associativity:
+\begin{itemize}
+\item polynomial manipulation via \texttt{ring}
+
+\pause
+
+\item geometric argument via B\'ezout's theorem
+\end{itemize}
+
+\pause
+
+Proofs by identification with known groups:
+\begin{itemize}
+\item a quotient $ \mathbb{C} / \Lambda $ of the complex numbers by a lattice
+
+\pause
+
+\item the group of degree-zero Weil divisors $ \mathrm{Pic}^0(W_F) $
+
+\pause
+
+\item the ideal class group $ \mathrm{Cl}(F[W_F]) $ of the coordinate ring
+\end{itemize}
+
+\pause
+
+Junyan gave an pure algebraic proof via norms.
+
+\end{frame}
+
+\begin{frame}[t]{Group law: formalisation}
+
+Define
+$$
+\begin{array}{rcrcl}
+\phi & : & W_F(F) & \longrightarrow & \mathrm{Cl}(F[W_F]) \\
+& & 0 & \longmapsto & [\langle 1 \rangle] \\
+& & (x, y) & \longmapsto & [\langle X - x, Y - y \rangle]
+\end{array}.
+$$
+
+\pause
+
+Note that $ F[W_F] $ is a free algebra over $ F[X] $ with basis $ \{1, Y\} $, so it has a norm given by $ \mathrm{Nm}(p + qY) = \det([\cdot (p + qY)]) $. \pause On one hand,
+$$ \deg(\mathrm{Nm}(p + qY)) = \max(2\deg(p), 2\deg(q) + 3) \ne 1. $$
+
+\pause
+
+On the other hand, $ F[W_F] / \langle p + qY\rangle \cong F[X] / \langle p\rangle \oplus F[X] / \langle q\rangle $, so
+$$ \deg(\mathrm{Nm}(p + qY)) = \deg(pq) = \dim(F[W_F] / \langle p + qY\rangle). $$
+
+\pause
+
+Thus if $ \langle X - x, Y - y \rangle = \langle p + qY\rangle $, then
+$$ F[W_F] / \langle p + qY\rangle = F[X, Y] / \langle W(X, Y), X - x, Y - y\rangle \cong F, $$
+which contradicts $ \dim(F[W_F] / \langle p + qY\rangle) \ne 1 $.
+
+\end{frame}
+
+\section{Torsion subgroup}
+
+\begin{frame}[t]{Torsion subgroup: theorem}
+
+\begin{theorem}[in \texttt{Torsion.lean}]
+If $ F $ is a field where $ n \ne 0 $, then $ E_F(\overline{F})[n] \cong (\mathbb{Z} / n\mathbb{Z})^2 $.
+\end{theorem}
+
+\pause
+
+\vspace{0.5cm}
+
+Some standard proofs:
+\begin{itemize}
+\item identification with $ (\mathbb{C} / \Lambda)[n] $
+
+\pause
+
+\item induced map of isogenies on $ \mathrm{Pic}^0(E_{\overline{F}}) $
+
+\pause
+
+\item existence of polynomials $ \psi_n, \phi_n, \omega_n \in \overline{F}[X, Y] $ such that
+$$ [n](x, y) = \left(\dfrac{\phi_n(x)}{\psi_n(x)^2}, \dfrac{\omega_n(x, y)}{\psi_n(x, y)^3}\right) $$
+and a proof that $ \deg(\psi_n^2) = n^2 - 1 $
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[t]{Torsion subgroup: formalisation}
+
+The latter proof turned out to be incredibly tricky.
+
+\pause
+
+\begin{itemize}
+\item The identity holds in the universal ring $ \mathbb{Z}[A_i, X, Y] / \langle W\rangle $, so needs a specialisation map or projective coordinates
+
+\pause
+
+\item The definition of $ \psi_n $ is strong even-odd recursive with five base cases and an awkward even case, so proofs are very lengthy
+
+\pause
+
+\item The definition of $ \omega_n $ is very elusive, and seemingly involves division by two in characteristic two
+
+\pause
+
+\item The polynomials $ \phi_n $ and $ \psi_n^2 $ are bivariate, so needs a conversion to univariate polynomials for degree computations
+
+\pause
+
+\item The identity cannot be proven directly via induction, and needs elliptic divisibility sequences and elliptic nets
+\end{itemize}
+
+\pause
+
+These have been formalised in \texttt{Projective.lean}, \texttt{Jacobian.lean}, \texttt{DivisionPolynomial/*.lean}, and \texttt{Universal.lean}. These also use lemmas in \texttt{Algebra/Polynomial/Bivariate.lean} and \texttt{NumberTheory/EllipticDivisibilitySequence.lean}
+
+\end{frame}
+
+\section{Progress}
+
+\begin{frame}[t]{Progress: current}
+
+Already in master:
+\begin{itemize}
+\item Weierstrass curves and variable changes of standard quantities
+\item elliptic curves with prescribed j-invariant
+\item affine group law and functoriality of base change
+\item Jacobian group law and equivalence with affine group law
+\item division polynomials and degree computations
+\end{itemize}
+
+\pause
+
+Already in branches:
+\begin{itemize}
+\item Galois theory on points and n-torsion points
+\item projective group law and equivalence with affine group law
+\item the coordinate ring and other universal constructions
+\item elliptic divisibility sequences and elliptic nets
+\item multiplication by n in terms of division polynomials
+\item structure of the n-torsion subgroup and the Tate module
+\item the affine scheme associated to an elliptic curve
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[t]{Progress: future}
+
+Projects without algebraic geometry:
+\begin{itemize}
+\item algorithms that only use the group law
+\item finite fields: the Hasse--Weil bound, the Weil conjectures
+\item local fields: the reduction homomorphism, Tate's algorithm, the Neron--Ogg--Shafarevich criterion, the Hasse--Weil L-function
+\item number fields: Neron-Tate heights, the Mordell--Weil theorem, Tate--Shafarevich groups, the Birch--Swinnerton-Dyer conjecture
+\item complete fields: complex uniformisation, p-adic uniformisation
+\end{itemize}
+
+\pause
+
+Projects with algebraic geometry:
+\begin{itemize}
+\item elliptic curves over global function fields
+\item the projective scheme associated to an elliptic curve
+\item integral models and finite flat group schemes
+\item divisors on curves and the Riemann--Roch theorem
+\item modular curves and Mazur's theorem
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+
+\begin{center}
+\Huge THANK YOU!
+\end{center}
+
+\end{frame}
+
+\end{document}
