@@ -10,15 +10,17 @@
   <body>
     <div class="terminal">
       data <a href="{back}"> David </a>
-      | <a href="{back}projects/"> Projects </a>
+      = <a href="{back}projects/"> Projects </a>
       | <a href="{back}talks/"> Talks </a>
+      | <a href="{back}conferences/"> Conferences </a>
+      | <a href="{back}teaching/"> Teaching </a>
       | <a href="{back}notes/"> Notes </a>
     </div>
     <div class="header">
       {head}
     </div>
     <div class="terminal">
-      <a href="https://www.haskell.org/ghc/"> GHCi, </a> {version}: <a href="https://www.haskell.org/"> https://www.haskell.org/ </a> &nbsp; :? for <a href="https://www.haskell.org/documentation/"> help </a>
+      <a href="https://www.haskell.org/ghc"> GHCi, </a> {version}: <a href="https://www.haskell.org"> https://www.haskell.org </a> &nbsp; :? for <a href="https://www.haskell.org/documentation"> help </a>
     </div>
 {body}
   </body>

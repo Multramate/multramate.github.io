@@ -4,37 +4,38 @@
         <li>
           Here are some presentation slides or typed notes for past mathematical talks.
           <ul>
-            <li> <a href="telogf/main.pdf"> Twisted elliptic L-values over global fields </a> <br /> Contributed talk for Algebraic Number Theory </li>
-            <li> <a href="dobq/main.pdf"> Denominators of BSD quotients </a> <br /> Contributed talk for Young Researchers in Algebraic Number Theory </li>
-            <li> <a href="aac/main.pdf"> Adèles and cohomology </a> <br /> Study group on class field theory </li>
-            <li> <a href="ecim/main.pdf"> Elliptic curves in mathlib </a> <br /> Workshop talk for Formalising Algebraic Geometry </li>
-            <li> <a href="tloec/main.pdf"> Twisted L-values of elliptic curves </a> <br /> Contributed talk for 75th British Mathematical Colloquium </li>
-            <li> <a href="de/main.pdf"> Diophantine equations </a> <br /> Year 1 post exams colloquia </li>
-            <li> <a href="loectbcc/main.pdf"> L-values of elliptic curves twisted by cubic characters </a> <br /> Linfoot Number Theory Seminars </li>
-            <li> <a href="kt/main.pdf"> Kolyvagin's theorem </a> <br /> Study group on the conjecture of Birch and Swinnerton-Dyer </li>
-            <li> <a href="tbmo/main.pdf"> The Brauer–Manin obstruction </a> <br /> London Junior Number Theory Seminar </li> <li> <a href="cotl/main.pdf"> Congruences of twisted L-values </a> <br /> Study group on what am I doing at the moment </li>
-            <li> <a href="tgloaec/main.pdf"> The group law on an elliptic curve </a> <br /> Postgraduate seminar </li>
-            <li> <a href="tel/main.pdf"> Twisted elliptic L-values </a> <br /> Contributed talk for Early Number Theory Researchers Workshop 2023 </li>
-            <li> <a href="aefpotgloweciac/main.pdf"> An elementary formal proof of the group law on Weierstrass elliptic curves in any characteristic </a> <br /> Conference talk for the Fourteenth International Conference on Interactive Theorem Proving </li>
-            <li> <a href="itavoff/main.pdf"> Introduction to abelian varieties over finite fields </a> <br /> Study group on abelian varieties over finite fields </li>
-            <li> <a href="cnfalt/main.pdf"> Class number formula, à la Tate </a> <br /> London Junior Number Theory Seminar </li>
-            <li> <a href="eobg/main.pdf"> Examples of Brauer groups </a> <br /> Study group on the Brauer-Manin obstruction </li>
-            <li> <a href="ttaef/main.pdf"> Tate's thesis and epsilon factors </a> <br /> Study group on Galois representations and root numbers </li>
-            <li> <a href="ecamt/main.pdf"> Elliptic curves and Mordell's theorem </a> <br /> Workshop talk for Xena Project </li>
-            <li> <a href="foecil/main.pdf"> Formalisation of elliptic curves in Lean </a> <br /> Contributed talk for Young Researchers in Algebraic Number Theory </li>
-            <li> <a href="ec/main.pdf"> Étale cohomology </a> <br /> Study group on étale cohomology </li>
-            <li> <a href="ttsabg/main.pdf" title="The Tate-Shafarevich and Brauer groups"> The Tate-Shafarevich and Brauer groups </a> <br /> Study group on curves over function fields </li>
-            <li> <a href="ecatmwt/main.pdf" title="Elliptic curves and the Mordell-Weil theorem"> Elliptic curves and the Mordell-Weil theorem </a> <br /> Talk for London Learning Lean </li>
-            <li> <a href="tesohp/main.pdf" title="The Euler system of Heegner points"> The Euler system of Heegner points </a> <br /> London Junior Number Theory Seminar </li>
-            <li> <a href="kwotbc/main.pdf" title="Kolyagin's work on the BSD conjecture"> Kolyagin's work on the BSD conjecture </a> <br /> Mini project presentation </li>
-            <li> <a href="ecil/main.pdf" title="Elliptic curves in Lean"> Elliptic curves in Lean </a> <br /> Workshop talk in Huawei Technologies R&D UK Ltd </li>
-            <li> <a href="icg/main.pdf" title="Ideal class groups"> Ideal class groups </a> <br /> Introductory talk for the London School of Geometry and Number Theory </li>
-            <li> <a href="rhfec/main.pdf" title="Rank heuristics for elliptic curves"> Rank heuristics for elliptic curves </a> <br /> Part III Seminar Series </li>
-            <li> <a href="asfec/main.pdf"> Arithmetic statistics for elliptic curves </a> <br /> Master's thesis presentation </li>
-            <li> <a href="ticgiatsg/main.pdf"> The ideal class group is a Tate-Shafarevich group </a> <br /> Interview presentation for Essen Seminar for Algebraic Geometry and Arithmetic </li>
-            <li> <a href="ceaaul/main.pdf"> Cryptography engineering at Adjoint UK Ltd </a> <br /> Industrial placement presentation </li>
-            <li> <a href="pbecc/main.pdf"> Pairing-based elliptic curve cryptography </a> <br /> Lunch talk in Adjoint UK Ltd </li>
-            <li> An unusual cubic representation problem <a href="aucrp/slides/main.pdf"> slides </a> and <a href="aucrp/notes/main.pdf"> notes </a> <br /> Undergraduate Mathematics Colloquium </li>
+            <li> <a href="telogf/main.pdf"> Twisted elliptic L-values over global fields </a> <br /> Contributed talk for Algebraic Number Theory in Munich on 5 September 2024 </li>
+            <li> <a href="dobq/main.pdf"> Denominators of BSD quotients </a> <br /> Contributed talk for Young Researchers in Algebraic Number Theory in Oxford on 31 July 2024 </li>
+            <li> <a href="aac/main.pdf"> Adèles and cohomology </a> <br /> Study group for class field theory (9 talks from May 2024 to July 2024) in London on 4 July 2024 </li>
+            <li> <a href="ecim/main.pdf"> Elliptic curves in mathlib </a> <br /> Workshop talk for Formalising Algebraic Geometry in Pasadena (Online) on 26 June 2024 </li>
+            <li> <a href="tloec/main.pdf"> Twisted L-values of elliptic curves </a> <br /> Contributed talk for 75th British Mathematical Colloquium in Manchester on 19 June 2024 </li>
+            <li> <a href="de/main.pdf"> Diophantine equations </a> <br /> Colloquium talk for year 1 post exams colloquia in London on 20 May 2024 </li>
+            <li> <a href="loectbcc/main.pdf"> L-values of elliptic curves twisted by cubic characters </a> <br /> Seminar talk for Linfoot Number Theory Seminars in Bristol on 24 April 2024 </li>
+            <li> <a href="kt/main.pdf"> Kolyvagin's theorem </a> <br /> Study group for the conjecture of Birch and Swinnerton-Dyer (11 talks from January 2024 to March 2024) in London on 13 March 2024 </li>
+            <li> <a href="tbmo/main.pdf"> The Brauer–Manin obstruction </a> <br /> Seminar talk for London Junior Number Theory Seminar in London on 5 December 2023 </li>
+            <li> <a href="cotl/main.pdf"> Congruences of twisted L-values </a> <br /> Study group for what am I doing at the moment (8 talks from October 2023 to December 2023) in London on 19 October 2023 </li>
+            <li> <a href="tgloaec/main.pdf"> The group law on an elliptic curve </a> <br /> Seminar talk for postgraduate seminar in London on 5 October 2023 </li>
+            <li> <a href="tel/main.pdf"> Twisted elliptic L-values </a> <br /> Contributed talk for Early Number Theory Researchers Workshop 2023 in Bielefeld on 25 August 2023 </li>
+            <li> <a href="aefpotgloweciac/main.pdf"> An elementary formal proof of the group law on Weierstrass elliptic curves in any characteristic </a> <br /> Conference talk for 14th International Conference on Interactive Theorem Proving in Białystok on 2 August 2023 </li>
+            <li> <a href="dav/main.pdf"> Dual abelian varieties </a> <br /> Study group for abelian varieties over finite fields (11 talks from January 2023 to March 2023) in London on 18 January 2023 </li>
+            <li> <a href="cnfalt/main.pdf"> Class number formula, à la Tate </a> <br /> Seminar talk for London Junior Number Theory Seminar in London on 17 January 2023 </li>
+            <li> <a href="eobg/main.pdf"> Examples of Brauer groups </a> <br /> Study group for the Brauer-Manin obstruction (13 talks from October 2022 to March 2023, co-organiser) in London on 30 November 2022 </li>
+            <li> <a href="ttaef/main.pdf"> Tate's thesis and epsilon factors </a> <br /> Study group for Galois representations and root numbers (10 talks from October 2022 to December 2022) in London on 22 November 2022 </li>
+            <li> <a href="ecamt/main.pdf"> Elliptic curves and Mordell's theorem </a> <br /> Workshop talk for 2022 Xena Project undergraduate workshop in London on 29 September 2022 </li>
+            <li> <a href="foecil/main.pdf"> Formalisation of elliptic curves in Lean </a> <br /> Contributed talk for Young Researchers in Algebraic Number Theory on 24 August 2022 </li>
+            <li> <a href="ec/main.pdf"> Étale cohomology </a> <br /> Study group for étale cohomology (9 talks from June 2022 to August 2022, co-organiser) in London on 5 August 2022 </li>
+            <li> <a href="ttsabg/main.pdf" title="The Tate-Shafarevich and Brauer groups"> The Tate-Shafarevich and Brauer groups </a> <br /> Study group for curves over function fields (8 talks from May 2022 to July 2022) in London on 5 July 2022 </li>
+            <li> <a href="ecatmwt/main.pdf" title="Elliptic curves and the Mordell-Weil theorem"> Elliptic curves and the Mordell-Weil theorem </a> <br /> Seminar talk for London Learning Lean in London on 26 May 2022 </li>
+            <li> <a href="tesohp/main.pdf" title="The Euler system of Heegner points"> The Euler system of Heegner points </a> <br /> Seminar talk for London Junior Number Theory Seminar in London on 10 May 2022 </li>
+            <li> <a href="kwotbc/main.pdf" title="Kolyagin's work on the BSD conjecture"> Kolyagin's work on the BSD conjecture </a> <br /> Presentation for London School of Geometry and Number Theory in London on 5 May 2022 </li>
+            <li> <a href="ecil/main.pdf" title="Elliptic curves in Lean"> Elliptic curves in Lean </a> <br /> Workshop talk for Huawei Technologies R&D UK Ltd in Cambridge on 25 April 2022 </li>
+            <li> <a href="icg/main.pdf" title="Ideal class groups"> Ideal class groups </a> <br /> Presentation for the London School of Geometry and Number Theory in London on 6 October 2021 </li>
+            <li> <a href="rhfec/main.pdf" title="Rank heuristics for elliptic curves"> Rank heuristics for elliptic curves </a> <br /> Seminar talk for Part III Seminar Series in Cambridge on 4 December 2020 </li>
+            <li> <a href="asfec/main.pdf"> Arithmetic statistics for elliptic curves </a> <br /> Presentation for master's thesis presentation in London 22 June 2020 </li>
+            <li> <a href="ticgiatsg/main.pdf"> The ideal class group is a Tate-Shafarevich group </a> <br /> Presentation for Essen Seminar for Algebraic Geometry and Arithmetic in Essen (Online) on 11 March 2020 </li>
+            <li> <a href="ceaaul/main.pdf"> Cryptography engineering at Adjoint UK Ltd </a> <br /> Presentation for industrial placement in London on 4 October 2019 </li>
+            <li> <a href="pbecc/main.pdf"> Pairing-based elliptic curve cryptography </a> <br /> Presentation for Adjoint UK Ltd in London on 13 September 2019 </li>
+            <li> An unusual cubic representation problem <a href="aucrp/slides/main.pdf"> slides </a> and <a href="aucrp/notes/main.pdf"> notes </a> <br /> Colloquium talk for undergraduate Mathematics Colloquium in London on 16 January 2019 </li>
           </ul>
         </li>
       </ul>

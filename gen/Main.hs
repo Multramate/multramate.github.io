@@ -8,6 +8,8 @@ main = do
   old <- readFile "old.txt"
   projects <- readFile "projects.txt"
   talks <- readFile "talks.txt"
+  conferences <- readFile "conferences.txt"
+  teaching <- readFile "teaching.txt"
   notes <- readFile "notes.txt"
   writeFile "../index.html" $
     replaceAll (replaceLookup [old, index, version, ""]) template
@@ -15,6 +17,10 @@ main = do
     replaceAll (replaceLookup ["Projects", projects, version, "../"]) template
   writeFile "../talks/index.html" $
     replaceAll (replaceLookup ["Talks", talks, version, "../"]) template
+  writeFile "../conferences/index.html" $
+    replaceAll (replaceLookup ["Conferences", conferences, version, "../"]) template
+  writeFile "../teaching/index.html" $
+    replaceAll (replaceLookup ["Teaching", teaching, version, "../"]) template
   writeFile "../notes/index.html" $
     replaceAll (replaceLookup ["Notes", notes, version, "../"]) template
 

@@ -7,6 +7,11 @@
 
 \nopagenumbers
 
+\newcommand{\projects}[5]{\ifthenelse{\equal{#1}{1}}{\cvitem{#2}{\ifthenelse{\equal{#3}{}}{#4}{\href{#3}{#4}}}\vspace{-0.1cm}\cvitem{}{\small #5}}{}}
+\newcommand{\talks}[6]{\ifthenelse{\equal{#1}{1}}{\cvitem{#2}{#3}\vspace{-0.1cm}\cvitem{}{\small #4 for \emph{#5} in #6}}{}}
+\newcommand{\conferences}[4]{\ifthenelse{\equal{#1}{1}}{\cvitemwithcomment{#2}{#3}{#4}}{}}
+\newcommand{\teaching}[6]{\ifthenelse{\equal{#1}{1}}{\cvitemwithcomment{#2}{#3 for \emph{#4}}{#5}\ifthenelse{\equal{#6}{}}{}{\vspace{-0.1cm}\cvitem{}{\small #6}}}{}}
+
 \firstname{David Kurniadi}
 \familyname{Angdinata}
 \mobile{+44 7551 733331}
@@ -19,172 +24,154 @@
 
 \section{Research interests}
 
-I currently work in the arithmetic of elliptic curves over global fields, specifically on their twisted L-values in the context of the refined Birch and Swinnerton-Dyer conjecture. More broadly, I am interested in understanding local-global obstructions to rational points on varieties, via cohomological gadgets such as the Brauer group. I am also interested in the formalisation of arithmetic geometry in interactive theorem provers, being a pioneer in the development of the theory of elliptic curves in Lean. Finally, I am passionate in mathematical education and outreach activities.
+I currently work in the arithmetic of abelian varieties over global fields, specifically on the special values of their twisted L-functions in the context of the refined Birch and Swinnerton-Dyer conjecture. I am involved in the formalisation of arithmetic geometry in interactive theorem provers, being a pioneer in the development of the theory of elliptic curves in Lean. I am also interested in understanding local-global obstructions to rational points on varieties, via cohomological gadgets such as the Brauer group. Finally, I am passionate in pedagogical aspects of undergraduate mathematics education.
+
+\vspace{0.5cm}
+
+Refer to \href{https://multramate.github.io}{my website} for a full list of \href{https://multramate.github.io/projects/}{projects}, \href{https://multramate.github.io/talks/}{talks}, \href{https://multramate.github.io/conferences/}{conferences}, \href{https://multramate.github.io/teaching/}{teaching}, and \href{https://multramate.github.io/notes/}{notes}.
 
 \section{Education record}
 
-\cvitemwithcomment{9/21 -- 9/25}{PhD Mathematics}{London School of Geometry and Number Theory (LSGNT)}
+\cvitemwithcomment{9/21 -- 9/25}{PhD Mathematics}{London School of Geometry and Number Theory}
+\vspace{-0.1cm}\cvitem{}{\small Supervised by Vladimir Dokchitser and Kevin Buzzard}
 \cvitemwithcomment{10/20 -- 6/21}{MASt Pure Mathematics}{University of Cambridge}
-\cvitemwithcomment{10/16 -- 6/20}{MEng Pure Mathematics and Computational Logic}{Imperial College}
+\cvitemwithcomment{10/16 -- 6/20}{MEng Pure Mathematics and Computational Logic}{Imperial College London}
 \cvitemwithcomment{1/14 -- 12/15}{Singapore-Cambridge GCE A-level}{Temasek Junior College}
 \cvitemwithcomment{1/12 -- 12/13}{Singapore-Cambridge GCE O-level}{Anderson Secondary School}
 
 \section{Employment record}
 
 \cvitem{7/22 -- 9/22}{Research assistant at Huawei Technologies R\&D UK Ltd}
-\vspace{-0.1cm}\cvitem{}{\small Summer internship on formalisation of modern mathematics in automated theorem proving.}
+\vspace{-0.1cm}\cvitem{}{\small Summer internship on formalisation of modern mathematics in automated theorem proving}
 \cvitem{6/19 -- 9/19}{Cryptography engineer at Adjoint UK Ltd}
 \vspace{-0.1cm}\cvitem{}{\small Developed three highly polymorphic libraries for zero-knowledge proof protocols in Haskell:
 \begin{itemize}
-\item \href{http://hackage.haskell.org/package/galois-field}{\texttt{galois-field}} --- an efficient implementation of finite field arithmetic,
-\item \href{http://hackage.haskell.org/package/elliptic-curve}{\texttt{elliptic-curve}} --- an extensible database of elliptic curve operations, and
-\item \href{http://hackage.haskell.org/package/pairing}{\texttt{pairing}} --- a polymorphic library for bilinear pairing algorithms.
+\item \href{http://hackage.haskell.org/package/galois-field}{\texttt{galois-field}} --- an efficient implementation of finite field arithmetic
+\item \href{http://hackage.haskell.org/package/elliptic-curve}{\texttt{elliptic-curve}} --- an extensible database of elliptic curve operations
+\item \href{http://hackage.haskell.org/package/pairing}{\texttt{pairing}} --- a polymorphic library for bilinear pairing algorithms
 \end{itemize}
 Published on Hackage as: \href{http://hackage.haskell.org}{\texttt{hackage.haskell.org/package/\textit{<name>}}}}
 
-\section{Research papers}
-
-\cvitem{10/24}{Algebraicity of Artin--Hasse--Weil L-series over global function fields}
-\vspace{-0.1cm}\cvitem{}{\small Preprint in preparation}
-\cvitem{1/24}{L-values of elliptic curves twisted by cubic characters}
-\vspace{-0.1cm}\cvitem{}{\small Preprint submitted to the Journal of the London Mathematical Society}
-\cvitem{7/23}{An elementary formal proof of the group law on Weierstrass elliptic curves in any characteristic (joint with Junyan Xu)}
-\vspace{-0.1cm}\cvitem{}{\small Published in the Fourteenth International Conference on Interactive Theorem Proving}
-
 \section{Research projects}
 
-\cvitem{1/24 -- $ \qquad $}{Twisted L-values of elliptic curves over global function fields}
-\cvitem{7/23 -- $ \qquad $}{Formalising division polynomials, elliptic divisibility sequences, the torsion subgroup, and the Tate module of Weierstrass elliptic curves (joint with Peiran Wu and Junyan Xu)}
-\cvitem{12/21 -- 6/22}{The Mordell--Weil theorem (mini project, LSGNT)}
-\cvitem{12/21 -- 4/22}{The Euler system of Heegner points (mini project, LSGNT)}
-\cvitem{10/19 -- 6/20}{Arithmetic statistics for elliptic curves (master's thesis, Imperial College)}
-\cvitem{7/19 -- 9/19}{Class field theory and applications (UROP, Imperial College)}
-\cvitem{8/18 -- 9/18}{The arithmetic of elliptic curves (UROP, Imperial College)}
+\projects{0}{1/24 -- $ \qquad $}{}{Twisted L-values of elliptic curves over global function fields}{Ongoing project}
+\projects{1}{?/24}{}{Formalising division polynomials, elliptic divisibility sequences, the torsion subgroup, and the Tate module of Weierstrass elliptic curves (joint with Peiran Wu and Junyan Xu)}{Preprint in preparation}
+\projects{1}{10/24}{https://arxiv.org/abs/2410.05196}{Algebraicity of Artin--Hasse--Weil L-series over global function fields}{Preprint}
+\projects{1}{1/24}{https://arxiv.org/abs/2401.09927}{L-values of elliptic curves twisted by cubic characters}{Preprint submitted to the \emph{Journal of the London Mathematical Society}}
+\projects{1}{7/23}{https://arxiv.org/abs/2302.10640}{An elementary formal proof of the group law on Weierstrass elliptic curves in any characteristic (joint with Junyan Xu)}{Published in the \emph{14th International Conference on Interactive Theorem Proving}}
+\projects{0}{12/21 -- 6/22}{}{The Mordell--Weil theorem}{Mini project for the \emph{London School of Geometry and Number Theory}}
+\projects{0}{12/21 -- 4/22}{}{The Euler system of Heegner points}{Mini project for the \emph{London School of Geometry and Number Theory}}
+\projects{0}{10/19 -- 6/20}{}{Arithmetic statistics for elliptic curves}{Master's thesis in Imperial College London}
+\projects{0}{7/19 -- 9/19}{}{Class field theory and applications}{Undergraduate Research Opportunities Programme in Imperial College London}
+\projects{0}{8/18 -- 9/18}{}{The arithmetic of elliptic curves}{Undergraduate Research Opportunities Programme in Imperial College London}
 
-\section{Talks given}
+\section{Selected talks}
 
-\cvitemwithcomment{5/9/24}{Twisted elliptic L-values over global fields}{contributed talk for Algebraic Number Theory}
-\cvitemwithcomment{31/7/24}{Denominators of BSD quotients}{contributed talk for Y-RANT}
-\cvitemwithcomment{4/7/24}{Ad\`eles and cohomology}{study group}
-\cvitemwithcomment{26/6/24}{Elliptic curves in mathlib}{workshop talk for Formalising Algebraic Geometry}
-\cvitemwithcomment{19/6/24}{Twisted L-values of elliptic curves}{contributed talk for BMC}
-\cvitemwithcomment{20/5/24}{Diophantine equations}{year 1 post exams colloquia}
-\cvitemwithcomment{24/4/24}{L-values of elliptic curves twisted by cubic characters}{Linfoot Number Theory Seminars}
-\cvitemwithcomment{13/3/24}{Kolyvagin's theorem}{study group}
-\cvitemwithcomment{5/12/23}{The Brauer--Manin obstruction}{London Junior Number Theory Seminar}
-\cvitemwithcomment{19/10/23}{Congruences of twisted L-values}{study group}
-\cvitemwithcomment{5/10/23}{The group law on an elliptic curve}{postgraduate seminar}
-\cvitemwithcomment{25/8/23}{Twisted elliptic L-values}{contributed talk for ENTR}
-\cvitem{2/8/23}{An elementary formal proof of the group law on Weierstrass elliptic curves in any}
-\vspace{-0.1cm}\cvitemwithcomment{}{characteristic}{conference talk for ITP}
-\cvitemwithcomment{18/1/23}{Introduction to abelian varieties over finite fields}{study group}
-\cvitemwithcomment{17/1/23}{Class number formula, \`a la Tate}{London Junior Number Theory Seminar}
-\cvitemwithcomment{30/11/22}{Examples of Brauer groups}{study group}
-\cvitemwithcomment{22/11/22}{Tate's thesis and epsilon factors}{study group}
-\cvitemwithcomment{29/9/22}{Elliptic curves and Mordell's theorem}{workshop talk for Xena Project}
-\cvitemwithcomment{24/8/22}{Formalisation of elliptic curves in Lean}{contributed talk for Y-RANT}
-\cvitemwithcomment{5/8/22}{\'Etale cohomology}{study group}
-\cvitemwithcomment{5/7/22}{The Tate--Shafarevich and Brauer groups}{study group}
-\cvitemwithcomment{26/5/22}{Elliptic curves and the Mordell--Weil theorem}{talk for London Learning Lean}
-\cvitemwithcomment{10/5/22}{The Euler system of Heegner points}{London Junior Number Theory Seminar}
-\cvitemwithcomment{5/5/22}{Kolyagin's work on the BSD conjecture}{mini project presentation}
-\cvitemwithcomment{25/4/22}{Elliptic curves in Lean}{workshop talk in Huawei}
-\cvitemwithcomment{6/10/21}{Ideal class groups}{introductory talk for LSGNT}
-\cvitemwithcomment{4/12/20}{Rank heuristics for elliptic curves}{Part III Seminar Series}
-\cvitemwithcomment{22/6/20}{Arithmetic statistics for elliptic curves}{master's thesis presentation}
-\cvitemwithcomment{11/3/20}{The ideal class group is a Tate--Shafarevich group}{interview presentation for ESAGA}
-\cvitemwithcomment{4/10/19}{Cryptography engineering at Adjoint UK Ltd}{industrial placement presentation}
-\cvitemwithcomment{13/9/19}{Pairing-based elliptic curve cryptography}{lunch talk in Adjoint}
-\cvitemwithcomment{16/1/19}{An unusual cubic representation problem}{undergraduate mathematics colloquium}
+\talks{0}{31/10/24}{?}{Study group}{open problems in number theory (10/24 -- 12/24, 10 talks)}{London}
+\talks{1}{5/9/24}{Twisted elliptic L-values over global fields}{Contributed talk}{Algebraic Number Theory}{Munich}
+\talks{1}{31/7/24}{Denominators of BSD quotients}{Contributed talk}{Young Researchers in Algebraic Number Theory}{Oxford}
+\talks{0}{4/7/24}{Ad\`eles and cohomology}{Study group}{class field theory (5/24 -- 7/24, 9 talks)}{London}
+\talks{1}{26/6/24}{Elliptic curves in mathlib}{Workshop talk}{Formalising Algebraic Geometry}{Pasadena (Online)}
+\talks{1}{19/6/24}{Twisted L-values of elliptic curves}{Contributed talk}{75th British Mathematical Colloquium}{Manchester}
+\talks{0}{20/5/24}{Diophantine equations}{Colloquium talk}{year 1 post exams colloquia}{London}
+\talks{1}{24/4/24}{L-values of elliptic curves twisted by cubic characters}{Seminar talk}{Linfoot Number Theory Seminars}{Bristol}
+\talks{0}{13/3/24}{Kolyvagin's theorem}{Study group}{the conjecture of Birch and Swinnerton-Dyer (1/24 -- 3/24, 11 talks)}{London}
+\talks{0}{5/12/23}{The Brauer--Manin obstruction}{Seminar talk}{London Junior Number Theory Seminar}{London}
+\talks{0}{19/10/23}{Congruences of twisted L-values}{Study group}{what am I doing at the moment (10/23 -- 12/23, 8 talks)}{London}
+\talks{0}{5/10/23}{The group law on an elliptic curve}{Seminar talk}{postgraduate seminar}{London}
+\talks{1}{25/8/23}{Twisted elliptic L-values}{Contributed talk}{Early Number Theory Researchers Workshop 2023}{Bielefeld}
+\talks{1}{2/8/23}{An elementary formal proof of the group law on Weierstrass elliptic curves in any characteristic}{Conference talk}{14th International Conference on Interactive Theorem Proving}{Bia\l ystok}
+\talks{0}{18/1/23}{Dual abelian varieties}{Study group}{abelian varieties over finite fields (1/23 -- 3/23, 11 talks)}{London}
+\talks{0}{17/1/23}{Class number formula, \`a la Tate}{Seminar talk}{London Junior Number Theory Seminar}{London}
+\talks{0}{30/11/22}{Examples of Brauer groups}{Study group}{the Brauer--Manin obstruction (10/22 -- 3/23, 13 talks, co-organiser)}{London}
+\talks{0}{22/11/22}{Tate's thesis and epsilon factors}{Study group}{Galois representations and root numbers (10/22 -- 12/22, 10 talks)}{London}
+\talks{0}{29/9/22}{Elliptic curves and Mordell's theorem}{Workshop talk}{2022 Xena Project undergraduate workshop}{London}
+\talks{1}{24/8/22}{Formalisation of elliptic curves in Lean}{Contributed talk}{Young Researchers in Algebraic Number Theory}{Glasgow}
+\talks{0}{5/8/22}{\'Etale cohomology}{Study group}{\'etale cohomology (6/22 -- 8/22, 9 talks, co-organiser)}{London}
+\talks{0}{5/7/22}{The Tate--Shafarevich and Brauer groups}{Study group}{curves over function fields (5/22 -- 7/22, 8 talks)}{London}
+\talks{1}{26/5/22}{Elliptic curves and the Mordell--Weil theorem}{Seminar talk}{London Learning Lean}{London}
+\talks{0}{10/5/22}{The Euler system of Heegner points}{Seminar talk}{London Junior Number Theory Seminar}{London}
+\talks{0}{5/5/22}{Kolyagin's work on the BSD conjecture}{Presentation}{London School of Geometry and Number Theory}{London}
+\talks{1}{25/4/22}{Elliptic curves in Lean}{Workshop talk}{Huawei Technologies R\&D UK Ltd}{Cambridge}
+\talks{0}{6/10/21}{Ideal class groups}{Presentation}{London School of Geometry and Number Theory}{London}
+\talks{1}{4/12/20}{Rank heuristics for elliptic curves}{Seminar talk}{Part III Seminar Series}{Cambridge}
+\talks{0}{22/6/20}{Arithmetic statistics for elliptic curves}{Presentation}{master's thesis}{London}
+\talks{0}{11/3/20}{The ideal class group is a Tate--Shafarevich group}{Presentation}{Essen Seminar for Algebraic Geometry and Arithmetic}{Essen (Online)}
+\talks{0}{4/10/19}{Cryptography engineering at Adjoint UK Ltd}{Presentation}{industrial placement}{London}
+\talks{1}{13/9/19}{Pairing-based elliptic curve cryptography}{Presentation}{Adjoint UK Ltd}{London}
+\talks{0}{16/1/19}{An unusual cubic representation problem}{Colloquium talk}{undergraduate mathematics colloquium}{London}
 
-\section{Conferences attended}
+\section{Selected conferences}
 
-\cvitemwithcomment{18--22/11/24}{Workshop on p-adic Geometry}{Singapore}
-\cvitemwithcomment{3--4/10/24}{Arithmetic Geometry of K3 Surfaces and Related Areas}{London}
-\cvitemwithcomment{2--6/9/24}{Algebraic Number Theory}{Munich}
-\cvitemwithcomment{21--25/8/24}{The Third Journal of Number Theory Biennial Conference (JNT)}{Cetraro}
-\cvitemwithcomment{31/7--2/8/24}{Young Researchers in Algebraic Number Theory (Y-RANT)}{Oxford}
-\cvitemwithcomment{22--25/7/24}{International Congress on Mathematical Software (co-organiser)}{Durham}
-\cvitemwithcomment{24--28/6/24}{Formalising Algebraic Geometry}{Online}
-\cvitemwithcomment{17--20/6/24}{75th British Mathematical Colloquium (BMC)}{Manchester}
-\cvitemwithcomment{13--14/6/24}{London-Paris Number Theory Seminar (LPNTS)}{London}
-\cvitemwithcomment{25--29/3/24}{Lean for the Curious Mathematician 2024 (LftCM)}{Marseille}
-\cvitemwithcomment{9--12/1/24}{Lean Together 2024}{Online}
-\cvitemwithcomment{6--8/12/23}{Modular Curves and their Arithmetic}{Coventry}
-\cvitemwithcomment{18--22/9/23}{Hausdorff School: Formal Mathematics and Computer-Assisted Proving}{Bonn}
-\cvitemwithcomment{11--15/9/23}{Algebra and Number Theory In Conversation (ANTIC)}{Manchester}
-\cvitemwithcomment{11--22/9/23}{Rational Points on Modular Curves}{Bengaluru/Online}
-\cvitemwithcomment{6--8/9/23}{Young Researchers in Algebraic Number Theory (Y-RANT)}{Cambridge}
-\cvitemwithcomment{23--25/8/23}{Early Number Theory Researchers Workshop 2023 (ENTR)}{Bielefeld}
-\cvitemwithcomment{31/7--4/8/23}{Fourteenth International Conference on Interactive Theorem Proving (ITP)}{Bia\l ystok}
-\cvitemwithcomment{26--30/6/23}{Masterclass: Formalisation of Mathematics}{Copenhagen}
-\cvitemwithcomment{12--14/6/23}{London-Paris Number Theory Seminar (LPNTS)}{London}
-\cvitemwithcomment{22--26/5/23}{Formalization of Cohomology Theories}{Banff/Online}
-\cvitemwithcomment{8--19/5/23}{Arithmetic Statistics}{Marseille}
-\cvitemwithcomment{10--14/4/23}{Arithmetic, Algebra, and Algorithms}{Edinburgh/Online}
-\cvitemwithcomment{30/1--10/2/23}{Symposium on Arithmetic Geometry and its Applications (SAGA)}{Marseille}
-\cvitemwithcomment{23--25/8/22}{Young Researchers in Algebraic Number Theory (Y-RANT)}{Glasgow}
-\cvitemwithcomment{15--19/8/22}{Mordell 2022}{Cambridge}
-\cvitemwithcomment{8--12/8/22}{Elliptic Curves 2022}{Clyro}
-\cvitemwithcomment{6--9/6/22}{73rd British Mathematical Colloquium (BMC)}{London}
+\conferences{0}{18--22/11/24}{Workshop on p-adic Geometry}{Singapore}
+\conferences{0}{3--4/10/24}{Arithmetic Geometry of K3 Surfaces and Related Areas}{London}
+\conferences{1}{2--6/9/24}{Algebraic Number Theory}{Munich}
+\conferences{0}{21--25/8/24}{The Third Journal of Number Theory Biennial Conference}{Cetraro}
+\conferences{1}{31/7--2/8/24}{Young Researchers in Algebraic Number Theory}{Oxford}
+\conferences{1}{22--25/7/24}{International Congress on Mathematical Software (co-organiser)}{Durham}
+\conferences{1}{24--28/6/24}{Formalising Algebraic Geometry}{Pasadena (Online)}
+\conferences{0}{17--20/6/24}{75th British Mathematical Colloquium}{Manchester}
+\conferences{0}{13--14/6/24}{London-Paris Number Theory Seminar}{London}
+\conferences{0}{25--29/3/24}{Lean for the Curious Mathematician 2024}{Marseille}
+\conferences{0}{9--12/1/24}{Lean Together 2024}{Online}
+\conferences{0}{6--8/12/23}{Modular Curves and their Arithmetic}{Coventry}
+\conferences{0}{18--22/9/23}{Hausdorff School: Formal Mathematics and Computer-Assisted Proving}{Bonn}
+\conferences{0}{11--15/9/23}{Algebra and Number Theory In Conversation}{Manchester}
+\conferences{0}{11--22/9/23}{Rational Points on Modular Curves}{Bengaluru (Online)}
+\conferences{0}{6--8/9/23}{Young Researchers in Algebraic Number Theory}{Cambridge}
+\conferences{0}{23--25/8/23}{Early Number Theory Researchers Workshop 2023}{Bielefeld}
+\conferences{1}{31/7--4/8/23}{14th International Conference on Interactive Theorem Proving}{Bia\l ystok}
+\conferences{0}{26--30/6/23}{Masterclass: Formalisation of Mathematics}{Copenhagen}
+\conferences{0}{12--14/6/23}{London--Paris Number Theory Seminar}{London}
+\conferences{0}{22--26/5/23}{Formalization of Cohomology Theories}{Banff (Online)}
+\conferences{0}{8--19/5/23}{Arithmetic Statistics}{Marseille}
+\conferences{0}{10--14/4/23}{Arithmetic, Algebra, and Algorithms}{Edinburgh (Online)}
+\conferences{0}{30/1--10/2/23}{Symposium on Arithmetic Geometry and its Applications}{Marseille}
+\conferences{0}{23--25/8/22}{Young Researchers in Algebraic Number Theory}{Glasgow}
+\conferences{0}{15--19/8/22}{Mordell 2022}{Cambridge}
+\conferences{0}{8--12/8/22}{Elliptic Curves 2022}{Clyro}
+\conferences{0}{6--9/6/22}{73rd British Mathematical Colloquium}{London}
 
-\section{Teaching activities}
+\section{Selected teaching}
 
-\cvitem{5/24 -- 6/24}{Supervisions for Year 1 Term 3 research projects: a project on how to tell if a number is}
-\vspace{-0.1cm}\cvitemwithcomment{}{prime and a project on group theory and Rubik's cube}{University College}
-\cvitemwithcomment{1/24 -- 3/24}{Problem classes for MATH40003 Linear Algebra and Groups}{Imperial College}
-\cvitemwithcomment{1/24 -- 3/24}{Laboratory for MATH60040 Formalising Mathematics}{Imperial College}
-\cvitemwithcomment{1/24 -- 3/24}{Problem classes and marking for MATH0034 Number Theory}{University College}
-\cvitemwithcomment{1/24 -- 3/24}{Tutorials for 6CCM351A Representation Theory of Finite Groups}{King's College}
-\cvitemwithcomment{10/23 -- 12/23}{Tutorials for MATH0005 Algebra 1}{University College}
-\cvitemwithcomment{10/23 -- 12/23}{Tutorials and marking for 4CCM121A Introduction to Algebra}{King's College}
-\cvitem{7/23}{Logic and proof summer course: assisted in an introductory course on logic and proof for}
-\vspace{-0.1cm}\cvitemwithcomment{}{sixth form students that spanned five full days}{University College}
-\cvitem{5/23 -- 6/23}{Supervisions for Year 1 Term 3 research projects: a project on cryptography, a project on}
-\vspace{-0.1cm}\cvitemwithcomment{}{sums of squares, and a project on the axiom of choice}{University College}
-\cvitem{3/23}{London Maths Outreach: designed and taught an introductory course on elliptic curves}
-\vspace{-0.1cm}\cvitemwithcomment{}{for sixth form students that spanned four weeks}{Harris Academy St John's Wood}
-\cvitemwithcomment{1/23 -- 3/23}{Problem classes and marking for MATH0034 Number Theory}{University College}
-\cvitemwithcomment{1/23 -- 3/23}{Marking for MATH0037 Logic}{University College}
-\cvitemwithcomment{1/23 -- 3/23}{Marking for MATH0050 Logic}{University College}
-\cvitemwithcomment{1/23 -- 3/23}{Tutorials and marking for 5CCM251A Discrete Mathematics}{King's College}
-\cvitemwithcomment{10/22 -- 12/22}{Marking for MATH0022 Galois Theory}{University College}
-\cvitemwithcomment{10/22 -- 12/22}{Marking for Foundations of Mathematics}{University College}
-\cvitemwithcomment{10/22 -- 12/22}{Tutorials and marking for 5CCM224A Introduction to Number Theory}{King's College}
-\cvitem{5/22 -- 6/22}{Supervisions for Year 1 Term 3 research projects: a project on continued fractions, a}
-\vspace{-0.1cm}\cvitemwithcomment{}{project on cryptography, and two Lean projects}{University College}
-\cvitemwithcomment{1/22 -- 3/22}{Drop-in sessions for MATH0014 Analysis 2}{University College}
-\cvitemwithcomment{10/21 -- 12/21}{Tutorials and marking for MATH0014 Further Linear Algebra}{University College}
-\cvitemwithcomment{1/20 -- 3/20}{Tutorials and marking for CO141 Reasoning about Programs}{Imperial College}
-\cvitemwithcomment{1/20 -- 3/20}{Tutorials and marking for CO150 Graphs and Algorithms}{Imperial College}
-\cvitemwithcomment{10/19 -- 12/19}{Tutorials and marking for CO140 Logic}{Imperial College}
-\cvitemwithcomment{1/19 -- 3/19}{Tutorials and marking for CO141 Reasoning about Programs}{Imperial College}
-\cvitemwithcomment{10/18 -- 12/18}{Tutorials and marking for CO140 Logic}{Imperial College}
-\cvitemwithcomment{10/18 -- 12/18}{Tutorials and marking for CO142 Discrete Structures}{Imperial College}
-
-\section{Study groups}
-
-\cvitemwithcomment{5/24 -- 7/24}{Open problems in number theory (10 talks)}{University College}
-\cvitemwithcomment{5/24 -- 7/24}{Class field theory (9 talks)}{University College}
-\cvitemwithcomment{1/24 -- 3/24}{The conjecture of Birch and Swinnerton-Dyer (11 talks)}{University College}
-\cvitemwithcomment{10/23 -- 12/23}{What am I doing at the moment (8 talks)}{University College}
-\cvitemwithcomment{1/23 -- 3/23}{Abelian varieties over finite fields (11 talks)}{University College}
-\cvitemwithcomment{11/22 -- 3/23}{The Brauer--Manin obstruction (13 talks, co-organiser)}{Online}
-\cvitemwithcomment{10/22 -- 12/22}{Galois representations and root numbers (10 talks)}{University College}
-\cvitemwithcomment{6/22 -- 8/22}{\'Etale cohomology (9 talks, co-organiser)}{Online}
-\cvitemwithcomment{5/22 -- 7/22}{Curves over function fields (8 talks)}{University College}
+\teaching{1}{5/24 -- 6/24}{Supervisions}{Year 1 Term 3 research projects}{UCL}{Projects on how to tell if a number is prime and group theory and Rubik's cube}
+\teaching{0}{1/24 -- 3/24}{Problem classes}{MATH40003 Linear Algebra and Groups}{ICL}{}
+\teaching{1}{1/24 -- 3/24}{Laboratory}{MATH60040 Formalising Mathematics}{ICL}{}
+\teaching{1}{1/24 -- 3/24}{Problem classes and marking}{MATH0034 Number Theory}{UCL}{}
+\teaching{1}{1/24 -- 3/24}{Tutorials}{6CCM351A Representation Theory of Finite Groups}{KCL}{}
+\teaching{0}{10/23 -- 12/23}{Tutorials}{MATH0005 Algebra 1}{UCL}{}
+\teaching{0}{10/23 -- 12/23}{Tutorials and marking}{4CCM121A Introduction to Algebra}{KCL}{}
+\teaching{1}{7/23}{Assistant}{Year 12 Maths Summer School: Logic and Proof}{UCL}{Assisted in an introductory course on logic and proof for sixth form students that spanned 5 days}
+\teaching{1}{5/23 -- 6/23}{Supervisions}{Year 1 Term 3 research projects}{UCL}{Projects on cryptography, sums of squares, and the axiom of choice}
+\teaching{1}{3/23}{Teacher}{London Maths Outreach}{Harris Academy St John's Wood}{Designed a introductory course on elliptic curves for sixth form students that spanned 4 weeks}
+\teaching{0}{1/23 -- 3/23}{Problem classes and marking}{MATH0034 Number Theory}{UCL}{}
+\teaching{0}{1/23 -- 3/23}{Marking}{MATH0037 Logic}{UCL}{}
+\teaching{0}{1/23 -- 3/23}{Marking}{MATH0050 Logic}{UCL}{}
+\teaching{1}{1/23 -- 3/23}{Tutorials and marking}{5CCM251A Discrete Mathematics}{KCL}{}
+\teaching{1}{10/22 -- 12/22}{Marking}{MATH0022 Galois Theory}{UCL}{}
+\teaching{0}{10/22 -- 12/22}{Marking}{Foundations of Mathematics}{UCL}{}
+\teaching{1}{10/22 -- 12/22}{Tutorials and marking}{5CCM224A Introduction to Number Theory}{KCL}{}
+\teaching{1}{5/22 -- 6/22}{Supervisions}{Year 1 Term 3 research projects}{UCL}{Projects on continued fractions, cryptography, and Lean}
+\teaching{0}{1/22 -- 3/22}{Drop-in sessions}{MATH0014 Analysis 2}{UCL}{}
+\teaching{1}{10/21 -- 12/21}{Tutorials and marking}{MATH0014 Further Linear Algebra}{UCL}{}
+\teaching{0}{1/20 -- 3/20}{Tutorials and marking}{CO141 Reasoning about Programs}{ICL}{}
+\teaching{0}{1/20 -- 3/20}{Tutorials and marking}{CO150 Graphs and Algorithms}{ICL}{}
+\teaching{0}{10/19 -- 12/19}{Tutorials and marking}{CO140 Logic}{ICL}{}
+\teaching{0}{1/19 -- 3/19}{Tutorials and marking}{CO141 Reasoning about Programs}{ICL}{}
+\teaching{0}{10/18 -- 12/18}{Tutorials and marking}{CO140 Logic}{ICL}{}
+\teaching{0}{10/18 -- 12/18}{Tutorials and marking}{CO142 Discrete Structures}{ICL}{}
 
 \section{Awards attained}
 
-\cvitemwithcomment{2024}{MAPS Faculty Education Award 2024 for individual excellence}{University College}
-\cvitemwithcomment{2021 -- 2025}{Full funding for 4-year PhD research}{EPSRC}
-\cvitemwithcomment{2020}{Governors' MSci JMC Prize for best overall performance in final year}{Imperial College}
-\cvitemwithcomment{2020}{Donald Davies Prize for best final year individual project}{Imperial College}
-\cvitemwithcomment{2020}{Faculty of Engineering Dean's List}{Imperial College}
-\cvitemwithcomment{2018}{Department of Mathematics UROP research studentship}{Imperial College}
-\cvitemwithcomment{2018}{Faculty of Engineering Dean's List}{Imperial College}
-\cvitemwithcomment{2017}{G Research Ltd Prize for academic excellence}{Imperial College}
-\cvitemwithcomment{2017}{Faculty of Engineering Dean's List}{Imperial College}
+\cvitemwithcomment{2024}{MAPS Faculty Education Award 2024 for individual excellence}{UCL}
+\cvitemwithcomment{2021 -- 2025}{Full funding for 4-year PhD research [EP/S021590/1]}{EPSRC}
+\cvitemwithcomment{2020}{Governors' MSci JMC Prize for best overall performance in final year}{ICL}
+\cvitemwithcomment{2020}{Donald Davies Prize for best final year individual project}{ICL}
+\cvitemwithcomment{2020}{Faculty of Engineering Dean's List}{ICL}
+\cvitemwithcomment{2018}{Department of Mathematics UROP research studentship}{ICL}
+\cvitemwithcomment{2018}{Faculty of Engineering Dean's List}{ICL}
+\cvitemwithcomment{2017}{G Research Ltd Prize for academic excellence}{ICL}
+\cvitemwithcomment{2017}{Faculty of Engineering Dean's List}{ICL}
 \cvitemwithcomment{2012 -- 2015}{Full 4-year school-based scholarship}{MOE Singapore}
 
 \section{Language skills}
