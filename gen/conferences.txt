@@ -4,6 +4,7 @@
         <li>
           Here are some conferences I have attended in the past.
           <ul>
+            <li> <a href="https://leanprover-community.github.io/lt2025/"> Lean Together 2025 </a> in Zoom (Online) from 14 January 2025 to 17 January 2025 </li>
             <li> <a href="http://www.davidrenshawhansen.net/workshop2024.html"> Workshop on p-adic Geometry </a> in Singapore from 18 November 2024 to 22 November 2024 </li>
             <li> <a href="https://www.ma.imperial.ac.uk/~anskor/K3Imperial.htm"> Arithmetic Geometry of K3 Surfaces and Related Areas </a> in London from 3 October 2024 to 4 October 2024 </li>
             <li> <a href="https://nt2024.unibw.de"> Algebraic Number Theory </a> in Munich from 2 September 2024 to 6 September 2024 </li>
