@@ -4,9 +4,9 @@
         <li>
           Here are my recent research projects and some of their final papers.
           <ul>
-            <li> Twisted L-values of elliptic curves over global function fields </li>
+            <li> Computing motivic L-functions over global function fields <br /> Preprint in preparation </li>
             <li> Formalising division polynomials, elliptic divisibility sequences, the torsion subgroup, and the Tate module of Weierstrass elliptic curves (joint with Peiran Wu and Junyan Xu) <br /> Preprint in preparation </li>
-            <li> <a href="aoalogff/main.pdf"> Algebraicity of Artin–Hasse–Weil L-series over global function fields </a> <br /> Preprint </li>
+            <li> <a href="aoalogff/main.pdf"> Algebraicity of Artin–Hasse–Weil L-series over global function fields </a> <br /> Preprint submitted to the <a href="https://www.lms.ac.uk/publications/blms"> Bulletin of the London Mathematical Society </a> </li>
             <li> <a href="loectbcc/main.pdf"> L-values of elliptic curves twisted by cubic characters </a> <br /> Preprint submitted to the <a href="https://www.lms.ac.uk/publications/jlms"> Journal of the London Mathematical Society </a> </li>
             <li> <a href="aefpotgloweciac/main.pdf"> An elementary formal proof of the group law on Weierstrass elliptic curves in any characteristic </a> (joint with Junyan Xu) <br /> Published in the <a href="https://mizar.uwb.edu.pl/ITP2023"> 14th International Conference on Interactive Theorem Proving </a> </li>
           </ul>

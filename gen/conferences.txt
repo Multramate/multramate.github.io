@@ -2,8 +2,11 @@
       *David> print conference >> mapM_ print conferences
       <ul>
         <li>
-          Here are some conferences I have attended in the past.
+          Here are some conferences I have attended or will be attending.
           <ul>
+            <li> <a href="https://www.mathe2.uni-bayreuth.de/stoll/workshop2025/"> Rational Points 2025 </a> in Schney from 27 July 2025 to 2 August 2025 </li>
+            <li> <a href="https://timo-keller.de/MagmaWorkshop2025.html"> Magma Meeting: Rational Points 2025 </a> in W\"urzburg from 25 July 2025 to 26 July 2025 </li>
+            <li> <a href="https://icms.bg/diophantine-and-rationality-problems-drp2025/"> Diophantine and Rationality Problems </a> in Sofia from 10 March 2025 to 14 March 2025 </li>
             <li> <a href="https://leanprover-community.github.io/lt2025/"> Lean Together 2025 </a> in Zoom (Online) from 14 January 2025 to 17 January 2025 </li>
             <li> <a href="http://www.davidrenshawhansen.net/workshop2024.html"> Workshop on p-adic Geometry </a> in Singapore from 18 November 2024 to 22 November 2024 </li>
             <li> <a href="https://www.ma.imperial.ac.uk/~anskor/K3Imperial.htm"> Arithmetic Geometry of K3 Surfaces and Related Areas </a> in London from 3 October 2024 to 4 October 2024 </li>
