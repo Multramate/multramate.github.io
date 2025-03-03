@@ -1,0 +1,231 @@
+\documentclass[10pt]{beamer}
+
+\setbeamertemplate{footline}[page number]
+
+\newtheorem{conjecture}{Conjecture}
+
+\title{Computing L-functions over global function fields}
+
+\author{David Kurniadi Angdinata}
+
+\institute{London School of Geometry and Number Theory}
+
+\date{Monday, 3 March 2025}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}[t]{Global fields}
+
+Let $ E $ be an elliptic curve over a global field $ K $. Its L-function is given by
+$$ L(E, s) := \prod_v \dfrac{1}{\mathcal{L}_v(E, p_v^{-s\deg v})}, $$
+where $ p_v $ is the residue characteristic at each place $ v $ of $ K $.
+
+\pause
+
+\vspace{0.5cm} Here, the local Euler factors are given by
+$$ \mathcal{L}_v(E, T) := \det(1 - T \cdot \phi_v^{-1} \mid \rho_{E, \ell}^{I_v}) \in 1 + T \cdot \mathbb{Q}[T], $$
+where $ \ell $ is some prime different from $ p_v $.
+
+\pause
+
+\vspace{0.5cm}
+
+\begin{conjecture}[Birch and Swinnerton-Dyer]
+The arithmetic of $ E $ is determined by the analysis of $ L(E, s) $ at $ s = 1 $.
+\end{conjecture}
+
+\vspace{0.5cm} There is much numerical evidence, which requires computing $ L(E, s) $!
+
+\end{frame}
+
+\begin{frame}[t]{Computing special values}
+
+Over a number field $ K $, Dokchitser \footnote{Tim Dokchitser. ``Computing special values of motivic L-functions'' Experimental Mathematics 13 (2) 137--150, 2004} gave an algorithm to compute the special values of $ L(E, s) $ assuming the functional equation
+$$ \Lambda(E, s) = \epsilon_E\mathrm{Nm}(\mathfrak{f}_E)^{1 - s}\Delta_K^{1 - s}\Lambda(E, 2 - s), $$
+where its completed L-function is given by
+$$ \Lambda(E, s) := \left(\dfrac{\Gamma(s)}{(2\pi)^s}\right)^{[K : \mathbb{Q}]}L(E, s). $$
+This was originally the \texttt{ComputeL} package in PARI/GP, but later ported to Magma as \texttt{LSeries()} and SageMath as \texttt{lseries().dokchitser()}.
+
+\pause
+
+\vspace{0.5cm} Over a global function field, Magma has \texttt{LFunction()}, which uses the theory of Mordell--Weil lattices on elliptic surfaces to give a polynomial.
+
+\vspace{0.5cm} I claim that there is a much easier way to compute the same polynomial!
+
+\end{frame}
+
+\begin{frame}[t]{Global function fields}
+
+Let $ K := k(C) $ be the global function field of a smooth proper geometrically irreducible curve $ C $ over a finite field $ k := \mathbb{F}_q $.
+
+\pause
+
+\vspace{0.5cm} The formal L-function of an elliptic curve $ E $ over $ K $ is given by
+$$ \mathcal{L}(E, T) := \prod_v \dfrac{1}{\mathcal{L}_v(E, T^{\deg v})} \in \mathbb{Q}[[T]], $$
+so that $ L(E, s) = \mathcal{L}(E, q^{-s}) $.
+
+\pause
+
+\vspace{0.5cm} If $ \{a_{v, i}\}_{i = 0}^\infty $ are the coefficients of $ \mathcal{L}_v(E, T^{\deg v})^{-1} $, then
+$$ \mathcal{L}(E, T) = \prod_v \left(\sum_{i = 0}^\infty a_{v, i}T^{i\deg v}\right) \visible<4>{= \sum_{j = 0}^\infty \left(\sum_{\deg D = j} a_D\right)T^j,} $$%
+\visible<4>{where $ a_D := \prod_v a_{v, i_v} $ for any effective Weil divisor $ D = \sum_v i_v[v] $ on $ C $.}
+
+\end{frame}
+
+\begin{frame}[t]{Rationality}
+
+\begin{corollary}[of the Weil conjectures \footnote{Grothendieck--Lefschetz trace formula and Grothendieck--Ogg--Shafarevich formula}]
+There are polynomials $ P_0(T), P_1(T), P_2(T) \in 1 + T \cdot \mathbb{Q}[T] $ such that
+$$ \mathcal{L}(E, T) = \dfrac{P_1(T)}{P_0(T) \cdot P_2(T)} \in \mathbb{Q}(T), $$
+and
+$$ -\deg P_0(T) + \deg P_1(T) - \deg P_2(T) = 4g_C - 4 + \deg\mathfrak{f}_E. $$
+Furthermore, there are simple expressions for $ P_0(T) $ and $ P_2(T) $ in terms of $ \mathcal{L}(C, T) $, and in fact $ P_0(T) = P_2(T) = 1 $ whenever $ E $ is not constant.
+\end{corollary}
+
+\pause
+
+\vspace{0.5cm} Thus $ \mathcal{L}(E, T) $ is completely determined by the coefficients $ a_D $ for all effective Weil divisors $ D $ on $ C $ with $ \deg D \le d_E $, where
+$$ d_E := 4g_C - 4 + \deg\mathfrak{f}_E + \deg P_0(T) + \deg P_2(T). $$
+
+\end{frame}
+
+\begin{frame}[t]{Quadratic example}
+
+Let $ E $ be the elliptic curve $ y^2 = x^3 + x^2 + t^2 + 2 $ over $ K = \mathbb{F}_3(t) $. \pause Then
+$$ \deg\mathcal{L}(E, T) = d_E = 4(0) - 4 + \deg(4[\tfrac{1}{t}] + [t + 1] + [t + 2]) = 2. $$
+\pause \vspace{-0.5cm}
+$$
+\begin{array}{|c|c|c|c|}
+\hline
+v & \mathcal{L}_v(E, T) & \mathcal{L}_v(E, T^{\deg v}) & \mathcal{L}_v(E, T^{\deg v})^{-1} \\
+\hline
+\tfrac{1}{t} & 1 & 1 & 1 \\
+\hline
+t & 1 - T + 3T^2 & 1 - T + 3T^2 & 1 + T - 2T^2 + \dots \\
+\hline
+t + 1 & 1 - T & 1 - T & 1 + T + T^2 + \dots \\
+\hline
+t + 2 & 1 - T & 1 - T & 1 + T + T^2 + \dots \\
+\hline
+t^2 + 1 & 1 + 2T + 3T^2 & 1 + 2T^2 + \dots & 1 - 2T^2 + \dots \\
+\hline
+t^2 + t + 2 & 1 - 4T + 3T^2 & 1 - 4T^2 + \dots & 1 + 4T^2 + \dots \\
+\hline
+t^2 + 2t + 2 & 1 - 4T + 3T^2 & 1 - 4T^2 + \dots & 1 + 4T^2 + \dots \\
+\hline
+\end{array}
+$$
+
+\pause
+
+Thus
+\begin{align*}
+\mathcal{L}(E, T)
+& \equiv (1 + T - 2T^2 + \dots) \cdot \dots \cdot (1 + 4T^2 + \dots) \mod T^3 \\
+& \equiv 1 + 3T + 9T^2 \mod T^3,
+\end{align*}
+which forces $ \mathcal{L}(E, T) = 1 + 3T + 9T^2 $.
+
+\end{frame}
+
+\begin{frame}[t]{Functional equation}
+
+\begin{corollary}[of the Weil conjectures and root number results \footnote{by the works of Deligne, Rohrlich, Kobayashi, and Imai}]
+There is a global root number $ \epsilon_E \in \{\pm1\} $ such that
+$$ \mathcal{L}(E, T) = \epsilon_Eq^{d_E}T^{d_E}\mathcal{L}(E, 1 / q^2T). $$
+Furthermore, there is a simple algorithm to compute $ \epsilon_E $ in terms of the reduction type of $ E $ at each place in the support of $ \mathfrak{f}_E $.
+\end{corollary}
+
+\pause
+
+\vspace{0.5cm} If $ \{b_i\}_{i = 0}^{d_E} $ are the coefficients of $ \mathcal{L}(E, T) $, then
+$$ \sum_{i = 0}^{d_E} b_iT^i = \sum_{i = 0}^{d_E} \epsilon_Eb_iq^{d_E - 2i}T^{d_E - i} \visible<3>{= \sum_{i = 0}^{d_E} \epsilon_Eb_{d_E - i}q^{2i - d_E}T^i,} $$%
+\visible<3>{so that $ b_i $ can be computed as $ \epsilon_Eb_{d_E - i}q^{2i - d_E} $ when $ \lceil d_E / 2\rceil \le i \le d_E $.}
+
+\end{frame}
+
+\begin{frame}[t]{Quintic example}
+
+Let $ E $ be the elliptic curve $ y^2 = x^3 + x^2 + t^4 + t^2 $ over $ K = \mathbb{F}_3(t) $. \pause Then
+$$ \deg\mathcal{L}(E, T) = d_E = 4(0) - 4 + \deg(6[\tfrac{1}{t}] + [t] + [t^2 + 1]) = 5. $$
+
+\pause
+
+By computing $ \mathcal{L}_v(E, T^{\deg v})^{-1} $ for all places $ v $ of $ K $ with $ \deg v \le 2 $,
+$$ \mathcal{L}(E, T) \equiv 1 + 3T + 9T^2 \mod T^3, $$
+which forces $ \mathcal{L}(E, T) = 1 + 3T + 9T^2 + 27\epsilon_ET^3 + 81\epsilon_ET^4 + 243\epsilon_ET^5 $.
+
+\pause
+
+\vspace{0.5cm} In fact, $ \epsilon_E = -1 $, since $ \epsilon_{E, t} = \epsilon_{E, t^2 + 1} = -1 $ and
+\begin{align*}
+\epsilon_{E, \frac{1}{t}}
+& = -(\Delta_{E'}, a_{6, E'}) \cdot \left(\dfrac{v_{\frac{1}{t}}(a_{6, E'})}{3}\right)^{v_{\frac{1}{t}}(\Delta_{E'})} \cdot \left(\dfrac{-1}{3}\right)^{\tfrac{v_{\frac{1}{t}}(\Delta_{E'})(v_{\frac{1}{t}}(\Delta_{E'}) - 1)}{2}} \\
+& = -1,
+\end{align*}
+where $ E' $ is the elliptic curve $ y^2 = x^3 + (\tfrac{1}{t})^2x^2 + (\tfrac{1}{t})^4 + (\tfrac{1}{t})^2 $ over $ K_{\frac{1}{t}} $.
+
+\end{frame}
+
+\begin{frame}[t]{$ \ell $-adic representations}
+
+In general, the formal L-function of an almost everywhere unramified $ \ell $-adic representation $ \rho : G_K \to \mathrm{GL}_n(\overline{\mathbb{Q}_\ell}) $ is given by
+$$ \mathcal{L}(\rho, T) := \prod_v \dfrac{1}{\mathcal{L}_v(\rho, T^{\deg v})} \in \overline{\mathbb{Q}_\ell}[[T]], $$
+where $ \mathcal{L}_v(\rho, T) $ is defined similarly as before.
+
+\pause
+
+\begin{corollary}[of the Weil conjectures \footnote{by the works of Grothendieck and Deligne}]
+If $ \rho $ has no $ G_{\overline{k}K} $-invariants, then $ \mathcal{L}(\rho, T) \in \overline{\mathbb{Q}_\ell}[T] $ has degree
+$$ d_\rho := (2g_C - 2)\dim\rho + \deg\mathfrak{f}_\rho, $$
+and satisfies the functional equation
+$$ \mathcal{L}(\rho, T) = \epsilon_\rho q^{d_\rho(\tfrac{w_\rho + 1}{2})}T^{d_\rho}\mathcal{L}(\rho, 1 / q^{w_\rho + 1}T)^{\sigma_\rho}, $$
+where $ w_\rho $ is the weight of $ \rho $ and $ \sigma_\rho $ is some automorphism on $ \overline{\mathbb{Q}_\ell} $.
+\end{corollary}
+
+\end{frame}
+
+\begin{frame}[t]{Magma implementation}
+
+I have implemented \texttt{intrinsic}s for computing formal L-functions of arbitrary $ \ell $-adic representations with or without functional equations.
+
+\pause
+
+\vspace{0.5cm} This includes specific examples of motives over $ k(t) $:
+\begin{itemize}
+\item elliptic curves, with functional equation except when $ \mathrm{char}(k) = 2, 3 $
+\begin{itemize}
+\item functional equation when $ \mathrm{char}(k) = 2, 3 $ require Hilbert symbols
+\item faster than \texttt{LFunction()} when $ \mathrm{char}(k) = 2, 3, 5, 7 $
+\end{itemize}
+
+\pause
+
+\item Dirichlet characters, without functional equation
+\begin{itemize}
+\item functional equation requires efficient computations of Gauss sums
+\item non-square-free modulus is surprisingly tricky
+\end{itemize}
+
+\pause
+
+\item tensor products assuming their conductors are disjoint
+\begin{itemize}
+\item degree computation requires $ \mathfrak{f}_{\rho \otimes \tau} $ in terms of $ \mathfrak{f}_\rho $ and $ \mathfrak{f}_\tau $
+\item functional equation requires $ \epsilon_{\rho \otimes \tau} $ in terms of $ \epsilon_\rho $ and $ \epsilon_\tau $
+\end{itemize}
+
+\pause
+
+\item any other nice motives?
+\begin{itemize}
+\item hyperelliptic curves?
+\item Artin representations?
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\end{document}
