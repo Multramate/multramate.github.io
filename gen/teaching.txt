@@ -4,6 +4,7 @@
         <li>
           Here are some of my past and current teaching activities.
           <ul>
+            <li> Supervisions for Year 1 Term 3 research projects in University College London from May 2025 to June 2025 <br /> Projects on Mordell's equation and Lean </li>
             <li> Assistant for <a href="https://www.londonmathsoutreach.org"> London Maths Outreach </a> in University College London from March 2025 to April 2025 <br /> Assisted in an introductory course on group theory for sixth form students that spanned 4 weeks </li>
             <li> Laboratory for MATH60040 Formalising Mathematics in Imperial College London from January 2025 to March 2025 </li>
             <li> Problem classes for MATH40003 Linear Algebra and Groups in Imperial College London from January 2025 to March 2025 </li>
