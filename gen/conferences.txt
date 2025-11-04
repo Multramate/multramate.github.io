@@ -4,6 +4,7 @@
         <li>
           Here are some conferences I have attended or will be attending.
           <ul>
+            <li> <a href="https://judithludwig.github.io/LeanWorkshop2025"> Lean Workshop 2025: Formalising Algebraic Geometry </a> in Heidelberg from 19 November 2025 to 21 November 2025 </li>
             <li> <a href="https://ricerca.mat.uniroma3.it/users/aturchet/Pisa25"> Algebraic and Geometric Methods for Diophantine Problems </a> in Pisa from 9 September 2025 to 12 September 2025 </li>
             <li> <a href="https://y-rant.github.io"> Young Researchers in Algebraic Number Theory </a> in Nottingham from 3 September 2025 to 5 September 2025 </li>
             <li> <a href="https://www.mathe2.uni-bayreuth.de/stoll/workshop2025"> Rational Points 2025 </a> in Schney from 27 July 2025 to 2 August 2025 </li>

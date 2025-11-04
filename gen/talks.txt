@@ -4,6 +4,7 @@
         <li>
           Here are some presentation slides or typed notes for past mathematical talks.
           <ul>
+            <li> <a href="sfadv/main.pdf"> Sheaves, functors, and derived versions </a> <br /> Study group for character sheaves (12 talks from September 2025 to December 2025) in Norwich on 4 November 2025 </li>
             <li> <a href="cdlogff/main.pdf"> Computing Dirichlet L-functions over global function fields </a> <br /> Contributed talk for Young Researchers in Algebraic Number Theory on 4 September 2025 </li>
             <li> <a href="rpoecil/main.pdf"> Rational points on elliptic curves in Lean </a> <br /> Contributed talk for Rational Points 2025 in Schney on 31 July 2025 </li>
             <li> <a href="edsil/main.pdf"> Elliptic divisibility sequences in Lean </a> <br /> Contributed talk for British Mathematical Colloquium in Exeter on 25 June 2025 </li>
