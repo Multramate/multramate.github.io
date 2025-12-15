@@ -11,18 +11,21 @@ main = do
   conferences <- readFile "conferences.txt"
   teaching <- readFile "teaching.txt"
   notes <- readFile "notes.txt"
+  workshop <- readFile "workshop.txt"
   writeFile "../index.html" $
-    replaceAll (replaceLookup [old, index, version, ""]) template
+    replaceAll (replaceLookup ["David Kurniadi Angdinata", old, index, version, ""]) template
   writeFile "../projects/index.html" $
-    replaceAll (replaceLookup ["Projects", projects, version, "../"]) template
+    replaceAll (replaceLookup ["Projects", "Projects", projects, version, "../"]) template
   writeFile "../talks/index.html" $
-    replaceAll (replaceLookup ["Talks", talks, version, "../"]) template
+    replaceAll (replaceLookup ["Talks", "Talks", talks, version, "../"]) template
   writeFile "../conferences/index.html" $
-    replaceAll (replaceLookup ["Conferences", conferences, version, "../"]) template
+    replaceAll (replaceLookup ["Conferences", "Conferences", conferences, version, "../"]) template
   writeFile "../teaching/index.html" $
-    replaceAll (replaceLookup ["Teaching", teaching, version, "../"]) template
+    replaceAll (replaceLookup ["Teaching", "Teaching", teaching, version, "../"]) template
   writeFile "../notes/index.html" $
-    replaceAll (replaceLookup ["Notes", notes, version, "../"]) template
+    replaceAll (replaceLookup ["Notes", "Notes", notes, version, "../"]) template
+  writeFile "../lean-lmfdb/index.html" $
+    replaceAll (replaceLookup ["Bridging Lean and the LMFDB", "Bridging <img class=\"lean\" src=\"lean.png\" /> and the <img class=\"lmfdb\" src=\"lmfdb.png\" />", workshop, version, "../"]) template
 
 replaceAll :: Eq a => [([a], [a])] -> [a] -> [a]
 replaceAll = flip $ foldl $ flip replaceOne
@@ -33,4 +36,4 @@ replaceAll = flip $ foldl $ flip replaceOne
 
 replaceLookup :: [String] -> [(String, String)]
 replaceLookup
-  = zipWith ((,) . ('{' :) . (++ "}")) ["head", "body", "version", "back"]
+  = zipWith ((,) . ('{' :) . (++ "}")) ["title", "head", "body", "version", "back"]

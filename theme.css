@@ -1,9 +1,9 @@
 body {
+  background-color: #0C0C0C;
   color: #ffffff;
-  font-size: 12pt;
-  background: #0C0C0C;
   margin-top: 25px;
   font-family: monospace, sans-serif;
+  font-size: 12pt;
 }
 
 a {
@@ -24,45 +24,79 @@ li ul li {
   list-style-type: disc;
 }
 
+table {
+  border-style: solid;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  text-align: center;
+  width: 90%;
+}
+
+tr {
+  height: 30px;
+}
+
+td {
+  border-style: solid;
+  width: 15%;
+}
+
 .me a {
-  width: 250px;
+  border-radius: 100%;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 100%;
+  width: 250px;
 }
 
 .me img {
-  width: 250px;
-  padding: 25px;
-  transition: 1s;
   border-color: #ffffff;
+  border-radius: 100%;
   border-style: solid;
   border-width: 0px;
-  border-radius: 100%;
+  padding: 25px;
+  transition: 1s;
+  width: 250px;
 }
 
 .me img:hover {
-  width: 300px;
   padding: 0px;
+  width: 300px;
 }
 
 .header {
   font-size: 48pt;
+  margin-bottom: 25px;
   margin-top: 25px;
   text-align: center;
-  margin-bottom: 25px;
+}
+
+.footer {
+  margin-top: 10px;
+}
+
+.lean {
+  margin-bottom: -10pt;
+  width: 150pt;
+}
+
+.lmfdb {
+  margin-bottom: -30pt;
+  width: 150pt;
 }
 
 .terminal {
-  width: 75%;
-  padding: 10px;
-  max-width: 1500px;
-  min-width: 750px;
-  background: #012456;
-  margin-left: auto;
+  background-color: #012456;
   border-color: #ffffff;
   border-style: solid;
   border-width: 1px;
+  margin-left: auto;
   margin-right: auto;
+  max-width: 1500px;
+  min-width: 750px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 25px;
+  padding-top: 10px;
+  width: 75%;
 }
