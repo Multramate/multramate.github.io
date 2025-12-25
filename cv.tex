@@ -1,0 +1,131 @@
+\documentclass[10pt]{moderncv}
+\moderncvstyle{casual}
+\moderncvcolor{blue}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\nopagenumbers
+
+\newcommand{\cv}[3]{\cvitem{#1}{#2}\ifthenelse{\equal{#3}{}}{}{\vspace{-0.1cm}{\setstretch{0}\cvitem{}{\small#3}}}}
+
+\name{David Kurniadi}{Angdinata}
+\born{21 May 1997}
+\phone[mobile]{+44 7551 733331}
+\email{jrv25shu@uea.ac.uk}
+\homepage{multramate.github.io}
+\social[discord]{Multramate}
+\social[github]{https://github.com/Multramate}
+
+\begin{document}
+
+\maketitle
+
+\section{Research interests}
+I am interested in the computational aspects of the Birch and Swinnerton-Dyer conjecture for abelian varieties over global fields and their formalisation in the Lean theorem prover. Please refer to my \link[\texttt{website}]{https://multramate.github.io/} for more details on my \link[\texttt{research}]{https://multramate.github.io/research}, \link[\texttt{activities}]{https://multramate.github.io/activities}, \link[\texttt{events}]{https://multramate.github.io/events}, \link[\texttt{talks}]{https://multramate.github.io/talks}, and \link[\texttt{other projects}]{https://multramate.github.io/miscellaneous}.
+
+\section{Academic record}
+\cv{10.25 -- 8.27}{\textbf{Senior Research Associate} in the University of East Anglia}{Grant: Scalable theorem proving via mathematical databases}
+\cv{9.21 -- 9.25}{\textbf{PhD Mathematics} in the London School of Geometry and Number Theory}{Thesis: L-functions of Dirichlet twists of elliptic curves: computations and congruences}
+\cv{10.20 -- 6.21}{\textbf{MASt Pure Mathematics} in the University of Cambridge}{}
+\cv{10.16 -- 6.20}{\textbf{MEng Pure Mathematics and Computational Logic} in Imperial College London}{}
+\cv{1.14 -- 12.15}{\textbf{Singapore-Cambridge GCE A-level} in Temasek Junior College}{}
+\cv{1.12 -- 12.13}{\textbf{Singapore-Cambridge GCE O-level} in Anderson Secondary School}{}
+
+\section{Employment record}
+
+\cv{4.25 -- 6.25}{\textbf{Part-time Lean expert} in Harmonic}{}
+\cv{7.22 -- 9.22}{\textbf{Research assistant} in Huawei Technologies R\&D UK Ltd}{}
+\cv{6.19 -- 9.19}{\textbf{Cryptography engineer} in Adjoint UK Ltd}{Developed and published the Haskell libraries \link[\texttt{galois-field}]{http://hackage.haskell.org/package/galois-field}, \link[\texttt{elliptic-curve}]{http://hackage.haskell.org/package/elliptic-curve}, and \link[\texttt{pairing}]{http://hackage.haskell.org/package/pairing}}
+
+\section{Research papers}
+\cv{}{Computing L-functions of $ \lambda $-adic representations over global function fields}{Preprint in preparation}
+\cv{5.25}{\link[On L-values of elliptic curves twisted by cubic Dirichlet characters]{https://doi.org/10.4153/S0008414X25101065}}{In \emph{Canadian Journal of Mathematics}}
+\cv{10.24}{\link[Algebraicity of Artin--Hasse--Weil L-series over global function fields]{https://arxiv.org/abs/2410.05196}}{Submitted to the \emph{Bulletin of the London Mathematical Society}}
+\cv{7.23}{\link[An elementary formal proof of the group law on Weierstrass elliptic curves in any characteristic (with Junyan Xu)]{https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITP.2023.6}}{In \emph{14th International Conference on Interactive Theorem Proving (ITP 2023)}, volume 268 of \emph{Leibniz International Proceedings in Informatics}, pages 6:1--6:19. Schloss Dagstuhl -- Leibniz-Zentrum f\"ur Informatik, Dagstuhl Publishing, Wadern, Germany, 2023}
+
+\section{Mathlib contributions}
+\cv{Elliptic curves}{The \link[\texttt{discriminant}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/CubicDiscriminant.lean} of a cubic equation, \link[\texttt{Weierstrass}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass} equations and their changes of variables, the group law in \link[\texttt{affine}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/AlgebraicGeometry/EllipticCurve/Affine} coordinates, the group law in \link[\texttt{Jacobian}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian} coordinates, the group law in \link[\texttt{projective}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/AlgebraicGeometry/EllipticCurve/Projective} coordinates, \link[\texttt{division polynomials}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial} and their degrees, the theory of \link[\texttt{elliptic divisibility sequences}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/NumberTheory/EllipticDivisibilitySequence.lean}}{}
+\cv{Ring theory}{\link[\texttt{maximal ideals}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/RingTheory/MaximalSpectrum.lean} and \link[\texttt{maximal spectra}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/AlgebraicGeometry/Maximal.lean}, the ring of \link[\texttt{S-integers}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/RingTheory/DedekindDomain/SInteger.lean} of a Dedekind domain, the \link[\texttt{Selmer group}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/RingTheory/DedekindDomain/SelmerGroup.lean} of a Dedekind domain}{}
+
+\pagebreak
+
+\section{Selected talks}
+\cv{4.9.25}{\link[Computing Dirichlet L-functions over global function fields]{../talks/cdlfogff.pdf}}{Contributed talk for \emph{Young Researchers in Algebraic Number Theory} in Nottingham}
+\cv{31.7.25}{\link[Rational points on elliptic curves in Lean]{../talks/rpoecil.pdf}}{Contributed talk for \emph{Rational Points 2025} in Schney}
+\cv{25.6.25}{\link[Elliptic divisibility sequences in Lean]{../talks/edsil.pdf}}{Contributed talk for \emph{British Mathematical Colloquium and British Applied Mathematics Colloquium} in Exeter}
+\cv{25.3.25}{\link[Teaching a computer algebraic number theory]{../talks/tacant.pdf}}{\emph{Algebra, Number Theory, Logic and Representation Theory Seminar} in Norwich}
+\cv{3.3.25}{\link[Computing L-functions over global function fields]{../talks/clfogff.pdf}}{Contributed talk for \emph{Elliptic Curves in the Cotswolds} in Stonehouse}
+\cv{13.2.25}{\link[Algebraising foundations of elliptic curves]{../talks/afoec.pdf}}{\emph{Formalisation of Mathematics with Interactive Theorem Provers} in Cambridge}
+\cv{17.1.25}{\link[Division polynomials of elliptic curves]{../talks/dpoec.pdf}}{Contributed talk for \emph{Lean Together 2025} in Zoom (Online)}
+\cv{5.9.24}{\link[Twisted elliptic L-values over global fields]{../talks/telvogf.pdf}}{Contributed talk for \emph{Algebraic Number Theory} in Munich}
+\cv{31.7.24}{\link[Denominators of BSD quotients]{../talks/dobq.pdf}}{Contributed talk for \emph{Young Researchers in Algebraic Number Theory} in Oxford}
+\cv{26.6.24}{\link[Elliptic curves in mathlib]{../talks/ecim.pdf}}{\emph{Formalising Algebraic Geometry} in Pasadena, CA (Online)}
+\cv{19.6.24}{\link[Twisted L-values of elliptic curves]{../talks/tlvoec.pdf}}{Contributed talk for \emph{75th British Mathematical Colloquium} in Manchester}
+\cv{24.4.24}{\link[L-values of elliptic curves twisted by cubic characters]{../talks/lvoectbcc.pdf}}{\emph{Linfoot Number Theory Seminars} in Bristol}
+\cv{2.8.23}{\link[An elementary formal proof of the group law on Weierstrass elliptic curves in any characteristic]{../talks/aefpotgloweciac.pdf}}{\emph{14th International Conference on Interactive Theorem Proving} in Bia\l ystok}
+\cv{26.5.22}{\link[Elliptic curves and the Mordell--Weil theorem]{../talks/ecatmwt.pdf}}{\emph{London Learning Lean} in London}
+\cv{25.4.22}{\link[Elliptic curves in Lean]{../talks/ecil.pdf}}{\emph{Mathematical Theorem Proving Workshop} in Cambridge}
+
+\section{Events organised}
+\cv{29.6--3.7.26}{\link[\emph{Bridging Lean and the LMFDB}]{../lean-lmfdb}, event in Norwich}{Workshop organised by Chris Birkbeck and myself}
+\cv{22--25.7.24}{\link[\emph{International Congress on Mathematical Software: Novel Formalisations of Mathematics in Lean}]{https://maths.dur.ac.uk/icms2024}, event in Durham}{Conference session organised by Fangming Li, Amelia Livingston, Jujian Zhang, and myself}
+
+\section{Selected conferences}
+\cv{19--21.11.25}{\link[\emph{Lean Workshop 2025: Formalising Algebraic Geometry}]{https://judithludwig.github.io/LeanWorkshop2025}, workshop in Heidelberg}{}
+\cv{9--12.9.25}{\link[\emph{Algebraic and Geometric Methods for Diophantine Problems}]{https://ricerca.mat.uniroma3.it/users/aturchet/Pisa25}, conference in Pisa}{}
+\cv{3--5.9.25}{\link[\emph{Young Researchers in Algebraic Number Theory}]{https://y-rant.github.io/historic/YRANT7}, conference in Nottingham}{}
+\cv{27.7--2.8.25}{\link[\emph{Rational Points 2025}]{https://www.mathe2.uni-bayreuth.de/stoll/workshop2025}, conference in Schney}{}
+\cv{25--26.7.25}{\link[\emph{Magma Meeting: Rational Points 2025}]{https://timo-keller.de/MagmaWorkshop2025.html}, workshop in W\"urzburg}{}
+\cv{21--25.7.25}{\link[\emph{Formalizing Class Field Theory}]{https://www.claymath.org/events/formalizing-class-field-theory}, workshop in Oxford}{}
+\cv{14--18.7.25}{\link[\emph{LMFDB Workshop}]{https://math.mit.edu/~roed/conferences/LMFDB25}, workshop in Cambridge, MA (Online)}{}
+\cv{7--11.7.25}{\link[\emph{LMFDB, Computation, and Number Theory}]{https://icerm.brown.edu/program/topical_workshop/tw-25-lucant}, conference in Providence, RI (Online)}{}
+\cv{10--14.3.25}{\link[\emph{Diophantine and Rationality Problems}]{https://icms.bg/diophantine-and-rationality-problems-drp2025}, conference in Sofia}{}
+\cv{2--6.9.24}{\link[\emph{Algebraic Number Theory}]{https://nt2024.unibw.de}, workshop in Munich}{}
+\cv{24--28.6.24}{\link[\emph{Formalising Algebraic Geometry}]{https://aimath.org/workshops/upcoming/alggeominlean}, workshop in Pasadena (Online)}{}
+\cv{31.7--4.8.23}{\link[\emph{14th International Conference on Interactive Theorem Proving}]{https://mizar.uwb.edu.pl/ITP2023}, conference in Bia\l ystok}{}
+
+\pagebreak
+
+\section{Selected teaching}
+\cv{Summer 2025}{Supervisions for \emph{Year 1 Term 3 research projects} in UCL}{Projects in Mordell's equation, Lean}
+\cv{Spring 2025}{Problems classes for \emph{Year 3 MATH60040 Formalising Mathematics} in Imperial}{}
+\cv{Spring 2025}{Problems classes for \emph{Year 1 MATH40003 Linear Algebra and Groups} in Imperial}{}
+\cv{Summer 2024}{Supervisions for \emph{Year 1 Term 3 research projects} in UCL}{Projects in how to tell if a number is prime, group theory and Rubik's cube}
+\cv{Spring 2024}{Tutorials for \emph{Year 3 6CCM351A Representation Theory of Finite Groups} in KCL}{}
+\cv{Spring 2024}{Lectures for \emph{Year 2 MATH0034 Number Theory} in UCL}{}
+\cv{Summer 2023}{Supervisions for \emph{Year 1 Term 3 research projects} in UCL}{Projects in cryptography, sums of squares, the axiom of choice}
+\cv{Spring 2023}{Tutorials for \emph{Year 2 5CCM251A Discrete Mathematics} in KCL}{}
+\cv{Autumn 2022}{Tutorials for \emph{Year 2 5CCM224A Introduction to Number Theory} in KCL}{}
+\cv{Summer 2022}{Supervisions for \emph{Year 1 Term 3 research projects} in UCL}{Projects in continued fractions, cryptography, Lean}
+\cv{Autumn 2021}{Tutorials for \emph{Year 2 MATH0014 Further Linear Algebra} in UCL}{}
+
+\section{Outreach activities}
+\cv{Spring 2025}{\emph{London Maths Outreach: Group Theory} in UCL}{A 4-week introductory course for sixth form students led by Alberto Centelles}
+\cv{Spring 2025}{\emph{London Maths Outreach: Rational Points and Elliptic Curves} in UCL}{A 4-week introductory course for sixth form students led by Jed Thorpe}
+\cv{Summer 2023}{\emph{Logic and Proof Summer School} in UCL}{A 5-day introductory course for sixth form students led by Nikoleta Kalaydzhieva}
+\cv{Spring 2023}{\emph{London Maths Outreach: Elliptic Curves} in Harris Academy St John's Wood}{A 4-week introductory course for sixth form students assisted by Ben Handley}
+
+\section{Awards attained}
+\cv{2025 -- 2026}{LMS Early Career Fellowship (£10490, declined)}{}
+\cv{2024}{MAPS Faculty Education Award 2024 for individual excellence (£500)}{}
+\cv{2021 -- 2025}{Full funding for 4-year PhD research [EP/S021590/1]}{}
+\cv{2020}{Governors' MSci JMC Prize for best overall performance in final year (£500)}{}
+\cv{2020}{Donald Davies Prize for best final year individual project (£500)}{}
+\cv{2018}{Department of Mathematics UROP research studentship (£1200)}{}
+\cv{2017}{G Research Ltd Prize for academic excellence (£500)}{}
+\cv{2017 -- 2020}{Faculty of Engineering Dean's List (2017, 2018, 2020)}{}
+\cv{2012 -- 2015}{MOE Full 4-year school-based scholarship}{}
+
+\section{Language skills}
+\cv{Languages}{English, Mandarin/Hokkien, Indonesian/Malay, Japanese}{}
+\cv{Programming}{Lean, Haskell, Python/SageMath, Magma, Java, C/C++, Prolog, PHP/MySQL}{}
+\cv{Tools}{LaTeX, XHTML/CSS, Git, Stack, Vim}{}
+
+\section{Miscellaneous activities}
+\cv{2022 -- 2023}{Private tutor for mathematics and computer science in TutorChase and ElitePrep}{}
+\cv{2020 -- 2021}{Owner and moderator of the Cambridge Part III Mathematics Discord server}{}
+\cv{2018 -- 2021}{Live-TeXed lecture notes for geometry, algebra, and number theory available on GitHub}{}
+\cv{2019 -- 2020}{Problems curator for the Imperial College Mathematics Competition}{}
+\cv{2018 -- 2020}{Organiser for the Imperial College undergraduate mathematics colloquium}{}
+\cv{2012 -- 2018}{Solved 180 Project Euler problems primarily in Java and Haskell}{}
+
+\end{document}

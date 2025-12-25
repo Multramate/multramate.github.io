@@ -1,0 +1,48 @@
+Id;CV;Type;Day;City;Name;Event;Notes
+1;False;Semi;16.1.19;London;An unusual cubic representation problem;undergraduate mathematics colloquium;Imperial
+2;False;Coll;13.9.19;London;Pairing-based elliptic curve cryptography;Lunch and Learn;Adjoint UK Ltd
+3;False;Pres;4.10.19;London;Cryptography engineering at Adjoint UK Ltd;industrial placement presentation;Imperial
+4;False;Pres;11.3.20;Essen (Online);The ideal class group is a Tate–Shafarevich group;interview presentation;ESAGA
+5;False;Pres;22.6.20;London;Arithmetic statistics for elliptic curves;master's thesis presentation;Imperial
+6;False;Cont;4.12.20;Cambridge;Rank heuristics for elliptic curves;Part III Seminar Series;
+7;False;Pres;6.10.21;London;Ideal class groups;introductory presentation;LSGNT
+8;True;Work;25.4.22;Cambridge;Elliptic curves in Lean;Mathematical Theorem Proving Workshop;Huawei Technologies R&D UK Ltd
+9;False;Pres;5.5.22;London;Kolyagin's work on the BSD conjecture;mini-project presentation;LSGNT
+10;False;Semi;10.5.22;London;The Euler system of Heegner points;London Junior Number Theory Seminar;
+11;True;Semi;26.5.22;London;Elliptic curves and the Mordell–Weil theorem;London Learning Lean;
+12;False;Stud;5.7.22;London;The Tate–Shafarevich and Brauer groups;curves over function fields;8 talks from May 2022 to July 2022, organised by Holly Green
+13;False;Stud;5.8.22;London;Étale cohomology;étale cohomology;9 talks from June 2022 to August 2022, organised by Yuan Yang and myself
+14;False;Cont;24.8.22;Glasgow;Formalisation of elliptic curves in Lean;Young Researchers in Algebraic Number Theory;
+15;False;Work;29.9.22;London;Elliptic curves and Mordell's theorem;2022 Xena Project Undergraduate Workshop;
+16;False;Stud;22.11.22;London;Tate's thesis and epsilon factors;Galois representations and root numbers;10 talks from October 2022 to December 2022, organised by Holly Green
+17;False;Stud;30.11.22;London;Examples of Brauer groups;the Brauer–Manin obstruction;13 talks from October 2022 to March 2023, organised by Sebastian Monnet, Mohamed Tawfik, and myself
+18;False;Semi;17.1.23;London;Class number formula, à la Tate;London Junior Number Theory Seminar;
+19;False;Stud;18.1.23;London;Dual abelian varieties;abelian varieties over finite fields;11 talks from January 2023 to March 2023, organised by Luis Garcia and Caleb Springer
+20;True;Conf;2.8.23;Białystok;An elementary formal proof of the group law on Weierstrass elliptic curves in any characteristic;14th International Conference on Interactive Theorem Proving;
+21;False;Cont;25.8.23;Bielefeld;Twisted elliptic L-values;Early Number Theory Researchers Workshop 2023;
+22;False;Semi;5.10.23;London;The group law on an elliptic curve;postgraduate seminar;UCL
+23;False;Stud;19.10.23;London;Congruences of twisted L-values;what am I doing at the moment;8 talks from October 2023 to December 2023, organised by Alexandros Constantinou
+24;False;Semi;5.12.23;London;The Brauer–Manin obstruction;London Junior Number Theory Seminar;
+25;False;Stud;13.3.24;London;Kolyvagin's theorem;the conjecture of Birch and Swinnerton-Dyer;11 talks from January 2024 to March 2024, organised by Dominik Bullach and Robert Rockwood
+26;True;Semi;24.4.24;Bristol;L-values of elliptic curves twisted by cubic characters;Linfoot Number Theory Seminars;
+27;False;Coll;20.5.24;London;Diophantine equations;year 1 post exams colloquia;UCL
+28;True;Cont;19.6.24;Manchester;Twisted L-values of elliptic curves;75th British Mathematical Colloquium;
+29;True;Work;26.6.24;Pasadena, CA (Online);Elliptic curves in mathlib;Formalising Algebraic Geometry;
+30;False;Stud;4.7.24;London;Adèles and cohomology;class field theory;9 talks from May 2024 to July 2024, organised by Jamie Bell
+31;True;Cont;31.7.24;Oxford;Denominators of BSD quotients;Young Researchers in Algebraic Number Theory;
+32;True;Cont;5.9.24;Munich;Twisted elliptic L-values over global fields;Algebraic Number Theory;
+33;False;Stud;31.10.24;London;Schinzel's hypothesis H;open problems in number theory;10 talks from October 2024 to December 2024, organised by Jamie Bell
+34;True;Cont;17.1.25;Zoom (Online);Division polynomials of elliptic curves;Lean Together 2025;
+35;True;Semi;13.2.25;Cambridge;Algebraising foundations of elliptic curves;Formalisation of Mathematics with Interactive Theorem Provers;
+36;True;Cont;3.3.25;Stonehouse;Computing L-functions over global function fields;Elliptic Curves in the Cotswolds;
+37;True;Semi;25.3.25;Norwich;Teaching a computer algebraic number theory;Algebra, Number Theory, Logic and Representation Theory Seminar;
+38;False;Stud;2.4.25;London;Computing Euler factors;models of curves and arithmetic applications;12 talks from January 2025 to April 2025, organised by Elvira Lupoian
+39;False;Coll;28.5.25;London;Can we solve Diophantine equations?;year 1 post exams colloquia;UCL
+40;False;Stud;18.6.25;London;Application of additive combinatorics;Hilbert's tenth problem over rings of integers of number fields;9 talks from April 2025 to June 2025, organised by Lee Berry, Giorgio Navone, and Corijn Rudrum
+41;True;Cont;25.6.25;Exeter;Elliptic divisibility sequences in Lean;British Mathematical Colloquium and British Applied Mathematics Colloquium;
+42;True;Cont;31.7.25;Schney;Rational points on elliptic curves in Lean;Rational Points 2025;
+43;True;Cont;4.9.25;Nottingham;Computing Dirichlet L-functions over global function fields;Young Researchers in Algebraic Number Theory;
+44;False;Stud;4.11.25;Norwich;Sheaves, functors, and derived versions;character sheaves;10 talks from September 2025 to December 2025, organised by Marie Roth
+45;False;Coll;12.11.25;Norwich;A unique pair of triangles;random maths;UEA
+46;False;Stud;28.11.25;London;Hyperelliptic curves over function fields;the arithmetic of hyperelliptic curves;9 talks from October 2025 to December 2025, organised by Harry Spencer
+47;False;Pres;1.12.25;London;L-functions of Dirichlet twists of elliptic curves: computations and congruences;PhD viva examination;UCL

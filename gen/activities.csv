@@ -1,0 +1,33 @@
+Id;CV;Type;Term;Name;Institute;Notes
+1;False;Tut;Autumn 2018;Year 1 CO140 Logic;Imperial;
+2;False;Tut;Autumn 2018;Year 1 CO142 Discrete Structures;Imperial;
+3;False;Tut;Spring 2019;Year 1 CO141 Reasoning about Programs;Imperial;
+4;False;Tut;Autumn 2019;Year 1 CO140 Logic;Imperial;
+5;False;Tut;Spring 2020;Year 1 CO141 Reasoning about Programs;Imperial;
+6;False;Tut;Spring 2020;Year 1 CO150 Graphs and Algorithms;Imperial;
+7;True;Tut;Autumn 2021;Year 2 MATH0014 Further Linear Algebra;UCL;
+8;False;Pro;Spring 2022;Year 1 MATH0014 Analysis 2;UCL;
+9;True;Sup;Summer 2022;Year 1 Term 3 research projects;UCL;Projects in continued fractions, cryptography, Lean
+10;False;Mar;Autumn 2022;Foundations of Mathematics;UCL;
+11;True;Tut;Autumn 2022;Year 2 5CCM224A Introduction to Number Theory;KCL;
+12;False;Mar;Autumn 2022;Year 3 MATH0022 Galois Theory;UCL;
+13;True;Tut;Spring 2023;Year 2 5CCM251A Discrete Mathematics;KCL;
+14;False;Lec;Spring 2023;Year 2 MATH0034 Number Theory;UCL;
+15;False;Mar;Spring 2023;Year 3 MATH0037 Logic;UCL;
+16;False;Mar;Spring 2023;Year 3 MATH0050 Logic;UCL;
+17;True;Out;Spring 2023;London Maths Outreach: Elliptic Curves;Harris Academy St John's Wood;A 4-week introductory course for sixth form students assisted by Ben Handley
+18;True;Sup;Summer 2023;Year 1 Term 3 research projects;UCL;Projects in cryptography, sums of squares, the axiom of choice
+19;True;Out;Summer 2023;Logic and Proof Summer School;UCL;A 5-day introductory course for sixth form students led by Nikoleta Kalaydzhieva
+20;False;Tut;Autumn 2023;Year 1 4CCM121A Introduction to Algebra;KCL;
+21;False;Tut;Autumn 2023;Year 1 MATH0005 Algebra 1;UCL;
+22;False;Pro;Spring 2024;Year 1 MATH40003 Linear Algebra and Groups;Imperial;
+23;True;Lec;Spring 2024;Year 2 MATH0034 Number Theory;UCL;
+24;True;Tut;Spring 2024;Year 3 6CCM351A Representation Theory of Finite Groups;KCL;
+25;False;Pro;Spring 2024;Year 3 MATH60040 Formalising Mathematics;Imperial;
+26;True;Sup;Summer 2024;Year 1 Term 3 research projects;UCL;Projects in how to tell if a number is prime, group theory and Rubik's cube
+27;True;Out;Spring 2025;London Maths Outreach: Rational Points and Elliptic Curves;UCL;A 4-week introductory course for sixth form students led by Jed Thorpe
+28;False;Tut;Spring 2025;Year 1 MATH0006 Algebra 2;UCL;
+29;True;Pro;Spring 2025;Year 1 MATH40003 Linear Algebra and Groups;Imperial;
+30;True;Pro;Spring 2025;Year 3 MATH60040 Formalising Mathematics;Imperial;
+31;True;Out;Spring 2025;London Maths Outreach: Group Theory;UCL;A 4-week introductory course for sixth form students led by Alberto Centelles
+32;True;Sup;Summer 2025;Year 1 Term 3 research projects;UCL;Projects in Mordell's equation, Lean

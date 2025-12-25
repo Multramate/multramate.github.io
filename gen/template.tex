@@ -1,0 +1,83 @@
+\documentclass[10pt]{moderncv}
+\moderncvstyle{casual}
+\moderncvcolor{blue}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\nopagenumbers
+
+\newcommand{\cv}[3]{\cvitem{#1}{#2}\ifthenelse{\equal{#3}{}}{}{\vspace{-0.1cm}{\setstretch{0}\cvitem{}{\small#3}}}}
+
+\name{David Kurniadi}{Angdinata}
+\born{21 May 1997}
+\phone[mobile]{+44 7551 733331}
+\email{jrv25shu@uea.ac.uk}
+\homepage{multramate.github.io}
+\social[discord]{Multramate}
+\social[github]{https://github.com/Multramate}
+
+\begin{document}
+
+\maketitle
+
+\section{Research interests}
+I am interested in the computational aspects of the Birch and Swinnerton-Dyer conjecture for abelian varieties over global fields and their formalisation in the Lean theorem prover. Please refer to my \link[\texttt{website}]{https://multramate.github.io/} for more details on my \link[\texttt{research}]{https://multramate.github.io/research}, \link[\texttt{activities}]{https://multramate.github.io/activities}, \link[\texttt{events}]{https://multramate.github.io/events}, \link[\texttt{talks}]{https://multramate.github.io/talks}, and \link[\texttt{other projects}]{https://multramate.github.io/miscellaneous}.
+
+\section{Academic record}
+\cv{10.25 -- 8.27}{\textbf{Senior Research Associate} in the University of East Anglia}{Grant: Scalable theorem proving via mathematical databases}
+\cv{9.21 -- 9.25}{\textbf{PhD Mathematics} in the London School of Geometry and Number Theory}{Thesis: L-functions of Dirichlet twists of elliptic curves: computations and congruences}
+\cv{10.20 -- 6.21}{\textbf{MASt Pure Mathematics} in the University of Cambridge}{}
+\cv{10.16 -- 6.20}{\textbf{MEng Pure Mathematics and Computational Logic} in Imperial College London}{}
+\cv{1.14 -- 12.15}{\textbf{Singapore-Cambridge GCE A-level} in Temasek Junior College}{}
+\cv{1.12 -- 12.13}{\textbf{Singapore-Cambridge GCE O-level} in Anderson Secondary School}{}
+
+\section{Employment record}
+
+\cv{4.25 -- 6.25}{\textbf{Part-time Lean expert} in Harmonic}{}
+\cv{7.22 -- 9.22}{\textbf{Research assistant} in Huawei Technologies R&D UK Ltd}{}
+\cv{6.19 -- 9.19}{\textbf{Cryptography engineer} in Adjoint UK Ltd}{Developed and published the Haskell libraries \link[\texttt{galois-field}]{http://hackage.haskell.org/package/galois-field}, \link[\texttt{elliptic-curve}]{http://hackage.haskell.org/package/elliptic-curve}, and \link[\texttt{pairing}]{http://hackage.haskell.org/package/pairing}}
+
+\section{Research papers}
+\cv{}{Computing L-functions of $ \lambda $-adic representations over global function fields}{Preprint in preparation}
+\cv{5.25}{\link[On L-values of elliptic curves twisted by cubic Dirichlet characters]{https://doi.org/10.4153/S0008414X25101065}}{In \emph{Canadian Journal of Mathematics}}
+\cv{10.24}{\link[Algebraicity of Artin--Hasse--Weil L-series over global function fields]{https://arxiv.org/abs/2410.05196}}{Submitted to the \emph{Bulletin of the London Mathematical Society}}
+\cv{7.23}{\link[An elementary formal proof of the group law on Weierstrass elliptic curves in any characteristic (with Junyan Xu)]{https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITP.2023.6}}{In \emph{14th International Conference on Interactive Theorem Proving (ITP 2023)}, volume 268 of \emph{Leibniz International Proceedings in Informatics}, pages 6:1--6:19. Schloss Dagstuhl -- Leibniz-Zentrum für Informatik, Dagstuhl Publishing, Wadern, Germany, 2023}
+
+\section{Mathlib contributions}
+\cv{Elliptic curves}{The \link[\texttt{discriminant}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/CubicDiscriminant.lean} of a cubic equation, \link[\texttt{Weierstrass}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass} equations and their changes of variables, the group law in \link[\texttt{affine}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/AlgebraicGeometry/EllipticCurve/Affine} coordinates, the group law in \link[\texttt{Jacobian}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian} coordinates, the group law in \link[\texttt{projective}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/AlgebraicGeometry/EllipticCurve/Projective} coordinates, \link[\texttt{division polynomials}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial} and their degrees, the theory of \link[\texttt{elliptic divisibility sequences}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/NumberTheory/EllipticDivisibilitySequence.lean}}{}
+\cv{Ring theory}{\link[\texttt{maximal ideals}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/RingTheory/MaximalSpectrum.lean} and \link[\texttt{maximal spectra}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/AlgebraicGeometry/Maximal.lean}, the ring of \link[\texttt{S-integers}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/RingTheory/DedekindDomain/SInteger.lean} of a Dedekind domain, the \link[\texttt{Selmer group}]{https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/RingTheory/DedekindDomain/SelmerGroup.lean} of a Dedekind domain}{}
+
+\pagebreak
+
+{TALKS}
+
+{EVENTS}
+
+\pagebreak
+
+{ACTIVITIES}
+
+\section{Awards attained}
+\cv{2025 -- 2026}{LMS Early Career Fellowship (£10490, declined)}{}
+\cv{2024}{MAPS Faculty Education Award 2024 for individual excellence (£500)}{}
+\cv{2021 -- 2025}{Full funding for 4-year PhD research [EP/S021590/1]}{}
+\cv{2020}{Governors' MSci JMC Prize for best overall performance in final year (£500)}{}
+\cv{2020}{Donald Davies Prize for best final year individual project (£500)}{}
+\cv{2018}{Department of Mathematics UROP research studentship (£1200)}{}
+\cv{2017}{G Research Ltd Prize for academic excellence (£500)}{}
+\cv{2017 -- 2020}{Faculty of Engineering Dean's List (2017, 2018, 2020)}{}
+\cv{2012 -- 2015}{MOE Full 4-year school-based scholarship}{}
+
+\section{Language skills}
+\cv{Languages}{English, Mandarin/Hokkien, Indonesian/Malay, Japanese}{}
+\cv{Programming}{Lean, Haskell, Python/SageMath, Magma, Java, C/C++, Prolog, PHP/MySQL}{}
+\cv{Tools}{LaTeX, XHTML/CSS, Git, Stack, Vim}{}
+
+\section{Miscellaneous activities}
+\cv{2022 -- 2023}{Private tutor for mathematics and computer science in TutorChase and ElitePrep}{}
+\cv{2020 -- 2021}{Owner and moderator of the Cambridge Part III Mathematics Discord server}{}
+\cv{2018 -- 2021}{Live-TeXed lecture notes for geometry, algebra, and number theory available on GitHub}{}
+\cv{2019 -- 2020}{Problems curator for the Imperial College Mathematics Competition}{}
+\cv{2018 -- 2020}{Organiser for the Imperial College undergraduate mathematics colloquium}{}
+\cv{2012 -- 2018}{Solved 180 Project Euler problems primarily in Java and Haskell}{}
+
+\end{document}

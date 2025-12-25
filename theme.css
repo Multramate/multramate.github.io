@@ -1,7 +1,6 @@
 body {
   background-color: #0C0C0C;
   color: #ffffff;
-  margin-top: 25px;
   font-family: monospace, sans-serif;
   font-size: 12pt;
 }
@@ -17,17 +16,15 @@ a:hover {
 }
 
 li {
-  list-style-type: none;
+  margin-left: 30px;
 }
 
-li ul li {
-  list-style-type: disc;
+ul {
+  margin-right: 30px;
 }
 
 table {
   border-style: solid;
-  margin-bottom: 25px;
-  margin-top: 25px;
   text-align: center;
   width: 90%;
 }
@@ -52,8 +49,6 @@ td {
 .me img {
   border-color: #ffffff;
   border-radius: 100%;
-  border-style: solid;
-  border-width: 0px;
   padding: 25px;
   transition: 1s;
   width: 250px;
@@ -66,13 +61,9 @@ td {
 
 .header {
   font-size: 48pt;
-  margin-bottom: 25px;
-  margin-top: 25px;
+  margin-bottom: 40px;
+  margin-top: 40px;
   text-align: center;
-}
-
-.footer {
-  margin-top: 10px;
 }
 
 .lean {
@@ -92,11 +83,9 @@ td {
   border-width: 1px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 20px;
   max-width: 1500px;
   min-width: 750px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 25px;
-  padding-top: 10px;
+  padding: 10px;
   width: 75%;
 }
