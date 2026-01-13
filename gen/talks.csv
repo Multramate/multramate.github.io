@@ -46,3 +46,4 @@ Id;CV;Type;Day;City;Name;Event;Notes
 45;False;Coll;12.11.25;Norwich;A unique pair of triangles;random maths;UEA
 46;False;Stud;28.11.25;London;Hyperelliptic curves over function fields;the arithmetic of hyperelliptic curves;9 talks from October 2025 to December 2025, organised by Harry Spencer
 47;False;Pres;1.12.25;London;L-functions of Dirichlet twists of elliptic curves: computations and congruences;PhD viva examination;UCL
+48;False;Semi;13.1.26;Beijing (Online);A blueprint for the Birch and Swinnerton-Dyer conjecture in Lean;meeting for Key Laboratory of Mathematics Mechanization;AMSS, CAS
