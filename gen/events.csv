@@ -39,11 +39,12 @@ Id;CV;Type;Begin;End;City;Name;Link;Notes
 38;False;Mee;13.5.25;13.5.25;Bath;Spring of Rational Points II;https://sites.google.com/view/jessepajwani/spring-of-rational-points-ii;
 39;False;Con;23.6.25;26.6.25;Exeter;British Mathematical Colloquium;https://sites.exeter.ac.uk/bmc-bamc2025;
 40;True;Con;7.7.25;11.7.25;Providence, RI (Online);LMFDB, Computation, and Number Theory;https://icerm.brown.edu/program/topical_workshop/tw-25-lucant;
-41;True;Wor;14.7.25;18.7.25;Cambridge, MA (Online);LMFDB Workshop;https://math.mit.edu/~roed/conferences/LMFDB25;
+41;False;Wor;14.7.25;18.7.25;Cambridge, MA (Online);LMFDB Workshop;https://math.mit.edu/~roed/conferences/LMFDB25;
 42;True;Wor;21.7.25;25.7.25;Oxford;Formalizing Class Field Theory;https://www.claymath.org/events/formalizing-class-field-theory;
-43;True;Wor;25.7.25;26.7.25;Würzburg;Magma Meeting: Rational Points 2025;https://timo-keller.de/MagmaWorkshop2025.html;
+43;False;Wor;25.7.25;26.7.25;Würzburg;Magma Meeting: Rational Points 2025;https://timo-keller.de/MagmaWorkshop2025.html;
 44;True;Con;27.7.25;2.8.25;Schney;Rational Points 2025;https://www.mathe2.uni-bayreuth.de/stoll/workshop2025;
 45;True;Con;3.9.25;5.9.25;Nottingham;Young Researchers in Algebraic Number Theory;https://y-rant.github.io/historic/YRANT7;
-46;True;Con;9.9.25;12.9.25;Pisa;Algebraic and Geometric Methods for Diophantine Problems;https://ricerca.mat.uniroma3.it/users/aturchet/Pisa25;
+46;False;Con;9.9.25;12.9.25;Pisa;Algebraic and Geometric Methods for Diophantine Problems;https://ricerca.mat.uniroma3.it/users/aturchet/Pisa25;
 47;True;Wor;19.11.25;21.11.25;Heidelberg;Lean Workshop 2025: Formalising Algebraic Geometry;https://judithludwig.github.io/LeanWorkshop2025;
-48;True;Org;29.6.26;3.7.26;Norwich;Bridging Lean and the LMFDB;../lean-lmfdb;Workshop organised by Chris Birkbeck and myself
+48;True;Wor;26.1.26;27.1.26;Beijing;Lean 形式化数学学习强化和实践交流研讨会;;
+49;True;Org;29.6.26;3.7.26;Norwich;Bridging Lean and the LMFDB;../lean-lmfdb;Workshop organised by Chris Birkbeck and myself

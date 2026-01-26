@@ -27,7 +27,9 @@ Id;CV;Type;Term;Name;Institute;Notes
 26;True;Sup;Summer 2024;Year 1 Term 3 research projects;UCL;Projects in how to tell if a number is prime, group theory and Rubik's cube
 27;True;Out;Spring 2025;London Maths Outreach: Rational Points and Elliptic Curves;UCL;A 4-week introductory course for sixth form students led by Jed Thorpe
 28;False;Tut;Spring 2025;Year 1 MATH0006 Algebra 2;UCL;
-29;True;Pro;Spring 2025;Year 1 MATH40003 Linear Algebra and Groups;Imperial;
+29;False;Pro;Spring 2025;Year 1 MATH40003 Linear Algebra and Groups;Imperial;
 30;True;Pro;Spring 2025;Year 3 MATH60040 Formalising Mathematics;Imperial;
 31;True;Out;Spring 2025;London Maths Outreach: Group Theory;UCL;A 4-week introductory course for sixth form students led by Alberto Centelles
 32;True;Sup;Summer 2025;Year 1 Term 3 research projects;UCL;Projects in Mordell's equation, Lean
+33;True;Lec;Spring 2026;Year 1 MTHA4007B Computation and Modelling;UEA;
+34;True;Pro;Spring 2026;Year 1 MTHA4003B Real Analysis and Group Theory;UEA;
