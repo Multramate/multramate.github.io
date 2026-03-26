@@ -30,7 +30,7 @@ Id;CV;Type;Begin;End;City;Name;Link;Notes
 29;True;Org;22.7.24;25.7.24;Durham;International Congress on Mathematical Software: Novel Formalisations of Mathematics in Lean;https://maths.dur.ac.uk/icms2024;Conference session organised by Fangming Li, Amelia Livingston, Jujian Zhang, and myself
 30;False;Con;31.7.24;2.8.24;Oxford;Young Researchers in Algebraic Number Theory;https://y-rant.github.io/historic/YRANT6;
 31;False;Con;21.8.24;25.8.24;Cetraro;The Third Journal of Number Theory Biennial Conference;https://www.math.columbia.edu/~goldfeld/JNTBiennial2024.html;
-32;True;Wor;2.9.24;6.9.24;Munich;Algebraic Number Theory;https://nt2024.unibw.de;
+32;False;Wor;2.9.24;6.9.24;Munich;Algebraic Number Theory;https://nt2024.unibw.de;
 33;False;Wor;3.10.24;4.10.24;London;Arithmetic Geometry of K3 Surfaces and Related Areas;https://www.ma.imperial.ac.uk/~anskor/K3Imperial.htm;
 34;False;Wor;18.11.24;22.11.24;Singapore;Workshop on p-adic Geometry;http://www.davidrenshawhansen.net/workshop2024.html;
 35;False;Mee;14.1.25;17.1.25;Zoom (Online);Lean Together 2025;https://leanprover-community.github.io/lt2025;
@@ -47,4 +47,8 @@ Id;CV;Type;Begin;End;City;Name;Link;Notes
 46;False;Con;9.9.25;12.9.25;Pisa;Algebraic and Geometric Methods for Diophantine Problems;https://ricerca.mat.uniroma3.it/users/aturchet/Pisa25;
 47;True;Wor;19.11.25;21.11.25;Heidelberg;Lean Workshop 2025: Formalising Algebraic Geometry;https://judithludwig.github.io/LeanWorkshop2025;
 48;True;Wor;26.1.26;27.1.26;Beijing;Lean 形式化数学学习强化和实践交流研讨会;;
-49;True;Org;29.6.26;3.7.26;Norwich;Bridging Lean and the LMFDB;../lean-lmfdb;Workshop organised by Chris Birkbeck and myself
+49;True;Wor;2.3.26;6.3.26;London;Accelerating Mathlib Workshop 1;;
+50;True;Con;25.3.26;27.3.26;Brig;SMS Spring Meeting: Formalization and Proof Assistants;https://unidistance.ch/evenement/sms-spring-meeting-formalization-and-proof-assistants;
+51;False;Sch;30.3.26;3.4.26;Stockholm;Mathlib Reviewer Bootcamp 2026;https://yaeldillies.github.io/mrb2026.html;
+52;True;Org;29.6.26;3.7.26;Norwich;Bridging Lean and the LMFDB;../lean-lmfdb;Workshop organised by Chris Birkbeck and myself
+53;True;Con;6.7.26;10.7.26;Groningen;17th Algorithmic Number Theory Symposium;https://www.antsxvii.org;
