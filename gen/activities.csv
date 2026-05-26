@@ -31,5 +31,7 @@ Id;CV;Type;Term;Name;Institute;Notes
 30;True;Pro;Spring 2025;Year 3 MATH60040 Formalising Mathematics;Imperial;
 31;True;Out;Spring 2025;London Maths Outreach: Group Theory;UCL;A 4-week introductory course for sixth form students led by Alberto Centelles
 32;True;Sup;Summer 2025;Year 1 Term 3 research projects;UCL;Projects in Mordell's equation, Lean
-33;True;Lec;Spring 2026;Year 1 MTHA4007B Computation and Modelling;UEA;
-34;True;Pro;Spring 2026;Year 1 MTHA4003B Real Analysis and Group Theory;UEA;
+33;True;Lec;Spring 2026;Year 1 MTHA4007B Computational Mathematics;UEA;
+34;False;Pro;Spring 2026;Year 1 MTHA4003B Group Theory;UEA;
+35;False;Sup;Summer 2026;Year 1 Term 3 research projects;UCL;Project in sums of squares
+36;True;Lec;Spring 2027;Year 1 MTHA4008B Probability;UEA;

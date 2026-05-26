@@ -8,7 +8,7 @@ Id;CV;Type;Begin;End;City;Name;Link;Notes
 7;False;Sch;30.1.23;3.2.23;Marseille;Introduction to Symposium on Arithmetic Geometry and its Applications;https://conferences.cirm-math.fr/2801.html;
 8;False;Con;6.2.23;10.2.23;Marseille;Symposium on Arithmetic Geometry and its Applications;https://conferences.cirm-math.fr/2802.html;
 9;False;Con;10.4.23;14.4.23;Edinburgh (Online);Arithmetic, Algebra, and Algorithms;https://www.icms.org.uk/workshops/2023/arithmetic-algebra-and-algorithms;
-10;False;Sch;8.5.23;12.5.23;Marseille;Spring School in Arithmetic Statistics ;https://conferences.cirm-math.fr/2679.html;
+10;False;Sch;8.5.23;12.5.23;Marseille;Spring School in Arithmetic Statistics;https://conferences.cirm-math.fr/2679.html;
 11;False;Con;15.5.23;19.5.23;Marseille;Arithmetic Statistics;https://conferences.cirm-math.fr/2675.html;
 12;False;Wor;22.5.23;26.5.23;Banff (Online);Formalization of Cohomology Theories;https://www.birs.ca/events/2023/5-day-workshops/23w5124;
 13;False;Mee;12.6.23;14.6.23;London;London–Paris Number Theory Seminar;https://www.ma.imperial.ac.uk/~anskor/Manin-meeting.htm;
@@ -50,5 +50,8 @@ Id;CV;Type;Begin;End;City;Name;Link;Notes
 49;True;Wor;2.3.26;6.3.26;London;Accelerating Mathlib Workshop 1;;
 50;True;Con;25.3.26;27.3.26;Brig;SMS Spring Meeting: Formalization and Proof Assistants;https://unidistance.ch/evenement/sms-spring-meeting-formalization-and-proof-assistants;
 51;False;Sch;30.3.26;3.4.26;Stockholm;Mathlib Reviewer Bootcamp 2026;https://yaeldillies.github.io/mrb2026.html;
-52;True;Org;29.6.26;3.7.26;Norwich;Bridging Lean and the LMFDB;../lean-lmfdb;Workshop organised by Chris Birkbeck and myself
-53;True;Con;6.7.26;10.7.26;Groningen;17th Algorithmic Number Theory Symposium;https://www.antsxvii.org;
+52;False;Wor;8.4.26;10.4.26;Exeter (Online);Workshop on AI and Theorem Provers in Mathematics;https://aitpm.github.io;
+53;True;Org;29.6.26;3.7.26;Norwich;Bridging Lean and the LMFDB;https://multramate.github.io/lean-lmfdb;Workshop organised by Chris Birkbeck and myself
+54;True;Con;6.7.26;10.7.26;Groningen;17th Algorithmic Number Theory Symposium;https://www.antsxvii.org;
+55;True;Wor;13.7.26;24.7.26;Seoul;AI and Mathematics;https://symposia.kias.re.kr/AI-Math2026;
+56;False;Con;14.9.26;18.9.26;Opatija;Modular Curves and Applications of AI to Number Theory;https://web.math.pmf.unizg.hr/~fnajman/Opatija.html;
