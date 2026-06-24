@@ -25,8 +25,8 @@ ul {
 
 table {
   border-style: solid;
+  border-width: 1px;
   text-align: center;
-  width: 90%;
 }
 
 tr {
@@ -35,7 +35,7 @@ tr {
 
 td {
   border-style: solid;
-  width: 15%;
+  border-width: 1px;
 }
 
 .me a {
