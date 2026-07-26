@@ -35,23 +35,26 @@ Id;CV;Type;Begin;End;City;Name;Link;Notes
 34;False;Wor;18.11.24;22.11.24;Singapore;Workshop on p-adic Geometry;http://www.davidrenshawhansen.net/workshop2024.html;
 35;False;Mee;14.1.25;17.1.25;Zoom (Online);Lean Together 2025;https://leanprover-community.github.io/lt2025;
 36;False;Mee;3.3.25;4.3.25;Stonehouse;Elliptic Curves in the Cotswolds;;
-37;True;Con;10.3.25;14.3.25;Sofia;Diophantine and Rationality Problems;https://icms.bg/diophantine-and-rationality-problems-drp2025;
+37;False;Con;10.3.25;14.3.25;Sofia;Diophantine and Rationality Problems;https://icms.bg/diophantine-and-rationality-problems-drp2025;
 38;False;Mee;13.5.25;13.5.25;Bath;Spring of Rational Points II;https://sites.google.com/view/jessepajwani/spring-of-rational-points-ii;
 39;False;Con;23.6.25;26.6.25;Exeter;British Mathematical Colloquium;https://sites.exeter.ac.uk/bmc-bamc2025;
 40;True;Con;7.7.25;11.7.25;Providence, RI (Online);LMFDB, Computation, and Number Theory;https://icerm.brown.edu/program/topical_workshop/tw-25-lucant;
 41;False;Wor;14.7.25;18.7.25;Cambridge, MA (Online);LMFDB Workshop;https://math.mit.edu/~roed/conferences/LMFDB25;
-42;True;Wor;21.7.25;25.7.25;Oxford;Formalizing Class Field Theory;https://www.claymath.org/events/formalizing-class-field-theory;
+42;False;Wor;21.7.25;25.7.25;Oxford;Formalizing Class Field Theory;https://www.claymath.org/events/formalizing-class-field-theory;
 43;False;Wor;25.7.25;26.7.25;Würzburg;Magma Meeting: Rational Points 2025;https://timo-keller.de/MagmaWorkshop2025.html;
 44;True;Con;27.7.25;2.8.25;Schney;Rational Points 2025;https://www.mathe2.uni-bayreuth.de/stoll/workshop2025;
-45;True;Con;3.9.25;5.9.25;Nottingham;Young Researchers in Algebraic Number Theory;https://y-rant.github.io/historic/YRANT7;
+45;False;Con;3.9.25;5.9.25;Nottingham;Young Researchers in Algebraic Number Theory;https://y-rant.github.io/historic/YRANT7;
 46;False;Con;9.9.25;12.9.25;Pisa;Algebraic and Geometric Methods for Diophantine Problems;https://ricerca.mat.uniroma3.it/users/aturchet/Pisa25;
-47;True;Wor;19.11.25;21.11.25;Heidelberg;Lean Workshop 2025: Formalising Algebraic Geometry;https://judithludwig.github.io/LeanWorkshop2025;
-48;True;Wor;26.1.26;27.1.26;Beijing;Lean 形式化数学学习强化和实践交流研讨会;;
-49;True;Wor;2.3.26;6.3.26;London;Accelerating Mathlib Workshop 1;;
+47;False;Wor;19.11.25;21.11.25;Heidelberg;Lean Workshop 2025: Formalising Algebraic Geometry;https://judithludwig.github.io/LeanWorkshop2025;
+48;False;Wor;26.1.26;27.1.26;Beijing;Lean 形式化数学学习强化和实践交流研讨会;;
+49;False;Wor;2.3.26;6.3.26;London;Accelerating Mathlib Workshop 1;;
 50;True;Con;25.3.26;27.3.26;Brig;SMS Spring Meeting: Formalization and Proof Assistants;https://unidistance.ch/evenement/sms-spring-meeting-formalization-and-proof-assistants;
 51;False;Sch;30.3.26;3.4.26;Stockholm;Mathlib Reviewer Bootcamp 2026;https://yaeldillies.github.io/mrb2026.html;
 52;False;Wor;8.4.26;10.4.26;Exeter (Online);Workshop on AI and Theorem Provers in Mathematics;https://aitpm.github.io;
 53;True;Org;29.6.26;3.7.26;Norwich;Bridging Lean and the LMFDB;https://multramate.github.io/lean-lmfdb;Workshop organised by Chris Birkbeck and myself
-54;True;Con;6.7.26;10.7.26;Groningen;17th Algorithmic Number Theory Symposium;https://www.antsxvii.org;
-55;True;Wor;13.7.26;24.7.26;Seoul;AI and Mathematics;https://symposia.kias.re.kr/AI-Math2026;
+54;False;Con;6.7.26;10.7.26;Groningen;17th Algorithmic Number Theory Symposium;https://www.antsxvii.org;
+55;True;Wor;13.7.26;24.7.26;Seoul;Thematic Program on AI and Mathematics;https://symposia.kias.re.kr/AI-Math2026;
 56;False;Con;14.9.26;18.9.26;Opatija;Modular Curves and Applications of AI to Number Theory;https://web.math.pmf.unizg.hr/~fnajman/Opatija.html;
+57;True;Wor;25.1.27;29.1.27;Cambridge, MA;Bridging the LMFDB and Lean;https://math.mit.edu/~roed/conferences/lean-lmfdb2;
+58;True;Wor;15.3.27;9.4.27;Berkeley, CA;Building the Mathematical Library of the Future;https://www.slmath.org/axiom/412;
+59;True;Org;7.6.27;11.6.27;Edinburgh;Arithmetic of Curves, Galois representations, and L-functions: Celebrating the Mathematics of Tim and Vladimir Dokchitser;;Conference organised by Alex Bartel, Matthew Bisatt, Alexandros Constantinou, Júlia Martínez-Marín, Jordi Vilà-Casadevall, and myself

@@ -50,3 +50,5 @@ Id;CV;Type;Day;City;Name;Event;Notes
 49;False;Work;26.1.26;Beijing;Formalising division polynomials in Lean;Lean 形式化数学学习强化和实践交流研讨会;
 50;True;Work;26.3.26;Brig;Torsion subgroups of elliptic curves in Lean;SMS Spring Meeting: Formalization and Proof Assistants;
 51;False;Stud;26.5.26;Norwich;Zeta integrals and epsilon functions;the Langlands–Deligne local constant;8 talks from February 2026 to June 2026, organised by myself
+52;False;Stud;11.6.26;London;Mordell--Weil lattices;surfaces;8 talks from April 2026 to June 2026, organised by Edwina Aylward
+53;True;Work;15.7.26;Seoul;Bridging Lean and the LMFDB;Thematic Program on AI and Mathematics: Formalization, Theorem Proving and Reasoning;

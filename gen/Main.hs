@@ -253,6 +253,8 @@ generateCV template activities events talks = replaceUTF8 "../cv.tex" template
   , ("\224", "\\`a")
   , ("\232", "\\`e")
   , ("\233", "\\'e")
+  , ("\237", "\\'i")
+  , ("\250", "\\'u")
   , ("\252", "\\\"u")
   , ("\322", "\\l ")
   , ("\8211", "--")
