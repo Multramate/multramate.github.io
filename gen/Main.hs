@@ -139,13 +139,14 @@ timeCV begin end = case (d == d', m == m', y == y') of
 
 showCV :: Item -> String
 showCV (Activity _ True cat term name institute notes) = "\\cv{" ++ term ++ "}{"
-  ++ (if cat == Out then "" else show cat ++ " for ") ++ "\\emph{" ++ name
-  ++ "} in " ++ institute ++ "}{" ++ notes ++ "}"
+  ++ (if cat == Out then "" else show cat ++ " for ") ++ "\\emph{" ++ name ++ "} in " ++ institute
+  ++ "}{" ++ notes ++ "}"
 showCV (Event _ True cat begin end city name link notes) = "\\cv{" ++ timeCV begin end
   ++ "}{\\link[" ++ "\\emph{" ++ name ++ "}]{" ++ link ++ "}, " ++ map toLower (show cat) ++ " in "
   ++ city ++ "}{" ++ notes ++ "}"
 showCV (Talk _ True cat day city name event _) = "\\cv{" ++ timeCV day day ++ "}{\\link[" ++ name
-  ++ "]{../talks/" ++ map (toLower . head) (wordsBy (flip elem " -\8211") name) ++ ".pdf}}{"
+  ++ "]{https://multramate.github.io/talks/"
+  ++ concatMap (snd . encode . toLower . head) (wordsBy (flip elem " -\8211") name) ++ ".pdf}}{"
   ++ (if cat == Cont then show cat ++ " for " else "") ++ "\\emph{" ++ event ++ "} in " ++ city
   ++ "}"
 showCV _ = ""
@@ -190,8 +191,8 @@ showWS (Event _ _ _ begin end city name link notes) = "        <li> <a href=\"" 
   ++ name ++ " </a> held in " ++ city ++ ' ' : timeWS begin end
   ++ (if null notes then "" else " <br /> " ++ notes) ++ " </li>"
 showWS (Talk _ _ _ day city name event notes) = "        <li> <a href=\""
-  ++ map (toLower . head) (wordsBy (flip elem " -\8211") name) ++ ".pdf\"> " ++ name
-  ++ " </a> given in " ++ city ++ ' ' : timeWS day day ++ " as part of " ++ event
+  ++ concatMap (snd . encode . toLower . head) (wordsBy (flip elem " -\8211") name) ++ ".pdf\"> "
+  ++ name ++ " </a> given in " ++ city ++ ' ' : timeWS day day ++ " as part of " ++ event
   ++ (if null notes then "" else " (" ++ notes ++ ")") ++ " </li>"
 
 showsWS :: [Item] -> [(String, [Category])] -> String
@@ -239,26 +240,30 @@ readUTF8 file m = openFile file ReadMode >>= \h -> hSetEncoding h utf8 >> hGetCo
 writeUTF8 :: String -> String -> IO ()
 writeUTF8 file s = openFile file WriteMode >>= \h -> hSetEncoding h utf8 >> hPutStr h s >> hClose h
 
+encode :: Char -> (String, String)
+encode '&' = ("\\&", "&")
+encode '\201' = ("\\'E", "E")
+encode '\224' = ("\\`a", "a")
+encode '\232' = ("\\`e", "e")
+encode '\233' = ("\\'e", "e")
+encode '\237' = ("\\'i", "i")
+encode '\250' = ("\\'u", "u")
+encode '\252' = ("\\\"u", "u")
+encode '\322' = ("\\l ", "l")
+encode '\8211' = ("--", "-")
+encode c = ([c], [c])
+
 replaceUTF8 :: String -> String -> [(String, String)] -> IO ()
 replaceUTF8 file s dict = writeUTF8 file $
   foldl (flip . uncurry $ \before after -> intercalate after . splitOn before) s dict
 
 generateCV :: String -> [Item] -> [Item] -> [Item] -> IO ()
-generateCV template activities events talks = replaceUTF8 "../cv.tex" template
-  [ ("{ACTIVITIES}", activitiesCV $ filter selected activities)
-  , ("{EVENTS}", eventsCV $ filter selected events)
-  , ("{TALKS}", talksCV $ filter selected talks)
-  , ("&", "\\&")
-  , ("\201", "\\'E")
-  , ("\224", "\\`a")
-  , ("\232", "\\`e")
-  , ("\233", "\\'e")
-  , ("\237", "\\'i")
-  , ("\250", "\\'u")
-  , ("\252", "\\\"u")
-  , ("\322", "\\l ")
-  , ("\8211", "--")
-  ]
+generateCV template activities events talks =
+  replaceUTF8 "../cv.tex" (concatMap (fst . encode) template)
+    [ ("{ACTIVITIES}", concatMap (fst . encode) . activitiesCV $ filter selected activities)
+    , ("{EVENTS}", concatMap (fst . encode) . eventsCV $ filter selected events)
+    , ("{TALKS}", concatMap (fst . encode) . talksCV $ filter selected talks)
+    ]
 
 generateWS :: String -> [Item] -> [Item] -> [Item] -> Page -> IO ()
 generateWS template activities events talks page = readUTF8 "../README.md" $ \date ->

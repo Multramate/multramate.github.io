@@ -39,10 +39,10 @@ Id;CV;Type;Day;City;Name;Event;Notes
 38;False;Stud;2.4.25;London;Computing Euler factors;models of curves and arithmetic applications;12 talks from January 2025 to April 2025, organised by Elvira Lupoian
 39;False;Coll;28.5.25;London;Can we solve Diophantine equations?;year 1 post exams colloquia;UCL
 40;False;Stud;18.6.25;London;Application of additive combinatorics;Hilbert's tenth problem over rings of integers of number fields;9 talks from April 2025 to June 2025, organised by Lee Berry, Giorgio Navone, and Corijn Rudrum
-41;True;Cont;25.6.25;Exeter;Elliptic divisibility sequences in Lean;British Mathematical Colloquium and British Applied Mathematics Colloquium;
+41;False;Cont;25.6.25;Exeter;Elliptic divisibility sequences in Lean;British Mathematical Colloquium and British Applied Mathematics Colloquium;
 42;True;Cont;31.7.25;Schney;Rational points on elliptic curves in Lean;Rational Points 2025;
 43;True;Cont;4.9.25;Nottingham;Computing Dirichlet L-functions over global function fields;Young Researchers in Algebraic Number Theory;
-44;False;Stud;4.11.25;Norwich;Sheaves, functors, and derived versions;character sheaves;8 talks from September 2025 to January 2025, organised by Marie Roth
+44;False;Stud;4.11.25;Norwich;Sheaves, functors, and derived versions;character sheaves;8 talks from September 2025 to January 2026, organised by Marie Roth
 45;False;Coll;12.11.25;Norwich;A unique pair of triangles;random maths;UEA
 46;False;Stud;28.11.25;London;Hyperelliptic curves over function fields;the arithmetic of hyperelliptic curves;9 talks from October 2025 to December 2025, organised by Harry Spencer
 47;False;Pres;1.12.25;London;L-functions of Dirichlet twists of elliptic curves: computations and congruences;PhD viva examination;UCL
@@ -50,5 +50,5 @@ Id;CV;Type;Day;City;Name;Event;Notes
 49;False;Work;26.1.26;Beijing;Formalising division polynomials in Lean;Lean 形式化数学学习强化和实践交流研讨会;
 50;True;Work;26.3.26;Brig;Torsion subgroups of elliptic curves in Lean;SMS Spring Meeting: Formalization and Proof Assistants;
 51;False;Stud;26.5.26;Norwich;Zeta integrals and epsilon functions;the Langlands–Deligne local constant;8 talks from February 2026 to June 2026, organised by myself
-52;False;Stud;11.6.26;London;Mordell--Weil lattices;surfaces;8 talks from April 2026 to June 2026, organised by Edwina Aylward
-53;True;Work;15.7.26;Seoul;Bridging Lean and the LMFDB;Thematic Program on AI and Mathematics: Formalization, Theorem Proving and Reasoning;
+52;True;Work;15.7.26;Seoul;Bridging Lean and the LMFDB;Thematic Program on AI and Mathematics: Formalization, Theorem Proving and Reasoning;
+53;True;Cont;17.9.26;Opatija;Torsion and Tamagawa numbers over function fields;Modular Curves and Applications of AI to Number Theory;

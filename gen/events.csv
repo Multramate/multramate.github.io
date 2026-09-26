@@ -54,7 +54,8 @@ Id;CV;Type;Begin;End;City;Name;Link;Notes
 53;True;Org;29.6.26;3.7.26;Norwich;Bridging Lean and the LMFDB;https://multramate.github.io/lean-lmfdb;Workshop organised by Chris Birkbeck and myself
 54;False;Con;6.7.26;10.7.26;Groningen;17th Algorithmic Number Theory Symposium;https://www.antsxvii.org;
 55;True;Wor;13.7.26;24.7.26;Seoul;Thematic Program on AI and Mathematics;https://symposia.kias.re.kr/AI-Math2026;
-56;False;Con;14.9.26;18.9.26;Opatija;Modular Curves and Applications of AI to Number Theory;https://web.math.pmf.unizg.hr/~fnajman/Opatija.html;
-57;True;Wor;25.1.27;29.1.27;Cambridge, MA;Bridging the LMFDB and Lean;https://math.mit.edu/~roed/conferences/lean-lmfdb2;
-58;True;Wor;15.3.27;9.4.27;Berkeley, CA;Building the Mathematical Library of the Future;https://www.slmath.org/axiom/412;
-59;True;Org;7.6.27;11.6.27;Edinburgh;Arithmetic of Curves, Galois representations, and L-functions: Celebrating the Mathematics of Tim and Vladimir Dokchitser;;Conference organised by Alex Bartel, Matthew Bisatt, Alexandros Constantinou, Júlia Martínez-Marín, Jordi Vilà-Casadevall, and myself
+56;False;Wor;7.9.26;11.9.26;London;Formal Conjectures Workshop;;
+57;False;Con;14.9.26;18.9.26;Opatija;Modular Curves and Applications of AI to Number Theory;https://web.math.pmf.unizg.hr/~fnajman/Opatija.html;
+58;True;Wor;25.1.27;29.1.27;Cambridge, MA;Bridging the LMFDB and Lean;https://math.mit.edu/~roed/conferences/lean-lmfdb2;
+59;True;Wor;15.3.27;9.4.27;Berkeley, CA;Building the Mathematical Library of the Future;https://www.slmath.org/axiom/412;
+60;True;Org;7.6.27;11.6.27;Edinburgh;Arithmetic of Curves, Galois representations, and L-functions: Celebrating the Mathematics of Tim and Vladimir Dokchitser;;Conference organised by Alex Bartel, Matthew Bisatt, Alexandros Constantinou, Júlia Martínez-Marín, Jordi Vilà-Casadevall, and myself
